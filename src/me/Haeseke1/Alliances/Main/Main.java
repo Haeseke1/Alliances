@@ -4,7 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin{
 	
-	public static Stirng cmdlogo = "";
+	public static final String cmdlogo = "";
 	
 	@Override
 	public void onEnable() {
