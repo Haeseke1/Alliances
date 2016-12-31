@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin{
 	
-	public static final String cmdlogo = "";
+	public static final String cmdlogo = "[Alliances]";
 	
 	@Override
 	public void onEnable() {
