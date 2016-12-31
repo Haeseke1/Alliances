@@ -4,9 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class Main extends JavaPlugin{
 	
-	public static final String cmdlogo = "[Alliances]";
+	public static final String cmdlogo = ChatColor.GOLD + "[Alliances]";
 	
 	@Override
 	public void onEnable() {
