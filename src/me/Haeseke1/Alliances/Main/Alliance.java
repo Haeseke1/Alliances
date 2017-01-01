@@ -1,6 +1,7 @@
 package me.Haeseke1.Alliances.Main;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
@@ -10,10 +11,10 @@ public class Alliance {
 	private int mWins;
 	private int mLoses;
 	private int mCoins;
-	private HashMap<Player,String> mMembers;
+	private HashMap<UUID,String> mMembers;
 	
-	public Alliance(Player owner, HashMap<Player,String> members, int wins, int loses, int coins){
-		members = new HashMap<Player, String>();
+	public Alliance(Player owner, HashMap<UUID,String> members, int wins, int loses, int coins){
+		members = new HashMap<UUID, String>();
 		this.mOwner = owner;
 	    this.mWins = wins;
 	    this.mLoses = loses;
@@ -25,7 +26,7 @@ public class Alliance {
 		return mOwner;
 	}
 	
-	public HashMap<Player,String> getMembers(){
+	public HashMap<UUID,String> getMembers(){
 	    return mMembers;
 	}
 	
