@@ -29,6 +29,7 @@ public class Main extends JavaPlugin{
 	@Override
 	public void onDisable() {
 		ConfigManager.saveConfigFile(this);
+		MessageManager.sendAlertMessage("The plugin has been shutted down! *-* The cake wasn't a lie thought *-*");
 	}
 	
 	public void registerEvents(){
