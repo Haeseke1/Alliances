@@ -7,8 +7,14 @@ import net.md_5.bungee.api.ChatColor;
 
 public class MessageManager {
 	
-	public static void sendMessage(Player player,String message){
+	public static void sendInfoMessage(Player player,String message){
 		player.sendMessage(Main.cmdlogo + message);
+	}
+	public static void sendAlertMessage(Player player,String message){
+		player.sendMessage(Main.cmdlogo + ChatColor.RED + message);
+	}
+	public static void sendRemarkMessage(Player player,String message){
+		player.sendMessage(Main.cmdlogo + ChatColor.GREEN +  message);
 	}
 	
 	public static String translateColorCode(String message){
