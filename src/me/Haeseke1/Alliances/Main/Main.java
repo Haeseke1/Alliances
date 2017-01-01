@@ -1,13 +1,13 @@
 package me.Haeseke1.Alliances.Main;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
+import me.Haeseke1.Alliances.Utils.MessageManager;
 
 
 public class Main extends JavaPlugin{
@@ -20,7 +20,7 @@ public class Main extends JavaPlugin{
 	public void onEnable() {
 		config = getConfig();
 		try {
-			cmdlogo = ConfigManager.getStringFromConfig(config, "Logo");
+			cmdlogo = MessageManager.translateColorCode(ConfigManager.getStringFromConfig(config, "Logo"));
 		} catch (EmptyStringException e) {
 			e.printStackTrace();
 			pm.disablePlugin(this);
