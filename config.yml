@@ -1,1 +1,8 @@
+#The logo that will be used in every message of this plugin.
 Logo: "[Alliances]"
+
+#Changes the colors of all the messages to console and players.
+ColorCodes:
+  alertMessages: "&c"
+  remarkMessages: "&a"
+  infoMessages: "&e"

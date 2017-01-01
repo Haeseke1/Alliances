@@ -5,7 +5,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -19,21 +18,17 @@ public class Main extends JavaPlugin{
 	@Override
 	public void onEnable() {
 		config = getConfig();
-		try {
-			cmdlogo = MessageManager.translateColorCode(ConfigManager.getStringFromConfig(config, "Logo"));
-		} catch (EmptyStringException e) {
-			e.printStackTrace();
-			pm.disablePlugin(this);
-			return;
-		}
-		System.out.println("[" + this.getName() + "] The plugin is doing fine... *-* The cake is a lie *-*");
+		ConfigManager.registerConfigFile(this);
+		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
+		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
+		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 	}
 	
 
 
 	@Override
 	public void onDisable() {
-		
+		ConfigManager.saveConfigFile(this);
 	}
 	
 	public void registerEvents(){
