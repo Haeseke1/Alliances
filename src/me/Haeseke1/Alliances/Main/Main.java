@@ -15,9 +15,10 @@ public class Main extends JavaPlugin{
 	public static String cmdlogo;
 	public static PluginManager pm = Bukkit.getPluginManager();
 	
+	@SuppressWarnings("static-access")
 	@Override
 	public void onEnable() {
-		config = getConfig();
+		this.config = getConfig();
 		ConfigManager.registerConfigFile(this);
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
