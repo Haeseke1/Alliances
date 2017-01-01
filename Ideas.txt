@@ -1,0 +1,5 @@
+* Arena fights
+* You can challenge other Alliances 
+* To create an Alliance you'll need to get coins from PVP'ing 
+* Adding achievements 
+* Adding challenges

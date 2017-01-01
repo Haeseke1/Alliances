@@ -1,10 +1,10 @@
 package me.Haeseke1.Alliances.Utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Main.Main;
-import net.md_5.bungee.api.ChatColor;
 
 public class MessageManager {
 	

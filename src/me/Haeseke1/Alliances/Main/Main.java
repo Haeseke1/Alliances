@@ -24,8 +24,6 @@ public class Main extends JavaPlugin{
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 	}
-	
-
 
 	@Override
 	public void onDisable() {
