@@ -28,6 +28,9 @@ public class Main extends JavaPlugin{
 		}
 		System.out.println("[" + this.getName() + "] The plugin is doing fine... *-* The cake is a lie *-*");
 	}
+	
+
+
 	@Override
 	public void onDisable() {
 		
