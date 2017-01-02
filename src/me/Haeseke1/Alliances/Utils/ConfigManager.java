@@ -1,6 +1,7 @@
 package me.Haeseke1.Alliances.Utils;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -59,13 +60,18 @@ public class ConfigManager {
     /*
      * Creates a config file 
      */
-	public static YamlConfiguration creatYamlConfig(String name, Main main){
+	public static FileConfiguration creatYamlConfig(String name, Main main) throws IOException{
 		File file = new File(main.getDataFolder(),name);
 		if(file.exists()){
+			MessageManager.sendRemarkMessage("The " + name + " file has been loaded");
 			return YamlConfiguration.loadConfiguration(file);	
 		}
 		//Not ready yet
-		return YamlConfiguration.loadConfiguration(file);	
+		FileConfiguration customConfig = YamlConfiguration.loadConfiguration(file);
+		customConfig.setDefaults(customConfig);
+		customConfig.save(file);
+		MessageManager.sendRemarkMessage("The " + name + " file has been created");
+		return customConfig;	
 	}
 	
 	/*

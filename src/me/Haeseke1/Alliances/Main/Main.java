@@ -1,5 +1,7 @@
 package me.Haeseke1.Alliances.Main;
 
+import java.io.IOException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -16,7 +18,7 @@ public class Main extends JavaPlugin{
 	public static String cmdlogo;
 	public static PluginManager pm = Bukkit.getPluginManager();
 	
-	public static YamlConfiguration coins;
+	public static FileConfiguration coins;
 	
 	
 	@SuppressWarnings("static-access")
@@ -24,7 +26,13 @@ public class Main extends JavaPlugin{
 	public void onEnable() {
 		this.config = getConfig();
 		ConfigManager.registerConfigFile(this);
-		createConfigs();
+		try {
+			createConfigs();
+		} catch (IOException e) {
+            MessageManager.sendAlertMessage("There was a problem with loading in the config file");
+            pm.disablePlugin(this);
+			e.printStackTrace();
+		}
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
@@ -44,7 +52,7 @@ public class Main extends JavaPlugin{
 		
 	}
 	
-	public void createConfigs(){
+	public void createConfigs() throws IOException{
 		coins = ConfigManager.creatYamlConfig("coins.yml", this);
 	}
 	
