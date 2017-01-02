@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
+import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Main.Main;
 
 public class ConfigManager {
@@ -60,7 +61,7 @@ public class ConfigManager {
     /*
      * Creates a config file 
      */
-	public static FileConfiguration creatYamlConfig(String name, Main main) throws IOException{
+	public static FileConfiguration creatYamlConfig(String name, Main main) throws IOException,InvalidConfigTypeException{
 	  if(name.contains(".yml")){
 		File file = new File(main.getDataFolder(),name);
 		if(file.exists()){
@@ -74,7 +75,7 @@ public class ConfigManager {
 		MessageManager.sendRemarkMessage("The " + name + " file has been created");
 		return customConfig;	
 	  }else{
-		  return null;
+		  throw new InvalidConfigTypeException(name);
 	  }
 	}
 	

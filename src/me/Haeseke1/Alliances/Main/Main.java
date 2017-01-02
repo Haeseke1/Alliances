@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -26,14 +27,20 @@ public class Main extends JavaPlugin{
 	@Override
 	public void onEnable() {
 		this.config = getConfig();
-		ConfigManager.registerConfigFile(this);
 		try {
 			createConfigs();
 		} catch (IOException e) {
             MessageManager.sendAlertMessage("There was a problem with loading in the config file");
             pm.disablePlugin(this);
 			e.printStackTrace();
+			return;
+		}catch(InvalidConfigTypeException icte){
+			icte.printStackTrace();
+			MessageManager.sendAlertMessage("There was a problem in the code. Ask a dev for more information or download an earlier version of this plugin");
+			pm.disablePlugin(this);
+			return;
 		}
+		ConfigManager.registerConfigFile(this);
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
@@ -53,8 +60,8 @@ public class Main extends JavaPlugin{
 		
 	}
 	
-	public void createConfigs() throws IOException{
-		coins = ConfigManager.creatYamlConfig("coins.yml", this);
+	public void createConfigs() throws IOException, InvalidConfigTypeException{
+		coins = ConfigManager.creatYamlConfig("coins.yl", this);
 	}
 	
 }
