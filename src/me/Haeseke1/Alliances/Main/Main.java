@@ -60,8 +60,11 @@ public class Main extends JavaPlugin{
 		
 	}
 	
+	/*
+	 * Creates all the needed configs of the code (JSON support not included)
+	 */
 	public void createConfigs() throws IOException, InvalidConfigTypeException{
-		coins = ConfigManager.creatYamlConfig("coins.yl", this);
+		coins = ConfigManager.creatYamlConfig("coins.yml", this);
 	}
 	
 }

@@ -62,12 +62,18 @@ public class ConfigManager {
      * Creates a config file 
      */
 	public static FileConfiguration creatYamlConfig(String name, Main main) throws IOException,InvalidConfigTypeException{
-	  if(name.contains(".yml")){
+	  if(name.split(".").equals("yml")){
+		  /*
+		   * Creates the file for the system.
+		   */
 		File file = new File(main.getDataFolder(),name);
 		if(file.exists()){
 			MessageManager.sendRemarkMessage("The " + name + " file has been loaded");
 			return YamlConfiguration.loadConfiguration(file);	
 		}
+		/*
+		 * Creates a new config file if the config file doesn't exists already.
+		 */
 		main.saveResource(name, false);
 		FileConfiguration customConfig = YamlConfiguration.loadConfiguration(file);
 		customConfig.setDefaults(customConfig);
@@ -75,6 +81,9 @@ public class ConfigManager {
 		MessageManager.sendRemarkMessage("The " + name + " file has been created");
 		return customConfig;	
 	  }else{
+		  /*
+		   * Throws an exception if the config isn't a .yml file.
+		   */
 		  throw new InvalidConfigTypeException(name);
 	  }
 	}
