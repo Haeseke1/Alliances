@@ -2,6 +2,7 @@ package me.Haeseke1.Alliances.Main;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -19,6 +20,7 @@ public class Main extends JavaPlugin{
 	public static FileConfiguration config;
 	public static String cmdlogo;
 	public static PluginManager pm = Bukkit.getPluginManager();
+	public static List<FileConfiguration> configFiles;
 	
 	public static FileConfiguration coins;
 	
@@ -41,6 +43,7 @@ public class Main extends JavaPlugin{
 			return;
 		}
 		ConfigManager.registerConfigFile(this);
+		saveAllCustomConfigs();
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
@@ -64,7 +67,20 @@ public class Main extends JavaPlugin{
 	 * Creates all the needed configs of the code (JSON support not included)
 	 */
 	public void createConfigs() throws IOException, InvalidConfigTypeException{
-		coins = ConfigManager.creatYamlConfig("coins.yml", this);
+	   coins = ConfigManager.creatYamlConfig("coins.yml", this);
+	}
+	
+	public void saveAllCustomConfigs(){
+		for(FileConfiguration config: configFiles){
+			try {
+				ConfigManager.saveCustomConfig(config, this);
+			} catch (IOException e) {
+				MessageManager.sendAlertMessage("Couldn't save the custom config");
+				pm.disablePlugin(this);
+				e.printStackTrace();
+				return;
+			}
+		}
 	}
 	
 }
