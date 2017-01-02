@@ -61,17 +61,21 @@ public class ConfigManager {
      * Creates a config file 
      */
 	public static FileConfiguration creatYamlConfig(String name, Main main) throws IOException{
+	  if(name.contains(".yml")){
 		File file = new File(main.getDataFolder(),name);
 		if(file.exists()){
 			MessageManager.sendRemarkMessage("The " + name + " file has been loaded");
 			return YamlConfiguration.loadConfiguration(file);	
 		}
-		//Not ready yet
+		main.saveResource(name, false);
 		FileConfiguration customConfig = YamlConfiguration.loadConfiguration(file);
 		customConfig.setDefaults(customConfig);
-		customConfig.save(file);
+		customConfig.options().copyDefaults(true);
 		MessageManager.sendRemarkMessage("The " + name + " file has been created");
 		return customConfig;	
+	  }else{
+		  return null;
+	  }
 	}
 	
 	/*
