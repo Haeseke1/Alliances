@@ -1,14 +1,14 @@
 package me.Haeseke1.Alliances.Main;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.sun.corba.se.impl.ior.GenericTaggedComponent;
 
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
@@ -60,7 +60,7 @@ public class Main extends JavaPlugin{
 	}
 	
 	public void registerCommands(){
-		
+		getCommand("Alliances");
 	}
 	
 	/*
