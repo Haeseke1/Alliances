@@ -82,7 +82,7 @@ public class ConfigManager {
 		return customConfig;	
 	  }else{
 		  /*
-		   * Throws an exception if the config isn't a .yml file.
+		   * Throws an exception if the config isn't a valid config file. (JSON not included)
 		   */
 		  throw new InvalidConfigTypeException(name);
 	  }
