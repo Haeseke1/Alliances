@@ -3,6 +3,7 @@ package me.Haeseke1.Alliances.Utils;
 import java.io.File;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Main.Main;
@@ -55,6 +56,17 @@ public class ConfigManager {
 		}
 		
 	}
+    /*
+     * Creates a config file 
+     */
+	public static YamlConfiguration creatYamlConfig(String name, Main main){
+		File file = new File(main.getDataFolder(),name);
+		if(file.exists()){
+			return YamlConfiguration.loadConfiguration(file);	
+		}
+		//Not ready yet
+		return YamlConfiguration.loadConfiguration(file);	
+	}
 	
 	/*
 	 * Save changes made to the config file
@@ -62,4 +74,6 @@ public class ConfigManager {
 	public static void saveConfigFile(Main main){
 		main.saveDefaultConfig();
 	}
+	
+
 }

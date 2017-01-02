@@ -2,6 +2,7 @@ package me.Haeseke1.Alliances.Main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,11 +16,15 @@ public class Main extends JavaPlugin{
 	public static String cmdlogo;
 	public static PluginManager pm = Bukkit.getPluginManager();
 	
+	public static YamlConfiguration coins;
+	
+	
 	@SuppressWarnings("static-access")
 	@Override
 	public void onEnable() {
 		this.config = getConfig();
 		ConfigManager.registerConfigFile(this);
+		createConfigs();
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
@@ -37,6 +42,10 @@ public class Main extends JavaPlugin{
 	
 	public void registerCommands(){
 		
+	}
+	
+	public void createConfigs(){
+		coins = ConfigManager.creatYamlConfig("coins.yml", this);
 	}
 	
 }
