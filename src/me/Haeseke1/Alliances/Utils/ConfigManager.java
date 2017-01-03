@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Main.Main;
@@ -20,6 +21,10 @@ public class ConfigManager {
 		return config.getString(path);
 	}
 	
+	public static Integer getIntFromConfig(FileConfiguration config, String path) throws EmptyStringException{
+		if(config.getString(path) == null){ throw new EmptyStringException(path);}
+		return config.getInt(path);
+	}
 	/*
 	 * Register or reload config file
 	 */
@@ -38,6 +43,14 @@ public class ConfigManager {
 			MessageManager.alertColorCode = MessageManager.translateColorCode(getStringFromConfig(Main.config, "ColorCodes.alertMessages"));
 			MessageManager.infoColorCode = MessageManager.translateColorCode(getStringFromConfig(Main.config, "ColorCodes.infoMessages"));
 			MessageManager.remarkColorCode = MessageManager.translateColorCode(getStringFromConfig(Main.config, "ColorCodes.remarkMessages"));
+		} catch (EmptyStringException e) {
+			e.printStackTrace();
+			Main.pm.disablePlugin(main);
+		}
+		
+		//fetch coin information
+		try {
+			Coins.defaultCoins = getIntFromConfig(Main.config, "Coins.StarterCoins");
 		} catch (EmptyStringException e) {
 			e.printStackTrace();
 			Main.pm.disablePlugin(main);
