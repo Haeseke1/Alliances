@@ -6,6 +6,7 @@ ColorCodes:
   alertMessages: "&c"
   remarkMessages: "&a"
   infoMessages: "&e"
+  
 #All the configuration for handling coins
 Coins:
 

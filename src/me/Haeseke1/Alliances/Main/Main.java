@@ -28,7 +28,8 @@ public class Main extends JavaPlugin {
 	public static HashMap<String, FileConfiguration> configFiles = new HashMap<String, FileConfiguration>();
 	public static List<Alliance> alliances = new ArrayList<Alliance>();
 
-	public static FileConfiguration coins;
+	public static FileConfiguration coinsConfig;
+	public static FileConfiguration alliancesConfig;
 
 	@SuppressWarnings("static-access")
 	@Override
@@ -68,14 +69,15 @@ public class Main extends JavaPlugin {
 
 	public void registerCommands() {
 		getCommand("Alliances").setExecutor(new Alli());
-		;
 	}
 
 	/*
 	 * Creates all the needed configs of the code (JSON support not included)
 	 */
 	public void createConfigs() throws IOException, InvalidConfigTypeException {
-		coins = ConfigManager.getCustomConfig(new File(getDataFolder(), "coins.yml"));
+		coinsConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "coins.yml"));
+		alliancesConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "alliances.yml"));
+		
 	}
 
 	public void saveAllCustomConfigs() {

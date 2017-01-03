@@ -13,9 +13,9 @@ public class Coins {
 
 	public static int getPlayerCoins(Player player) {
 		try {
-			return ConfigManager.getIntFromConfig(Main.coins, player.getUniqueId().toString());
+			return ConfigManager.getIntFromConfig(Main.coinsConfig, player.getUniqueId().toString());
 		} catch (EmptyStringException e) {
-			Main.coins.set(player.getUniqueId().toString(), defaultCoins);
+			Main.coinsConfig.set(player.getUniqueId().toString(), defaultCoins);
 			return defaultCoins;
 		}
 	}
@@ -23,22 +23,22 @@ public class Coins {
 	@SuppressWarnings("deprecation")
 	public static int getPlayerCoins(String player) {
 		try {
-			return ConfigManager.getIntFromConfig(Main.coins, Bukkit.getOfflinePlayer(player).getUniqueId().toString());
+			return ConfigManager.getIntFromConfig(Main.coinsConfig, Bukkit.getOfflinePlayer(player).getUniqueId().toString());
 		} catch (EmptyStringException e) {
-			Main.coins.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins);
+			Main.coinsConfig.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins);
 			return defaultCoins;
 		}
 	}
 
 	public static int addPlayerCoins(Player player, int amount) {
 		try {
-			Main.coins.set(player.getUniqueId().toString(),
-					ConfigManager.getIntFromConfig(Main.coins, player.getUniqueId().toString() + amount));
-			return ConfigManager.getIntFromConfig(Main.coins, player.getUniqueId().toString());
+			Main.coinsConfig.set(player.getUniqueId().toString(),
+					ConfigManager.getIntFromConfig(Main.coinsConfig, player.getUniqueId().toString() + amount));
+			return ConfigManager.getIntFromConfig(Main.coinsConfig, player.getUniqueId().toString());
 		} catch (EmptyStringException e) {
-			Main.coins.set(player.getUniqueId().toString(), defaultCoins + amount);
+			Main.coinsConfig.set(player.getUniqueId().toString(), defaultCoins + amount);
 			try {
-				return ConfigManager.getIntFromConfig(Main.coins, player.getUniqueId().toString());
+				return ConfigManager.getIntFromConfig(Main.coinsConfig, player.getUniqueId().toString());
 			} catch (EmptyStringException e1) {
 				e1.printStackTrace();
 			}
@@ -49,13 +49,13 @@ public class Coins {
 	@SuppressWarnings("deprecation")
 	public static int addPlayerCoins(String player, int amount) {
 		try {
-			Main.coins.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), ConfigManager
-					.getIntFromConfig(Main.coins, Bukkit.getOfflinePlayer(player).getUniqueId().toString() + amount));
-			return ConfigManager.getIntFromConfig(Main.coins, Bukkit.getOfflinePlayer(player).getUniqueId().toString());
+			Main.coinsConfig.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), ConfigManager
+					.getIntFromConfig(Main.coinsConfig, Bukkit.getOfflinePlayer(player).getUniqueId().toString() + amount));
+			return ConfigManager.getIntFromConfig(Main.coinsConfig, Bukkit.getOfflinePlayer(player).getUniqueId().toString());
 		} catch (EmptyStringException e) {
-			Main.coins.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins + amount);
+			Main.coinsConfig.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins + amount);
 			try {
-				return ConfigManager.getIntFromConfig(Main.coins,
+				return ConfigManager.getIntFromConfig(Main.coinsConfig,
 						Bukkit.getOfflinePlayer(player).getUniqueId().toString());
 			} catch (EmptyStringException e1) {
 				e1.printStackTrace();
@@ -66,17 +66,17 @@ public class Coins {
 
 	public static boolean removePlayerCoins(Player player, int amount) {
 		try {
-			if (ConfigManager.getIntFromConfig(Main.coins, player.getUniqueId().toString()) >= amount) {
-				int i = ConfigManager.getIntFromConfig(Main.coins, player.getUniqueId().toString());
+			if (ConfigManager.getIntFromConfig(Main.coinsConfig, player.getUniqueId().toString()) >= amount) {
+				int i = ConfigManager.getIntFromConfig(Main.coinsConfig, player.getUniqueId().toString());
 				i -= amount;
-				Main.coins.set(player.getUniqueId().toString(), i);
+				Main.coinsConfig.set(player.getUniqueId().toString(), i);
 				return true;
 			} else {
 				return false;
 			}
 		} catch (EmptyStringException e) {
 			if (defaultCoins >= amount) {
-				Main.coins.set(player.getUniqueId().toString(), defaultCoins - amount);
+				Main.coinsConfig.set(player.getUniqueId().toString(), defaultCoins - amount);
 				return true;
 			} else {
 				return false;
@@ -87,19 +87,19 @@ public class Coins {
 	@SuppressWarnings("deprecation")
 	public static boolean removePlayerCoins(String player, int amount) {
 		try {
-			if (ConfigManager.getIntFromConfig(Main.coins,
+			if (ConfigManager.getIntFromConfig(Main.coinsConfig,
 					Bukkit.getOfflinePlayer(player).getUniqueId().toString()) >= amount) {
-				int i = ConfigManager.getIntFromConfig(Main.coins,
+				int i = ConfigManager.getIntFromConfig(Main.coinsConfig,
 						Bukkit.getOfflinePlayer(player).getUniqueId().toString());
 				i -= amount;
-				Main.coins.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), i);
+				Main.coinsConfig.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), i);
 				return true;
 			} else {
 				return false;
 			}
 		} catch (EmptyStringException e) {
 			if (defaultCoins >= amount) {
-				Main.coins.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins - amount);
+				Main.coinsConfig.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins - amount);
 				return true;
 			} else {
 				return false;

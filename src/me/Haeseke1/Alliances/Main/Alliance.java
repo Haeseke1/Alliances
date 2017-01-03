@@ -12,9 +12,11 @@ public class Alliance {
 	private int mLoses;
 	private int mCoins;
 	private HashMap<UUID, String> mMembers;
+	private String name;
 
-	public Alliance(Player owner, int wins, int loses, int coins) {
+	public Alliance(String name, Player owner, int wins, int loses, int coins) {
 		mMembers = new HashMap<UUID, String>();
+		this.name = name;
 		this.mOwner = owner;
 		this.mWins = wins;
 		this.mLoses = loses;
@@ -39,5 +41,9 @@ public class Alliance {
 
 	public int getCoins() {
 		return mCoins;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

@@ -9,18 +9,22 @@ import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class AllianceManager {
 
-	public static void createAlliance(Player owner) {
+	public static boolean createAlliance(String name, Player owner) {
 		if (!playerIsInAlli(owner)) {
-			int mCoins = Coins.getPlayerCoins(owner);
-			int mWins = 0;
-			int mLoses = 0;
-			Alliance alliance = new Alliance(owner, mWins, mLoses, mCoins);
-			Main.alliances.add(alliance);
-			alliance.getMembers().put(owner.getUniqueId(), "");
-			return;
+			if(!alliExist(name)){
+				int mCoins = Coins.getPlayerCoins(owner);
+				int mWins = 0;
+				int mLoses = 0;
+				Alliance alliance = new Alliance(name, owner, mWins, mLoses, mCoins);
+				Main.alliances.add(alliance);
+				alliance.getMembers().put(owner.getUniqueId(), "");
+				return true;
+			}
+			MessageManager.sendAlertMessage(owner, "Alliance already exist.");
+			return false;
 		}
 		MessageManager.sendAlertMessage(owner, "You're already in an alliance.");
-		return;
+		return false;
 	}
 
 	public static boolean playerIsInAlli(Player player) {
@@ -31,4 +35,14 @@ public class AllianceManager {
 		}
 		return false;
 	}
+	
+	public static boolean alliExist(String name) {
+		for (Alliance alli : Main.alliances) {
+			if (alli.getName().equalsIgnoreCase(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
