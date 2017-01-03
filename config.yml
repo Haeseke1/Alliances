@@ -14,4 +14,13 @@ Coins:
   StarterCoins: 100
   
   #The coins it cost to create a alliance
-  CreateAllianceCost: 1000
+  Dark: 
+    SmallAllianceCost: 1000
+    NormalAllianceCost: 2000
+    BigAllianceCost: 3000
+    HugeAllianceCost: 4000
+  Light:
+    SmallAllianceCost: 1000
+    NormalAllianceCost: 2000
+    BigAllianceCost: 3000
+    HugeAllianceCost: 4000
