@@ -8,4 +8,9 @@ ColorCodes:
   infoMessages: "&e"
 #All the configuration for handling coins
 Coins:
+
+  #The coins a player get on joining
   StarterCoins: 100
+  
+  #The coins it cost to create a alliance
+  CreateAllianceCost: 1000
