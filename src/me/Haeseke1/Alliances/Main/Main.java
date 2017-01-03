@@ -15,6 +15,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Haeseke1.Alliances.Commands.Alli;
+import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -51,6 +52,7 @@ public class Main extends JavaPlugin {
 		}
 		ConfigManager.registerConfigFile(this);
 		registerCommands();
+		registerEvents();
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
@@ -64,7 +66,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerEvents() {
-
+		pm.registerEvents(new InventoryEvents(), this);
 	}
 
 	public void registerCommands() {

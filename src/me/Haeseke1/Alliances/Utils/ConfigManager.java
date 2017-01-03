@@ -6,6 +6,15 @@ import java.io.IOException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import me.Haeseke1.Alliances.Alliance.Type.Caith_Sith;
+import me.Haeseke1.Alliances.Alliance.Type.Gnome;
+import me.Haeseke1.Alliances.Alliance.Type.Imp;
+import me.Haeseke1.Alliances.Alliance.Type.Leprechaun;
+import me.Haeseke1.Alliances.Alliance.Type.Pooka;
+import me.Haeseke1.Alliances.Alliance.Type.Salamander;
+import me.Haeseke1.Alliances.Alliance.Type.Spriggan;
+import me.Haeseke1.Alliances.Alliance.Type.Sylph;
+import me.Haeseke1.Alliances.Alliance.Type.Undine;
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Main.Main;
@@ -58,6 +67,15 @@ public class ConfigManager {
 		// fetch coin information
 		try {
 			Coins.defaultCoins = getIntFromConfig(Main.config, "Coins.StarterCoins");
+			Caith_Sith.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Cait Sith");
+			Gnome.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Gnome");
+			Imp.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Imp");
+			Leprechaun.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Leprechaun");
+			Pooka.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Pooka");
+			Salamander.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Salamander");
+			Spriggan.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Spriggan");
+			Sylph.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Sylph");
+			Undine.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Undine");
 		} catch (EmptyStringException e) {
 			e.printStackTrace();
 			Main.pm.disablePlugin(main);

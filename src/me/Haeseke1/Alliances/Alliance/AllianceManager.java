@@ -9,13 +9,13 @@ import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class AllianceManager {
 
-	public static boolean createAlliance(String name, Player owner) {
+	public static boolean createAlliance(String name, Player owner, allianceType type) {
 		if (!playerIsInAlli(owner)) {
 			if(!alliExist(name)){
 				int mCoins = Coins.getPlayerCoins(owner);
 				int mWins = 0;
 				int mLoses = 0;
-				Alliance alliance = new Alliance(name, owner, mWins, mLoses, mCoins);
+				Alliance alliance = new Alliance(name, owner, mWins, mLoses, mCoins, type);
 				Main.alliances.add(alliance);
 				alliance.getMembers().put(owner.getUniqueId(), "");
 				return true;

@@ -27,11 +27,6 @@ public class Alli implements CommandExecutor {
 		}
 		
 		if(args[0].equalsIgnoreCase("create")){
-			if(args.length < 2){
-				MessageManager.sendAlertMessage((Player) sender,
-						"Not enough arguments! Use /alliance coin for more information!");
-				return false;
-			}
 			mainCreate.onCommand(sender, args);
 			return true;
 		}

@@ -14,13 +14,13 @@ Coins:
   StarterCoins: 100
   
   #The coins it cost to create a alliance
-  Dark: 
-    SmallAllianceCost: 1000
-    NormalAllianceCost: 2000
-    BigAllianceCost: 3000
-    HugeAllianceCost: 4000
-  Light:
-    SmallAllianceCost: 1000
-    NormalAllianceCost: 2000
-    BigAllianceCost: 3000
-    HugeAllianceCost: 4000
+  AllianceTypes:
+    Cait Sith: 1000
+    Gnome: 1000
+    Imp: 1000
+    Leprechaun: 1000
+    Pooka: 1000
+    Salamander: 1000
+    Spriggan: 1000
+    Sylph: 1000
+    Undine: 1000 

@@ -32,10 +32,22 @@ public class MessageManager {
 		Bukkit.getConsoleSender().sendMessage(Main.cmdlogo + alertColorCode + message);
 	}
 
+	public static void sendRemarkBroadcast(String message) {
+		Bukkit.broadcastMessage(Main.cmdlogo + remarkColorCode + message);
+	}
+	
+	public static void sendInfoBroadcast(String message) {
+		Bukkit.broadcastMessage(Main.cmdlogo + infoColorCode + message);
+	}
+
+	public static void sendAlertBroadcast(String message) {
+		Bukkit.broadcastMessage(Main.cmdlogo + alertColorCode + message);
+	}
+
 	public static void sendRemarkMessage(String message) {
 		Bukkit.getConsoleSender().sendMessage(Main.cmdlogo + remarkColorCode + message);
 	}
-
+	
 	public static String translateColorCode(String message) {
 		return ChatColor.translateAlternateColorCodes('&', message);
 	}
