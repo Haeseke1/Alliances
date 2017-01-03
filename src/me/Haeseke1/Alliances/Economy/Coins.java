@@ -1,5 +1,6 @@
 package me.Haeseke1.Alliances.Economy;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
@@ -22,6 +23,15 @@ public class Coins {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
+	public static int getPlayerCoins(String player){
+		try {
+			return ConfigManager.getIntFromConfig(Main.coins, Bukkit.getOfflinePlayer(player).getUniqueId().toString());
+		} catch (EmptyStringException e) {
+			Main.coins.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins);
+			return defaultCoins;
+		}
+	}
 
 	public static int addPlayerCoins(Player player,int amount){
 		try {
@@ -38,6 +48,21 @@ public class Coins {
 		return 0;
 	}
 	
+	@SuppressWarnings("deprecation")
+	public static int addPlayerCoins(String player,int amount){
+		try {
+			Main.coins.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), ConfigManager.getIntFromConfig(Main.coins, Bukkit.getOfflinePlayer(player).getUniqueId().toString() + amount));
+			return ConfigManager.getIntFromConfig(Main.coins, Bukkit.getOfflinePlayer(player).getUniqueId().toString());
+		} catch (EmptyStringException e) {
+			Main.coins.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins + amount);
+			try {
+				return ConfigManager.getIntFromConfig(Main.coins, Bukkit.getOfflinePlayer(player).getUniqueId().toString());
+			} catch (EmptyStringException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return 0;
+	}
 	
 	public static boolean removePlayerCoins(Player player,int amount){
 		try {
@@ -52,6 +77,28 @@ public class Coins {
 		} catch (EmptyStringException e) {
 			if(defaultCoins >= amount){
 				Main.coins.set(player.getUniqueId().toString(), defaultCoins - amount);
+				return true;
+			}else{
+				return false;
+			}
+		}
+	}
+	
+	
+	@SuppressWarnings("deprecation")
+	public static boolean removePlayerCoins(String player,int amount){
+		try {
+			if(ConfigManager.getIntFromConfig(Main.coins, Bukkit.getOfflinePlayer(player).getUniqueId().toString()) >= amount){
+				int i = ConfigManager.getIntFromConfig(Main.coins, Bukkit.getOfflinePlayer(player).getUniqueId().toString());
+				i -= amount;
+				Main.coins.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), i);
+				return true;
+			}else{
+				return false;
+			}
+		} catch (EmptyStringException e) {
+			if(defaultCoins >= amount){
+				Main.coins.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins - amount);
 				return true;
 			}else{
 				return false;

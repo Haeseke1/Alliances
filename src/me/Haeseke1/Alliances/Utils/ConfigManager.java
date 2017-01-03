@@ -8,7 +8,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
-import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Main.Main;
 
 public class ConfigManager {
@@ -71,43 +70,6 @@ public class ConfigManager {
 		}
 		
 	}
-    /*
-     * Creates a config file 
-     */
-	public static FileConfiguration creatYamlConfig(String name, Main main) throws IOException,InvalidConfigTypeException{
-	  if(name.contains(".yml")){
-		  /*
-		   * Creates the file for the system.
-		   */
-		File file = new File(main.getDataFolder(),name);
-		if(file.exists()){
-			FileConfiguration customConfig = YamlConfiguration.loadConfiguration(file); 
-			Main.configFiles.add(customConfig);
-			MessageManager.sendRemarkMessage("The " + name + " file has been loaded");	
-			return customConfig;	
-		}
-		/*
-		 * Creates a new config file if the config file doesn't exists already.
-		 */
-		main.saveResource(name, false);
-        FileConfiguration customConfig = YamlConfiguration.loadConfiguration(file);
-		customConfig.setDefaults(customConfig);
-		customConfig.options().copyDefaults(true);
-		Main.configFiles.add(customConfig);
-		MessageManager.sendRemarkMessage("The " + name + " file has been created");
-		return customConfig;	
-	  }else{
-		  /*
-		   * Throws an exception if the config isn't a valid config file. (JSON not included)
-		   */
-		  throw new InvalidConfigTypeException(name);
-	  }
-	}
-	
-	public static void saveCustomConfig(FileConfiguration config, Main main) throws IOException{
-		File configFile = new File(main.getDataFolder(),config.getName());
-		config.save(configFile);
-	}
 	
 	/*
 	 * Save changes made to the config file
@@ -115,6 +77,27 @@ public class ConfigManager {
 	public static void saveConfigFile(Main main){
 		main.saveDefaultConfig();
 	}
+	
+	
+	public static FileConfiguration getCustomConfig(File f){
+		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
+		Main.configFiles.put(f.getName(),file);
+		return file;
+	}
+	
+	
+	public static void saveCustomConfig(File f, FileConfiguration file) {
+	    if (f == null || file == null) {
+	        return;
+	    }
+	    try {
+	    	file.save(f);
+	    } catch (IOException ex) {
+	        MessageManager.sendAlertMessage("Could not save " + file.getName() + "!");
+	    }
+	}
+	
+
 	
 
 }

@@ -1,14 +1,16 @@
 package me.Haeseke1.Alliances.Main;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
+import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -19,7 +21,7 @@ public class Main extends JavaPlugin{
 	public static FileConfiguration config;
 	public static String cmdlogo;
 	public static PluginManager pm = Bukkit.getPluginManager();
-	public static List<FileConfiguration> configFiles;
+	public static HashMap<String, FileConfiguration> configFiles = new HashMap<String,FileConfiguration>();
 	
 	public static FileConfiguration coins;
 	
@@ -42,7 +44,7 @@ public class Main extends JavaPlugin{
 			return;
 		}
 		ConfigManager.registerConfigFile(this);
-		saveAllCustomConfigs();
+		registerCommands();
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
@@ -51,6 +53,7 @@ public class Main extends JavaPlugin{
 	@Override
 	public void onDisable() {
 		ConfigManager.saveConfigFile(this);
+		saveAllCustomConfigs();
 		MessageManager.sendAlertMessage("The plugin has been shutted down! *-* The cake wasn't a lie thought *-*");
 	}
 	
@@ -59,26 +62,19 @@ public class Main extends JavaPlugin{
 	}
 	
 	public void registerCommands(){
-		getCommand("Alliances");
+		getCommand("Alliances").setExecutor(new Alli());;
 	}
 	
 	/*
 	 * Creates all the needed configs of the code (JSON support not included)
 	 */
 	public void createConfigs() throws IOException, InvalidConfigTypeException{
-	   coins = ConfigManager.creatYamlConfig("coins.yml", this);
+	    coins = ConfigManager.getCustomConfig(new File(getDataFolder() , "coins.yml"));
 	}
 	
 	public void saveAllCustomConfigs(){
-		for(FileConfiguration config: configFiles){
-			try {
-				ConfigManager.saveCustomConfig(config, this);
-			} catch (IOException e) {
-				MessageManager.sendAlertMessage("Couldn't save the custom config");
-				pm.disablePlugin(this);
-				e.printStackTrace();
-				return;
-			}
+		for(Entry<String,FileConfiguration> entry: configFiles.entrySet()){
+			ConfigManager.saveCustomConfig(new File(getDataFolder(),entry.getKey()), entry.getValue());
 		}
 	}
 	
