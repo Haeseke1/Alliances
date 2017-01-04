@@ -9,7 +9,7 @@ import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class AllianceManager {
 
-	public static boolean createAlliance(String name, Player owner, allianceType type) {
+	public static boolean createAlliance(String name, Player owner, AllianceType type) {
 		if (!playerIsInAlli(owner)) {
 			if(!alliExist(name)){
 				int mCoins = Coins.getPlayerCoins(owner);

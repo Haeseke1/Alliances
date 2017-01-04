@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
-import me.Haeseke1.Alliances.Alliance.allianceType;
+import me.Haeseke1.Alliances.Alliance.AllianceType;
 import me.Haeseke1.Alliances.Alliance.Type.Caith_Sith;
 import me.Haeseke1.Alliances.Alliance.Type.Gnome;
 import me.Haeseke1.Alliances.Alliance.Type.Imp;
@@ -28,7 +28,7 @@ import me.Haeseke1.Alliances.Utils.MessageManager;
 @SuppressWarnings("deprecation")
 public class InventoryEvents implements Listener{
 	
-	public static HashMap<Player,allianceType> chooseName = new HashMap<Player,allianceType>();
+	public static HashMap<Player,AllianceType> chooseName = new HashMap<Player,AllianceType>();
 	
 	public static void createInventory(Player player){
 		Inventory inv = Bukkit.createInventory(null, 9, "Create alliance");
@@ -54,7 +54,7 @@ public class InventoryEvents implements Listener{
 				switch(event.getCurrentItem().getType()){
 				case MONSTER_EGG:
 					if(Coins.getPlayerCoins(player) >= Caith_Sith.cost){
-						chooseName.put(player, allianceType.CAIT_SITH);
+						chooseName.put(player, AllianceType.CAIT_SITH);
 						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
 					}else{
 						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
@@ -63,7 +63,7 @@ public class InventoryEvents implements Listener{
 					break;
 				case DIRT:
 					if(Coins.getPlayerCoins(player) >= Gnome.cost){
-						chooseName.put(player, allianceType.GNOME);
+						chooseName.put(player, AllianceType.GNOME);
 						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
 					}else{
 						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
@@ -72,7 +72,7 @@ public class InventoryEvents implements Listener{
 					break;
 				case EYE_OF_ENDER:
 					if(Coins.getPlayerCoins(player) >= Imp.cost){
-						chooseName.put(player, allianceType.IMP);
+						chooseName.put(player, AllianceType.IMP);
 						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
 					}else{
 						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
@@ -81,7 +81,7 @@ public class InventoryEvents implements Listener{
 					break;
 				case REDSTONE_TORCH_ON:
 					if(Coins.getPlayerCoins(player) >= Leprechaun.cost){
-						chooseName.put(player, allianceType.LEPRECHAUN);
+						chooseName.put(player, AllianceType.LEPRECHAUN);
 						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
 					}else{
 						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
@@ -90,7 +90,7 @@ public class InventoryEvents implements Listener{
 					break;
 				case BLAZE_ROD:
 					if(Coins.getPlayerCoins(player) >= Pooka.cost){
-						chooseName.put(player, allianceType.POOKA);
+						chooseName.put(player, AllianceType.POOKA);
 						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
 					}else{
 						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
@@ -99,7 +99,7 @@ public class InventoryEvents implements Listener{
 					break;
 				case FIREBALL:
 					if(Coins.getPlayerCoins(player) >= Salamander.cost){
-						chooseName.put(player, allianceType.SALAMANDER);
+						chooseName.put(player, AllianceType.SALAMANDER);
 						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
 					}else{
 						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
@@ -108,7 +108,7 @@ public class InventoryEvents implements Listener{
 					break;
 				case DIAMOND_BLOCK:
 					if(Coins.getPlayerCoins(player) >= Spriggan.cost){
-						chooseName.put(player, allianceType.SPRIGGAN);
+						chooseName.put(player, AllianceType.SPRIGGAN);
 						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
 					}else{
 						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
@@ -117,7 +117,7 @@ public class InventoryEvents implements Listener{
 					break;
 				case FEATHER:
 					if(Coins.getPlayerCoins(player) >= Sylph.cost){
-						chooseName.put(player, allianceType.SYLPH);
+						chooseName.put(player, AllianceType.SYLPH);
 						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
 					}else{
 						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
@@ -126,7 +126,7 @@ public class InventoryEvents implements Listener{
 					break;
 				case GOLDEN_APPLE:
 					if(Coins.getPlayerCoins(player) >= Undine.cost){
-						chooseName.put(player, allianceType.UNDINE);
+						chooseName.put(player, AllianceType.UNDINE);
 						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
 					}else{
 						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");

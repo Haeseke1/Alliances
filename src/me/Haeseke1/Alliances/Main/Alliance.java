@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
-import me.Haeseke1.Alliances.Alliance.allianceType;
+import me.Haeseke1.Alliances.Alliance.AllianceType;
 
 public class Alliance {
 
@@ -15,9 +15,9 @@ public class Alliance {
 	private int mCoins;
 	private HashMap<UUID, String> mMembers;
 	private String name;
-	private allianceType type;
+	private AllianceType type;
 	
-	public Alliance(String name, Player owner, int wins, int loses, int coins, allianceType type) {
+	public Alliance(String name, Player owner, int wins, int loses, int coins, AllianceType type) {
 		mMembers = new HashMap<UUID, String>();
 		this.name = name;
 		this.mOwner = owner;
@@ -51,7 +51,7 @@ public class Alliance {
 		return name;
 	}
 
-	public allianceType getType() {
+	public AllianceType getType() {
 		return type;
 	}
 	
