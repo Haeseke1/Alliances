@@ -210,7 +210,7 @@ public class InventoryEvents implements Listener{
 				}
 				break;
 			}
-			if(AllianceManager.createAlliance(event.getMessage(), player, chooseName.get(player))){
+			if(AllianceManager.createNewAlliance(event.getMessage(), player, chooseName.get(player))){
 				event.setCancelled(true);
 				chooseName.remove(player);
 				MessageManager.sendRemarkMessage(player, "Congratulations, the alliance " + event.getMessage() + " is created!");

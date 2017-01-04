@@ -3,7 +3,7 @@ package me.Haeseke1.Alliances.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
+import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 
@@ -14,7 +14,7 @@ public class Coins {
 	public static int getPlayerCoins(Player player) {
 		try {
 			return ConfigManager.getIntFromConfig(Main.coinsConfig, player.getUniqueId().toString());
-		} catch (EmptyStringException e) {
+		} catch (EmptyIntException e) {
 			Main.coinsConfig.set(player.getUniqueId().toString(), defaultCoins);
 			return defaultCoins;
 		}
@@ -24,7 +24,7 @@ public class Coins {
 	public static int getPlayerCoins(String player) {
 		try {
 			return ConfigManager.getIntFromConfig(Main.coinsConfig, Bukkit.getOfflinePlayer(player).getUniqueId().toString());
-		} catch (EmptyStringException e) {
+		} catch (EmptyIntException e) {
 			Main.coinsConfig.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins);
 			return defaultCoins;
 		}
@@ -35,11 +35,11 @@ public class Coins {
 			Main.coinsConfig.set(player.getUniqueId().toString(),
 					ConfigManager.getIntFromConfig(Main.coinsConfig, player.getUniqueId().toString() + amount));
 			return ConfigManager.getIntFromConfig(Main.coinsConfig, player.getUniqueId().toString());
-		} catch (EmptyStringException e) {
+		} catch (EmptyIntException e) {
 			Main.coinsConfig.set(player.getUniqueId().toString(), defaultCoins + amount);
 			try {
 				return ConfigManager.getIntFromConfig(Main.coinsConfig, player.getUniqueId().toString());
-			} catch (EmptyStringException e1) {
+			} catch (EmptyIntException e1) {
 				e1.printStackTrace();
 			}
 		}
@@ -52,12 +52,12 @@ public class Coins {
 			Main.coinsConfig.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), ConfigManager
 					.getIntFromConfig(Main.coinsConfig, Bukkit.getOfflinePlayer(player).getUniqueId().toString() + amount));
 			return ConfigManager.getIntFromConfig(Main.coinsConfig, Bukkit.getOfflinePlayer(player).getUniqueId().toString());
-		} catch (EmptyStringException e) {
+		} catch (EmptyIntException e) {
 			Main.coinsConfig.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins + amount);
 			try {
 				return ConfigManager.getIntFromConfig(Main.coinsConfig,
 						Bukkit.getOfflinePlayer(player).getUniqueId().toString());
-			} catch (EmptyStringException e1) {
+			} catch (EmptyIntException e1) {
 				e1.printStackTrace();
 			}
 		}
@@ -74,7 +74,7 @@ public class Coins {
 			} else {
 				return false;
 			}
-		} catch (EmptyStringException e) {
+		} catch (EmptyIntException e) {
 			if (defaultCoins >= amount) {
 				Main.coinsConfig.set(player.getUniqueId().toString(), defaultCoins - amount);
 				return true;
@@ -97,7 +97,7 @@ public class Coins {
 			} else {
 				return false;
 			}
-		} catch (EmptyStringException e) {
+		} catch (EmptyIntException e) {
 			if (defaultCoins >= amount) {
 				Main.coinsConfig.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), defaultCoins - amount);
 				return true;

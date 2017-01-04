@@ -3,13 +3,12 @@ package me.Haeseke1.Alliances.Main;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Alliance.AllianceType;
 
 public class Alliance {
 
-	private Player mOwner;
+	private UUID mOwner;
 	private int mWins;
 	private int mLoses;
 	private int mCoins;
@@ -17,7 +16,7 @@ public class Alliance {
 	private String name;
 	private AllianceType type;
 	
-	public Alliance(String name, Player owner, int wins, int loses, int coins, AllianceType type) {
+	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type) {
 		mMembers = new HashMap<UUID, String>();
 		this.name = name;
 		this.mOwner = owner;
@@ -27,7 +26,17 @@ public class Alliance {
 		this.type = type;
 	}
 
-	public Player getOwner() {
+	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type,HashMap<UUID,String> mMembers) {
+		this.mMembers = mMembers;
+		this.name = name;
+		this.mOwner = owner;
+		this.mWins = wins;
+		this.mLoses = loses;
+		this.mCoins = coins;
+		this.type = type;
+	}
+	
+	public UUID getOwner() {
 		return mOwner;
 	}
 

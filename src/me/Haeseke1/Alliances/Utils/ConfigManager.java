@@ -2,6 +2,7 @@ package me.Haeseke1.Alliances.Utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -16,7 +17,9 @@ import me.Haeseke1.Alliances.Alliance.Type.Spriggan;
 import me.Haeseke1.Alliances.Alliance.Type.Sylph;
 import me.Haeseke1.Alliances.Alliance.Type.Undine;
 import me.Haeseke1.Alliances.Economy.Coins;
+import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
+import me.Haeseke1.Alliances.Exceptions.EmptyStringListException;
 import me.Haeseke1.Alliances.Main.Main;
 
 public class ConfigManager {
@@ -31,11 +34,18 @@ public class ConfigManager {
 		return config.getString(path);
 	}
 
-	public static Integer getIntFromConfig(FileConfiguration config, String path) throws EmptyStringException {
-		if (config.getString(path) == null) {
-			throw new EmptyStringException(path);
+	public static Integer getIntFromConfig(FileConfiguration config, String path) throws EmptyIntException {
+		if (!config.isInt(path)) {
+			throw new EmptyIntException(path);
 		}
 		return config.getInt(path);
+	}
+	
+	public static List<String> getStringListFromConfig(FileConfiguration config, String path) throws EmptyStringListException {
+		if (config.getStringList(path) == null) {
+			throw new EmptyStringListException(path);
+		}
+		return config.getStringList(path);
 	}
 
 	/*
@@ -76,7 +86,7 @@ public class ConfigManager {
 			Spriggan.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Spriggan");
 			Sylph.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Sylph");
 			Undine.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Undine");
-		} catch (EmptyStringException e) {
+		} catch (EmptyIntException e) {
 			e.printStackTrace();
 			Main.pm.disablePlugin(main);
 		}

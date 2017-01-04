@@ -14,6 +14,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
@@ -53,6 +54,7 @@ public class Main extends JavaPlugin {
 		ConfigManager.registerConfigFile(this);
 		registerCommands();
 		registerEvents();
+		AllianceManager.registerAlliance();
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
@@ -83,6 +85,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void saveAllCustomConfigs() {
+		AllianceManager.saveAlliance();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
 			ConfigManager.saveCustomConfig(new File(getDataFolder(), entry.getKey()), entry.getValue());
 		}
