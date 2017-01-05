@@ -113,4 +113,13 @@ public class AllianceManager {
 		}
 	}
 	
+	public static Alliance getAlliance(Player player){
+		for (Alliance alli : Main.alliances) {
+			if (alli.getMembers().containsKey(player.getUniqueId())) {
+				return alli;
+			}
+		}
+		return null;
+	}
+	
 }

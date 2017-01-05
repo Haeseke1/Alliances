@@ -21,6 +21,7 @@ import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringListException;
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Outpost.Timer;
 
 public class ConfigManager {
 
@@ -61,7 +62,6 @@ public class ConfigManager {
 			Main.pm.disablePlugin(main);
 			return;
 		}
-		// fetch colorcodes
 		try {
 			MessageManager.alertColorCode = MessageManager
 					.translateColorCode(getStringFromConfig(Main.config, "ColorCodes.alertMessages"));
@@ -74,7 +74,6 @@ public class ConfigManager {
 			Main.pm.disablePlugin(main);
 		}
 
-		// fetch coin information
 		try {
 			Coins.defaultCoins = getIntFromConfig(Main.config, "Coins.StarterCoins");
 			Caith_Sith.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Cait Sith");
@@ -86,6 +85,9 @@ public class ConfigManager {
 			Spriggan.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Spriggan");
 			Sylph.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Sylph");
 			Undine.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Undine");
+			
+			Timer.rewardTime = getIntFromConfig(Main.config, "Outpost.Time_Per_Reward");
+			Timer.take_overTime = getIntFromConfig(Main.config, "Outpost.Time_For_Take_Over");
 		} catch (EmptyIntException e) {
 			e.printStackTrace();
 			Main.pm.disablePlugin(main);

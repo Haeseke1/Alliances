@@ -24,3 +24,9 @@ Coins:
     Spriggan: 1000
     Sylph: 1000
     Undine: 1000 
+    
+    
+Outpost:
+  # the time per reward (in seconds) and the time it takes to take over a outpost (in sec) (best to take a number divisible by 4)
+  Time_Per_Reward: 240
+  Time_For_Take_Over: 600

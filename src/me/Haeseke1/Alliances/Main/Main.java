@@ -2,11 +2,9 @@ package me.Haeseke1.Alliances.Main;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.util.ArrayList;
-import java.util.List;
-
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
@@ -18,6 +16,8 @@ import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
+import me.Haeseke1.Alliances.Outpost.OutpostEvents;
+import me.Haeseke1.Alliances.Outpost.Timer;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -69,10 +69,15 @@ public class Main extends JavaPlugin {
 
 	public void registerEvents() {
 		pm.registerEvents(new InventoryEvents(), this);
+		pm.registerEvents(new OutpostEvents(), this);
 	}
 
 	public void registerCommands() {
 		getCommand("Alliances").setExecutor(new Alli());
+	}
+	
+	public void registerSchedulers(){
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Timer(), 20, 20);
 	}
 
 	/*
