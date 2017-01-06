@@ -122,4 +122,13 @@ public class AllianceManager {
 		return null;
 	}
 	
+	public static Alliance getAlliance(String alli_Name){
+		for (Alliance alli : Main.alliances) {
+			if (alli.getName().equalsIgnoreCase(alli_Name)){
+				return alli;
+			}
+		}
+		return null;
+	}
+	
 }

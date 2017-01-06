@@ -17,6 +17,7 @@ import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Outpost.OutpostEvents;
+import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.Timer;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -32,6 +33,7 @@ public class Main extends JavaPlugin {
 
 	public static FileConfiguration coinsConfig;
 	public static FileConfiguration alliancesConfig;
+	public static FileConfiguration outpostConfig;
 
 	@SuppressWarnings("static-access")
 	@Override
@@ -54,7 +56,6 @@ public class Main extends JavaPlugin {
 		ConfigManager.registerConfigFile(this);
 		registerCommands();
 		registerEvents();
-		AllianceManager.registerAlliance();
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
@@ -86,11 +87,14 @@ public class Main extends JavaPlugin {
 	public void createConfigs() throws IOException, InvalidConfigTypeException {
 		coinsConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "coins.yml"));
 		alliancesConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "alliances.yml"));
-		
+		outpostConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "outpost.yml"));
+		AllianceManager.registerAlliance();
+		OutpostManager.registerOutpost();
 	}
 
 	public void saveAllCustomConfigs() {
 		AllianceManager.saveAlliance();
+		OutpostManager.saveOutpost();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
 			ConfigManager.saveCustomConfig(new File(getDataFolder(), entry.getKey()), entry.getValue());
 		}
