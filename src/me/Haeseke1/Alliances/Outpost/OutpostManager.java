@@ -3,7 +3,9 @@ package me.Haeseke1.Alliances.Outpost;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.Haeseke1.Alliances.Outpost.Type.Blacksmith;
@@ -55,7 +57,128 @@ public class OutpostManager {
 		}
 	}
 	
-	public static boolean checkBlock(Location b){
+	public static void checkPlayers(){
+		for(Player player : Bukkit.getOnlinePlayers()){
+			Location loc = player.getLocation();
+			Farm f = checkFarms(loc);
+			if(f != null){
+				f.inOutpost.add(player);
+			}
+			Blacksmith b = checkBlacksmiths(loc);
+			if(b != null){
+				b.inOutpost.add(player);
+			}
+			Dock d = checkDocks(loc);
+			if(d != null){
+				d.inOutpost.add(player);
+			}
+			God g = checkGods(loc);
+			if(g != null){
+				g.inOutpost.add(player);
+			}
+			Magic_Tower mt = checkMagic_Towers(loc);
+			if(mt != null){
+				mt.inOutpost.add(player);
+			}
+			Mine m = checkMines(loc);
+			if(m != null){
+				m.inOutpost.add(player);
+			}
+			Mob_Farm mf = checkMob_Farms(loc);
+			if(mf != null){
+				mf.inOutpost.add(player);
+			}
+		}
+	}
+	
+	
+	
+	private static Farm checkFarms(Location b){
+		for(Farm f : Farm.farms){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static Blacksmith checkBlacksmiths(Location b){
+		for(Blacksmith f : Blacksmith.blacksmiths){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	
+	private static Dock checkDocks(Location b){
+		for(Dock f : Dock.docks){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static God checkGods(Location b){
+		for(God f : God.gods){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static Magic_Tower checkMagic_Towers(Location b){
+		for(Magic_Tower f : Magic_Tower.magic_towers){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static Mine checkMines(Location b){
+		for(Mine f : Mine.mines){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static Mob_Farm checkMob_Farms(Location b){
+		for(Mob_Farm f : Mob_Farm.mob_farms){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public static boolean checkLocation(Location b){
 		for(Farm f : Farm.farms){
 			if(f.world.equals(b.getWorld())){
 				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&

@@ -15,7 +15,8 @@ public class Timer implements Runnable{
 		}else{
 			currentRewardTime++;
 		}
-		
+		OutpostManager.checkPlayers();
+		OutpostManager.updateTakeOver();
 		
 	}
 }
