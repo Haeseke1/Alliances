@@ -1,12 +1,16 @@
 package me.Haeseke1.Alliances.Outpost;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -520,6 +524,179 @@ public class OutpostManager {
 			}
 		}
 	}
+	
+	@SuppressWarnings("deprecation")
+	public static void saveRewards(){
+		FileConfiguration config = Main.config;
+		config.set("Outpost.Rewards.Blacksmith", null);
+		int i = 0;
+		for(Entry<ItemStack,Integer> entry : Blacksmith.rewards.entrySet()){
+			config.set("Outpost.Rewards.Blacksmith" + i + ".ID", entry.getKey().getTypeId());
+			config.set("Outpost.Rewards.Blacksmith" + i + ".Data", entry.getKey().getData().getData());
+			config.set("Outpost.Rewards.Blacksmith" + i + ".Amount", entry.getKey().getAmount());
+			if(entry.getKey().hasItemMeta()){
+				if(entry.getKey().getItemMeta().hasDisplayName()){
+					config.set("Outpost.Rewards.Blacksmith" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
+				}
+				if(entry.getKey().getItemMeta().hasLore()){
+					config.set("Outpost.Rewards.Blacksmith" + i + ".Lore", entry.getKey().getItemMeta().getLore());
+				}
+				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+				List<String> list = new ArrayList<String>();
+				for(Entry<Enchantment,Integer> ench : map.entrySet()){
+					list.add(ench.getKey().getId() + "," + ench.getValue());
+				}
+				config.set("Outpost.Rewards.Blacksmith" + i + ".Enchantments", list);
+				config.set("Outpost.Rewards.Blacksmith" + i + ".Percentage", entry.getValue());
+			}
+			i++;
+		}
+		
+		config.set("Outpost.Rewards.Dock", null);
+		i = 0;
+		for(Entry<ItemStack,Integer> entry : Dock.rewards.entrySet()){
+			config.set("Outpost.Rewards.Dock" + i + ".ID", entry.getKey().getTypeId());
+			config.set("Outpost.Rewards.Dock" + i + ".Data", entry.getKey().getData().getData());
+			config.set("Outpost.Rewards.Dock" + i + ".Amount", entry.getKey().getAmount());
+			if(entry.getKey().hasItemMeta()){
+				if(entry.getKey().getItemMeta().hasDisplayName()){
+					config.set("Outpost.Rewards.Dock" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
+				}
+				if(entry.getKey().getItemMeta().hasLore()){
+					config.set("Outpost.Rewards.Dock" + i + ".Lore", entry.getKey().getItemMeta().getLore());
+				}
+				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+				List<String> list = new ArrayList<String>();
+				for(Entry<Enchantment,Integer> ench : map.entrySet()){
+					list.add(ench.getKey().getId() + "," + ench.getValue());
+				}
+				config.set("Outpost.Rewards.Dock" + i + ".Enchantments", list);
+				config.set("Outpost.Rewards.Dock" + i + ".Percentage", entry.getValue());
+			}
+			i++;
+		}
+		
+		config.set("Outpost.Rewards.Farm", null);
+		i = 0;
+		for(Entry<ItemStack,Integer> entry : Farm.rewards.entrySet()){
+			config.set("Outpost.Rewards.Farm" + i + ".ID", entry.getKey().getTypeId());
+			config.set("Outpost.Rewards.Farm" + i + ".Data", entry.getKey().getData().getData());
+			config.set("Outpost.Rewards.Farm" + i + ".Amount", entry.getKey().getAmount());
+			if(entry.getKey().hasItemMeta()){
+				if(entry.getKey().getItemMeta().hasDisplayName()){
+					config.set("Outpost.Rewards.Farm" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
+				}
+				if(entry.getKey().getItemMeta().hasLore()){
+					config.set("Outpost.Rewards.Farm" + i + ".Lore", entry.getKey().getItemMeta().getLore());
+				}
+				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+				List<String> list = new ArrayList<String>();
+				for(Entry<Enchantment,Integer> ench : map.entrySet()){
+					list.add(ench.getKey().getId() + "," + ench.getValue());
+				}
+				config.set("Outpost.Rewards.Farm" + i + ".Enchantments", list);
+				config.set("Outpost.Rewards.Farm" + i + ".Percentage", entry.getValue());
+			}
+			i++;
+		}
+		
+		config.set("Outpost.Rewards.God", null);
+		i = 0;
+		for(Entry<ItemStack,Integer> entry : God.rewards.entrySet()){
+			config.set("Outpost.Rewards.God" + i + ".ID", entry.getKey().getTypeId());
+			config.set("Outpost.Rewards.God" + i + ".Data", entry.getKey().getData().getData());
+			config.set("Outpost.Rewards.God" + i + ".Amount", entry.getKey().getAmount());
+			if(entry.getKey().hasItemMeta()){
+				if(entry.getKey().getItemMeta().hasDisplayName()){
+					config.set("Outpost.Rewards.God" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
+				}
+				if(entry.getKey().getItemMeta().hasLore()){
+					config.set("Outpost.Rewards.God" + i + ".Lore", entry.getKey().getItemMeta().getLore());
+				}
+				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+				List<String> list = new ArrayList<String>();
+				for(Entry<Enchantment,Integer> ench : map.entrySet()){
+					list.add(ench.getKey().getId() + "," + ench.getValue());
+				}
+				config.set("Outpost.Rewards.God" + i + ".Enchantments", list);
+				config.set("Outpost.Rewards.God" + i + ".Percentage", entry.getValue());
+			}
+			i++;
+		}
+		
+		config.set("Outpost.Rewards.Magic_Tower", null);
+		i = 0;
+		for(Entry<ItemStack,Integer> entry : Magic_Tower.rewards.entrySet()){
+			config.set("Outpost.Rewards.Magic_Tower" + i + ".ID", entry.getKey().getTypeId());
+			config.set("Outpost.Rewards.Magic_Tower" + i + ".Data", entry.getKey().getData().getData());
+			config.set("Outpost.Rewards.Magic_Tower" + i + ".Amount", entry.getKey().getAmount());
+			if(entry.getKey().hasItemMeta()){
+				if(entry.getKey().getItemMeta().hasDisplayName()){
+					config.set("Outpost.Rewards.Magic_Tower" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
+				}
+				if(entry.getKey().getItemMeta().hasLore()){
+					config.set("Outpost.Rewards.Magic_Tower" + i + ".Lore", entry.getKey().getItemMeta().getLore());
+				}
+				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+				List<String> list = new ArrayList<String>();
+				for(Entry<Enchantment,Integer> ench : map.entrySet()){
+					list.add(ench.getKey().getId() + "," + ench.getValue());
+				}
+				config.set("Outpost.Rewards.Magic_Tower" + i + ".Enchantments", list);
+				config.set("Outpost.Rewards.Magic_Tower" + i + ".Percentage", entry.getValue());
+			}
+			i++;
+		}
+		
+		config.set("Outpost.Rewards.Mine", null);
+		i = 0;
+		for(Entry<ItemStack,Integer> entry : Mine.rewards.entrySet()){
+			config.set("Outpost.Rewards.Mine" + i + ".ID", entry.getKey().getTypeId());
+			config.set("Outpost.Rewards.Mine" + i + ".Data", entry.getKey().getData().getData());
+			config.set("Outpost.Rewards.Mine" + i + ".Amount", entry.getKey().getAmount());
+			if(entry.getKey().hasItemMeta()){
+				if(entry.getKey().getItemMeta().hasDisplayName()){
+					config.set("Outpost.Rewards.Mine" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
+				}
+				if(entry.getKey().getItemMeta().hasLore()){
+					config.set("Outpost.Rewards.Mine" + i + ".Lore", entry.getKey().getItemMeta().getLore());
+				}
+				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+				List<String> list = new ArrayList<String>();
+				for(Entry<Enchantment,Integer> ench : map.entrySet()){
+					list.add(ench.getKey().getId() + "," + ench.getValue());
+				}
+				config.set("Outpost.Rewards.Mine" + i + ".Enchantments", list);
+				config.set("Outpost.Rewards.Mine" + i + ".Percentage", entry.getValue());
+			}
+			i++;
+		}
+		
+		config.set("Outpost.Rewards.Mob_Farm", null);
+		i = 0;
+		for(Entry<ItemStack,Integer> entry : Mine.rewards.entrySet()){
+			config.set("Outpost.Rewards.Mob_Farm" + i + ".ID", entry.getKey().getTypeId());
+			config.set("Outpost.Rewards.Mob_Farm" + i + ".Data", entry.getKey().getData().getData());
+			config.set("Outpost.Rewards.Mob_Farm" + i + ".Amount", entry.getKey().getAmount());
+			if(entry.getKey().hasItemMeta()){
+				if(entry.getKey().getItemMeta().hasDisplayName()){
+					config.set("Outpost.Rewards.Mob_Farm" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
+				}
+				if(entry.getKey().getItemMeta().hasLore()){
+					config.set("Outpost.Rewards.Mob_Farm" + i + ".Lore", entry.getKey().getItemMeta().getLore());
+				}
+				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+				List<String> list = new ArrayList<String>();
+				for(Entry<Enchantment,Integer> ench : map.entrySet()){
+					list.add(ench.getKey().getId() + "," + ench.getValue());
+				}
+				config.set("Outpost.Rewards.Mob_Farm" + i + ".Enchantments", list);
+				config.set("Outpost.Rewards.Mob_Farm" + i + ".Percentage", entry.getValue());
+			}
+			i++;
+		}
+	}
+	
 	
 	
 	public static void saveOutpost(){

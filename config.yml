@@ -30,3 +30,41 @@ Outpost:
   # the time per reward (in seconds) and the time it takes to take over a outpost (in sec) (best to take a number divisible by 4)
   Time_Per_Reward: 240
   Time_For_Take_Over: 600
+  
+  Rewards:
+    Blacksmith:
+      "1":
+        ID: 1
+        Amount: 10
+        Data: 0
+    Dock:
+      "1":
+        ID: 1
+        Amount: 10
+        Data: 0
+    Farm:
+      "1":
+        ID: 1
+        Amount: 10
+        Data: 0
+      Rewards:
+    God:
+      "1":
+        ID: 1
+        Amount: 10
+        Data: 0
+    Magic_Tower:
+      "1":
+        ID: 1
+        Amount: 10
+        Data: 0
+    Mine:
+      "1":
+        ID: 1
+        Amount: 10
+        Data: 0
+    Mob_Farm:
+      "1":
+        ID: 1
+        Amount: 10
+        Data: 0

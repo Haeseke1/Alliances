@@ -95,6 +95,7 @@ public class Main extends JavaPlugin {
 	public void saveAllCustomConfigs() {
 		AllianceManager.saveAlliance();
 		OutpostManager.saveOutpost();
+		OutpostManager.saveRewards();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
 			ConfigManager.saveCustomConfig(new File(getDataFolder(), entry.getKey()), entry.getValue());
 		}

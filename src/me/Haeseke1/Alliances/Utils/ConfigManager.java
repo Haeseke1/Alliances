@@ -4,8 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
 
 import me.Haeseke1.Alliances.Alliance.Type.Caith_Sith;
 import me.Haeseke1.Alliances.Alliance.Type.Gnome;
@@ -18,10 +23,18 @@ import me.Haeseke1.Alliances.Alliance.Type.Sylph;
 import me.Haeseke1.Alliances.Alliance.Type.Undine;
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
+import me.Haeseke1.Alliances.Exceptions.EmptyItemStackException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringListException;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Outpost.Timer;
+import me.Haeseke1.Alliances.Outpost.Type.Blacksmith;
+import me.Haeseke1.Alliances.Outpost.Type.Dock;
+import me.Haeseke1.Alliances.Outpost.Type.Farm;
+import me.Haeseke1.Alliances.Outpost.Type.God;
+import me.Haeseke1.Alliances.Outpost.Type.Magic_Tower;
+import me.Haeseke1.Alliances.Outpost.Type.Mine;
+import me.Haeseke1.Alliances.Outpost.Type.Mob_Farm;
 
 public class ConfigManager {
 
@@ -47,6 +60,39 @@ public class ConfigManager {
 			throw new EmptyStringListException(path);
 		}
 		return config.getStringList(path);
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static ItemStack getItemStackFromConfig(FileConfiguration config, String path) throws EmptyItemStackException {
+		if (config.getStringList(path) == null) {
+			throw new EmptyItemStackException(path);
+		}
+		try{
+			ItemStack i = new ItemStack(config.getInt(path + ".ID"));
+			i.setAmount(config.getInt(path + ".Amount"));
+			ItemMeta im = i.getItemMeta();
+			if(config.contains(path + ".Displayname")){
+				im.setDisplayName(ChatColor.translateAlternateColorCodes('&', config.getString(path + ".Displayname")));
+			}
+			if(config.contains(path + ".Lore")){
+				im.setLore(config.getStringList(path + ".Lore"));
+			}
+			i.setItemMeta(im);
+			MaterialData md = i.getData();
+			md.setData((byte) config.getInt(path + ".Data"));
+			i.setData(md);
+			if(config.contains(path + ".Enchantments")){
+				for(String ench : config.getStringList(path + ".Enchantments")){
+					i.addUnsafeEnchantment(Enchantment.getById(Integer.parseInt(ench.split(",")[0])), Integer.parseInt(ench.split(",")[1]));
+				}
+			}
+			return i;
+		}catch(Exception e){
+			MessageManager.sendAlertMessage("ItemStack can't be fetched from " + path);
+			return null;
+		}
+
+
 	}
 
 	/*
@@ -92,7 +138,44 @@ public class ConfigManager {
 			e.printStackTrace();
 			Main.pm.disablePlugin(main);
 		}
-
+		
+		try{
+			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Blacksmith").getKeys(false)){
+				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s);
+				Blacksmith.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s + "Percentage"));
+			}
+			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Dock").getKeys(false)){
+				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Dock." + s);
+				Dock.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Dock." + s + "Percentage"));
+			}
+			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Farm").getKeys(false)){
+				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Farm." + s);
+				Farm.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Farm." + s + "Percentage"));
+			}
+			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Blacksmith").getKeys(false)){
+				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s);
+				God.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s + "Percentage"));
+			}
+			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Magic_Tower").getKeys(false)){
+				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Magic_Tower." + s);
+				Magic_Tower.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Magic_Tower." + s + "Percentage"));
+			}
+			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Mine").getKeys(false)){
+				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Mine." + s);
+				Mine.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Mine." + s + "Percentage"));
+			}
+			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Mob_Farm").getKeys(false)){
+				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Mob_Farm." + s);
+				Mob_Farm.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Mob_Farm." + s + "Percentage"));
+			}
+		}catch(EmptyItemStackException e){
+			e.printStackTrace();
+		} catch (EmptyIntException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 		// create configs into plugin folder
 		File dir = main.getDataFolder();
 		if (!dir.exists()) {
