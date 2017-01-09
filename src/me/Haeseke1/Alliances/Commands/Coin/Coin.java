@@ -12,10 +12,8 @@ public class Coin {
 		if (args.length == 1) {
 			sender.sendMessage(MessageManager.infoColorCode + "===== Coins =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
-			sender.sendMessage(
-					MessageManager.infoColorCode + "/... coin balance #Watch your balance or from other Players");
-			sender.sendMessage(MessageManager.infoColorCode
-					+ "/... coin pay <Player> <Amount> #Watch your balance or from other Players");
+			sender.sendMessage(MessageManager.infoColorCode + "/... coin balance #Watch your balance or from other Players");
+			sender.sendMessage(MessageManager.infoColorCode + "/... coin pay <Player> <Amount> #Watch your balance or from other Players");
 			sender.sendMessage(MessageManager.infoColorCode + "/... coin add <Player> <Amount> #give player coins");
 			return;
 		}

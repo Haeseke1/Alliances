@@ -21,6 +21,7 @@ import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.Timer;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import me.Haeseke1.Alliances.regionSelect.regionSelect;
 
 public class Main extends JavaPlugin {
 
@@ -71,6 +72,7 @@ public class Main extends JavaPlugin {
 	public void registerEvents() {
 		pm.registerEvents(new InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
+		pm.registerEvents(new regionSelect(), this);
 	}
 
 	public void registerCommands() {

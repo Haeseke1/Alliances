@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Main.Alliance;
@@ -68,6 +71,13 @@ public class Mob_Farm {
 		mob_farms.add(this);
 	}
 	
+	public static ItemStack createItem(){
+		ItemStack i = new ItemStack(Material.BONE, 1);
+		ItemMeta im = i.getItemMeta();
+		im.setDisplayName(ChatColor.GOLD + "Mob Farm");
+		i.setItemMeta(im);
+		return i;
+	}
 	
 	public void take_over(){
 		if(inOutpost.isEmpty()){

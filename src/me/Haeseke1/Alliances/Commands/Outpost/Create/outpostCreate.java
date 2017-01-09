@@ -1,14 +1,14 @@
-package me.Haeseke1.Alliances.Commands.Create;
+package me.Haeseke1.Alliances.Commands.Outpost.Create;
 
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import me.Haeseke1.Alliances.regionSelect.regionSelect;
 
 
-public class mainCreate {
+public class outpostCreate {
 	
 	
 	public static void onCommand(CommandSender sender, String[] args) {
@@ -17,10 +17,10 @@ public class mainCreate {
 			return;
 		}
 		Player player = (Player) sender;
-		if(!AllianceManager.playerIsInAlli(player)){
+		if(regionSelect.leftClick.containsKey(player) && regionSelect.rightClick.containsKey(player)){
 			InventoryEvents.createInventory(player);
 		}else{
-			MessageManager.sendAlertMessage(player, "You are already part of a alliance!");
+			MessageManager.sendAlertMessage(player, "Select a region first!");
 		}
 	}
 

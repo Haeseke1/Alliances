@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Main.Alliance;
@@ -54,6 +57,14 @@ public class God {
 			zmax = loc2.getBlockZ();
 		}
 		gods.add(this);
+	}
+	
+	public static ItemStack createItem(){
+		ItemStack i = new ItemStack(Material.GOLDEN_APPLE, 1);
+		ItemMeta im = i.getItemMeta();
+		im.setDisplayName(ChatColor.GOLD + "God");
+		i.setItemMeta(im);
+		return i;
 	}
 	
 	public God(String name, World world, int xmin, int xmax, int zmin, int zmax, Alliance alli) {

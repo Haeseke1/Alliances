@@ -69,6 +69,86 @@ public class OutpostManager {
 		}
 	}
 	
+	
+	public static boolean checkLocation(Location loc1, Location loc2){
+		int xmin = 0;
+		int xmax = 0;
+		int zmin = 0;
+		int zmax = 0;
+		if(loc1.getBlockX() > loc2.getBlockX()){
+			xmin = loc2.getBlockX();
+			xmax = loc1.getBlockX();
+		}else{
+			xmin = loc1.getBlockX();
+			xmax = loc2.getBlockX();
+		}
+		if(loc1.getBlockZ() > loc2.getBlockZ()){
+			zmin = loc2.getBlockZ();
+			zmax = loc1.getBlockZ();
+		}else{
+			zmin = loc1.getBlockZ();
+			zmax = loc2.getBlockZ();
+		}
+		
+		for(Farm f : Farm.farms){
+			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
+					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
+					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
+					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+				return false;
+			}
+		}
+		for(Blacksmith f : Blacksmith.blacksmiths){
+			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
+					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
+					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
+					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+				return false;
+			}
+		}
+		for(Dock f : Dock.docks){
+			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
+					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
+					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
+					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+				return false;
+			}
+		}
+		for(God f : God.gods){
+			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
+					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
+					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
+					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+				return false;
+			}
+		}
+		for(Magic_Tower f : Magic_Tower.magic_towers){
+			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
+					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
+					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
+					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+				return false;
+			}
+		}
+		for(Mine f : Mine.mines){
+			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
+					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
+					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
+					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+				return false;
+			}
+		}
+		for(Mob_Farm f : Mob_Farm.mob_farms){
+			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
+					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
+					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
+					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public static void checkPlayers(){
 		for(Player player : Bukkit.getOnlinePlayers()){
 			Location loc = player.getLocation();
