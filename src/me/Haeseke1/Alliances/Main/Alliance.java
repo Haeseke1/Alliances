@@ -20,7 +20,9 @@ public class Alliance {
 	private int mCoins;
 	private HashMap<UUID, String> mMembers;
 	private String name;
-	private AllianceType type;
+	private final AllianceType type;
+	
+	private List<UUID> admins = new ArrayList<UUID>();
 	
 	private List<ItemStack> outpostRewards = new ArrayList<ItemStack>();
 	
@@ -50,6 +52,10 @@ public class Alliance {
 
 	public HashMap<UUID, String> getMembers() {
 		return mMembers;
+	}
+	
+	public void addMember(UUID uuid){
+		this.mMembers.put(uuid, "Member");
 	}
 
 	public int getWins() {
@@ -100,6 +106,14 @@ public class Alliance {
 		outpostRewards.add(item);
 	}
 	
+	public List<ItemStack> getReward(){
+		return this.outpostRewards;
+	}
+	
+	public void setReward(List<ItemStack> rewards){
+		this.outpostRewards = rewards;
+	}
+	
 	public boolean claimReward(Player player){
 		while(player.getInventory().firstEmpty() >= 0){
 			if(!outpostRewards.isEmpty()){
@@ -110,6 +124,17 @@ public class Alliance {
 			}
 		}
 		return false;
+	}
+
+	public List<UUID> getAdmins() {
+		return admins;
+	}
+
+	public void addAdmins(UUID admin) {
+		this.admins.add(admin);
+	}
+	public void setAdmins(List<UUID> admins){
+		this.admins = admins;
 	}
 	
 }

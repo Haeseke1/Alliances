@@ -94,6 +94,7 @@ public class InventoryEvents implements Listener{
 	@EventHandler
 	private void onPlayerChat(PlayerChatEvent event){
 		if(chooseName.containsKey(event.getPlayer())){
+			event.setCancelled(true);
 			Player player = event.getPlayer();
 			if(!OutpostManager.checkLocation(regionSelect.leftClick.get(player), regionSelect.rightClick.get(player))){
 				MessageManager.sendAlertMessage(player, "You are trying to construct a outpost on a existing outpost!");

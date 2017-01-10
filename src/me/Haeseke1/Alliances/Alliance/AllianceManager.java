@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringListException;
@@ -23,7 +22,7 @@ public class AllianceManager {
 	public static boolean createNewAlliance(String name, Player owner, AllianceType type) {
 		if (!playerIsInAlli(owner)) {
 			if(!alliExist(name)){
-				int mCoins = Coins.getPlayerCoins(owner);
+				int mCoins = 0;
 				int mWins = 0;
 				int mLoses = 0;
 				Alliance alliance = new Alliance(name, owner.getUniqueId(), mWins, mLoses, mCoins, type);
