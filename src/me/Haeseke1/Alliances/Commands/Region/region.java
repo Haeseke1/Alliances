@@ -3,7 +3,6 @@ package me.Haeseke1.Alliances.Commands.Region;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.Haeseke1.Alliances.Commands.Outpost.Create.outpostCreate;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
 
