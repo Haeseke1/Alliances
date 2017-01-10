@@ -57,6 +57,7 @@ public class Main extends JavaPlugin {
 		ConfigManager.registerConfigFile(this);
 		registerCommands();
 		registerEvents();
+		registerSchedulers();
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
@@ -71,6 +72,7 @@ public class Main extends JavaPlugin {
 
 	public void registerEvents() {
 		pm.registerEvents(new InventoryEvents(), this);
+		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Outpost.Create.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
 		pm.registerEvents(new regionSelect(), this);
 	}

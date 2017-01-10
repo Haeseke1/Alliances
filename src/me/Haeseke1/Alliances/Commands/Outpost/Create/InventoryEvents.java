@@ -122,6 +122,8 @@ public class InventoryEvents implements Listener{
 				new Mob_Farm(event.getMessage(), regionSelect.leftClick.get(player), regionSelect.rightClick.get(player), null);
 				break;
 			}
+			chooseName.remove(event.getPlayer());
+			MessageManager.sendRemarkMessage(player, "Outpost constructed!");
 		}
 	}
 }

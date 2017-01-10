@@ -15,7 +15,7 @@ public class Outpost {
 		if(args.length == 1){
 			sender.sendMessage(MessageManager.infoColorCode + "===== Outpost =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
-			sender.sendMessage(MessageManager.infoColorCode + "/... outpsot create #Create a new outpost");
+			sender.sendMessage(MessageManager.infoColorCode + "/... outpost create #Create a new outpost");
 			return;
 		}
 		

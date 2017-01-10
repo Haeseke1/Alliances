@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import me.Haeseke1.Alliances.Commands.Coin.Coin;
 import me.Haeseke1.Alliances.Commands.Create.mainCreate;
 import me.Haeseke1.Alliances.Commands.Outpost.Outpost;
+import me.Haeseke1.Alliances.Commands.Region.region;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Alli implements CommandExecutor {
@@ -35,6 +36,11 @@ public class Alli implements CommandExecutor {
 		
 		if(args[0].equalsIgnoreCase("outpost")){
 			Outpost.onCommand(sender, args);
+			return true;
+		}
+		
+		if(args[0].equalsIgnoreCase("region")){
+			region.onCommand(sender, args);
 			return true;
 		}
 

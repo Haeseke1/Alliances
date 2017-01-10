@@ -149,7 +149,33 @@ public class OutpostManager {
 		return true;
 	}
 	
+	
+	private static void resetPlayers(){
+		for(Farm f : Farm.farms){
+			f.inOutpost = new ArrayList<Player>();
+		}
+		for(Blacksmith f : Blacksmith.blacksmiths){
+			f.inOutpost = new ArrayList<Player>();
+		}
+		for(Dock f : Dock.docks){
+			f.inOutpost = new ArrayList<Player>();
+		}
+		for(God f : God.gods){
+			f.inOutpost = new ArrayList<Player>();
+		}
+		for(Magic_Tower f : Magic_Tower.magic_towers){
+			f.inOutpost = new ArrayList<Player>();
+		}
+		for(Mine f : Mine.mines){
+			f.inOutpost = new ArrayList<Player>();
+		}
+		for(Mob_Farm f : Mob_Farm.mob_farms){
+			f.inOutpost = new ArrayList<Player>();
+		}
+	}
+	
 	public static void checkPlayers(){
+		resetPlayers();
 		for(Player player : Bukkit.getOnlinePlayers()){
 			Location loc = player.getLocation();
 			Farm f = checkFarms(loc);
@@ -183,8 +209,6 @@ public class OutpostManager {
 		}
 	}
 	
-	
-	
 	private static Farm checkFarms(Location b){
 		for(Farm f : Farm.farms){
 			if(f.world.equals(b.getWorld())){
@@ -208,7 +232,6 @@ public class OutpostManager {
 		}
 		return null;
 	}
-	
 	
 	private static Dock checkDocks(Location b){
 		for(Dock f : Dock.docks){
@@ -353,9 +376,6 @@ public class OutpostManager {
 			mf.take_over();
 		}
 	}
-	
-	
-	
 	
 	private static ItemStack chooseReward(HashMap<ItemStack,Integer> rewards){
 		ItemStack reward = null;
@@ -776,8 +796,6 @@ public class OutpostManager {
 			i++;
 		}
 	}
-	
-	
 	
 	public static void saveOutpost(){
 		FileConfiguration file = Main.outpostConfig;

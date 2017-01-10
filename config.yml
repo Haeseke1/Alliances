@@ -37,34 +37,40 @@ Outpost:
         ID: 1
         Amount: 10
         Data: 0
+        Percentage: 100
     Dock:
       "1":
         ID: 1
         Amount: 10
         Data: 0
+        Percentage: 100
     Farm:
       "1":
         ID: 1
         Amount: 10
         Data: 0
-      Rewards:
+        Percentage: 100
     God:
       "1":
         ID: 1
         Amount: 10
         Data: 0
+        Percentage: 100
     Magic_Tower:
       "1":
         ID: 1
         Amount: 10
         Data: 0
+        Percentage: 100
     Mine:
       "1":
         ID: 1
         Amount: 10
         Data: 0
+        Percentage: 100
     Mob_Farm:
       "1":
         ID: 1
         Amount: 10
         Data: 0
+        Percentage: 100

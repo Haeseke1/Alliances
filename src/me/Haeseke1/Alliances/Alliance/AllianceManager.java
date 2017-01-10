@@ -28,7 +28,7 @@ public class AllianceManager {
 				int mLoses = 0;
 				Alliance alliance = new Alliance(name, owner.getUniqueId(), mWins, mLoses, mCoins, type);
 				Main.alliances.add(alliance);
-				alliance.getMembers().put(owner.getUniqueId(), "");
+				alliance.getMembers().put(owner.getUniqueId(), "Owner");
 				return true;
 			}
 			MessageManager.sendAlertMessage(owner, "Alliance already exist.");

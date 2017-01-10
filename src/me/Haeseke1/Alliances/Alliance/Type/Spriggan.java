@@ -18,7 +18,7 @@ public class Spriggan {
 	public static ItemStack createItem(Player player){
 		ItemStack i = new ItemStack(Material.DIAMOND_BLOCK, 1);
 		ItemMeta im = i.getItemMeta();
-		im.setDisplayName(ChatColor.GOLD + "Pooka");
+		im.setDisplayName(ChatColor.GOLD + "Spriggan");
 		List<String> list = new ArrayList<String>();
 		if(Coins.getPlayerCoins(player) >= cost){
 			list.add(ChatColor.DARK_PURPLE + "Cost: " + ChatColor.GREEN + cost + "$");

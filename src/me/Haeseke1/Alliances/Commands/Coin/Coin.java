@@ -33,8 +33,7 @@ public class Coin {
 		}
 		if (args[1].equalsIgnoreCase("add")) {
 			if (args.length < 4) {
-				MessageManager.sendAlertMessage((Player) sender,
-						"Not enough arguments! Use /alliance coin for more information!");
+				MessageManager.sendAlertMessage((Player) sender, "Not enough arguments! Use /alliance coin for more information!");
 				return;
 			} else {
 				try {
@@ -50,8 +49,7 @@ public class Coin {
 		}
 		if (args[1].equalsIgnoreCase("pay")) {
 			if (args.length < 4) {
-				MessageManager.sendAlertMessage((Player) sender,
-						"Not enough arguments! Use /alliance coin for more information!");
+				MessageManager.sendAlertMessage((Player) sender, "Not enough arguments! Use /alliance coin for more information!");
 				return;
 			} else {
 				if (!(sender instanceof Player)) {
@@ -62,8 +60,7 @@ public class Coin {
 				try {
 					if (Coins.removePlayerCoins(player, Integer.parseInt(args[3]))) {
 						Coins.addPlayerCoins(args[2], Integer.parseInt(args[3]));
-						MessageManager.sendRemarkMessage((Player) sender,
-								"Succesfully payed coins! Your new balance: " + Coins.getPlayerCoins(player));
+						MessageManager.sendRemarkMessage((Player) sender, "Succesfully payed coins! Your new balance: " + Coins.getPlayerCoins(player));
 						return;
 					} else {
 						MessageManager.sendAlertMessage((Player) sender, "You don't have enough coins!");
@@ -76,7 +73,6 @@ public class Coin {
 			}
 		}
 		MessageManager.sendAlertMessage((Player) sender, "Wrong arguments! use /alliance coin for more information!");
-
 	}
 
 }
