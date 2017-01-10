@@ -13,6 +13,10 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
+import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Count;
+import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Time;
+import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Zombie;
+import me.Haeseke1.Alliances.Challenge.Type.Time_On;
 import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
@@ -76,6 +80,9 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Join.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
 		pm.registerEvents(new regionSelect(), this);
+		pm.registerEvents(new Mob_Killing_Time(), this);
+		pm.registerEvents(new Mob_Killing_Count(), this);
+		pm.registerEvents(new Mob_Killing_Zombie(), this);
 	}
 
 	public void registerCommands() {
@@ -84,6 +91,8 @@ public class Main extends JavaPlugin {
 	
 	public void registerSchedulers(){
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Timer(), 20, 20);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Time_On(), 20, 20);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Mob_Killing_Time(), 20, 20);
 	}
 
 	/*
