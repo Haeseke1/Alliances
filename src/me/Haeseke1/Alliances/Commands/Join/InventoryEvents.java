@@ -20,7 +20,6 @@ import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
 
 
-@SuppressWarnings("deprecation")
 public class InventoryEvents implements Listener{
 	
 	public static HashMap<Player,AllianceType> chooseName = new HashMap<Player,AllianceType>();

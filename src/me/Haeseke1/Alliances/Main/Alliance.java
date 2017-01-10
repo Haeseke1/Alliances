@@ -49,6 +49,10 @@ public class Alliance {
 	public UUID getOwner() {
 		return mOwner;
 	}
+	
+	public void setOwner(UUID owner){
+		this.mOwner = owner;
+	}
 
 	public HashMap<UUID, String> getMembers() {
 		return mMembers;
@@ -58,6 +62,10 @@ public class Alliance {
 		this.mMembers.put(uuid, "Member");
 	}
 
+	public void setMembers(HashMap<UUID, String> mMembers) {
+		this.mMembers = mMembers;
+	}
+	
 	public int getWins() {
 		return mWins;
 	}
