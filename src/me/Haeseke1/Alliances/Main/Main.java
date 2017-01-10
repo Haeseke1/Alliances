@@ -9,13 +9,24 @@ import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
+import me.Haeseke1.Alliances.Challenge.Type.Block_Breaking;
+import me.Haeseke1.Alliances.Challenge.Type.Block_Placing;
+import me.Haeseke1.Alliances.Challenge.Type.Distance_Travel;
+import me.Haeseke1.Alliances.Challenge.Type.Enchanting;
+import me.Haeseke1.Alliances.Challenge.Type.Fishing;
+import me.Haeseke1.Alliances.Challenge.Type.Lost_Hearts;
 import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Count;
+import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Enderman;
+import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Skeleton;
 import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Time;
+import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Wither;
 import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Zombie;
+import me.Haeseke1.Alliances.Challenge.Type.Player_Kill;
 import me.Haeseke1.Alliances.Challenge.Type.Time_On;
 import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
@@ -80,9 +91,20 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Join.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
 		pm.registerEvents(new regionSelect(), this);
-		pm.registerEvents(new Mob_Killing_Time(), this);
+		
+		pm.registerEvents(new Block_Breaking(), this);
+		pm.registerEvents(new Block_Placing(), this);
+		pm.registerEvents(new Distance_Travel(), this);
+		pm.registerEvents(new Enchanting(), this);
+		pm.registerEvents(new Fishing(), this);
+		pm.registerEvents(new Lost_Hearts(), this);
 		pm.registerEvents(new Mob_Killing_Count(), this);
+		pm.registerEvents(new Mob_Killing_Enderman(), this);
+		pm.registerEvents(new Mob_Killing_Skeleton(), this);
+		pm.registerEvents(new Mob_Killing_Time(), this);
+		pm.registerEvents(new Mob_Killing_Wither(), this);
 		pm.registerEvents(new Mob_Killing_Zombie(), this);
+		pm.registerEvents(new Player_Kill(), this);
 	}
 
 	public void registerCommands() {
