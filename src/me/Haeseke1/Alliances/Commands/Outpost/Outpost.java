@@ -10,8 +10,10 @@ public class Outpost {
 	
 	public static void onCommand(CommandSender sender, String[] args) {
 		if(!(sender instanceof Player)){
-			return;
+			MessageManager.sendAlertMessage("You need to be a player to do this command!");
+			return ;
 		}
+		Player player = (Player) sender;
 		if(args.length == 1){
 			sender.sendMessage(MessageManager.infoColorCode + "===== Outpost =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");

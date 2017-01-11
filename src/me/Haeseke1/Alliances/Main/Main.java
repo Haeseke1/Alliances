@@ -32,13 +32,17 @@ import me.Haeseke1.Alliances.Challenge.Type.Player_Kill;
 import me.Haeseke1.Alliances.Challenge.Type.Time_On;
 import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
+import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.Timer;
+import me.Haeseke1.Alliances.Shop.ShopEvents;
+import me.Haeseke1.Alliances.Shop.ShopManager;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
+import net.minecraft.server.v1_8_R2.EntityVillager;
 
 public class Main extends JavaPlugin {
 
@@ -76,6 +80,7 @@ public class Main extends JavaPlugin {
 		registerCommands();
 		registerEvents();
 		registerSchedulers();
+		registerCustomEntitys();
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
@@ -85,6 +90,7 @@ public class Main extends JavaPlugin {
 	public void onDisable() {
 		ConfigManager.saveConfigFile(this);
 		saveAllCustomConfigs();
+		ShopManager.despawnVendors();
 		MessageManager.sendAlertMessage("The plugin has been shutted down! *-* The cake wasn't a lie thought *-*");
 	}
 
@@ -95,6 +101,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Challenges.Player.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
 		pm.registerEvents(new regionSelect(), this);
+		pm.registerEvents(new ShopEvents(), this);
 		
 		pm.registerEvents(new Block_Breaking(), this);
 		pm.registerEvents(new Block_Placing(), this);
@@ -114,6 +121,12 @@ public class Main extends JavaPlugin {
 	public void registerCommands() {
 		getCommand("Alliances").setExecutor(new Alli());
 	}
+	
+	public void registerCustomEntitys(){
+		NMSUtil nmsUtil = new NMSUtil();
+		nmsUtil.registerEntity("Vendor", 120, EntityVillager.class, CustomEntityVillager.class);
+	}
+	
 	
 	public void registerSchedulers(){
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Timer(), 20, 20);

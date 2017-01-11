@@ -17,6 +17,7 @@ import me.Haeseke1.Alliances.Commands.Member.Member;
 import me.Haeseke1.Alliances.Commands.Outpost.Outpost;
 import me.Haeseke1.Alliances.Commands.Owner.Owner;
 import me.Haeseke1.Alliances.Commands.Region.region;
+import me.Haeseke1.Alliances.Commands.Shop.mainShop;
 import me.Haeseke1.Alliances.Main.Alliance;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -36,7 +37,7 @@ public class Alli implements CommandExecutor {
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances join #join a alliance that invited you");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances owner #Get a list of commands for a owner");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances admin #Get a list of commands for a owner");
-			sender.sendMessage(MessageManager.infoColorCode + "/Alliances disband #disband your faction");
+			sender.sendMessage(MessageManager.infoColorCode + "/Alliances shop #Get a list of commands for shops");
 			return false;
 		}
 
@@ -80,10 +81,17 @@ public class Alli implements CommandExecutor {
 			return true;
 		}
 		
+		if(args[0].equalsIgnoreCase("shop")){
+			mainShop.onCommand(sender, args);
+			return true;
+		}
+		
 		if(args[0].equalsIgnoreCase("challenges")){
 			mainChallenges.onCommand(sender, args);
 			return true;
 		}
+		
+		
 		
 		MessageManager.sendAlertMessage((Player) sender, "Unknown command use /alliances for more help!");
 		return false;
