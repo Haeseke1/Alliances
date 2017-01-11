@@ -7,7 +7,9 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
@@ -28,6 +30,7 @@ import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyBooleanException;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyItemStackException;
+import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringListException;
 import me.Haeseke1.Alliances.Main.Main;
@@ -73,6 +76,20 @@ public class ConfigManager {
 		return config.getStringList(path);
 	}
 	
+	
+	public static Location getLocationFromConfig(FileConfiguration config, String path) throws EmptyLocationException {
+		if (config.getStringList(path) == null) {
+			throw new EmptyLocationException(path);
+		}
+		try{
+			Location loc = new Location(Bukkit.getWorld(config.getString(path + ".World")), config.getDouble(path + ".X"), config.getDouble(path + ".Y"), config.getDouble(path + ".Z"));
+			return loc;
+		}catch(Exception e){
+			MessageManager.sendAlertMessage("Location can't be fetched from " + path);
+			return null;
+		}
+	}
+	
 	@SuppressWarnings("deprecation")
 	public static ItemStack getItemStackFromConfig(FileConfiguration config, String path) throws EmptyItemStackException {
 		if (config.getStringList(path) == null) {
@@ -102,8 +119,6 @@ public class ConfigManager {
 			MessageManager.sendAlertMessage("ItemStack can't be fetched from " + path);
 			return null;
 		}
-
-
 	}
 
 	/*

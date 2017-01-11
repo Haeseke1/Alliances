@@ -38,7 +38,7 @@ public class mainShop {
 			String name = args[2];
 			Shop s = null;
 			for(Shop shop : Shop.shops){
-				if(ChatColor.stripColor(shop.name).equalsIgnoreCase(name)){
+				if(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', shop.name)).equalsIgnoreCase(name)){
 					s = shop;
 				}
 			}
@@ -71,7 +71,7 @@ public class mainShop {
 			Player player = (Player) sender;
 			Shop s = null;
 			for(Shop shop : Shop.shops){
-				if(ChatColor.stripColor(shop.name).equalsIgnoreCase(args[2])){
+				if(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', shop.name)).equalsIgnoreCase(args[2])){
 					s = shop;
 				}
 			}

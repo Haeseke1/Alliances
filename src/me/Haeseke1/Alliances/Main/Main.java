@@ -57,6 +57,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration alliancesConfig;
 	public static FileConfiguration outpostConfig;
 	public static FileConfiguration challengeConfig;
+	public static FileConfiguration shopConfig;
 
 	@SuppressWarnings("static-access")
 	@Override
@@ -148,15 +149,18 @@ public class Main extends JavaPlugin {
 		alliancesConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "alliances.yml"), this);
 		outpostConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "outpost.yml"), this);
 		challengeConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "challenges.yml"), this);
+		shopConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "shop.yml"), this);
 		AllianceManager.registerAlliance();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();
+		ShopManager.registerShops();
 	}
 
 	public void saveAllCustomConfigs() {
 		AllianceManager.saveAlliance();
 		OutpostManager.saveOutpost();
 		OutpostManager.saveRewards();
+		ShopManager.saveShops();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
 			ConfigManager.saveCustomConfig(new File(getDataFolder(), entry.getKey()), entry.getValue());
 		}

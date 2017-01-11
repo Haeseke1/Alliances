@@ -43,9 +43,8 @@ public class Owner {
 			if(AllianceManager.playerIsInAlli(player) && AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId())){
 				Alliance alli = AllianceManager.getAlliance(player);
 				String name = alli.getName();
-				alli = null;
-				// error next line (maybe)
 				Main.alliances.remove(alli);
+				alli = null;
 				MessageManager.sendRemarkMessage(player, "You disbanded your alliance!");
 				MessageManager.sendInfoBroadcast("Alliance " + name + "is disbanded!");
 			}else{

@@ -69,7 +69,6 @@ public class OutpostManager {
 		}
 	}
 	
-	
 	public static boolean checkLocation(Location loc1, Location loc2){
 		int xmin = 0;
 		int xmax = 0;
@@ -148,8 +147,7 @@ public class OutpostManager {
 		}
 		return true;
 	}
-	
-	
+		
 	private static void resetPlayers(){
 		for(Farm f : Farm.farms){
 			f.inOutpost = new ArrayList<Player>();
@@ -641,14 +639,14 @@ public class OutpostManager {
 				if(entry.getKey().getItemMeta().hasLore()){
 					config.set("Outpost.Rewards.Blacksmith" + i + ".Lore", entry.getKey().getItemMeta().getLore());
 				}
-				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-				List<String> list = new ArrayList<String>();
-				for(Entry<Enchantment,Integer> ench : map.entrySet()){
-					list.add(ench.getKey().getId() + "," + ench.getValue());
-				}
-				config.set("Outpost.Rewards.Blacksmith" + i + ".Enchantments", list);
-				config.set("Outpost.Rewards.Blacksmith" + i + ".Percentage", entry.getValue());
 			}
+			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+			List<String> list = new ArrayList<String>();
+			for(Entry<Enchantment,Integer> ench : map.entrySet()){
+				list.add(ench.getKey().getId() + "," + ench.getValue());
+			}
+			config.set("Outpost.Rewards.Blacksmith" + i + ".Enchantments", list);
+			config.set("Outpost.Rewards.Blacksmith" + i + ".Percentage", entry.getValue());
 			i++;
 		}
 		
@@ -665,14 +663,14 @@ public class OutpostManager {
 				if(entry.getKey().getItemMeta().hasLore()){
 					config.set("Outpost.Rewards.Dock" + i + ".Lore", entry.getKey().getItemMeta().getLore());
 				}
-				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-				List<String> list = new ArrayList<String>();
-				for(Entry<Enchantment,Integer> ench : map.entrySet()){
-					list.add(ench.getKey().getId() + "," + ench.getValue());
-				}
-				config.set("Outpost.Rewards.Dock" + i + ".Enchantments", list);
-				config.set("Outpost.Rewards.Dock" + i + ".Percentage", entry.getValue());
 			}
+			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+			List<String> list = new ArrayList<String>();
+			for(Entry<Enchantment,Integer> ench : map.entrySet()){
+				list.add(ench.getKey().getId() + "," + ench.getValue());
+			}
+			config.set("Outpost.Rewards.Dock" + i + ".Enchantments", list);
+			config.set("Outpost.Rewards.Dock" + i + ".Percentage", entry.getValue());
 			i++;
 		}
 		
@@ -689,14 +687,14 @@ public class OutpostManager {
 				if(entry.getKey().getItemMeta().hasLore()){
 					config.set("Outpost.Rewards.Farm" + i + ".Lore", entry.getKey().getItemMeta().getLore());
 				}
-				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-				List<String> list = new ArrayList<String>();
-				for(Entry<Enchantment,Integer> ench : map.entrySet()){
-					list.add(ench.getKey().getId() + "," + ench.getValue());
-				}
-				config.set("Outpost.Rewards.Farm" + i + ".Enchantments", list);
-				config.set("Outpost.Rewards.Farm" + i + ".Percentage", entry.getValue());
 			}
+			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+			List<String> list = new ArrayList<String>();
+			for(Entry<Enchantment,Integer> ench : map.entrySet()){
+				list.add(ench.getKey().getId() + "," + ench.getValue());
+			}
+			config.set("Outpost.Rewards.Farm" + i + ".Enchantments", list);
+			config.set("Outpost.Rewards.Farm" + i + ".Percentage", entry.getValue());
 			i++;
 		}
 		
@@ -713,14 +711,14 @@ public class OutpostManager {
 				if(entry.getKey().getItemMeta().hasLore()){
 					config.set("Outpost.Rewards.God" + i + ".Lore", entry.getKey().getItemMeta().getLore());
 				}
-				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-				List<String> list = new ArrayList<String>();
-				for(Entry<Enchantment,Integer> ench : map.entrySet()){
-					list.add(ench.getKey().getId() + "," + ench.getValue());
-				}
-				config.set("Outpost.Rewards.God" + i + ".Enchantments", list);
-				config.set("Outpost.Rewards.God" + i + ".Percentage", entry.getValue());
 			}
+			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+			List<String> list = new ArrayList<String>();
+			for(Entry<Enchantment,Integer> ench : map.entrySet()){
+				list.add(ench.getKey().getId() + "," + ench.getValue());
+			}
+			config.set("Outpost.Rewards.God" + i + ".Enchantments", list);
+			config.set("Outpost.Rewards.God" + i + ".Percentage", entry.getValue());
 			i++;
 		}
 		
@@ -737,14 +735,14 @@ public class OutpostManager {
 				if(entry.getKey().getItemMeta().hasLore()){
 					config.set("Outpost.Rewards.Magic_Tower" + i + ".Lore", entry.getKey().getItemMeta().getLore());
 				}
-				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-				List<String> list = new ArrayList<String>();
-				for(Entry<Enchantment,Integer> ench : map.entrySet()){
-					list.add(ench.getKey().getId() + "," + ench.getValue());
-				}
-				config.set("Outpost.Rewards.Magic_Tower" + i + ".Enchantments", list);
-				config.set("Outpost.Rewards.Magic_Tower" + i + ".Percentage", entry.getValue());
 			}
+			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+			List<String> list = new ArrayList<String>();
+			for(Entry<Enchantment,Integer> ench : map.entrySet()){
+				list.add(ench.getKey().getId() + "," + ench.getValue());
+			}
+			config.set("Outpost.Rewards.Magic_Tower" + i + ".Enchantments", list);
+			config.set("Outpost.Rewards.Magic_Tower" + i + ".Percentage", entry.getValue());
 			i++;
 		}
 		
@@ -761,14 +759,14 @@ public class OutpostManager {
 				if(entry.getKey().getItemMeta().hasLore()){
 					config.set("Outpost.Rewards.Mine" + i + ".Lore", entry.getKey().getItemMeta().getLore());
 				}
-				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-				List<String> list = new ArrayList<String>();
-				for(Entry<Enchantment,Integer> ench : map.entrySet()){
-					list.add(ench.getKey().getId() + "," + ench.getValue());
-				}
-				config.set("Outpost.Rewards.Mine" + i + ".Enchantments", list);
-				config.set("Outpost.Rewards.Mine" + i + ".Percentage", entry.getValue());
 			}
+			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+			List<String> list = new ArrayList<String>();
+			for(Entry<Enchantment,Integer> ench : map.entrySet()){
+				list.add(ench.getKey().getId() + "," + ench.getValue());
+			}
+			config.set("Outpost.Rewards.Mine" + i + ".Enchantments", list);
+			config.set("Outpost.Rewards.Mine" + i + ".Percentage", entry.getValue());
 			i++;
 		}
 		
@@ -785,14 +783,14 @@ public class OutpostManager {
 				if(entry.getKey().getItemMeta().hasLore()){
 					config.set("Outpost.Rewards.Mob_Farm" + i + ".Lore", entry.getKey().getItemMeta().getLore());
 				}
-				Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-				List<String> list = new ArrayList<String>();
-				for(Entry<Enchantment,Integer> ench : map.entrySet()){
-					list.add(ench.getKey().getId() + "," + ench.getValue());
-				}
-				config.set("Outpost.Rewards.Mob_Farm" + i + ".Enchantments", list);
-				config.set("Outpost.Rewards.Mob_Farm" + i + ".Percentage", entry.getValue());
 			}
+			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
+			List<String> list = new ArrayList<String>();
+			for(Entry<Enchantment,Integer> ench : map.entrySet()){
+				list.add(ench.getKey().getId() + "," + ench.getValue());
+			}
+			config.set("Outpost.Rewards.Mob_Farm" + i + ".Enchantments", list);
+			config.set("Outpost.Rewards.Mob_Farm" + i + ".Percentage", entry.getValue());
 			i++;
 		}
 	}
