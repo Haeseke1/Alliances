@@ -17,13 +17,13 @@ public class Time_On implements Runnable{
 				for(Player player : Bukkit.getOnlinePlayers()){
 					if(!challenge.done.contains(player.getUniqueId())){
 						if(challenge.points.containsKey(player.getUniqueId())){
+							challenge.points.replace(player.getUniqueId(), challenge.points.get(player.getUniqueId()) + 1);
 							if(challenge.max_Points <= challenge.points.get(player.getUniqueId())){
 								challenge.done.add(player.getUniqueId());
 								Coins.addPlayerCoins(player, challenge.reward);
 								MessageManager.sendInfoMessage(player, "Challenge " + challenge.name + " is completed, your reward is " + challenge.reward + " coins!");
 								return;
 							}
-							challenge.points.replace(player.getUniqueId(), challenge.points.get(player.getUniqueId()) + 1);
 						}else{
 							challenge.points.put(player.getUniqueId(), (double) 1);
 						}

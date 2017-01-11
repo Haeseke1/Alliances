@@ -1,10 +1,19 @@
 package me.Haeseke1.Alliances.Challenge;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 public enum challengeType {
 	Mob_Killing_Time, Mob_Killing_Count, Mob_Killing_Zombie,
 	Mob_Killing_Skeleton, Mob_Killing_Enderman, Mob_Killing_Wither,
 	Block_Breaking, Block_Placing, Fishing, Enchanting, Player_Kill,
 	Time_On, Lost_Hearts, Distance_Travel;
+	
+	private static final List<challengeType> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
+    private static final int SIZE = VALUES.size();
+	private static final Random RANDOM = new Random();
 	
 	public static challengeType getChallengeType(String name){
 		switch(name.toLowerCase()){
@@ -38,5 +47,10 @@ public enum challengeType {
 			return challengeType.Distance_Travel;
 		}
 		return null;
+	}
+	
+	
+	public static challengeType randomtype(){
+		return VALUES.get(RANDOM.nextInt(SIZE));
 	}
 }

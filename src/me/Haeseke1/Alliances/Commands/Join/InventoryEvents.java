@@ -39,7 +39,6 @@ public class InventoryEvents implements Listener{
 	
 	@EventHandler
 	private void onInvClickEvent(InventoryClickEvent event){
-		MessageManager.sendInfoMessage(event.getInventory().getName());
 		if(event.getInventory().getName().equalsIgnoreCase("Invites")){
 			event.setCancelled(true);
 			if(event.getCurrentItem() != null){

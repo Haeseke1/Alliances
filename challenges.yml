@@ -1,0 +1,89 @@
+#Timer works only for Mob_Killing_Timer, later challenges may have this feature to :D
+Player:
+  Block_Breaking:
+    name: "Break that block"
+    Points: 200
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Block_Placing:
+    name: "Place that block"
+    Points: 200
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Distance_Travel:
+    name: "it's adventure time"
+    Points: 400
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Enchanting:
+    name: "getting a upgrade"
+    Points: 3
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Fishing:
+    name: "Be patient"
+    Points: 15
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Lost_Hearts:
+    name: "Godmode on"
+    Points: 60
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Mob_Killing_Count:
+    name: "are you even counting?"
+    Points: 30
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Mob_Killing_Enderman:
+    name: "Fuck teleporting"
+    Points: 5
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Mob_Killing_Skeleton:
+    name: "Arrows do nothing"
+    Points: 10
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Mob_Killing_Time:
+    name: "Triple kill"
+    Points: 3
+    Timer: 10
+    Reward: 100
+    enabled: true
+  Mob_Killing_Wither:
+    name: "3 heads is not even enough"
+    Points: 1
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Mob_Killing_Zombie:
+    name: "I have more brains"
+    Points: 15
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Player_Kill:
+    name: "Player kill"
+    Points: 2
+    Timer: -1
+    Reward: 100
+    enabled: true
+  Time_On:
+    name: "no life"
+    Points: 3600
+    Timer: -1
+    Reward: 100
+    enabled: true
+    
+    
+    

@@ -46,7 +46,6 @@ public class InventoryEvents implements Listener{
 	
 	@EventHandler
 	private void onInvClickEvent(InventoryClickEvent event){
-		MessageManager.sendInfoMessage(event.getInventory().getName());
 		if(event.getInventory().getName().equalsIgnoreCase("Create alliance")){
 			event.setCancelled(true);
 			if(event.getCurrentItem() != null){

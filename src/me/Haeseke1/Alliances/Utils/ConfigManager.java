@@ -2,6 +2,9 @@ package me.Haeseke1.Alliances.Utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -22,6 +25,7 @@ import me.Haeseke1.Alliances.Alliance.Type.Spriggan;
 import me.Haeseke1.Alliances.Alliance.Type.Sylph;
 import me.Haeseke1.Alliances.Alliance.Type.Undine;
 import me.Haeseke1.Alliances.Economy.Coins;
+import me.Haeseke1.Alliances.Exceptions.EmptyBooleanException;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyItemStackException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
@@ -48,6 +52,13 @@ public class ConfigManager {
 		return config.getString(path);
 	}
 
+	public static Boolean getBooleanFromConfig(FileConfiguration config, String path) throws EmptyBooleanException {
+		if (config.getString(path) == null) {
+			throw new EmptyBooleanException(path);
+		}
+		return config.getBoolean(path);
+	}
+	
 	public static Integer getIntFromConfig(FileConfiguration config, String path) throws EmptyIntException {
 		if (!config.isInt(path)) {
 			throw new EmptyIntException(path);
@@ -198,9 +209,20 @@ public class ConfigManager {
 		main.saveDefaultConfig();
 	}
 
-	public static FileConfiguration getCustomConfig(File f) {
+	public static FileConfiguration getCustomConfig(File f, Main main) {
 		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
 		Main.configFiles.put(f.getName(), file);
+		
+		Reader defConfigStream;
+		try {
+			defConfigStream = new InputStreamReader(main.getResource(f.getName()), "UTF8");
+		    if (defConfigStream != null) {
+		        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+		        file.setDefaults(defConfig);
+		    }
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		return file;
 	}
 

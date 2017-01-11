@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Commands.Admin.Admin;
+import me.Haeseke1.Alliances.Commands.Challenges.mainChallenges;
 import me.Haeseke1.Alliances.Commands.Coin.Coin;
 import me.Haeseke1.Alliances.Commands.Create.mainCreate;
 import me.Haeseke1.Alliances.Commands.Join.mainJoin;
@@ -29,6 +30,7 @@ public class Alli implements CommandExecutor {
 			sender.sendMessage(MessageManager.infoColorCode + "===== Alliances =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances coin #Get list of coin commands");
+			sender.sendMessage(MessageManager.infoColorCode + "/Alliances challenges #Get list of challenge commands");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances create #Create a new alliance");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances outpost #Get list of outpost commands");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances join #join a alliance that invited you");
@@ -78,6 +80,10 @@ public class Alli implements CommandExecutor {
 			return true;
 		}
 		
+		if(args[0].equalsIgnoreCase("challenges")){
+			mainChallenges.onCommand(sender, args);
+			return true;
+		}
 		
 		MessageManager.sendAlertMessage((Player) sender, "Unknown command use /alliances for more help!");
 		return false;

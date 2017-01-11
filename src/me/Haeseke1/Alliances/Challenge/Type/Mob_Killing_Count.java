@@ -25,13 +25,13 @@ public class Mob_Killing_Count implements Listener {
 						Player player = event.getEntity().getKiller();
 						if(!challenge.done.contains(player.getUniqueId())){
 							if(challenge.points.containsKey(player.getUniqueId())){
+								challenge.points.replace(player.getUniqueId(), challenge.points.get(player.getUniqueId()) + 1);
 								if(challenge.points.get(player.getUniqueId()) >= challenge.max_Points){
 									Coins.addPlayerCoins(player, challenge.reward);
 									MessageManager.sendInfoMessage(player, "Challenge " + challenge.name + " is completed, your reward is " + challenge.reward + " coins!");
 									challenge.done.add(player.getUniqueId());
 									return;
 								}
-								challenge.points.replace(player.getUniqueId(), challenge.points.get(player.getUniqueId()) + 1);
 							}else{
 								challenge.points.put(player.getUniqueId(), (double) 1);
 							}

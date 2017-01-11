@@ -3,9 +3,11 @@ package me.Haeseke1.Alliances.Main;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,6 +15,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
+import me.Haeseke1.Alliances.Challenge.ChallengeManager;
 import me.Haeseke1.Alliances.Challenge.Type.Block_Breaking;
 import me.Haeseke1.Alliances.Challenge.Type.Block_Placing;
 import me.Haeseke1.Alliances.Challenge.Type.Distance_Travel;
@@ -49,6 +52,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration coinsConfig;
 	public static FileConfiguration alliancesConfig;
 	public static FileConfiguration outpostConfig;
+	public static FileConfiguration challengeConfig;
 
 	@SuppressWarnings("static-access")
 	@Override
@@ -88,6 +92,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Outpost.Create.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Join.InventoryEvents(), this);
+		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Challenges.Player.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
 		pm.registerEvents(new regionSelect(), this);
 		
@@ -114,17 +119,25 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Timer(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Time_On(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Mob_Killing_Time(), 20, 20);
+		java.util.Timer timer = new java.util.Timer();
+		Calendar today = Calendar.getInstance();
+		today.set(Calendar.HOUR_OF_DAY, 1);
+		today.set(Calendar.MINUTE, 0);
+		today.set(Calendar.SECOND, 0);
+		timer.schedule(new ChallengeManager(), TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
 	}
 
 	/*
 	 * Creates all the needed configs of the code (JSON support not included)
 	 */
 	public void createConfigs() throws IOException, InvalidConfigTypeException {
-		coinsConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "coins.yml"));
-		alliancesConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "alliances.yml"));
-		outpostConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "outpost.yml"));
+		coinsConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "coins.yml"), this);
+		alliancesConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "alliances.yml"), this);
+		outpostConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "outpost.yml"), this);
+		challengeConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "challenges.yml"), this);
 		AllianceManager.registerAlliance();
 		OutpostManager.registerOutpost();
+		ChallengeManager.registerChallenges();
 	}
 
 	public void saveAllCustomConfigs() {

@@ -14,6 +14,7 @@ public class Challenge {
 	public static HashMap<challengeType, Integer> challengeTimer = new HashMap<challengeType, Integer>();
 	public static HashMap<challengeType, Integer> challengeReward = new HashMap<challengeType, Integer>();
 	public static HashMap<challengeType, String> challengeName = new HashMap<challengeType, String>();
+	public static HashMap<challengeType, Boolean> challengeEnabled = new HashMap<challengeType, Boolean>();
 	
 	public String name;
 	public int timer;
@@ -31,6 +32,7 @@ public class Challenge {
 		this.max_Points = max_Points;
 		this.type = type;
 		this.reward = reward;
+		challenges.add(this);
 	}
 	
 	

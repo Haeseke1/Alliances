@@ -24,6 +24,7 @@ public class Player_Kill implements Listener{
 					if(event.getEntity().getKiller() != null && event.getEntity().getType().equals(EntityType.PLAYER)){
 						Player player = event.getEntity().getKiller();
 						if(!challenge.done.contains(player.getUniqueId())){
+							challenge.points.replace(player.getUniqueId(), challenge.points.get(player.getUniqueId()) + 1);
 							if(challenge.points.containsKey(player.getUniqueId())){
 								if(challenge.points.get(player.getUniqueId()) >= challenge.max_Points){
 									Coins.addPlayerCoins(player, challenge.reward);
@@ -31,7 +32,6 @@ public class Player_Kill implements Listener{
 									challenge.done.add(player.getUniqueId());
 									return;
 								}
-								challenge.points.replace(player.getUniqueId(), challenge.points.get(player.getUniqueId()) + 1);
 							}else{
 								challenge.points.put(player.getUniqueId(), (double) 1);
 							}

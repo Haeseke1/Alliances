@@ -42,7 +42,6 @@ public class InventoryEvents implements Listener{
 	
 	@EventHandler
 	private void onInvClickEvent(InventoryClickEvent event){
-		MessageManager.sendInfoMessage(event.getInventory().getName());
 		if(event.getInventory().getName().equalsIgnoreCase("Create outpost")){
 			event.setCancelled(true);
 			if(event.getCurrentItem() != null){
