@@ -15,6 +15,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
+import me.Haeseke1.Alliances.Arena.ArenaEvents;
+import me.Haeseke1.Alliances.Arena.ArenaTimer;
 import me.Haeseke1.Alliances.Challenge.ChallengeManager;
 import me.Haeseke1.Alliances.Challenge.Type.Block_Breaking;
 import me.Haeseke1.Alliances.Challenge.Type.Block_Placing;
@@ -31,6 +33,7 @@ import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Zombie;
 import me.Haeseke1.Alliances.Challenge.Type.Player_Kill;
 import me.Haeseke1.Alliances.Challenge.Type.Time_On;
 import me.Haeseke1.Alliances.Commands.Alli;
+import me.Haeseke1.Alliances.Commands.Arena.Create.ArenaCreateEvent;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
@@ -103,6 +106,8 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new OutpostEvents(), this);
 		pm.registerEvents(new regionSelect(), this);
 		pm.registerEvents(new ShopEvents(), this);
+		pm.registerEvents(new ArenaEvents(), this);
+		pm.registerEvents(new ArenaCreateEvent(), this);
 		
 		pm.registerEvents(new Block_Breaking(), this);
 		pm.registerEvents(new Block_Placing(), this);
@@ -133,6 +138,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Timer(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Time_On(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Mob_Killing_Time(), 20, 20);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ArenaTimer(), 20, 20);
 		java.util.Timer timer = new java.util.Timer();
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);

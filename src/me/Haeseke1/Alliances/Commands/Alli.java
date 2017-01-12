@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Commands.Admin.Admin;
+import me.Haeseke1.Alliances.Commands.Arena.Arena;
 import me.Haeseke1.Alliances.Commands.Challenges.mainChallenges;
 import me.Haeseke1.Alliances.Commands.Coin.Coin;
 import me.Haeseke1.Alliances.Commands.Create.mainCreate;
@@ -91,6 +92,10 @@ public class Alli implements CommandExecutor {
 			return true;
 		}
 		
+		if(args[0].equalsIgnoreCase("arena")){
+			Arena.onCommand(sender, args);
+			return true;
+		}
 		
 		
 		MessageManager.sendAlertMessage((Player) sender, "Unknown command use /alliances for more help!");

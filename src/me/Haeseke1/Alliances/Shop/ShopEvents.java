@@ -1,5 +1,6 @@
 package me.Haeseke1.Alliances.Shop;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
@@ -24,7 +25,7 @@ public class ShopEvents implements Listener{
 			return;
 		}
 		for(Shop s : Shop.shops){
-			if(event.getInventory().getName().equalsIgnoreCase(s.name)){
+			if(event.getInventory().getName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', s.name))){
 				Player player = (Player) event.getWhoClicked();
 				event.setCancelled(true);
 				if(event.getRawSlot() == 0){

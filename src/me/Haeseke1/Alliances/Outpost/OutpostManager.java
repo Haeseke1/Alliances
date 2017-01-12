@@ -90,58 +90,58 @@ public class OutpostManager {
 		}
 		
 		for(Farm f : Farm.farms){
-			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
-					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
-					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
-					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
+					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
+					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(Blacksmith f : Blacksmith.blacksmiths){
-			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
-					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
-					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
-					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
+					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
+					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(Dock f : Dock.docks){
-			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
-					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
-					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
-					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
+					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax)) ||
+					((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(God f : God.gods){
-			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
-					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
-					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
-					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
+					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
+					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(Magic_Tower f : Magic_Tower.magic_towers){
-			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
-					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
-					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
-					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
+					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
+					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(Mine f : Mine.mines){
-			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
-					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
-					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
-					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
+					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
+					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(Mob_Farm f : Mob_Farm.mob_farms){
-			if(((f.xmin <= xmin && f.xmax >= xmin || f.xmin <= xmax && f.xmax >= xmax) &&
-					(f.zmin <= zmin && f.zmax >= zmin || f.zmin <= zmax && f.zmax >= zmax)) ||
-					((xmin <= f.xmin && xmax >= xmin || xmin <= f.xmax && xmax >= f.xmax) &&
-					(zmin <= f.zmin && zmax >= zmin || zmin <= f.zmax && zmax >= f.zmax))){
+			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
+					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
+					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}

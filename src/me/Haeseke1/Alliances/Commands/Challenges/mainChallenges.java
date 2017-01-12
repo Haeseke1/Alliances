@@ -11,6 +11,7 @@ public class mainChallenges {
 	
 	public static void onCommand(CommandSender sender, String[] args) {
 		if(!(sender instanceof Player)){
+			MessageManager.sendAlertMessage("You need to be a player to do this command!");
 			return;
 		}
 		Player player = (Player) sender;
