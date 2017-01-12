@@ -1,4 +1,4 @@
-package me.Haeseke1.Alliances.Commands.Arena.Create;
+package me.Haeseke1.Alliances.Commands.Arena.CreateArena;
 
 import java.util.HashMap;
 
@@ -13,7 +13,7 @@ import me.Haeseke1.Alliances.Commands.Outpost.Create.InventoryEvents;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
 
-public class mainCreate {
+public class mainCreateArena {
 	
 	
 	public static HashMap<Player,String> createArena = new HashMap<Player,String>();

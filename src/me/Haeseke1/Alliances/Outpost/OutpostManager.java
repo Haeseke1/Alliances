@@ -843,7 +843,7 @@ public class OutpostManager {
 			}
 			file.set("Magic_Tower." + f.name + ".World", f.world.getName());
 			file.set("Magic_Tower." + f.name + ".Xmin", f.xmin);
-			file.set("Magic_Tower" + f.name + ".Xmax", f.xmax);
+			file.set("Magic_Tower." + f.name + ".Xmax", f.xmax);
 			file.set("Magic_Tower." + f.name + ".Zmin", f.zmin);
 			file.set("Magic_Tower." + f.name + ".Zmax", f.zmax);
 		}

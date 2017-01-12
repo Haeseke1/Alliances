@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Haeseke1.Alliances.Economy.Coins;
 import net.md_5.bungee.api.ChatColor;
+import net.minecraft.server.v1_8_R2.PlayerSelector;
 
 public class Arena {
 	
@@ -137,6 +138,7 @@ public class Arena {
 	
 	public void endGame(){
 		isFighting = false;
+		inGame = false;
 		if(aliveGroup1.isEmpty()){
 			for(Player player : group2){
 				Coins.addPlayerCoins(player, coins / group2.size());
@@ -150,9 +152,11 @@ public class Arena {
 		}
 		for(Player player : group2){
 			player.teleport(player.getLocation().getWorld().getSpawnLocation());
+			player.setHealth(player.getMaxHealth());
 		}
 		for(Player player : group1){
 			player.teleport(player.getLocation().getWorld().getSpawnLocation());
+			player.setHealth(player.getMaxHealth());
 		}
 		group1.clear();
 		group2.clear();

@@ -33,7 +33,7 @@ import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Zombie;
 import me.Haeseke1.Alliances.Challenge.Type.Player_Kill;
 import me.Haeseke1.Alliances.Challenge.Type.Time_On;
 import me.Haeseke1.Alliances.Commands.Alli;
-import me.Haeseke1.Alliances.Commands.Arena.Create.ArenaCreateEvent;
+import me.Haeseke1.Alliances.Commands.Arena.CreateArena.ArenaCreateEvent;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
@@ -103,6 +103,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Outpost.Create.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Join.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Challenges.Player.InventoryEvents(), this);
+		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Arena.CreateSign.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
 		pm.registerEvents(new regionSelect(), this);
 		pm.registerEvents(new ShopEvents(), this);

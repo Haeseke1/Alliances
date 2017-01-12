@@ -25,6 +25,9 @@ public class ArenaTimer implements Runnable{
 				}
 			}
 		}
+		for(Arena_Sign as : Arena_Sign.arena_signs){
+			as.update();
+		}
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,9 +13,11 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import me.Haeseke1.Alliances.Outpost.OutpostManager;
+import me.Haeseke1.Alliances.Economy.Coins;
+import me.Haeseke1.Alliances.Utils.LocationManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class ArenaEvents implements Listener {
@@ -55,6 +58,36 @@ public class ArenaEvents implements Listener {
 		}
 	}
 	
+	@EventHandler
+	private void onPlayerInteract(PlayerInteractEvent event){
+		if(!event.hasBlock()){
+			return;
+		}
+		Player player = event.getPlayer();
+		for(Arena_Sign as : Arena_Sign.arena_signs){
+			if(LocationManager.checkCoordinates(event.getClickedBlock().getLocation(), as.sign.getLocation())){
+				if(!as.playing){
+					if(as.isInQueue(player)){
+						as.removePlayer(player);
+						Coins.addPlayerCoins(player, as.Coins);
+						MessageManager.sendInfoMessage(player, "You left the queue!");
+					}else{
+						if(Coins.getPlayerCoins(player) < as.Coins){
+							MessageManager.sendAlertMessage(player,"You don't have enough money!");
+							return;
+						}
+						if(as.addPlayer(player)){
+							Coins.removePlayerCoins(player, as.Coins);
+							MessageManager.sendInfoMessage(player,"You entered the queue!");
+						}else{
+							MessageManager.sendAlertMessage(player,"The queue is full!");
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	
 	@EventHandler
 	private void onPlayerQuit(PlayerQuitEvent event){
@@ -78,6 +111,12 @@ public class ArenaEvents implements Listener {
 			event.setCancelled(true);
 			MessageManager.sendAlertMessage(event.getPlayer(), "You cannot break blocks from a arena");
 		}
+		for(Sign sign : Arena_Sign.signs){
+			if(LocationManager.checkCoordinates(event.getBlock().getLocation(), sign.getBlock().getLocation())){
+				event.setCancelled(true);
+				MessageManager.sendAlertMessage(event.getPlayer(), "You cannot break this sign!");
+			}
+		}
 	}
 
 	@EventHandler
@@ -97,7 +136,13 @@ public class ArenaEvents implements Listener {
             if(ArenaManager.checkLocation(block.getLocation())){
             	it.remove();
             }
+    		for(Sign sign : Arena_Sign.signs){
+    			if(LocationManager.checkCoordinates(block.getLocation(), sign.getLocation())){
+    				event.setCancelled(true);
+    			}
+    		}
         }
+
     }
 	
 	

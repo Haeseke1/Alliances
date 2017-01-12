@@ -1,4 +1,4 @@
-package me.Haeseke1.Alliances.Commands.Arena.Create;
+package me.Haeseke1.Alliances.Commands.Arena.CreateArena;
 
 import java.util.HashMap;
 
@@ -29,25 +29,24 @@ public class ArenaCreateEvent implements Listener{
 		if(event.hasBlock() && event.hasItem()){
 			if(event.getItem().hasItemMeta()){
 				if(event.getItem().getItemMeta().hasDisplayName() && event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Arena selector")){
-					if(!spawn1.containsKey(player) && mainCreate.createArena.containsKey(player)){
+					if(!spawn1.containsKey(player) && mainCreateArena.createArena.containsKey(player)){
 						spawn1.put(player, event.getClickedBlock().getLocation().add(0, 1, 0));
 						MessageManager.sendInfoMessage(player, "Select second teamspawn!");
 						return;
 					}
-					if(!spawn2.containsKey(player) && mainCreate.createArena.containsKey(player)){
+					if(!spawn2.containsKey(player) && mainCreateArena.createArena.containsKey(player)){
 						spawn2.put(player, event.getClickedBlock().getLocation().add(0, 1, 0));
 						MessageManager.sendInfoMessage(player, "Select observation room spawn!");
 						return;
 					}
-					if(mainCreate.createArena.containsKey(player)){
+					if(mainCreateArena.createArena.containsKey(player)){
 						player.setItemInHand(new ItemStack(Material.AIR));
-						new Arena(mainCreate.createArena.get(player),regionSelect.leftClick.get(player), regionSelect.rightClick.get(player),spawn1.get(player), spawn2.get(player), event.getClickedBlock().getLocation().add(0, 1, 0));
+						new Arena(mainCreateArena.createArena.get(player),regionSelect.leftClick.get(player), regionSelect.rightClick.get(player),spawn1.get(player), spawn2.get(player), event.getClickedBlock().getLocation().add(0, 1, 0));
 						MessageManager.sendRemarkMessage(player, "Arena created!");
 					}
 				}
 			}
 		}
-		
 	}
 	
 	

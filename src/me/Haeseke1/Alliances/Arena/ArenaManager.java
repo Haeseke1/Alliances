@@ -1,6 +1,7 @@
 package me.Haeseke1.Alliances.Arena;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.Location;
@@ -9,19 +10,28 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import me.Haeseke1.Alliances.Outpost.Type.Blacksmith;
-import me.Haeseke1.Alliances.Outpost.Type.Dock;
-import me.Haeseke1.Alliances.Outpost.Type.Farm;
-import me.Haeseke1.Alliances.Outpost.Type.God;
-import me.Haeseke1.Alliances.Outpost.Type.Magic_Tower;
-import me.Haeseke1.Alliances.Outpost.Type.Mine;
-import me.Haeseke1.Alliances.Outpost.Type.Mob_Farm;
 
 public class ArenaManager {
 	
+	public static HashMap<Player,List<Player>> battles = new HashMap<Player,List<Player>>();
 	
+	public static Arena getArena(){
+		for(Arena f : Arena.arenas){
+			if(!f.inGame){
+				return f;
+			}
+		}
+		return null;
+	}
 	
-	
+	public static boolean isArena(){
+		for(Arena f : Arena.arenas){
+			if(!f.inGame){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	public static void One_V_One(Player defender, Player challenger, int coins, Arena arena){
