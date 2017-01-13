@@ -54,6 +54,7 @@ public class Main extends JavaPlugin {
 	public static PluginManager pm = Bukkit.getPluginManager();
 
 	public static HashMap<String, FileConfiguration> configFiles = new HashMap<String, FileConfiguration>();
+	public static HashMap<String, File> configFile = new HashMap<String, File>();
 	public static List<Alliance> alliances = new ArrayList<Alliance>();
 
 	public static FileConfiguration coinsConfig;
@@ -168,7 +169,12 @@ public class Main extends JavaPlugin {
 		OutpostManager.saveOutpost();
 		ShopManager.saveShops();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
-			ConfigManager.saveCustomConfig(new File(getDataFolder(), entry.getKey()), entry.getValue());
+			if(configFile.containsKey(entry.getKey())){
+				ConfigManager.saveCustomConfig(configFile.get(entry.getKey()), entry.getValue());
+			}else{
+				ConfigManager.saveCustomConfig(new File(getDataFolder(), entry.getKey()), entry.getValue());
+			}
+			
 		}
 	}
 

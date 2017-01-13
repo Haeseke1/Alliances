@@ -131,7 +131,7 @@ public class ConfigManager {
 	public static FileConfiguration getCustomConfig(File f, Main main) {
 		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
 		Main.configFiles.put(f.getName(), file);
-		
+		Main.configFile.put(f.getName(), f);
 		Reader defConfigStream;
 		try {
 			defConfigStream = new InputStreamReader(main.getResource(f.getName()), "UTF8");
