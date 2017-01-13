@@ -12,7 +12,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Haeseke1.Alliances.Economy.Coins;
 import net.md_5.bungee.api.ChatColor;
-import net.minecraft.server.v1_8_R2.PlayerSelector;
 
 public class Arena {
 	

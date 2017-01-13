@@ -80,7 +80,7 @@ public class Main extends JavaPlugin {
 			pm.disablePlugin(this);
 			return;
 		}
-		ConfigManager.registerConfigFile(this);
+		Config.registerConfigFile(this);
 		registerCommands();
 		registerEvents();
 		registerSchedulers();
@@ -92,7 +92,7 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		ConfigManager.saveConfigFile(this);
+		Config.saveConfigFile(this);
 		saveAllCustomConfigs();
 		ShopManager.despawnVendors();
 		MessageManager.sendAlertMessage("The plugin has been shutted down! *-* The cake wasn't a lie thought *-*");
@@ -166,7 +166,6 @@ public class Main extends JavaPlugin {
 	public void saveAllCustomConfigs() {
 		AllianceManager.saveAlliance();
 		OutpostManager.saveOutpost();
-		OutpostManager.saveRewards();
 		ShopManager.saveShops();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
 			ConfigManager.saveCustomConfig(new File(getDataFolder(), entry.getKey()), entry.getValue());

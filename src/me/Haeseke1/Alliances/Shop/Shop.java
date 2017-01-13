@@ -23,40 +23,26 @@ import me.Haeseke1.Alliances.Utils.InventoryManager;
 
 public class Shop {
 	
-	
 	public static List<Shop> shops = new ArrayList<Shop>();
-	
-	public List<Villager> vendors = new ArrayList<Villager>();
-	public List<Chunk> chunks = new ArrayList<Chunk>();
-	
-	public List<SItem> shopItems = new ArrayList<SItem>();
-	public String name;
 	
 	public HashMap<Player,Integer> placing = new HashMap<Player,Integer>();
 	
+	public List<Villager> vendors = new ArrayList<Villager>();
+	public List<Chunk> chunks = new ArrayList<Chunk>();
+	public List<SItem> shopItems = new ArrayList<SItem>();
+	
+	public String name;
 	
 	public Shop(String name, List<SItem> shopItems, List<Location> locations){
 		this.name = name;
 		this.shopItems = shopItems;
 		for(Location loc : locations){
-			if(!loc.getChunk().isLoaded()){
-				loc.getChunk().load();
-			}
-			Villager cev = CustomEntityVillager.spawn(loc);
-			cev.setCustomName(ChatColor.translateAlternateColorCodes('&', name));
-			cev.setCustomNameVisible(true);
-			vendors.add(cev);
-			chunks.add(loc.getChunk());
+			createVillager(loc);
 		}
 		shops.add(this);
 	}
 	
-	
-	public void addSItem(SItem sitem){
-		shopItems.add(sitem);
-	}
-	
-	public void addVendor(Location loc){
+	private void createVillager(Location loc){
 		if(!loc.getChunk().isLoaded()){
 			loc.getChunk().load();
 		}
@@ -66,11 +52,26 @@ public class Shop {
 		vendors.add(cev);
 		chunks.add(loc.getChunk());
 	}
+		
+	public void addSItem(SItem sitem){
+		shopItems.add(sitem);
+	}
+	
+	public void addVendor(Location loc){
+		createVillager(loc);
+	}
 	
 	public void despawnVendors(){
 		for(Villager cev : vendors){
 			cev.remove();
 		}
+	}
+	
+	public boolean isVendor(Villager v){
+		if(vendors.contains(v)){
+			return true;
+		}
+		return false;
 	}
 	
 	public void createInventory(Player player){
@@ -219,14 +220,4 @@ public class Shop {
 		}
 		player.updateInventory();
 	}
-	
-	
-	
-	public boolean isVendor(Villager v){
-		if(vendors.contains(v)){
-			return true;
-		}
-		return false;
-	}
-	
 }

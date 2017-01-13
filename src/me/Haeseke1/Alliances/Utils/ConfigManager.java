@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,16 +19,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 
-import me.Haeseke1.Alliances.Alliance.Type.Caith_Sith;
-import me.Haeseke1.Alliances.Alliance.Type.Gnome;
-import me.Haeseke1.Alliances.Alliance.Type.Imp;
-import me.Haeseke1.Alliances.Alliance.Type.Leprechaun;
-import me.Haeseke1.Alliances.Alliance.Type.Pooka;
-import me.Haeseke1.Alliances.Alliance.Type.Salamander;
-import me.Haeseke1.Alliances.Alliance.Type.Spriggan;
-import me.Haeseke1.Alliances.Alliance.Type.Sylph;
-import me.Haeseke1.Alliances.Alliance.Type.Undine;
-import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyBooleanException;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyItemStackException;
@@ -34,20 +26,9 @@ import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringListException;
 import me.Haeseke1.Alliances.Main.Main;
-import me.Haeseke1.Alliances.Outpost.Timer;
-import me.Haeseke1.Alliances.Outpost.Type.Blacksmith;
-import me.Haeseke1.Alliances.Outpost.Type.Dock;
-import me.Haeseke1.Alliances.Outpost.Type.Farm;
-import me.Haeseke1.Alliances.Outpost.Type.God;
-import me.Haeseke1.Alliances.Outpost.Type.Magic_Tower;
-import me.Haeseke1.Alliances.Outpost.Type.Mine;
-import me.Haeseke1.Alliances.Outpost.Type.Mob_Farm;
 
 public class ConfigManager {
 
-	/*
-	 * Retrieves a string from a config file
-	 */
 	public static String getStringFromConfig(FileConfiguration config, String path) throws EmptyStringException {
 		if (config.getString(path) == null) {
 			throw new EmptyStringException(path);
@@ -75,8 +56,7 @@ public class ConfigManager {
 		}
 		return config.getStringList(path);
 	}
-	
-	
+		
 	public static Location getLocationFromConfig(FileConfiguration config, String path) throws EmptyLocationException {
 		if (config.getStringList(path) == null) {
 			throw new EmptyLocationException(path);
@@ -88,6 +68,13 @@ public class ConfigManager {
 			MessageManager.sendAlertMessage("Location can't be fetched from " + path);
 			return null;
 		}
+	}
+	
+	public static void setLocationFromConfig(FileConfiguration config, String path, Location loc) {
+		config.set(path + ".World", loc.getWorld().getName());
+		config.set(path + ".X", loc.getX());
+		config.set(path + ".Y", loc.getY());
+		config.set(path + ".Z", loc.getZ());
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -120,110 +107,27 @@ public class ConfigManager {
 			return null;
 		}
 	}
-
-	/*
-	 * Register or reload config file
-	 */
-	public static void registerConfigFile(Main main) {
-		main.reloadConfig();
-		// fetch logo
-		try {
-			Main.cmdlogo = MessageManager.translateColorCode(ConfigManager.getStringFromConfig(Main.config, "Logo"));
-		} catch (EmptyStringException e) {
-			e.printStackTrace();
-			Main.pm.disablePlugin(main);
-			return;
+	
+	@SuppressWarnings("deprecation")
+	public static void setItemStackInConfig(FileConfiguration config, String path, ItemStack item){
+		config.set(path + ".ID", item.getTypeId());
+		config.set(path + ".Amount", item.getAmount());
+		if(item.hasItemMeta()){
+			if(item.getItemMeta().hasDisplayName()){
+				config.set(path + ".Displayname", item.getItemMeta().getDisplayName());
+			}
+			if(item.getItemMeta().hasLore()){
+				config.set(path + ".Lore", item.getItemMeta().getLore());
+			}
 		}
-		try {
-			MessageManager.alertColorCode = MessageManager
-					.translateColorCode(getStringFromConfig(Main.config, "ColorCodes.alertMessages"));
-			MessageManager.infoColorCode = MessageManager
-					.translateColorCode(getStringFromConfig(Main.config, "ColorCodes.infoMessages"));
-			MessageManager.remarkColorCode = MessageManager
-					.translateColorCode(getStringFromConfig(Main.config, "ColorCodes.remarkMessages"));
-		} catch (EmptyStringException e) {
-			e.printStackTrace();
-			Main.pm.disablePlugin(main);
+		config.set(path + ".Data", item.getData().getData());
+		List<String> list = new ArrayList<String>();
+		for(Entry<Enchantment,Integer> ench : item.getEnchantments().entrySet()){
+			list.add(ench.getKey().getId() + "," + ench.getValue());
 		}
-
-		try {
-			Coins.defaultCoins = getIntFromConfig(Main.config, "Coins.StarterCoins");
-			Caith_Sith.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Cait Sith");
-			Gnome.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Gnome");
-			Imp.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Imp");
-			Leprechaun.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Leprechaun");
-			Pooka.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Pooka");
-			Salamander.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Salamander");
-			Spriggan.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Spriggan");
-			Sylph.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Sylph");
-			Undine.cost = getIntFromConfig(Main.config, "Coins.AllianceTypes.Undine");
-			
-			Timer.rewardTime = getIntFromConfig(Main.config, "Outpost.Time_Per_Reward");
-			Timer.take_overTime = getIntFromConfig(Main.config, "Outpost.Time_For_Take_Over");
-		} catch (EmptyIntException e) {
-			e.printStackTrace();
-			Main.pm.disablePlugin(main);
-		}
-		
-		try{
-			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Blacksmith").getKeys(false)){
-				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s);
-				Blacksmith.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s + ".Percentage"));
-			}
-			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Dock").getKeys(false)){
-				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Dock." + s);
-				Dock.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Dock." + s + ".Percentage"));
-			}
-			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Farm").getKeys(false)){
-				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Farm." + s);
-				Farm.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Farm." + s + ".Percentage"));
-			}
-			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Blacksmith").getKeys(false)){
-				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s);
-				God.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s + ".Percentage"));
-			}
-			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Magic_Tower").getKeys(false)){
-				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Magic_Tower." + s);
-				Magic_Tower.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Magic_Tower." + s + ".Percentage"));
-			}
-			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Mine").getKeys(false)){
-				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Mine." + s);
-				Mine.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Mine." + s + ".Percentage"));
-			}
-			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Mob_Farm").getKeys(false)){
-				ItemStack i = getItemStackFromConfig(Main.config, "Outpost.Rewards.Mob_Farm." + s);
-				Mob_Farm.rewards.put(i, getIntFromConfig(Main.config, "Outpost.Rewards.Mob_Farm." + s + ".Percentage"));
-			}
-		}catch(EmptyItemStackException e){
-			e.printStackTrace();
-		} catch (EmptyIntException e) {
-			e.printStackTrace();
-		}
-		
-		
-		
-		// create configs into plugin folder
-		File dir = main.getDataFolder();
-		if (!dir.exists()) {
-			if (!dir.mkdir()) {
-				MessageManager.sendAlertMessage("Couldn't create the plugin folder...");
-			} else {
-				main.saveDefaultConfig();
-				MessageManager.sendRemarkMessage("The config is succesfully created!");
-			}
-		} else {
-			MessageManager.sendInfoMessage("Configs are ready to go!");
-		}
-
+		config.set(path + ".Enchantments", list);
 	}
-
-	/*
-	 * Save changes made to the config file
-	 */
-	public static void saveConfigFile(Main main) {
-		main.saveDefaultConfig();
-	}
-
+	
 	public static FileConfiguration getCustomConfig(File f, Main main) {
 		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
 		Main.configFiles.put(f.getName(), file);

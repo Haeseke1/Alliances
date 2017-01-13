@@ -2,15 +2,12 @@ package me.Haeseke1.Alliances.Outpost;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -207,90 +204,6 @@ public class OutpostManager {
 		}
 	}
 	
-	private static Farm checkFarms(Location b){
-		for(Farm f : Farm.farms){
-			if(f.world.equals(b.getWorld())){
-				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
-						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
-					return f;
-				}
-			}
-		}
-		return null;
-	}
-	
-	private static Blacksmith checkBlacksmiths(Location b){
-		for(Blacksmith f : Blacksmith.blacksmiths){
-			if(f.world.equals(b.getWorld())){
-				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
-						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
-					return f;
-				}
-			}
-		}
-		return null;
-	}
-	
-	private static Dock checkDocks(Location b){
-		for(Dock f : Dock.docks){
-			if(f.world.equals(b.getWorld())){
-				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
-						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
-					return f;
-				}
-			}
-		}
-		return null;
-	}
-	
-	private static God checkGods(Location b){
-		for(God f : God.gods){
-			if(f.world.equals(b.getWorld())){
-				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
-						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
-					return f;
-				}
-			}
-		}
-		return null;
-	}
-	
-	private static Magic_Tower checkMagic_Towers(Location b){
-		for(Magic_Tower f : Magic_Tower.magic_towers){
-			if(f.world.equals(b.getWorld())){
-				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
-						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
-					return f;
-				}
-			}
-		}
-		return null;
-	}
-	
-	private static Mine checkMines(Location b){
-		for(Mine f : Mine.mines){
-			if(f.world.equals(b.getWorld())){
-				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
-						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
-					return f;
-				}
-			}
-		}
-		return null;
-	}
-	
-	private static Mob_Farm checkMob_Farms(Location b){
-		for(Mob_Farm f : Mob_Farm.mob_farms){
-			if(f.world.equals(b.getWorld())){
-				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
-						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
-					return f;
-				}
-			}
-		}
-		return null;
-	}
-	
 	public static boolean checkLocation(Location b){
 		for(Farm f : Farm.farms){
 			if(f.world.equals(b.getWorld())){
@@ -373,26 +286,6 @@ public class OutpostManager {
 		for(Mob_Farm mf : Mob_Farm.mob_farms){
 			mf.take_over();
 		}
-	}
-	
-	private static ItemStack chooseReward(HashMap<ItemStack,Integer> rewards){
-		ItemStack reward = null;
-		
-		int som = 0;
-		for(Entry<ItemStack,Integer> entry : rewards.entrySet()){
-			som += entry.getValue();
-		}
-		
-		Double random = Math.random() * som + 0.1;
-		int lootnumber = 0;
-		for(Entry<ItemStack,Integer> entry : rewards.entrySet()){
-			lootnumber += entry.getValue();
-			if(random < lootnumber){
-				reward = entry.getKey();
-				break;
-			}
-		}
-		return reward;
 	}
 	
 	public static void registerOutpost(){
@@ -623,178 +516,6 @@ public class OutpostManager {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
-	public static void saveRewards(){
-		FileConfiguration config = Main.config;
-		config.set("Outpost.Rewards.Blacksmith", null);
-		int i = 0;
-		for(Entry<ItemStack,Integer> entry : Blacksmith.rewards.entrySet()){
-			config.set("Outpost.Rewards.Blacksmith" + i + ".ID", entry.getKey().getTypeId());
-			config.set("Outpost.Rewards.Blacksmith" + i + ".Data", entry.getKey().getData().getData());
-			config.set("Outpost.Rewards.Blacksmith" + i + ".Amount", entry.getKey().getAmount());
-			if(entry.getKey().hasItemMeta()){
-				if(entry.getKey().getItemMeta().hasDisplayName()){
-					config.set("Outpost.Rewards.Blacksmith" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
-				}
-				if(entry.getKey().getItemMeta().hasLore()){
-					config.set("Outpost.Rewards.Blacksmith" + i + ".Lore", entry.getKey().getItemMeta().getLore());
-				}
-			}
-			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-			List<String> list = new ArrayList<String>();
-			for(Entry<Enchantment,Integer> ench : map.entrySet()){
-				list.add(ench.getKey().getId() + "," + ench.getValue());
-			}
-			config.set("Outpost.Rewards.Blacksmith" + i + ".Enchantments", list);
-			config.set("Outpost.Rewards.Blacksmith" + i + ".Percentage", entry.getValue());
-			i++;
-		}
-		
-		config.set("Outpost.Rewards.Dock", null);
-		i = 0;
-		for(Entry<ItemStack,Integer> entry : Dock.rewards.entrySet()){
-			config.set("Outpost.Rewards.Dock" + i + ".ID", entry.getKey().getTypeId());
-			config.set("Outpost.Rewards.Dock" + i + ".Data", entry.getKey().getData().getData());
-			config.set("Outpost.Rewards.Dock" + i + ".Amount", entry.getKey().getAmount());
-			if(entry.getKey().hasItemMeta()){
-				if(entry.getKey().getItemMeta().hasDisplayName()){
-					config.set("Outpost.Rewards.Dock" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
-				}
-				if(entry.getKey().getItemMeta().hasLore()){
-					config.set("Outpost.Rewards.Dock" + i + ".Lore", entry.getKey().getItemMeta().getLore());
-				}
-			}
-			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-			List<String> list = new ArrayList<String>();
-			for(Entry<Enchantment,Integer> ench : map.entrySet()){
-				list.add(ench.getKey().getId() + "," + ench.getValue());
-			}
-			config.set("Outpost.Rewards.Dock" + i + ".Enchantments", list);
-			config.set("Outpost.Rewards.Dock" + i + ".Percentage", entry.getValue());
-			i++;
-		}
-		
-		config.set("Outpost.Rewards.Farm", null);
-		i = 0;
-		for(Entry<ItemStack,Integer> entry : Farm.rewards.entrySet()){
-			config.set("Outpost.Rewards.Farm" + i + ".ID", entry.getKey().getTypeId());
-			config.set("Outpost.Rewards.Farm" + i + ".Data", entry.getKey().getData().getData());
-			config.set("Outpost.Rewards.Farm" + i + ".Amount", entry.getKey().getAmount());
-			if(entry.getKey().hasItemMeta()){
-				if(entry.getKey().getItemMeta().hasDisplayName()){
-					config.set("Outpost.Rewards.Farm" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
-				}
-				if(entry.getKey().getItemMeta().hasLore()){
-					config.set("Outpost.Rewards.Farm" + i + ".Lore", entry.getKey().getItemMeta().getLore());
-				}
-			}
-			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-			List<String> list = new ArrayList<String>();
-			for(Entry<Enchantment,Integer> ench : map.entrySet()){
-				list.add(ench.getKey().getId() + "," + ench.getValue());
-			}
-			config.set("Outpost.Rewards.Farm" + i + ".Enchantments", list);
-			config.set("Outpost.Rewards.Farm" + i + ".Percentage", entry.getValue());
-			i++;
-		}
-		
-		config.set("Outpost.Rewards.God", null);
-		i = 0;
-		for(Entry<ItemStack,Integer> entry : God.rewards.entrySet()){
-			config.set("Outpost.Rewards.God" + i + ".ID", entry.getKey().getTypeId());
-			config.set("Outpost.Rewards.God" + i + ".Data", entry.getKey().getData().getData());
-			config.set("Outpost.Rewards.God" + i + ".Amount", entry.getKey().getAmount());
-			if(entry.getKey().hasItemMeta()){
-				if(entry.getKey().getItemMeta().hasDisplayName()){
-					config.set("Outpost.Rewards.God" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
-				}
-				if(entry.getKey().getItemMeta().hasLore()){
-					config.set("Outpost.Rewards.God" + i + ".Lore", entry.getKey().getItemMeta().getLore());
-				}
-			}
-			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-			List<String> list = new ArrayList<String>();
-			for(Entry<Enchantment,Integer> ench : map.entrySet()){
-				list.add(ench.getKey().getId() + "," + ench.getValue());
-			}
-			config.set("Outpost.Rewards.God" + i + ".Enchantments", list);
-			config.set("Outpost.Rewards.God" + i + ".Percentage", entry.getValue());
-			i++;
-		}
-		
-		config.set("Outpost.Rewards.Magic_Tower", null);
-		i = 0;
-		for(Entry<ItemStack,Integer> entry : Magic_Tower.rewards.entrySet()){
-			config.set("Outpost.Rewards.Magic_Tower" + i + ".ID", entry.getKey().getTypeId());
-			config.set("Outpost.Rewards.Magic_Tower" + i + ".Data", entry.getKey().getData().getData());
-			config.set("Outpost.Rewards.Magic_Tower" + i + ".Amount", entry.getKey().getAmount());
-			if(entry.getKey().hasItemMeta()){
-				if(entry.getKey().getItemMeta().hasDisplayName()){
-					config.set("Outpost.Rewards.Magic_Tower" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
-				}
-				if(entry.getKey().getItemMeta().hasLore()){
-					config.set("Outpost.Rewards.Magic_Tower" + i + ".Lore", entry.getKey().getItemMeta().getLore());
-				}
-			}
-			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-			List<String> list = new ArrayList<String>();
-			for(Entry<Enchantment,Integer> ench : map.entrySet()){
-				list.add(ench.getKey().getId() + "," + ench.getValue());
-			}
-			config.set("Outpost.Rewards.Magic_Tower" + i + ".Enchantments", list);
-			config.set("Outpost.Rewards.Magic_Tower" + i + ".Percentage", entry.getValue());
-			i++;
-		}
-		
-		config.set("Outpost.Rewards.Mine", null);
-		i = 0;
-		for(Entry<ItemStack,Integer> entry : Mine.rewards.entrySet()){
-			config.set("Outpost.Rewards.Mine" + i + ".ID", entry.getKey().getTypeId());
-			config.set("Outpost.Rewards.Mine" + i + ".Data", entry.getKey().getData().getData());
-			config.set("Outpost.Rewards.Mine" + i + ".Amount", entry.getKey().getAmount());
-			if(entry.getKey().hasItemMeta()){
-				if(entry.getKey().getItemMeta().hasDisplayName()){
-					config.set("Outpost.Rewards.Mine" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
-				}
-				if(entry.getKey().getItemMeta().hasLore()){
-					config.set("Outpost.Rewards.Mine" + i + ".Lore", entry.getKey().getItemMeta().getLore());
-				}
-			}
-			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-			List<String> list = new ArrayList<String>();
-			for(Entry<Enchantment,Integer> ench : map.entrySet()){
-				list.add(ench.getKey().getId() + "," + ench.getValue());
-			}
-			config.set("Outpost.Rewards.Mine" + i + ".Enchantments", list);
-			config.set("Outpost.Rewards.Mine" + i + ".Percentage", entry.getValue());
-			i++;
-		}
-		
-		config.set("Outpost.Rewards.Mob_Farm", null);
-		i = 0;
-		for(Entry<ItemStack,Integer> entry : Mine.rewards.entrySet()){
-			config.set("Outpost.Rewards.Mob_Farm" + i + ".ID", entry.getKey().getTypeId());
-			config.set("Outpost.Rewards.Mob_Farm" + i + ".Data", entry.getKey().getData().getData());
-			config.set("Outpost.Rewards.Mob_Farm" + i + ".Amount", entry.getKey().getAmount());
-			if(entry.getKey().hasItemMeta()){
-				if(entry.getKey().getItemMeta().hasDisplayName()){
-					config.set("Outpost.Rewards.Mob_Farm" + i + ".DisplayName", entry.getKey().getItemMeta().getDisplayName());
-				}
-				if(entry.getKey().getItemMeta().hasLore()){
-					config.set("Outpost.Rewards.Mob_Farm" + i + ".Lore", entry.getKey().getItemMeta().getLore());
-				}
-			}
-			Map<Enchantment,Integer> map = entry.getKey().getEnchantments();
-			List<String> list = new ArrayList<String>();
-			for(Entry<Enchantment,Integer> ench : map.entrySet()){
-				list.add(ench.getKey().getId() + "," + ench.getValue());
-			}
-			config.set("Outpost.Rewards.Mob_Farm" + i + ".Enchantments", list);
-			config.set("Outpost.Rewards.Mob_Farm" + i + ".Percentage", entry.getValue());
-			i++;
-		}
-	}
-	
 	public static void saveOutpost(){
 		FileConfiguration file = Main.outpostConfig;
 		for(Blacksmith f : Blacksmith.blacksmiths){
@@ -869,5 +590,108 @@ public class OutpostManager {
 		}
 	}
 	
+	private static ItemStack chooseReward(HashMap<ItemStack,Integer> rewards){
+		ItemStack reward = null;
+		
+		int som = 0;
+		for(Entry<ItemStack,Integer> entry : rewards.entrySet()){
+			som += entry.getValue();
+		}
+		
+		Double random = Math.random() * som + 0.1;
+		int lootnumber = 0;
+		for(Entry<ItemStack,Integer> entry : rewards.entrySet()){
+			lootnumber += entry.getValue();
+			if(random < lootnumber){
+				reward = entry.getKey();
+				break;
+			}
+		}
+		return reward;
+	}
+	
+	private static Farm checkFarms(Location b){
+		for(Farm f : Farm.farms){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static Blacksmith checkBlacksmiths(Location b){
+		for(Blacksmith f : Blacksmith.blacksmiths){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static Dock checkDocks(Location b){
+		for(Dock f : Dock.docks){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static God checkGods(Location b){
+		for(God f : God.gods){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static Magic_Tower checkMagic_Towers(Location b){
+		for(Magic_Tower f : Magic_Tower.magic_towers){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static Mine checkMines(Location b){
+		for(Mine f : Mine.mines){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static Mob_Farm checkMob_Farms(Location b){
+		for(Mob_Farm f : Mob_Farm.mob_farms){
+			if(f.world.equals(b.getWorld())){
+				if(f.xmin <= b.getX() && f.xmax >= b.getX() &&
+						f.zmin <= b.getZ() && f.zmax >= b.getZ()){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
 	
 }

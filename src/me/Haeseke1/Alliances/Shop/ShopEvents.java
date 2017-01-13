@@ -66,7 +66,6 @@ public class ShopEvents implements Listener{
 		}
 	}
 	
-	
 	@EventHandler
 	private void onPlayerCloseInv(InventoryCloseEvent event){
 		for(Shop s : Shop.shops){
@@ -75,7 +74,6 @@ public class ShopEvents implements Listener{
 			}
 		}
 	}
-	
 	
 	@EventHandler
 	private void onPlayerInteract(PlayerInteractEntityEvent event){
@@ -113,6 +111,4 @@ public class ShopEvents implements Listener{
 		}
 		
 	}
-	
-	
 }
