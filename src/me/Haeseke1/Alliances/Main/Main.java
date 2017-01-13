@@ -32,6 +32,7 @@ import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Wither;
 import me.Haeseke1.Alliances.Challenge.Type.Mob_Killing_Zombie;
 import me.Haeseke1.Alliances.Challenge.Type.Player_Kill;
 import me.Haeseke1.Alliances.Challenge.Type.Time_On;
+import me.Haeseke1.Alliances.Chat.ChatEvent;
 import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Arena.CreateArena.ArenaCreateEvent;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
@@ -110,6 +111,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new ShopEvents(), this);
 		pm.registerEvents(new ArenaEvents(), this);
 		pm.registerEvents(new ArenaCreateEvent(), this);
+		pm.registerEvents(new ChatEvent(), this);
 		
 		pm.registerEvents(new Block_Breaking(), this);
 		pm.registerEvents(new Block_Placing(), this);
