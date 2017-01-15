@@ -294,7 +294,7 @@ public class OutpostManager {
 			for(String s : file.getConfigurationSection("Blacksmith").getKeys(false)){
 				String name = s;
 				Alliance alli = null;
-				if(file.contains("Blacksmith" + s + ".Owner")){
+				if(file.contains("Blacksmith." + s + ".Owner")){
 					try {
 						alli = AllianceManager.getAlliance(ConfigManager.getStringFromConfig(file, "Blacksmith." + s + ".Owner"));
 					} catch (EmptyStringException e) {
@@ -326,7 +326,7 @@ public class OutpostManager {
 			for(String s : file.getConfigurationSection("Dock").getKeys(false)){
 				String name = s;
 				Alliance alli = null;
-				if(file.contains("Dock" + s + ".Owner")){
+				if(file.contains("Dock." + s + ".Owner")){
 					try {
 						alli = AllianceManager.getAlliance(ConfigManager.getStringFromConfig(file, "Dock." + s + ".Owner"));
 					} catch (EmptyStringException e) {
