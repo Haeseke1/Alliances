@@ -23,10 +23,10 @@ public class ChatEvent implements Listener{
 			Alliance alli = AllianceManager.getAlliance(player);
 			String rank = alli.getMembers().get(player.getUniqueId());
 			String name = player.getDisplayName();
-			event.setFormat(ChatColor.translateAlternateColorCodes('&', format.replaceFirst("%alli_name%", alli.getName()).replaceAll("%name%", name).replaceAll("%alli_rank%", rank)) + event.getMessage());
+			event.setFormat(ChatColor.translateAlternateColorCodes('&', format.replace("%alli_name%", alli.getName()).replace("%name%", name).replace("%alli_rank%", rank)) + event.getMessage());
 		}else{
 			String name = player.getDisplayName();
-			event.setFormat(ChatColor.translateAlternateColorCodes('&', format.replaceAll("%name%", name)) + event.getMessage());
+			event.setFormat(ChatColor.translateAlternateColorCodes('&', format.replace("%name%", name)) + event.getMessage());
 		}
 	}
 }

@@ -135,7 +135,7 @@ public class Config {
 			i++;
 		}
 		
-		config.set("Outpost.Rewards.Dock.", null);
+		config.set("Outpost.Rewards.Dock", null);
 		i = 0;
 		for(Entry<ItemStack,Integer> entry : Dock.rewards.entrySet()){
 			ConfigManager.setItemStackInConfig(config, "Outpost.Rewards.Dock." + i, entry.getKey());

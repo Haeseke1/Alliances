@@ -96,7 +96,7 @@ public class Shop {
 				}else{
 					item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
 					im = item.getItemMeta();
-					im.setDisplayName(ChatColor.RED + "Buy "  + ChatColor.GRAY + "(" + sitem.buyV + " coins)");
+					im.setDisplayName(ChatColor.RED + "Buy "  + ChatColor.GRAY + "(" + sitem.sellV + " coins)");
 					item.setItemMeta(im);
 				}
 			}else{
@@ -116,7 +116,7 @@ public class Shop {
 				}else{
 					item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
 					im = item.getItemMeta();
-					im.setDisplayName(ChatColor.RED + "Sell "  + ChatColor.GRAY + "(" + sitem.buyV + " coins)");
+					im.setDisplayName(ChatColor.RED + "Sell "  + ChatColor.GRAY + "(" + sitem.sellV + " coins)");
 					item.setItemMeta(im);
 				}
 			}else{
@@ -175,7 +175,7 @@ public class Shop {
 				}else{
 					item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
 					im = item.getItemMeta();
-					im.setDisplayName(ChatColor.RED + "Buy "  + ChatColor.GRAY + "(" + sitem.buyV + " coins)");
+					im.setDisplayName(ChatColor.RED + "Buy "  + ChatColor.GRAY + "(" + sitem.sellV + " coins)");
 					item.setItemMeta(im);
 				}
 			}else{
@@ -195,7 +195,7 @@ public class Shop {
 				}else{
 					item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
 					im = item.getItemMeta();
-					im.setDisplayName(ChatColor.RED + "Sell "  + ChatColor.GRAY + "(" + sitem.buyV + " coins)");
+					im.setDisplayName(ChatColor.RED + "Sell "  + ChatColor.GRAY + "(" + sitem.sellV + " coins)");
 					item.setItemMeta(im);
 				}
 			}else{
