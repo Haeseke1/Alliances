@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Commands.Admin.Admin;
-import me.Haeseke1.Alliances.Commands.Arena.Arena;
 import me.Haeseke1.Alliances.Commands.Challenges.mainChallenges;
 import me.Haeseke1.Alliances.Commands.Create.mainCreate;
 import me.Haeseke1.Alliances.Commands.Join.mainJoin;
@@ -83,11 +82,6 @@ public class Alli implements CommandExecutor {
 		
 		if(args[0].equalsIgnoreCase("challenges")){
 			mainChallenges.onCommand(sender, args);
-			return true;
-		}
-		
-		if(args[0].equalsIgnoreCase("arena")){
-			Arena.onCommand(sender, args);
 			return true;
 		}
 		

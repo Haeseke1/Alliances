@@ -35,7 +35,6 @@ import me.Haeseke1.Alliances.Challenge.Type.Player_Kill;
 import me.Haeseke1.Alliances.Challenge.Type.Time_On;
 import me.Haeseke1.Alliances.Chat.ChatEvent;
 import me.Haeseke1.Alliances.Commands.Alli;
-import me.Haeseke1.Alliances.Commands.Arena.CreateArena.ArenaCreateEvent;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
 import me.Haeseke1.Alliances.Economy.Commands.Coin;
@@ -108,12 +107,10 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Outpost.Create.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Join.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Challenges.Player.InventoryEvents(), this);
-		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Arena.CreateSign.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
 		pm.registerEvents(new regionSelect(), this);
 		pm.registerEvents(new ShopEvents(), this);
 		pm.registerEvents(new ArenaEvents(), this);
-		pm.registerEvents(new ArenaCreateEvent(), this);
 		pm.registerEvents(new ChatEvent(), this);
 		
 		pm.registerEvents(new Block_Breaking(), this);
