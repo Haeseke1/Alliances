@@ -6,3 +6,5 @@ authors: [KingPieter, Haeseke1]
 commands:
   alliances:
     aliases: [alli,al]
+  coin:
+    alliases: [c,money,coins]

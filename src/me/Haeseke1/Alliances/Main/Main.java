@@ -38,6 +38,8 @@ import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Arena.CreateArena.ArenaCreateEvent;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
+import me.Haeseke1.Alliances.Economy.Coins;
+import me.Haeseke1.Alliances.Economy.Commands.Coin;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
@@ -131,6 +133,7 @@ public class Main extends JavaPlugin {
 
 	public void registerCommands() {
 		getCommand("Alliances").setExecutor(new Alli());
+		getCommand("Coin").setExecutor(new Coin());
 	}
 	
 	public void registerCustomEntitys(){

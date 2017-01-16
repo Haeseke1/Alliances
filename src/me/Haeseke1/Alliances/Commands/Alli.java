@@ -12,7 +12,6 @@ import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Commands.Admin.Admin;
 import me.Haeseke1.Alliances.Commands.Arena.Arena;
 import me.Haeseke1.Alliances.Commands.Challenges.mainChallenges;
-import me.Haeseke1.Alliances.Commands.Coin.Coin;
 import me.Haeseke1.Alliances.Commands.Create.mainCreate;
 import me.Haeseke1.Alliances.Commands.Join.mainJoin;
 import me.Haeseke1.Alliances.Commands.Member.Member;
@@ -40,11 +39,6 @@ public class Alli implements CommandExecutor {
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances admin #Get a list of commands for a owner");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances shop #Get a list of commands for shops");
 			return false;
-		}
-
-		if (args[0].equalsIgnoreCase("coin")) {
-			Coin.onCommand(sender, args);
-			return true;
 		}
 		
 		if(args[0].equalsIgnoreCase("create")){

@@ -29,6 +29,15 @@ public class Coins {
 			return defaultCoins;
 		}
 	}
+	
+	@SuppressWarnings("deprecation")
+	public static void setPlayerCoins(String player, int amount) {
+		Main.coinsConfig.set(Bukkit.getOfflinePlayer(player).getUniqueId().toString(), amount);
+	}
+	
+	public static void setPlayerCoins(Player player, int amount) {
+		Main.coinsConfig.set(player.getUniqueId().toString(), amount);
+	}
 
 	public static int addPlayerCoins(Player player, int amount) {
 		try {
