@@ -37,7 +37,7 @@ import me.Haeseke1.Alliances.Chat.ChatEvent;
 import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
-import me.Haeseke1.Alliances.Economy.Commands.Coin;
+import me.Haeseke1.Alliances.Economy.Commands.CoinC;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
@@ -104,7 +104,7 @@ public class Main extends JavaPlugin {
 
 	public void registerEvents() {
 		pm.registerEvents(new InventoryEvents(), this);
-		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Outpost.Create.InventoryEvents(), this);
+		pm.registerEvents(new me.Haeseke1.Alliances.Outpost.Commands.Create.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Join.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Challenges.Player.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
@@ -130,7 +130,7 @@ public class Main extends JavaPlugin {
 
 	public void registerCommands() {
 		getCommand("Alliances").setExecutor(new Alli());
-		getCommand("Coin").setExecutor(new Coin());
+		getCommand("Coin").setExecutor(new CoinC());
 	}
 	
 	public void registerCustomEntitys(){

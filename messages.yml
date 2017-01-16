@@ -1,5 +1,6 @@
 Command_Error_Not_A_User: "&4&lyou need to be a player to do this command!"
 Command_Error_Wrong_Arguments: "&4&lWrong arguments! use /alliance for more information!"
+Command_Error_Select_Region: "Select a region first!"
 
 #Can use %sender_coin%, %target_coin%, %coin%, %sender_name% and %target_name% as variables
 Command_Coin_Balance_Answer: "Balance: %sender_coin%"
@@ -13,3 +14,36 @@ Command_Coin_Pay_Answer: "Succesfully payed coins! Your new balance: %sender_coi
 Command_Coin_Pay_Not_Enough_Coins: "You don't have enough coins!"
 
 Command_Coin_Get_Answer: "%sender_name% gave you %coin% coins!"
+
+#Can use %shop_name% as variables
+Command_Shop_Create_Answer: "Shop created with name: %shop_name%"
+Command_Shop_Create_Already_Exist: "Shop already created with name: %shop_name%"
+
+Command_Shop_AddItem_Answer: "Item added to the shop"
+
+Command_Shop_AddLocation_Answer: "Added location to shop"
+
+#Can use no variables
+
+Command_Outpost_ChooseName: "Type the name of the outpost in the chat!"
+Command_Outpost_Creating_On_Existing_outpost: "You are trying to construct a outpost on a existing outpost!"
+Command_Outpost_Create_Answer: "Outpost constructed!"
+
+Outpost_Place_Block: "You cannot place blocks in a outpost"
+Outpost_Break_Block: "You cannot break blocks in a outpost"
+
+#Can use %outpost_name% as variables
+
+Outpost_Contested: "The outpost " + name + " is contested!"
+Outpost_Not_Taking_Over_Anymore: "You are not taking over %outpost_name% anymore!"
+Outpost_Safe: "Outpost %outpost_name% is safe!"
+Outpost_Losing: "You are losing your outpost called %outpost_name%!"
+
+#Can use %outpost_name% and %taking_over_name% as variables
+Outpost_Taking_Over_0: "%taking_over_name% is taking over a outpost called %outpost_name% (0%)"
+Outpost_Taking_Over_25: "%taking_over_name% is taking over a outpost called %outpost_name% (25%)"
+Outpost_Taking_Over_50: "%taking_over_name% is taking over a outpost called %outpost_name% (50%)"
+Outpost_Taking_Over_75: "%taking_over_name% is taking over a outpost called %outpost_name% (75%)"
+Outpost_Taking_Over_100: "%taking_over_name% has taken over a outpost called %outpost_name% (100%)"
+
+

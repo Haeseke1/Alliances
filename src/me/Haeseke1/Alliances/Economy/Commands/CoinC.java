@@ -9,7 +9,7 @@ import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.PlayerManager;
 
-public class Coin implements CommandExecutor{
+public class CoinC implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

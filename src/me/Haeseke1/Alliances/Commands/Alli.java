@@ -14,10 +14,8 @@ import me.Haeseke1.Alliances.Commands.Challenges.mainChallenges;
 import me.Haeseke1.Alliances.Commands.Create.mainCreate;
 import me.Haeseke1.Alliances.Commands.Join.mainJoin;
 import me.Haeseke1.Alliances.Commands.Member.Member;
-import me.Haeseke1.Alliances.Commands.Outpost.Outpost;
 import me.Haeseke1.Alliances.Commands.Owner.Owner;
 import me.Haeseke1.Alliances.Commands.Region.region;
-import me.Haeseke1.Alliances.Commands.Shop.mainShop;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Alli implements CommandExecutor {
@@ -29,24 +27,16 @@ public class Alli implements CommandExecutor {
 		if (args.length == 0) {
 			sender.sendMessage(MessageManager.infoColorCode + "===== Alliances =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
-			sender.sendMessage(MessageManager.infoColorCode + "/Alliances coin #Get list of coin commands");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances challenges #Get list of challenge commands");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances create #Create a new alliance");
-			sender.sendMessage(MessageManager.infoColorCode + "/Alliances outpost #Get list of outpost commands");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances join #join a alliance that invited you");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances owner #Get a list of commands for a owner");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances admin #Get a list of commands for a owner");
-			sender.sendMessage(MessageManager.infoColorCode + "/Alliances shop #Get a list of commands for shops");
 			return false;
 		}
 		
 		if(args[0].equalsIgnoreCase("create")){
 			mainCreate.onCommand(sender, args);
-			return true;
-		}
-		
-		if(args[0].equalsIgnoreCase("outpost")){
-			Outpost.onCommand(sender, args);
 			return true;
 		}
 		
@@ -72,11 +62,6 @@ public class Alli implements CommandExecutor {
 		
 		if(args[0].equalsIgnoreCase("member")){
 			Member.onCommand(sender, args);
-			return true;
-		}
-		
-		if(args[0].equalsIgnoreCase("shop")){
-			mainShop.onCommand(sender, args);
 			return true;
 		}
 		

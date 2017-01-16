@@ -72,7 +72,7 @@ public class Owner {
 				AllianceManager.getAlliance(player).setOwner(nowner.getUniqueId());
 				MessageManager.sendMessage(player, "Changed ownership succesfully to " + nowner.getName() + "!");
 				MessageManager.sendMessage(nowner, "You are now the owner of " + AllianceManager.getAlliance(player).getName() + "!");
-				AllianceManager.getAlliance(player).sendPlayersInfoMessage("The owner of this alliance is changed to " + nowner.getName() + "!");
+				AllianceManager.getAlliance(player).sendPlayersMessage("The owner of this alliance is changed to " + nowner.getName() + "!");
 				return;
 			}else{
 				MessageManager.sendMessage(player, "You are not owner/admin of a alliance!");
@@ -99,7 +99,7 @@ public class Owner {
 				AllianceManager.getAlliance(player).addAdmins(nadmin.getUniqueId());
 				MessageManager.sendMessage(player, "You promoted " + nadmin.getName() + " to admin!");
 				MessageManager.sendMessage(nadmin, "You are now a admin of " + AllianceManager.getAlliance(player).getName() + "!");
-				AllianceManager.getAlliance(player).sendPlayersInfoMessage(nadmin.getName() + " is promoted to admin!");
+				AllianceManager.getAlliance(player).sendPlayersMessage(nadmin.getName() + " is promoted to admin!");
 				return;
 			}else{
 				MessageManager.sendMessage(player, "You are not owner/admin of a alliance!");
@@ -128,7 +128,7 @@ public class Owner {
 				AllianceManager.getAlliance(player).setAdmins(admins);
 				MessageManager.sendMessage(player, "You removed " + nadmin.getName() + " from admin!");
 				MessageManager.sendMessage(nadmin, "You are no longer a admin of " + AllianceManager.getAlliance(player).getName() + "!");
-				AllianceManager.getAlliance(player).sendPlayersInfoMessage(nadmin.getName() + " is no longer a admin!");
+				AllianceManager.getAlliance(player).sendPlayersMessage(nadmin.getName() + " is no longer a admin!");
 				return;
 			}else{
 				MessageManager.sendMessage(player, "You are not owner/admin of a alliance!");

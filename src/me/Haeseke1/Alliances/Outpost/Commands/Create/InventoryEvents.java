@@ -1,4 +1,4 @@
-package me.Haeseke1.Alliances.Commands.Outpost.Create;
+package me.Haeseke1.Alliances.Outpost.Commands.Create;
 
 import java.util.HashMap;
 
@@ -46,45 +46,45 @@ public class InventoryEvents implements Listener{
 			event.setCancelled(true);
 			if(event.getCurrentItem() != null){
 				Player player = (Player) event.getWhoClicked();
+				String message = MessageManager.getMessage("Command_Outpost_ChooseName");
 				switch(event.getCurrentItem().getType()){
 				case DIAMOND_SWORD:
 					chooseName.put(player, OutpostType.BLACKSMITH);
-					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, message);
 					player.closeInventory();
 					break;
 				case FISHING_ROD:
 					chooseName.put(player, OutpostType.DOCK);
-					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, message);
 					player.closeInventory();
 					break;
 				case WHEAT:
 					chooseName.put(player, OutpostType.FARM);
-					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, message);
 					player.closeInventory();
 					break;
 				case GOLDEN_APPLE:
 					chooseName.put(player, OutpostType.GOD);
-					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, message);
 					player.closeInventory();
 					break;
 				case BLAZE_ROD:
 					chooseName.put(player, OutpostType.MAGIC_TOWER);
-					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, message);
 					player.closeInventory();
 					break;
 				case DIAMOND_PICKAXE:
 					chooseName.put(player, OutpostType.MINE);
-					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, message);
 					player.closeInventory();
 					break;
 				case BONE:
 					chooseName.put(player, OutpostType.MOB_FARM);
-					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, message);
 					player.closeInventory();
 					break;
 				default:
 					break;
-					
 				}
 			}
 		}
@@ -96,7 +96,8 @@ public class InventoryEvents implements Listener{
 			event.setCancelled(true);
 			Player player = event.getPlayer();
 			if(!OutpostManager.checkLocation(regionSelect.leftClick.get(player), regionSelect.rightClick.get(player))){
-				MessageManager.sendMessage(player, "You are trying to construct a outpost on a existing outpost!");
+				String message = MessageManager.getMessage("Command_Outpost_Creating_On_Existing_outpost");
+				MessageManager.sendMessage(player, message);
 				return;
 			}
 			switch(chooseName.get(event.getPlayer())){
@@ -123,7 +124,8 @@ public class InventoryEvents implements Listener{
 				break;
 			}
 			chooseName.remove(event.getPlayer());
-			MessageManager.sendMessage(player, "Outpost constructed!");
+			String message = MessageManager.getMessage("Command_Outpost_Create_Answer");
+			MessageManager.sendMessage(player, message);
 		}
 	}
 }
