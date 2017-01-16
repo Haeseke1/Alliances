@@ -48,6 +48,7 @@ public class MessageManager {
 		FileConfiguration file = Main.messageConfig;
 		for(String s : file.getKeys(false)){
 			try {
+				MessageManager.sendAlertMessage(s);
 				messages.put(s.toLowerCase(), ConfigManager.getStringFromConfig(file, s));
 			} catch (EmptyStringException e) {
 				e.printStackTrace();

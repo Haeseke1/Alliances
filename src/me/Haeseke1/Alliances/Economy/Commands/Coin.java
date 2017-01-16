@@ -34,8 +34,8 @@ public class Coin implements CommandExecutor{
 		
 		if (args[0].equalsIgnoreCase("balance")) {
 			if (args.length > 1) {
-				String message = MessageManager.getMessage("command_coin_balance_answer");
-				message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+				String message = MessageManager.getMessage("Command_Coin_Balance_Other_Answer");
+				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
 				.replace("%coin%", "")
 				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
 				.replace("%sender_name%", "" + sender.getName())
@@ -44,7 +44,7 @@ public class Coin implements CommandExecutor{
 				return false;
 			} else {
 				String message = MessageManager.getMessage("command_coin_balance_answer");
-				message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
 				.replace("%coin%", "")
 				.replace("%target_coin%", "")
 				.replace("%sender_name%", "" + sender.getName())
@@ -67,7 +67,7 @@ public class Coin implements CommandExecutor{
 					return false;
 				}
 				String message = MessageManager.getMessage("Command_Coin_Add_Answer");
-				message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
 				.replace("%coin%", "" + Integer.parseInt(args[2]))
 				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
 				.replace("%sender_name%", "" + sender.getName())
@@ -75,7 +75,7 @@ public class Coin implements CommandExecutor{
 				MessageManager.sendMessage(player, message);
 				if(PlayerManager.isPlayerOnline(args[1])){
 					message = MessageManager.getMessage("Command_Coin_Get_Answer");
-					message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+					message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
 					.replace("%coin%", "" + Integer.parseInt(args[2]))
 					.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
 					.replace("%sender_name%", "" + sender.getName())
@@ -98,7 +98,7 @@ public class Coin implements CommandExecutor{
 					return false;
 				}
 				String message = MessageManager.getMessage("Command_Coin_Set_Answer");
-				message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
 				.replace("%coin%", "" + Integer.parseInt(args[2]))
 				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
 				.replace("%sender_name%", "" + sender.getName())
@@ -117,7 +117,7 @@ public class Coin implements CommandExecutor{
 					if (Coins.removePlayerCoins(player, Integer.parseInt(args[2]))) {
 						Coins.addPlayerCoins(args[1], Integer.parseInt(args[2]));
 						String message = MessageManager.getMessage("Command_Coin_Pay_Answer");
-						message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+						message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
 						.replace("%coin%", "" + Integer.parseInt(args[2]))
 						.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
 						.replace("%sender_name%", "" + sender.getName())
@@ -125,7 +125,7 @@ public class Coin implements CommandExecutor{
 						MessageManager.sendMessage(player, message);
 						if(PlayerManager.isPlayerOnline(args[1])){
 							message = MessageManager.getMessage("Command_Coin_Get_Answer");
-							message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+							message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
 							.replace("%coin%", "" + Integer.parseInt(args[2]))
 							.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
 							.replace("%sender_name%", "" + sender.getName())
@@ -135,7 +135,7 @@ public class Coin implements CommandExecutor{
 						return false;
 					} else {
 						String message = MessageManager.getMessage("Command_Coin_Pay_Not_Enough_Coins");
-						message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+						message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
 						.replace("%coin%", "" + Integer.parseInt(args[2]))
 						.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
 						.replace("%sender_name%", "" + sender.getName())
