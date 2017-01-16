@@ -9,6 +9,5 @@ public class EmptyBooleanException extends Exception{
 	 */
 	public EmptyBooleanException(String path) {
 		super("Couldn't load Boolean in config. Path:" + path);
-		Main.pm.disablePlugin(Main.plugin);
 	}
 }

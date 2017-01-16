@@ -10,6 +10,5 @@ public class EmptyItemStackException extends Exception{
 	 */
 	public EmptyItemStackException(String path) {
 		super("Couldn't load ItemStack in config. Path:" + path);
-		Main.pm.disablePlugin(Main.plugin);
 	}
 }

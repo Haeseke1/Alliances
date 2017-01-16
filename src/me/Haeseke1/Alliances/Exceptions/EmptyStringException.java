@@ -9,7 +9,6 @@ public class EmptyStringException extends Exception {
 	 */
 	public EmptyStringException(String path) {
 		super("Couldn't load String in config. Path:" + path);
-		Main.pm.disablePlugin(Main.plugin);
 	}
 
 }

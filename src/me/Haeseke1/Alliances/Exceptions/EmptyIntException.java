@@ -9,6 +9,5 @@ public class EmptyIntException extends Exception{
 	 */
 	public EmptyIntException(String path) {
 		super("Couldn't load Int in config. Path:" + path);
-		Main.pm.disablePlugin(Main.plugin);
 	}
 }

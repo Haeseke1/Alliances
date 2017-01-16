@@ -26,13 +26,11 @@ public class ChatEvent implements Listener{
 			String name = player.getDisplayName();
 			String _format = format.replace("%alli_name%", alli.getName()).replace("%player_name%", name).replace("%alli_rank%", rank);
 			_format = ChatColor.translateAlternateColorCodes('&', _format);
-			MessageManager.sendInfoMessage(_format);
 			event.setFormat( _format + event.getMessage());
 		}else{
 			String name = player.getDisplayName();
 			String _format = format.replace("%alli_name%", "").replace("%player_name%", name).replace("%alli_rank%", "");
 			_format = ChatColor.translateAlternateColorCodes('&', _format);
-			MessageManager.sendInfoMessage(_format);
 			event.setFormat(_format + event.getMessage());
 		}
 	}

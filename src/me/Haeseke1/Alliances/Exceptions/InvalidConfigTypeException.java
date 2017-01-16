@@ -10,7 +10,6 @@ public class InvalidConfigTypeException extends Exception {
 	 */
 	public InvalidConfigTypeException(String filename) {
 		super(filename + " isn't a valid config file type");
-		Main.pm.disablePlugin(Main.plugin);
 	}
 
 }

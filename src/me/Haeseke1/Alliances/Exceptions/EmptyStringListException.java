@@ -9,6 +9,5 @@ public class EmptyStringListException extends Exception{
 	 */
 	public EmptyStringListException(String path) {
 		super("Couldn't load StringList in config. Path:" + path);
-		Main.pm.disablePlugin(Main.plugin);
 	}
 }
