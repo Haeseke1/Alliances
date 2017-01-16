@@ -1,6 +1,5 @@
 package me.Haeseke1.Alliances.Exceptions;
 
-import me.Haeseke1.Alliances.Main.Main;
 
 @SuppressWarnings("serial")
 public class EmptyLocationException extends Exception{
