@@ -20,7 +20,7 @@ public class mainCreate {
 		if(!AllianceManager.playerIsInAlli(player)){
 			InventoryEvents.createInventory(player);
 		}else{
-			MessageManager.sendAlertMessage(player, "You are already part of a alliance!");
+			MessageManager.sendMessage(player, "You are already part of a alliance!");
 		}
 	}
 

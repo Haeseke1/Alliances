@@ -8,9 +8,9 @@ import java.util.UUID;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Commands.Alli;
-import me.Haeseke1.Alliances.Main.Alliance;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.PlayerManager;
@@ -45,10 +45,10 @@ public class Owner {
 				String name = alli.getName();
 				Main.alliances.remove(alli);
 				alli = null;
-				MessageManager.sendRemarkMessage(player, "You disbanded your alliance!");
-				MessageManager.sendInfoBroadcast("Alliance " + name + "is disbanded!");
+				MessageManager.sendMessage(player, "You disbanded your alliance!");
+				MessageManager.sendBroadcast("Alliance " + name + "is disbanded!");
 			}else{
-				MessageManager.sendAlertMessage(player, "You are not owner of a alliance!");
+				MessageManager.sendMessage(player, "You are not owner of a alliance!");
 			}
 			return;
 		}
@@ -61,21 +61,21 @@ public class Owner {
 			Player player = (Player) sender;
 			if(AllianceManager.playerIsInAlli(player) && (AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId()) || AllianceManager.getAlliance(player).getAdmins().contains(player.getUniqueId()))){
 				if(!PlayerManager.isPlayerOnline(args[2])){
-					MessageManager.sendAlertMessage(player, "This player is not online!");
+					MessageManager.sendMessage(player, "This player is not online!");
 					return;
 				}
 				Player nowner = PlayerManager.getPlayer(args[2]);
 				if(!AllianceManager.getAlliance(player).getMembers().containsKey(nowner.getUniqueId())){
-					MessageManager.sendAlertMessage(player, "This player is not in your alliance!");
+					MessageManager.sendMessage(player, "This player is not in your alliance!");
 					return;
 				}
 				AllianceManager.getAlliance(player).setOwner(nowner.getUniqueId());
-				MessageManager.sendRemarkMessage(player, "Changed ownership succesfully to " + nowner.getName() + "!");
-				MessageManager.sendInfoMessage(nowner, "You are now the owner of " + AllianceManager.getAlliance(player).getName() + "!");
+				MessageManager.sendMessage(player, "Changed ownership succesfully to " + nowner.getName() + "!");
+				MessageManager.sendMessage(nowner, "You are now the owner of " + AllianceManager.getAlliance(player).getName() + "!");
 				AllianceManager.getAlliance(player).sendPlayersInfoMessage("The owner of this alliance is changed to " + nowner.getName() + "!");
 				return;
 			}else{
-				MessageManager.sendAlertMessage(player, "You are not owner/admin of a alliance!");
+				MessageManager.sendMessage(player, "You are not owner/admin of a alliance!");
 			}
 			return;
 		}
@@ -88,21 +88,21 @@ public class Owner {
 			Player player = (Player) sender;
 			if(AllianceManager.playerIsInAlli(player) && (AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId()) || AllianceManager.getAlliance(player).getAdmins().contains(player.getUniqueId()))){
 				if(!PlayerManager.isPlayerOnline(args[2])){
-					MessageManager.sendAlertMessage(player, "This player is not online!");
+					MessageManager.sendMessage(player, "This player is not online!");
 					return;
 				}
 				Player nadmin = PlayerManager.getPlayer(args[2]);
 				if(!AllianceManager.getAlliance(player).getMembers().containsKey(nadmin.getUniqueId())){
-					MessageManager.sendAlertMessage(player, "This player is not in your alliance!");
+					MessageManager.sendMessage(player, "This player is not in your alliance!");
 					return;
 				}
 				AllianceManager.getAlliance(player).addAdmins(nadmin.getUniqueId());
-				MessageManager.sendRemarkMessage(player, "You promoted " + nadmin.getName() + " to admin!");
-				MessageManager.sendInfoMessage(nadmin, "You are now a admin of " + AllianceManager.getAlliance(player).getName() + "!");
+				MessageManager.sendMessage(player, "You promoted " + nadmin.getName() + " to admin!");
+				MessageManager.sendMessage(nadmin, "You are now a admin of " + AllianceManager.getAlliance(player).getName() + "!");
 				AllianceManager.getAlliance(player).sendPlayersInfoMessage(nadmin.getName() + " is promoted to admin!");
 				return;
 			}else{
-				MessageManager.sendAlertMessage(player, "You are not owner/admin of a alliance!");
+				MessageManager.sendMessage(player, "You are not owner/admin of a alliance!");
 			}
 			return;
 		}
@@ -115,23 +115,23 @@ public class Owner {
 			Player player = (Player) sender;
 			if(AllianceManager.playerIsInAlli(player) && (AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId()) || AllianceManager.getAlliance(player).getAdmins().contains(player.getUniqueId()))){
 				if(!PlayerManager.isPlayerOnline(args[2])){
-					MessageManager.sendAlertMessage(player, "This player is not online!");
+					MessageManager.sendMessage(player, "This player is not online!");
 					return;
 				}
 				Player nadmin = PlayerManager.getPlayer(args[2]);
 				if(!AllianceManager.getAlliance(player).getAdmins().contains(nadmin.getUniqueId())){
-					MessageManager.sendAlertMessage(player, "This player is not a admin in your alliance!");
+					MessageManager.sendMessage(player, "This player is not a admin in your alliance!");
 					return;
 				}
 				List<UUID> admins = AllianceManager.getAlliance(player).getAdmins();
 				admins.remove(nadmin.getUniqueId());
 				AllianceManager.getAlliance(player).setAdmins(admins);
-				MessageManager.sendRemarkMessage(player, "You removed " + nadmin.getName() + " from admin!");
-				MessageManager.sendInfoMessage(nadmin, "You are no longer a admin of " + AllianceManager.getAlliance(player).getName() + "!");
+				MessageManager.sendMessage(player, "You removed " + nadmin.getName() + " from admin!");
+				MessageManager.sendMessage(nadmin, "You are no longer a admin of " + AllianceManager.getAlliance(player).getName() + "!");
 				AllianceManager.getAlliance(player).sendPlayersInfoMessage(nadmin.getName() + " is no longer a admin!");
 				return;
 			}else{
-				MessageManager.sendAlertMessage(player, "You are not owner/admin of a alliance!");
+				MessageManager.sendMessage(player, "You are not owner/admin of a alliance!");
 			}
 			return;
 		}
@@ -144,18 +144,18 @@ public class Owner {
 			Player player = (Player) sender;
 			if(AllianceManager.playerIsInAlli(player) && (AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId()) || AllianceManager.getAlliance(player).getAdmins().contains(player.getUniqueId()))){
 				if(!PlayerManager.isPlayerOnline(args[2])){
-					MessageManager.sendAlertMessage(player, "This player is not online!");
+					MessageManager.sendMessage(player, "This player is not online!");
 					return;
 				}
 				Player pinvite = PlayerManager.getPlayer(args[2]);
 				if(AllianceManager.getAlliance(player).getMembers().containsKey(pinvite.getUniqueId())){
-					MessageManager.sendAlertMessage(player, "This person is already in your alliance!");
+					MessageManager.sendMessage(player, "This person is already in your alliance!");
 					return;
 				}
 				if(Alli.invited.containsKey(pinvite)){
 					List<Alliance> allis = Alli.invited.get(pinvite);
 					if(allis.contains(AllianceManager.getAlliance(player))){
-						MessageManager.sendAlertMessage(player, "You already invited this person!");
+						MessageManager.sendMessage(player, "You already invited this person!");
 						return;
 					}
 					allis.add(AllianceManager.getAlliance(player));
@@ -165,11 +165,11 @@ public class Owner {
 					allis.add(AllianceManager.getAlliance(player));
 					Alli.invited.put(pinvite, allis);
 				}
-				MessageManager.sendInfoMessage(pinvite, "You are invited for the alliance " + AllianceManager.getAlliance(player).getName() + "!");
-				MessageManager.sendRemarkMessage(player, "You have invited " + pinvite.getName() + "!");
+				MessageManager.sendMessage(pinvite, "You are invited for the alliance " + AllianceManager.getAlliance(player).getName() + "!");
+				MessageManager.sendMessage(player, "You have invited " + pinvite.getName() + "!");
 				return;
 			}else{
-				MessageManager.sendAlertMessage(player, "You are not owner/admin of a alliance!");
+				MessageManager.sendMessage(player, "You are not owner/admin of a alliance!");
 			}
 			return;
 		}
@@ -182,19 +182,19 @@ public class Owner {
 			Player player = (Player) sender;
 			if(AllianceManager.playerIsInAlli(player) && (AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId()) || AllianceManager.getAlliance(player).getAdmins().contains(player.getUniqueId()))){
 				if(!PlayerManager.isPlayerOnline(args[2])){
-					MessageManager.sendAlertMessage(player, "This player is not online!");
+					MessageManager.sendMessage(player, "This player is not online!");
 					return;
 				}
 				Player cplayer = PlayerManager.getPlayer(args[2]);
 				if(!AllianceManager.getAlliance(player).getMembers().containsKey(cplayer.getUniqueId())){
-					MessageManager.sendAlertMessage(player, "This player is not in your alliance!");
+					MessageManager.sendMessage(player, "This player is not in your alliance!");
 					return;
 				}
 				HashMap<UUID,String> members = AllianceManager.getAlliance(player).getMembers();
 				members.replace(cplayer.getUniqueId(), args[3]);
 				AllianceManager.getAlliance(player).setMembers(members);
-				MessageManager.sendRemarkMessage(player, "The rank is updated!");
-				MessageManager.sendInfoMessage(cplayer, "Your rank has been updated to " + args[3] + "!");
+				MessageManager.sendMessage(player, "The rank is updated!");
+				MessageManager.sendMessage(cplayer, "Your rank has been updated to " + args[3] + "!");
 			}
 		}
 	}

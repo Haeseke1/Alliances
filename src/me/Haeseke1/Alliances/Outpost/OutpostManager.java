@@ -11,10 +11,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
-import me.Haeseke1.Alliances.Main.Alliance;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Outpost.Type.Blacksmith;
 import me.Haeseke1.Alliances.Outpost.Type.Dock;
@@ -294,7 +294,7 @@ public class OutpostManager {
 			for(String s : file.getConfigurationSection("Blacksmith").getKeys(false)){
 				String name = s;
 				Alliance alli = null;
-				if(file.contains("Blacksmith" + s + ".Owner")){
+				if(file.contains("Blacksmith." + s + ".Owner")){
 					try {
 						alli = AllianceManager.getAlliance(ConfigManager.getStringFromConfig(file, "Blacksmith." + s + ".Owner"));
 					} catch (EmptyStringException e) {
@@ -326,7 +326,7 @@ public class OutpostManager {
 			for(String s : file.getConfigurationSection("Dock").getKeys(false)){
 				String name = s;
 				Alliance alli = null;
-				if(file.contains("Dock" + s + ".Owner")){
+				if(file.contains("Dock." + s + ".Owner")){
 					try {
 						alli = AllianceManager.getAlliance(ConfigManager.getStringFromConfig(file, "Dock." + s + ".Owner"));
 					} catch (EmptyStringException e) {

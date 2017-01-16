@@ -27,7 +27,7 @@ public class region {
 			}
 			Player player = (Player) sender;
 			player.getInventory().addItem(regionSelect.createItem());
-			MessageManager.sendRemarkMessage(player, "Tool succesfully created!");
+			MessageManager.sendMessage(player, "Tool succesfully created!");
 			return;
 		}
 	}

@@ -1,4 +1,4 @@
-package me.Haeseke1.Alliances.Main;
+package me.Haeseke1.Alliances.Alliance;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.Haeseke1.Alliances.Alliance.AllianceType;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Alliance {
@@ -89,7 +88,7 @@ public class Alliance {
 	public void sendPlayersAlertMessage(String message){
 		for(Player player : Bukkit.getOnlinePlayers()){
 			if(mMembers.containsKey(player.getUniqueId())){
-				MessageManager.sendAlertMessage(player, message);
+				MessageManager.sendMessage(player, message);
 			}
 		}
 	}
@@ -97,7 +96,7 @@ public class Alliance {
 	public void sendPlayersInfoMessage(String message){
 		for(Player player : Bukkit.getOnlinePlayers()){
 			if(mMembers.containsKey(player.getUniqueId())){
-				MessageManager.sendInfoMessage(player, message);
+				MessageManager.sendMessage(player, message);
 			}
 		}
 	}
@@ -105,7 +104,7 @@ public class Alliance {
 	public void sendPlayersRemarkMessage(String message){
 		for(Player player : Bukkit.getOnlinePlayers()){
 			if(mMembers.containsKey(player.getUniqueId())){
-				MessageManager.sendRemarkMessage(player, message);
+				MessageManager.sendMessage(player, message);
 			}
 		}
 	}

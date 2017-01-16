@@ -14,9 +14,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
-import me.Haeseke1.Alliances.Arena.ArenaEvents;
-import me.Haeseke1.Alliances.Arena.ArenaTimer;
 import me.Haeseke1.Alliances.Challenge.ChallengeManager;
 import me.Haeseke1.Alliances.Challenge.Type.Block_Breaking;
 import me.Haeseke1.Alliances.Challenge.Type.Block_Placing;
@@ -34,9 +33,9 @@ import me.Haeseke1.Alliances.Challenge.Type.Player_Kill;
 import me.Haeseke1.Alliances.Challenge.Type.Time_On;
 import me.Haeseke1.Alliances.Chat.ChatEvent;
 import me.Haeseke1.Alliances.Commands.Alli;
-import me.Haeseke1.Alliances.Commands.Arena.CreateArena.ArenaCreateEvent;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
+import me.Haeseke1.Alliances.Economy.Commands.Coin;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
@@ -63,23 +62,24 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration outpostConfig;
 	public static FileConfiguration challengeConfig;
 	public static FileConfiguration shopConfig;
+	public static FileConfiguration messageConfig;
+	
+	public static Main plugin;
 
 	@SuppressWarnings("static-access")
 	@Override
 	public void onEnable() {
 		this.config = getConfig();
+		this.plugin = this;
 		try {
 			createConfigs();
 		} catch (IOException e) {
 			MessageManager.sendAlertMessage("There was a problem with loading in the config file");
-			pm.disablePlugin(this);
 			e.printStackTrace();
 			return;
 		} catch (InvalidConfigTypeException icte) {
 			icte.printStackTrace();
-			MessageManager.sendAlertMessage(
-					"There was a problem in the code. Ask a dev for more information or download an earlier version of this plugin");
-			pm.disablePlugin(this);
+			MessageManager.sendAlertMessage("There was a problem in the code. Ask a dev for more information or download an earlier version of this plugin");
 			return;
 		}
 		Config.registerConfigFile(this);
@@ -105,14 +105,14 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Outpost.Create.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Join.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Challenges.Player.InventoryEvents(), this);
-		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Arena.CreateSign.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
 		pm.registerEvents(new regionSelect(), this);
 		pm.registerEvents(new ShopEvents(), this);
-		pm.registerEvents(new ArenaEvents(), this);
-		pm.registerEvents(new ArenaCreateEvent(), this);
 		pm.registerEvents(new ChatEvent(), this);
 		
+		/*
+		 * Challenges 
+		 */
 		pm.registerEvents(new Block_Breaking(), this);
 		pm.registerEvents(new Block_Placing(), this);
 		pm.registerEvents(new Distance_Travel(), this);
@@ -130,6 +130,7 @@ public class Main extends JavaPlugin {
 
 	public void registerCommands() {
 		getCommand("Alliances").setExecutor(new Alli());
+		getCommand("Coin").setExecutor(new Coin());
 	}
 	
 	public void registerCustomEntitys(){
@@ -142,7 +143,6 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Timer(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Time_On(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Mob_Killing_Time(), 20, 20);
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ArenaTimer(), 20, 20);
 		java.util.Timer timer = new java.util.Timer();
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);
@@ -160,10 +160,12 @@ public class Main extends JavaPlugin {
 		outpostConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "outpost.yml"), this);
 		challengeConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "challenges.yml"), this);
 		shopConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "shop.yml"), this);
+		messageConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "messages.yml"), this);
 		AllianceManager.registerAlliance();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();
 		ShopManager.registerShops();
+		MessageManager.registerMessages();
 	}
 
 	public void saveAllCustomConfigs() {

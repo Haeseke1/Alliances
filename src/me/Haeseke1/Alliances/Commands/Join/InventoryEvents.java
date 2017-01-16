@@ -13,9 +13,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Alliance.AllianceType;
-import me.Haeseke1.Alliances.Main.Alliance;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
 
@@ -47,9 +47,9 @@ public class InventoryEvents implements Listener{
 					if(AllianceManager.alliExist(ChatColor.stripColor(event.getCurrentItem().getItemMeta().getDisplayName()))){
 						Alliance alli = AllianceManager.getAlliance(ChatColor.stripColor(event.getCurrentItem().getItemMeta().getDisplayName()));
 						alli.addMember(player.getUniqueId());
-						MessageManager.sendRemarkMessage(player, "You are member of the alliance " + alli.getName() + "!");
+						MessageManager.sendMessage(player, "You are member of the alliance " + alli.getName() + "!");
 					}else{
-						MessageManager.sendAlertMessage(player, "Something went wrong, the alliance does not exist anymore!");
+						MessageManager.sendMessage(player, "Something went wrong, the alliance does not exist anymore!");
 					}
 				}
 				player.closeInventory();

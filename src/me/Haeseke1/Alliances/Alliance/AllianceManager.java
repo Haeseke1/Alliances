@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringListException;
-import me.Haeseke1.Alliances.Main.Alliance;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -30,10 +29,10 @@ public class AllianceManager {
 				alliance.getMembers().put(owner.getUniqueId(), "Owner");
 				return true;
 			}
-			MessageManager.sendAlertMessage(owner, "Alliance already exist.");
+			MessageManager.sendMessage(owner, "Alliance already exist.");
 			return false;
 		}
-		MessageManager.sendAlertMessage(owner, "You're already in an alliance.");
+		MessageManager.sendMessage(owner, "You're already in an alliance.");
 		return false;
 	}
 	

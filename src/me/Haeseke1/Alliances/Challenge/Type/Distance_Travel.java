@@ -23,7 +23,7 @@ public class Distance_Travel implements Listener{
 						challenge.points.replace(player.getUniqueId(), challenge.points.get(player.getUniqueId()) + event.getFrom().distance(event.getTo()));
 						if(challenge.points.get(player.getUniqueId()) >= challenge.max_Points){
 							Coins.addPlayerCoins(player, challenge.reward);
-							MessageManager.sendInfoMessage(player, "Challenge " + challenge.name + " is completed, your reward is " + challenge.reward + " coins!");
+							MessageManager.sendMessage(player, "Challenge " + challenge.name + " is completed, your reward is " + challenge.reward + " coins!");
 							challenge.done.add(player.getUniqueId());
 							return;
 						}

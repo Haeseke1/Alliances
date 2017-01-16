@@ -1,0 +1,15 @@
+Command_Error_Not_A_User: "&4&lyou need to be a player to do this command!"
+Command_Error_Wrong_Arguments: "&4&lWrong arguments! use /alliance for more information!"
+
+#Can use %sender_coin%, %target_coin%, %coin%, %sender_name% and %target_name% as variables
+Command_Coin_Balance_Answer: "Balance: %sender_coin%"
+Command_Coin_Balance_Other_Answer: "Balance: %target_coin%"
+
+Command_Coin_Add_Answer: "Succesfully added coins! New balance: %target_coin%"
+
+Command_Coin_Set_Answer: "Succesfully set coins for %player_name%! New balance: %target_coin%"
+
+Command_Coin_Pay_Answer: "Succesfully payed coins! Your new balance: %sender_coin%"
+Command_Coin_Pay_Not_Enough_Coins: "You don't have enough coins!"
+
+Command_Coin_Get_Answer: "%sender_name% gave you %coin% coins!"

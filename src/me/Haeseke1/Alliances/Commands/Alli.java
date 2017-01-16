@@ -8,10 +8,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Commands.Admin.Admin;
-import me.Haeseke1.Alliances.Commands.Arena.Arena;
 import me.Haeseke1.Alliances.Commands.Challenges.mainChallenges;
-import me.Haeseke1.Alliances.Commands.Coin.Coin;
 import me.Haeseke1.Alliances.Commands.Create.mainCreate;
 import me.Haeseke1.Alliances.Commands.Join.mainJoin;
 import me.Haeseke1.Alliances.Commands.Member.Member;
@@ -19,7 +18,6 @@ import me.Haeseke1.Alliances.Commands.Outpost.Outpost;
 import me.Haeseke1.Alliances.Commands.Owner.Owner;
 import me.Haeseke1.Alliances.Commands.Region.region;
 import me.Haeseke1.Alliances.Commands.Shop.mainShop;
-import me.Haeseke1.Alliances.Main.Alliance;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Alli implements CommandExecutor {
@@ -40,11 +38,6 @@ public class Alli implements CommandExecutor {
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances admin #Get a list of commands for a owner");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances shop #Get a list of commands for shops");
 			return false;
-		}
-
-		if (args[0].equalsIgnoreCase("coin")) {
-			Coin.onCommand(sender, args);
-			return true;
 		}
 		
 		if(args[0].equalsIgnoreCase("create")){
@@ -91,14 +84,10 @@ public class Alli implements CommandExecutor {
 			mainChallenges.onCommand(sender, args);
 			return true;
 		}
-		
-		if(args[0].equalsIgnoreCase("arena")){
-			Arena.onCommand(sender, args);
-			return true;
-		}
+	
 		
 		
-		MessageManager.sendAlertMessage((Player) sender, "Unknown command use /alliances for more help!");
+		MessageManager.sendMessage((Player) sender, "Unknown command use /alliances for more help!");
 		return false;
 	}
 

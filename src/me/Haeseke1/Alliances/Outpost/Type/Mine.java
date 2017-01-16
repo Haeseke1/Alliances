@@ -12,8 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
-import me.Haeseke1.Alliances.Main.Alliance;
 import me.Haeseke1.Alliances.Outpost.Timer;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -130,31 +130,31 @@ public class Mine {
 			int n4 = Timer.take_overTime;
 
 			if(time_taking_over == 0){
-				MessageManager.sendInfoBroadcast(taking_over.getName() + " is taking over a outpost called " + name + " (0%)");
+				MessageManager.sendBroadcast(taking_over.getName() + " is taking over a outpost called " + name + " (0%)");
 				if(owner != null){
 					owner.sendPlayersAlertMessage("You are losing your outpost called " + name + "!"); 
 				}
 			}
 			if(time_taking_over == n1){
-				MessageManager.sendInfoBroadcast(taking_over.getName() + " is taking over a outpost called " + name + " (25%)");
+				MessageManager.sendBroadcast(taking_over.getName() + " is taking over a outpost called " + name + " (25%)");
 				if(owner != null){
 					owner.sendPlayersAlertMessage("You are losing your outpost called " + name + "!"); 
 				}
 			}
 			if(time_taking_over == n2){
-				MessageManager.sendInfoBroadcast(taking_over.getName() + " is taking over a outpost called " + name + " (50%)");
+				MessageManager.sendBroadcast(taking_over.getName() + " is taking over a outpost called " + name + " (50%)");
 				if(owner != null){
 					owner.sendPlayersAlertMessage("You are losing your outpost called " + name + "!"); 
 				}
 			}
 			if(time_taking_over == n3){
-				MessageManager.sendInfoBroadcast(taking_over.getName() + " is taking over a outpost called " + name + " (75%)");
+				MessageManager.sendBroadcast(taking_over.getName() + " is taking over a outpost called " + name + " (75%)");
 				if(owner != null){
 					owner.sendPlayersAlertMessage("You are losing your outpost called " + name + "!"); 
 				}
 			}
 			if(time_taking_over == n4){
-				MessageManager.sendInfoBroadcast(taking_over.getName() + " has taken over a outpost called " + name + " (100%)");
+				MessageManager.sendBroadcast(taking_over.getName() + " has taken over a outpost called " + name + " (100%)");
 				if(owner != null){
 					owner.sendPlayersAlertMessage("You lost outpost " + name + "!"); 
 				}

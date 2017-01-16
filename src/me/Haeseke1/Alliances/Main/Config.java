@@ -15,6 +15,7 @@ import me.Haeseke1.Alliances.Alliance.Type.Salamander;
 import me.Haeseke1.Alliances.Alliance.Type.Spriggan;
 import me.Haeseke1.Alliances.Alliance.Type.Sylph;
 import me.Haeseke1.Alliances.Alliance.Type.Undine;
+import me.Haeseke1.Alliances.Chat.ChatEvent;
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyItemStackException;
@@ -34,6 +35,7 @@ public class Config {
 	
 	public static void registerConfigFile(Main main) {
 		main.reloadConfig();
+		
 		try {
 			Main.cmdlogo = MessageManager.translateColorCode(ConfigManager.getStringFromConfig(Main.config, "Logo"));
 		} catch (EmptyStringException e) {
@@ -41,6 +43,7 @@ public class Config {
 			Main.pm.disablePlugin(main);
 			return;
 		}
+		
 		try {
 			MessageManager.alertColorCode = MessageManager
 					.translateColorCode(ConfigManager.getStringFromConfig(Main.config, "ColorCodes.alertMessages"));
@@ -48,11 +51,12 @@ public class Config {
 					.translateColorCode(ConfigManager.getStringFromConfig(Main.config, "ColorCodes.infoMessages"));
 			MessageManager.remarkColorCode = MessageManager
 					.translateColorCode(ConfigManager.getStringFromConfig(Main.config, "ColorCodes.remarkMessages"));
+			ChatEvent.format = ConfigManager.getStringFromConfig(Main.config, "Chat.Message");
 		} catch (EmptyStringException e) {
 			e.printStackTrace();
 			Main.pm.disablePlugin(main);
 		}
-
+		
 		try {
 			Coins.defaultCoins = ConfigManager.getIntFromConfig(Main.config, "Coins.StarterCoins");
 			Caith_Sith.cost = ConfigManager.getIntFromConfig(Main.config, "Coins.AllianceTypes.Cait Sith");
@@ -131,7 +135,7 @@ public class Config {
 			i++;
 		}
 		
-		config.set("Outpost.Rewards.Dock.", null);
+		config.set("Outpost.Rewards.Dock", null);
 		i = 0;
 		for(Entry<ItemStack,Integer> entry : Dock.rewards.entrySet()){
 			ConfigManager.setItemStackInConfig(config, "Outpost.Rewards.Dock." + i, entry.getKey());

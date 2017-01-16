@@ -20,7 +20,7 @@ public class outpostCreate {
 		if(regionSelect.leftClick.containsKey(player) && regionSelect.rightClick.containsKey(player)){
 			InventoryEvents.createInventory(player);
 		}else{
-			MessageManager.sendAlertMessage(player, "Select a region first!");
+			MessageManager.sendMessage(player, "Select a region first!");
 		}
 	}
 

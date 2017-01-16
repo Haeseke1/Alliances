@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Commands.Alli;
-import me.Haeseke1.Alliances.Main.Alliance;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class mainJoin {
@@ -19,7 +19,7 @@ public class mainJoin {
 		}
 		Player player = (Player) sender;
 		if(AllianceManager.playerIsInAlli(player)){
-			MessageManager.sendAlertMessage(player, "You are already in a alliance!");
+			MessageManager.sendMessage(player, "You are already in a alliance!");
 			return;
 		}
 		if(!Alli.invited.containsKey(player)){

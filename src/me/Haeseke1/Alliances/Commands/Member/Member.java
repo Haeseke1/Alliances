@@ -7,8 +7,8 @@ import java.util.UUID;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
-import me.Haeseke1.Alliances.Main.Alliance;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Member {
@@ -33,7 +33,7 @@ public class Member {
 			Player player = (Player) sender;
 			if(AllianceManager.playerIsInAlli(player)){
 				if(AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId())){
-					MessageManager.sendAlertMessage(player,"You cannot leave the faction, when you are the owner!");
+					MessageManager.sendMessage(player,"You cannot leave the faction, when you are the owner!");
 					return;
 				}
 				Alliance alli = AllianceManager.getAlliance(player);
@@ -44,10 +44,10 @@ public class Member {
 					admins.remove(player.getUniqueId());
 					alli.setAdmins(admins);
 				}
-				MessageManager.sendRemarkMessage(player, "You left your alliance!");
+				MessageManager.sendMessage(player, "You left your alliance!");
 				alli.sendPlayersInfoMessage(player.getName() + " left the alliance!");
 			}else{
-				MessageManager.sendAlertMessage(player, "You are not in a alliance!");
+				MessageManager.sendMessage(player, "You are not in a alliance!");
 			}
 			return;
 		}
