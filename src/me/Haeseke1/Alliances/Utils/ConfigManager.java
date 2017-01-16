@@ -135,7 +135,7 @@ public class ConfigManager {
 		Reader defConfigStream;
 		try {
 			defConfigStream = new InputStreamReader(main.getResource(f.getName()), "UTF8");
-		    if (defConfigStream != null) {
+			if (defConfigStream != null) {
 		        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 		        file.setDefaults(defConfig);
 		    }

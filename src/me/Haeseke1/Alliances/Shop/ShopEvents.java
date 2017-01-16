@@ -74,7 +74,6 @@ public class ShopEvents implements Listener{
 			}
 		}
 	}
-	
 	@EventHandler
 	private void onPlayerInteract(PlayerInteractEntityEvent event){
 		if(!(event.getRightClicked() instanceof Villager)){

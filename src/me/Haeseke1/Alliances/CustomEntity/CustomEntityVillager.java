@@ -38,7 +38,6 @@ public class CustomEntityVillager extends EntityVillager{
 	public static Villager spawn(Location location){
 		World mcWorld = (World) ((CraftWorld) location.getWorld()).getHandle();
 		final CustomEntityVillager customEntity = new CustomEntityVillager(mcWorld);
-		
 		customEntity.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
 		((CraftLivingEntity) customEntity.getBukkitEntity()).setRemoveWhenFarAway(false);
 		mcWorld.addEntity(customEntity, SpawnReason.CUSTOM);
