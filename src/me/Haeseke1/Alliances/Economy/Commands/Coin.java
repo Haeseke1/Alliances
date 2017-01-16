@@ -25,14 +25,14 @@ public class Coin implements CommandExecutor{
 
 		if (args[0].equalsIgnoreCase("balance")) {
 			if (args.length > 1) {
-				MessageManager.sendRemarkMessage((Player) sender, "Balance: " + Coins.getPlayerCoins(args[1]));
+				MessageManager.sendMessage((Player) sender, "Balance: " + Coins.getPlayerCoins(args[1]));
 				return false;
 			} else {
 				if (!(sender instanceof Player)) {
-					MessageManager.sendAlertMessage((Player) sender, "You need to be a player to do this command!");
+					MessageManager.sendMessage((Player) sender, "You need to be a player to do this command!");
 				}
 				Player player = (Player) sender;
-				MessageManager.sendRemarkMessage(player, "Balance: " + Coins.getPlayerCoins(player));
+				MessageManager.sendMessage(player, "Balance: " + Coins.getPlayerCoins(player));
 			}
 			return false;
 		}
@@ -40,16 +40,16 @@ public class Coin implements CommandExecutor{
 		
 		if (args[0].equalsIgnoreCase("add")) {
 			if (args.length < 3) {
-				MessageManager.sendAlertMessage((Player) sender, "Not enough arguments! Use /alliance coin for more information!");
+				MessageManager.sendMessage((Player) sender, "Not enough arguments! Use /alliance coin for more information!");
 				return false;
 			} else {
 				try {
 					Coins.addPlayerCoins(args[1], Integer.parseInt(args[2]));
 				} catch (Exception e) {
-					MessageManager.sendAlertMessage((Player) sender, "Given arguments are not correct!");
+					MessageManager.sendMessage((Player) sender, "Given arguments are not correct!");
 					return false;
 				}
-				MessageManager.sendRemarkMessage((Player) sender,
+				MessageManager.sendMessage((Player) sender,
 						"Succesfully added coins! New balance: " + Coins.getPlayerCoins(args[1]));
 			}
 			return false;
@@ -57,16 +57,16 @@ public class Coin implements CommandExecutor{
 		
 		if (args[0].equalsIgnoreCase("set")) {
 			if (args.length < 3) {
-				MessageManager.sendAlertMessage((Player) sender, "Not enough arguments! Use /coin for more information!");
+				MessageManager.sendMessage((Player) sender, "Not enough arguments! Use /coin for more information!");
 				return false;
 			} else {
 				try {
 					Coins.setPlayerCoins(args[1], Integer.parseInt(args[2]));
 				} catch (Exception e) {
-					MessageManager.sendAlertMessage((Player) sender, "Given arguments are not correct!");
+					MessageManager.sendMessage((Player) sender, "Given arguments are not correct!");
 					return false;
 				}
-				MessageManager.sendRemarkMessage((Player) sender,
+				MessageManager.sendMessage((Player) sender,
 						"Succesfully added coins! New balance: " + Coins.getPlayerCoins(args[1]));
 			}
 			return false;
@@ -74,33 +74,33 @@ public class Coin implements CommandExecutor{
 		
 		if (args[0].equalsIgnoreCase("pay")) {
 			if (args.length < 3) {
-				MessageManager.sendAlertMessage((Player) sender, "Not enough arguments! Use /alliance coin for more information!");
+				MessageManager.sendMessage((Player) sender, "Not enough arguments! Use /alliance coin for more information!");
 				return false;
 			} else {
 				if (!(sender instanceof Player)) {
-					MessageManager.sendAlertMessage((Player) sender, "You need to be a player to do this command!");
+					MessageManager.sendMessage((Player) sender, "You need to be a player to do this command!");
 					return false;
 				}
 				Player player = (Player) sender;
 				try {
 					if (Coins.removePlayerCoins(player, Integer.parseInt(args[2]))) {
 						Coins.addPlayerCoins(args[1], Integer.parseInt(args[2]));
-						MessageManager.sendRemarkMessage((Player) sender, "Succesfully payed coins! Your new balance: " + Coins.getPlayerCoins(player));
+						MessageManager.sendMessage((Player) sender, "Succesfully payed coins! Your new balance: " + Coins.getPlayerCoins(player));
 						if(PlayerManager.isPlayerOnline(args[1])){
-							MessageManager.sendRemarkMessage(PlayerManager.getPlayer(args[1]),  sender.getName() + " gave you " + Integer.parseInt(args[2]) + " coins!");
+							MessageManager.sendMessage(PlayerManager.getPlayer(args[1]),  sender.getName() + " gave you " + Integer.parseInt(args[2]) + " coins!");
 						}
 						return false;
 					} else {
-						MessageManager.sendAlertMessage((Player) sender, "You don't have enough coins!");
+						MessageManager.sendMessage((Player) sender, "You don't have enough coins!");
 						return false;
 					}
 				} catch (Exception e) {
-					MessageManager.sendAlertMessage((Player) sender, "Given arguments are not correct!");
+					MessageManager.sendMessage((Player) sender, "Given arguments are not correct!");
 					return false;
 				}
 			}
 		}
-		MessageManager.sendAlertMessage((Player) sender, "Wrong arguments! use /coin for more information!");
+		MessageManager.sendMessage((Player) sender, "Wrong arguments! use /coin for more information!");
 		return false;
 	}
 

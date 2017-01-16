@@ -19,7 +19,7 @@ public class mainJoin {
 		}
 		Player player = (Player) sender;
 		if(AllianceManager.playerIsInAlli(player)){
-			MessageManager.sendAlertMessage(player, "You are already in a alliance!");
+			MessageManager.sendMessage(player, "You are already in a alliance!");
 			return;
 		}
 		if(!Alli.invited.containsKey(player)){

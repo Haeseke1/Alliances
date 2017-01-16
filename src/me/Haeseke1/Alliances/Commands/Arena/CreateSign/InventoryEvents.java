@@ -37,7 +37,7 @@ public class InventoryEvents implements Listener{
 				case "1V1":
 					new Arena_Sign(mainCreateArenaSign.createArena_Sign.get(player), Fight_Type.ONE_V_ONE , mainCreateArenaSign.createArena_SignC.get(player));
 					player.closeInventory();
-					MessageManager.sendRemarkMessage(player, "Sign is created!");
+					MessageManager.sendMessage(player, "Sign is created!");
 					break;
 				default:
 					break;

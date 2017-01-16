@@ -27,14 +27,14 @@ public class mainCreateArena {
 		if(regionSelect.leftClick.containsKey(player) && regionSelect.rightClick.containsKey(player)){
 			InventoryEvents.createInventory(player);
 		}else{
-			MessageManager.sendAlertMessage(player, "Select a region first!");
+			MessageManager.sendMessage(player, "Select a region first!");
 		}
 		
 		ItemStack item = new ItemStack(Material.WOOD_HOE);
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.GOLD + "Arena selector");
 		item.setItemMeta(im);
-		MessageManager.sendInfoMessage(player, "Select first teamspawn!");
+		MessageManager.sendMessage(player, "Select first teamspawn!");
 		createArena.put(player, args[2]);
 	}
 	

@@ -92,7 +92,7 @@ public class Alli implements CommandExecutor {
 		}
 		
 		
-		MessageManager.sendAlertMessage((Player) sender, "Unknown command use /alliances for more help!");
+		MessageManager.sendMessage((Player) sender, "Unknown command use /alliances for more help!");
 		return false;
 	}
 

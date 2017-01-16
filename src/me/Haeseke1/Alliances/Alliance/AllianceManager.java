@@ -29,10 +29,10 @@ public class AllianceManager {
 				alliance.getMembers().put(owner.getUniqueId(), "Owner");
 				return true;
 			}
-			MessageManager.sendAlertMessage(owner, "Alliance already exist.");
+			MessageManager.sendMessage(owner, "Alliance already exist.");
 			return false;
 		}
-		MessageManager.sendAlertMessage(owner, "You're already in an alliance.");
+		MessageManager.sendMessage(owner, "You're already in an alliance.");
 		return false;
 	}
 	

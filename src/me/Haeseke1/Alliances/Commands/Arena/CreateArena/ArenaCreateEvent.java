@@ -31,18 +31,18 @@ public class ArenaCreateEvent implements Listener{
 				if(event.getItem().getItemMeta().hasDisplayName() && event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Arena selector")){
 					if(!spawn1.containsKey(player) && mainCreateArena.createArena.containsKey(player)){
 						spawn1.put(player, event.getClickedBlock().getLocation().add(0, 1, 0));
-						MessageManager.sendInfoMessage(player, "Select second teamspawn!");
+						MessageManager.sendMessage(player, "Select second teamspawn!");
 						return;
 					}
 					if(!spawn2.containsKey(player) && mainCreateArena.createArena.containsKey(player)){
 						spawn2.put(player, event.getClickedBlock().getLocation().add(0, 1, 0));
-						MessageManager.sendInfoMessage(player, "Select observation room spawn!");
+						MessageManager.sendMessage(player, "Select observation room spawn!");
 						return;
 					}
 					if(mainCreateArena.createArena.containsKey(player)){
 						player.setItemInHand(new ItemStack(Material.AIR));
 						new Arena(mainCreateArena.createArena.get(player),regionSelect.leftClick.get(player), regionSelect.rightClick.get(player),spawn1.get(player), spawn2.get(player), event.getClickedBlock().getLocation().add(0, 1, 0));
-						MessageManager.sendRemarkMessage(player, "Arena created!");
+						MessageManager.sendMessage(player, "Arena created!");
 					}
 				}
 			}

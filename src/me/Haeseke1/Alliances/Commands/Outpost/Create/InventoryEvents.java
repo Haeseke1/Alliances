@@ -49,37 +49,37 @@ public class InventoryEvents implements Listener{
 				switch(event.getCurrentItem().getType()){
 				case DIAMOND_SWORD:
 					chooseName.put(player, OutpostType.BLACKSMITH);
-					MessageManager.sendRemarkMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
 					player.closeInventory();
 					break;
 				case FISHING_ROD:
 					chooseName.put(player, OutpostType.DOCK);
-					MessageManager.sendRemarkMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
 					player.closeInventory();
 					break;
 				case WHEAT:
 					chooseName.put(player, OutpostType.FARM);
-					MessageManager.sendRemarkMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
 					player.closeInventory();
 					break;
 				case GOLDEN_APPLE:
 					chooseName.put(player, OutpostType.GOD);
-					MessageManager.sendRemarkMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
 					player.closeInventory();
 					break;
 				case BLAZE_ROD:
 					chooseName.put(player, OutpostType.MAGIC_TOWER);
-					MessageManager.sendRemarkMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
 					player.closeInventory();
 					break;
 				case DIAMOND_PICKAXE:
 					chooseName.put(player, OutpostType.MINE);
-					MessageManager.sendRemarkMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
 					player.closeInventory();
 					break;
 				case BONE:
 					chooseName.put(player, OutpostType.MOB_FARM);
-					MessageManager.sendRemarkMessage(player, "Type the name of the outpost in the chat!");
+					MessageManager.sendMessage(player, "Type the name of the outpost in the chat!");
 					player.closeInventory();
 					break;
 				default:
@@ -96,7 +96,7 @@ public class InventoryEvents implements Listener{
 			event.setCancelled(true);
 			Player player = event.getPlayer();
 			if(!OutpostManager.checkLocation(regionSelect.leftClick.get(player), regionSelect.rightClick.get(player))){
-				MessageManager.sendAlertMessage(player, "You are trying to construct a outpost on a existing outpost!");
+				MessageManager.sendMessage(player, "You are trying to construct a outpost on a existing outpost!");
 				return;
 			}
 			switch(chooseName.get(event.getPlayer())){
@@ -123,7 +123,7 @@ public class InventoryEvents implements Listener{
 				break;
 			}
 			chooseName.remove(event.getPlayer());
-			MessageManager.sendRemarkMessage(player, "Outpost constructed!");
+			MessageManager.sendMessage(player, "Outpost constructed!");
 		}
 	}
 }

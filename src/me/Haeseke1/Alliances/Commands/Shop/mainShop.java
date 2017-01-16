@@ -25,7 +25,7 @@ public class mainShop {
 		
 		if(args[1].equalsIgnoreCase("create") && args.length >= 3){
 			new Shop(args[2], new ArrayList<SItem>(), new ArrayList<Location>());
-			MessageManager.sendRemarkMessage((Player) sender, "Shop created with name: " + args[2]);
+			MessageManager.sendMessage((Player) sender, "Shop created with name: " + args[2]);
 			return;
 		}
 		
@@ -43,7 +43,7 @@ public class mainShop {
 				}
 			}
 			if(s == null){
-				MessageManager.sendAlertMessage(player, "This shop does not exist!");
+				MessageManager.sendMessage(player, "This shop does not exist!");
 				return;
 			}
 			boolean buy = Boolean.parseBoolean(args[3]);
@@ -54,12 +54,12 @@ public class mainShop {
 				buyV = Integer.parseInt(args[5]);
 				sellV = Integer.parseInt(args[6]);
 			}catch(Exception e){
-				MessageManager.sendAlertMessage(player, "Wrong arguments, not a number!");
+				MessageManager.sendMessage(player, "Wrong arguments, not a number!");
 				return;
 			}
 			SItem sitem = new SItem(player.getItemInHand(), buy, sell, buyV, sellV);
 			s.addSItem(sitem);
-			MessageManager.sendRemarkMessage((Player) sender, "Item added to the shop");
+			MessageManager.sendMessage((Player) sender, "Item added to the shop");
 			return;
 		}
 		
@@ -76,11 +76,11 @@ public class mainShop {
 				}
 			}
 			if(s == null){
-				MessageManager.sendAlertMessage(player, "This shop does not exist!");
+				MessageManager.sendMessage(player, "This shop does not exist!");
 				return;
 			}
 			s.addVendor(player.getLocation());
-			MessageManager.sendRemarkMessage((Player) sender, "added location to shop");
+			MessageManager.sendMessage((Player) sender, "added location to shop");
 			return;
 		}
 	}

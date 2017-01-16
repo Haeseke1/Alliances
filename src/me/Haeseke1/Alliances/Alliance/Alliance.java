@@ -88,7 +88,7 @@ public class Alliance {
 	public void sendPlayersAlertMessage(String message){
 		for(Player player : Bukkit.getOnlinePlayers()){
 			if(mMembers.containsKey(player.getUniqueId())){
-				MessageManager.sendAlertMessage(player, message);
+				MessageManager.sendMessage(player, message);
 			}
 		}
 	}
@@ -96,7 +96,7 @@ public class Alliance {
 	public void sendPlayersInfoMessage(String message){
 		for(Player player : Bukkit.getOnlinePlayers()){
 			if(mMembers.containsKey(player.getUniqueId())){
-				MessageManager.sendInfoMessage(player, message);
+				MessageManager.sendMessage(player, message);
 			}
 		}
 	}
@@ -104,7 +104,7 @@ public class Alliance {
 	public void sendPlayersRemarkMessage(String message){
 		for(Player player : Bukkit.getOnlinePlayers()){
 			if(mMembers.containsKey(player.getUniqueId())){
-				MessageManager.sendRemarkMessage(player, message);
+				MessageManager.sendMessage(player, message);
 			}
 		}
 	}

@@ -54,81 +54,81 @@ public class InventoryEvents implements Listener{
 				case MONSTER_EGG:
 					if(Coins.getPlayerCoins(player) >= Caith_Sith.cost){
 						chooseName.put(player, AllianceType.CAIT_SITH);
-						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
+						MessageManager.sendMessage(player, "Type your name of your alliance in the chat!");
 					}else{
-						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+						MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					}
 					player.closeInventory();
 					break;
 				case DIRT:
 					if(Coins.getPlayerCoins(player) >= Gnome.cost){
 						chooseName.put(player, AllianceType.GNOME);
-						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
+						MessageManager.sendMessage(player, "Type your name of your alliance in the chat!");
 					}else{
-						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+						MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					}
 					player.closeInventory();
 					break;
 				case EYE_OF_ENDER:
 					if(Coins.getPlayerCoins(player) >= Imp.cost){
 						chooseName.put(player, AllianceType.IMP);
-						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
+						MessageManager.sendMessage(player, "Type your name of your alliance in the chat!");
 					}else{
-						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+						MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					}
 					player.closeInventory();
 					break;
 				case REDSTONE_TORCH_ON:
 					if(Coins.getPlayerCoins(player) >= Leprechaun.cost){
 						chooseName.put(player, AllianceType.LEPRECHAUN);
-						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
+						MessageManager.sendMessage(player, "Type your name of your alliance in the chat!");
 					}else{
-						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+						MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					}
 					player.closeInventory();
 					break;
 				case BLAZE_ROD:
 					if(Coins.getPlayerCoins(player) >= Pooka.cost){
 						chooseName.put(player, AllianceType.POOKA);
-						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
+						MessageManager.sendMessage(player, "Type your name of your alliance in the chat!");
 					}else{
-						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+						MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					}
 					player.closeInventory();
 					break;
 				case FIREBALL:
 					if(Coins.getPlayerCoins(player) >= Salamander.cost){
 						chooseName.put(player, AllianceType.SALAMANDER);
-						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
+						MessageManager.sendMessage(player, "Type your name of your alliance in the chat!");
 					}else{
-						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+						MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					}
 					player.closeInventory();
 					break;
 				case DIAMOND_BLOCK:
 					if(Coins.getPlayerCoins(player) >= Spriggan.cost){
 						chooseName.put(player, AllianceType.SPRIGGAN);
-						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
+						MessageManager.sendMessage(player, "Type your name of your alliance in the chat!");
 					}else{
-						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+						MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					}
 					player.closeInventory();
 					break;
 				case FEATHER:
 					if(Coins.getPlayerCoins(player) >= Sylph.cost){
 						chooseName.put(player, AllianceType.SYLPH);
-						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
+						MessageManager.sendMessage(player, "Type your name of your alliance in the chat!");
 					}else{
-						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+						MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					}
 					player.closeInventory();
 					break;
 				case GOLDEN_APPLE:
 					if(Coins.getPlayerCoins(player) >= Undine.cost){
 						chooseName.put(player, AllianceType.UNDINE);
-						MessageManager.sendRemarkMessage(player, "Type your name of your alliance in the chat!");
+						MessageManager.sendMessage(player, "Type your name of your alliance in the chat!");
 					}else{
-						MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+						MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					}
 					player.closeInventory();
 					break;
@@ -147,63 +147,63 @@ public class InventoryEvents implements Listener{
 			switch(chooseName.get(event.getPlayer())){
 			case CAIT_SITH:
 				if(Coins.getPlayerCoins(player) < Caith_Sith.cost){
-					MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+					MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case GNOME:
 				if(Coins.getPlayerCoins(player) < Gnome.cost){
-					MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+					MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case IMP:
 				if(Coins.getPlayerCoins(player) < Imp.cost){
-					MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+					MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case LEPRECHAUN:
 				if(Coins.getPlayerCoins(player) < Leprechaun.cost){
-					MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+					MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case POOKA:
 				if(Coins.getPlayerCoins(player) < Pooka.cost){
-					MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+					MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case SALAMANDER:
 				if(Coins.getPlayerCoins(player) < Salamander.cost){
-					MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+					MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case SPRIGGAN:
 				if(Coins.getPlayerCoins(player) < Spriggan.cost){
-					MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+					MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case SYLPH:
 				if(Coins.getPlayerCoins(player) < Sylph.cost){
-					MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+					MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case UNDINE:
 				if(Coins.getPlayerCoins(player) < Undine.cost){
-					MessageManager.sendAlertMessage(player, "You don't have enough coins for this alliance!");
+					MessageManager.sendMessage(player, "You don't have enough coins for this alliance!");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
@@ -212,8 +212,8 @@ public class InventoryEvents implements Listener{
 			if(AllianceManager.createNewAlliance(event.getMessage(), player, chooseName.get(player))){
 				event.setCancelled(true);
 				chooseName.remove(player);
-				MessageManager.sendRemarkMessage(player, "Congratulations, the alliance " + event.getMessage() + " is created!");
-				MessageManager.sendInfoBroadcast("The alliance " + event.getMessage() + " is created! the owner is " + player.getName() + "!");
+				MessageManager.sendMessage(player, "Congratulations, the alliance " + event.getMessage() + " is created!");
+				MessageManager.sendBroadcast("The alliance " + event.getMessage() + " is created! the owner is " + player.getName() + "!");
 			}
 		}
 	}

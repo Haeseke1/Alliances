@@ -70,17 +70,17 @@ public class ArenaEvents implements Listener {
 					if(as.isInQueue(player)){
 						as.removePlayer(player);
 						Coins.addPlayerCoins(player, as.Coins);
-						MessageManager.sendInfoMessage(player, "You left the queue!");
+						MessageManager.sendMessage(player, "You left the queue!");
 					}else{
 						if(Coins.getPlayerCoins(player) < as.Coins){
-							MessageManager.sendAlertMessage(player,"You don't have enough money!");
+							MessageManager.sendMessage(player,"You don't have enough money!");
 							return;
 						}
 						if(as.addPlayer(player)){
 							Coins.removePlayerCoins(player, as.Coins);
-							MessageManager.sendInfoMessage(player,"You entered the queue!");
+							MessageManager.sendMessage(player,"You entered the queue!");
 						}else{
-							MessageManager.sendAlertMessage(player,"The queue is full!");
+							MessageManager.sendMessage(player,"The queue is full!");
 						}
 					}
 				}
@@ -109,12 +109,12 @@ public class ArenaEvents implements Listener {
 	private void onBlockBreak(BlockBreakEvent event){
 		if(ArenaManager.checkLocation(event.getBlock().getLocation())){
 			event.setCancelled(true);
-			MessageManager.sendAlertMessage(event.getPlayer(), "You cannot break blocks from a arena");
+			MessageManager.sendMessage(event.getPlayer(), "You cannot break blocks from a arena");
 		}
 		for(Sign sign : Arena_Sign.signs){
 			if(LocationManager.checkCoordinates(event.getBlock().getLocation(), sign.getBlock().getLocation())){
 				event.setCancelled(true);
-				MessageManager.sendAlertMessage(event.getPlayer(), "You cannot break this sign!");
+				MessageManager.sendMessage(event.getPlayer(), "You cannot break this sign!");
 			}
 		}
 	}
@@ -123,7 +123,7 @@ public class ArenaEvents implements Listener {
 	private void onBlockPlace(BlockPlaceEvent event){
 		if(ArenaManager.checkLocation(event.getBlock().getLocation())){
 			event.setCancelled(true);
-			MessageManager.sendAlertMessage(event.getPlayer(), "You cannot place blocks in a arena");
+			MessageManager.sendMessage(event.getPlayer(), "You cannot place blocks in a arena");
 		}
 	}
 	

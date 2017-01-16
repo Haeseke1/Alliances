@@ -38,7 +38,6 @@ import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Arena.CreateArena.ArenaCreateEvent;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
-import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Economy.Commands.Coin;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Outpost.OutpostEvents;
@@ -66,6 +65,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration outpostConfig;
 	public static FileConfiguration challengeConfig;
 	public static FileConfiguration shopConfig;
+	public static FileConfiguration messageConfig;
 
 	@SuppressWarnings("static-access")
 	@Override
@@ -75,14 +75,11 @@ public class Main extends JavaPlugin {
 			createConfigs();
 		} catch (IOException e) {
 			MessageManager.sendAlertMessage("There was a problem with loading in the config file");
-			pm.disablePlugin(this);
 			e.printStackTrace();
 			return;
 		} catch (InvalidConfigTypeException icte) {
 			icte.printStackTrace();
-			MessageManager.sendAlertMessage(
-					"There was a problem in the code. Ask a dev for more information or download an earlier version of this plugin");
-			pm.disablePlugin(this);
+			MessageManager.sendAlertMessage("There was a problem in the code. Ask a dev for more information or download an earlier version of this plugin");
 			return;
 		}
 		Config.registerConfigFile(this);
@@ -164,10 +161,12 @@ public class Main extends JavaPlugin {
 		outpostConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "outpost.yml"), this);
 		challengeConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "challenges.yml"), this);
 		shopConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "shop.yml"), this);
+		messageConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "messages.yml"), this);
 		AllianceManager.registerAlliance();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();
 		ShopManager.registerShops();
+		MessageManager.registerMessages();
 	}
 
 	public void saveAllCustomConfigs() {

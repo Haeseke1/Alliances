@@ -35,13 +35,13 @@ public class regionSelect implements Listener{
 			if(event.getAction().equals(Action.LEFT_CLICK_BLOCK)){
 				Location loc = event.getClickedBlock().getLocation();
 				leftClick.put(event.getPlayer(), loc);
-				MessageManager.sendRemarkMessage(event.getPlayer(), "1st position set! Coordinates: X" + loc.getBlockX() + " Y" + loc.getBlockY() + " Z" + loc.getBlockZ());
+				MessageManager.sendMessage(event.getPlayer(), "1st position set! Coordinates: X" + loc.getBlockX() + " Y" + loc.getBlockY() + " Z" + loc.getBlockZ());
 				return;
 			}
 			if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
 				Location loc = event.getClickedBlock().getLocation();
 				rightClick.put(event.getPlayer(), loc);
-				MessageManager.sendRemarkMessage(event.getPlayer(), "2nd position set! Coordinates: X" + loc.getBlockX() + " Y" + loc.getBlockY() + " Z" + loc.getBlockZ());
+				MessageManager.sendMessage(event.getPlayer(), "2nd position set! Coordinates: X" + loc.getBlockX() + " Y" + loc.getBlockY() + " Z" + loc.getBlockZ());
 				return;
 			}
 		}

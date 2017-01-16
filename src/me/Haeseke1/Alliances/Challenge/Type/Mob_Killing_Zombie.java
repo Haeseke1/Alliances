@@ -28,7 +28,7 @@ public class Mob_Killing_Zombie implements Listener{
 							if(challenge.points.containsKey(player.getUniqueId())){
 								if(challenge.points.get(player.getUniqueId()) >= challenge.max_Points){
 									Coins.addPlayerCoins(player, challenge.reward);
-									MessageManager.sendInfoMessage(player, "Challenge " + challenge.name + " is completed, your reward is " + challenge.reward + " coins!");
+									MessageManager.sendMessage(player, "Challenge " + challenge.name + " is completed, your reward is " + challenge.reward + " coins!");
 									challenge.done.add(player.getUniqueId());
 									return;
 								}
