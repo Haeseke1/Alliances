@@ -48,7 +48,7 @@ public class MessageManager {
 		FileConfiguration file = Main.messageConfig;
 		for(String s : file.getKeys(false)){
 			try {
-				messages.put(s, ConfigManager.getStringFromConfig(file, s));
+				messages.put(s.toLowerCase(), ConfigManager.getStringFromConfig(file, s));
 			} catch (EmptyStringException e) {
 				e.printStackTrace();
 			}
@@ -56,5 +56,10 @@ public class MessageManager {
 	}
 	
 	
-	
+	public static String getMessage(String s){
+		if(messages.containsKey(s.toLowerCase())){
+			return messages.get(s.toLowerCase());
+		}
+		return null;
+	}
 }

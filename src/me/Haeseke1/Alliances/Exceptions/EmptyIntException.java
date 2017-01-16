@@ -1,5 +1,7 @@
 package me.Haeseke1.Alliances.Exceptions;
 
+import me.Haeseke1.Alliances.Main.Main;
+
 @SuppressWarnings("serial")
 public class EmptyIntException extends Exception{
 	/*
@@ -7,5 +9,6 @@ public class EmptyIntException extends Exception{
 	 */
 	public EmptyIntException(String path) {
 		super("Couldn't load Int in config. Path:" + path);
+		Main.pm.disablePlugin(Main.plugin);
 	}
 }

@@ -22,17 +22,34 @@ public class Coin implements CommandExecutor{
 			sender.sendMessage(MessageManager.infoColorCode + "/coin set <Player> <Amount> #Set a player's coins");
 			return false;
 		}
-
+		
+		if (!(sender instanceof Player)) {
+			String message = MessageManager.getMessage("Command_Error_Not_A_User");
+			MessageManager.sendAlertMessage(message);
+		}
+		Player player = (Player) sender;
+		
+		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		
+		
 		if (args[0].equalsIgnoreCase("balance")) {
 			if (args.length > 1) {
-				MessageManager.sendMessage((Player) sender, "Balance: " + Coins.getPlayerCoins(args[1]));
+				String message = MessageManager.getMessage("command_coin_balance_answer");
+				message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+				.replace("%coin%", "")
+				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
+				.replace("%sender_name%", "" + sender.getName())
+				.replace("%target_name%", "" + args[1]);
+				MessageManager.sendMessage(player, message);
 				return false;
 			} else {
-				if (!(sender instanceof Player)) {
-					MessageManager.sendMessage((Player) sender, "You need to be a player to do this command!");
-				}
-				Player player = (Player) sender;
-				MessageManager.sendMessage(player, "Balance: " + Coins.getPlayerCoins(player));
+				String message = MessageManager.getMessage("command_coin_balance_answer");
+				message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+				.replace("%coin%", "")
+				.replace("%target_coin%", "")
+				.replace("%sender_name%", "" + sender.getName())
+				.replace("%target_name%", "");
+				MessageManager.sendMessage(player, message);
 			}
 			return false;
 		}
@@ -40,67 +57,99 @@ public class Coin implements CommandExecutor{
 		
 		if (args[0].equalsIgnoreCase("add")) {
 			if (args.length < 3) {
-				MessageManager.sendMessage((Player) sender, "Not enough arguments! Use /alliance coin for more information!");
+				MessageManager.sendMessage(player, wrong_arg);
 				return false;
 			} else {
 				try {
 					Coins.addPlayerCoins(args[1], Integer.parseInt(args[2]));
 				} catch (Exception e) {
-					MessageManager.sendMessage((Player) sender, "Given arguments are not correct!");
+					MessageManager.sendMessage(player, wrong_arg);
 					return false;
 				}
-				MessageManager.sendMessage((Player) sender,
-						"Succesfully added coins! New balance: " + Coins.getPlayerCoins(args[1]));
+				String message = MessageManager.getMessage("Command_Coin_Add_Answer");
+				message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+				.replace("%coin%", "" + Integer.parseInt(args[2]))
+				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
+				.replace("%sender_name%", "" + sender.getName())
+				.replace("%target_name%", "" + args[1]);
+				MessageManager.sendMessage(player, message);
+				if(PlayerManager.isPlayerOnline(args[1])){
+					message = MessageManager.getMessage("Command_Coin_Get_Answer");
+					message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+					.replace("%coin%", "" + Integer.parseInt(args[2]))
+					.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
+					.replace("%sender_name%", "" + sender.getName())
+					.replace("%target_name%", "" + args[1]);
+					MessageManager.sendMessage(PlayerManager.getPlayer(args[1]), message);
+				}
 			}
 			return false;
 		}
 		
 		if (args[0].equalsIgnoreCase("set")) {
 			if (args.length < 3) {
-				MessageManager.sendMessage((Player) sender, "Not enough arguments! Use /coin for more information!");
+				MessageManager.sendMessage((Player) sender, wrong_arg);
 				return false;
 			} else {
 				try {
 					Coins.setPlayerCoins(args[1], Integer.parseInt(args[2]));
 				} catch (Exception e) {
-					MessageManager.sendMessage((Player) sender, "Given arguments are not correct!");
+					MessageManager.sendMessage((Player) sender, wrong_arg);
 					return false;
 				}
-				MessageManager.sendMessage((Player) sender,
-						"Succesfully added coins! New balance: " + Coins.getPlayerCoins(args[1]));
+				String message = MessageManager.getMessage("Command_Coin_Set_Answer");
+				message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+				.replace("%coin%", "" + Integer.parseInt(args[2]))
+				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
+				.replace("%sender_name%", "" + sender.getName())
+				.replace("%target_name%", "" + args[1]);
+				MessageManager.sendMessage(player, message);
 			}
 			return false;
 		}
 		
 		if (args[0].equalsIgnoreCase("pay")) {
 			if (args.length < 3) {
-				MessageManager.sendMessage((Player) sender, "Not enough arguments! Use /alliance coin for more information!");
+				MessageManager.sendMessage((Player) sender, wrong_arg);
 				return false;
 			} else {
-				if (!(sender instanceof Player)) {
-					MessageManager.sendMessage((Player) sender, "You need to be a player to do this command!");
-					return false;
-				}
-				Player player = (Player) sender;
 				try {
 					if (Coins.removePlayerCoins(player, Integer.parseInt(args[2]))) {
 						Coins.addPlayerCoins(args[1], Integer.parseInt(args[2]));
-						MessageManager.sendMessage((Player) sender, "Succesfully payed coins! Your new balance: " + Coins.getPlayerCoins(player));
+						String message = MessageManager.getMessage("Command_Coin_Pay_Answer");
+						message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+						.replace("%coin%", "" + Integer.parseInt(args[2]))
+						.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
+						.replace("%sender_name%", "" + sender.getName())
+						.replace("%target_name%", "" + args[1]);
+						MessageManager.sendMessage(player, message);
 						if(PlayerManager.isPlayerOnline(args[1])){
-							MessageManager.sendMessage(PlayerManager.getPlayer(args[1]),  sender.getName() + " gave you " + Integer.parseInt(args[2]) + " coins!");
+							message = MessageManager.getMessage("Command_Coin_Get_Answer");
+							message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+							.replace("%coin%", "" + Integer.parseInt(args[2]))
+							.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
+							.replace("%sender_name%", "" + sender.getName())
+							.replace("%target_name%", "" + args[1]);
+							MessageManager.sendMessage(PlayerManager.getPlayer(args[1]), message);
 						}
 						return false;
 					} else {
-						MessageManager.sendMessage((Player) sender, "You don't have enough coins!");
+						String message = MessageManager.getMessage("Command_Coin_Pay_Not_Enough_Coins");
+						message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+						.replace("%coin%", "" + Integer.parseInt(args[2]))
+						.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
+						.replace("%sender_name%", "" + sender.getName())
+						.replace("%target_name%", "" + args[1]);
+						MessageManager.sendMessage(player, message);
 						return false;
 					}
 				} catch (Exception e) {
-					MessageManager.sendMessage((Player) sender, "Given arguments are not correct!");
+					MessageManager.sendMessage((Player) sender, wrong_arg);
 					return false;
 				}
 			}
 		}
-		MessageManager.sendMessage((Player) sender, "Wrong arguments! use /coin for more information!");
+		MessageManager.sendMessage((Player) sender, wrong_arg);
 		return false;
 	}
 

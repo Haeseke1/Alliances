@@ -66,11 +66,14 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration challengeConfig;
 	public static FileConfiguration shopConfig;
 	public static FileConfiguration messageConfig;
+	
+	public static Main plugin;
 
 	@SuppressWarnings("static-access")
 	@Override
 	public void onEnable() {
 		this.config = getConfig();
+		this.plugin = this;
 		try {
 			createConfigs();
 		} catch (IOException e) {

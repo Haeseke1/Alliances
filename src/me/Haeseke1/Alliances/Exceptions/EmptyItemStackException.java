@@ -1,5 +1,6 @@
 package me.Haeseke1.Alliances.Exceptions;
 
+import me.Haeseke1.Alliances.Main.Main;
 
 @SuppressWarnings("serial")
 public class EmptyItemStackException extends Exception{
@@ -9,5 +10,6 @@ public class EmptyItemStackException extends Exception{
 	 */
 	public EmptyItemStackException(String path) {
 		super("Couldn't load ItemStack in config. Path:" + path);
+		Main.pm.disablePlugin(Main.plugin);
 	}
 }
