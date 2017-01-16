@@ -1,4 +1,4 @@
-package me.Haeseke1.Alliances.Main;
+package me.Haeseke1.Alliances.Alliance;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.Haeseke1.Alliances.Alliance.AllianceType;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Alliance {

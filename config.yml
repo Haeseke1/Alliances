@@ -77,4 +77,4 @@ Outpost:
         
 #Configurations for chat. var: {%alli_name%, %player_name%, %alli_rank%}
 Chat:
-  Message: "%alli_name% %player_name% %alli_rank%>"
+  Message: "alli_name player_name alli_rank>"

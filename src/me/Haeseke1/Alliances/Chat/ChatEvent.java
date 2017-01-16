@@ -7,8 +7,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
-import me.Haeseke1.Alliances.Main.Alliance;
+import me.Haeseke1.Alliances.Utils.MessageManager;
 
 @SuppressWarnings("deprecation")
 public class ChatEvent implements Listener{
@@ -23,13 +24,15 @@ public class ChatEvent implements Listener{
 			Alliance alli = AllianceManager.getAlliance(player);
 			String rank = alli.getMembers().get(player.getUniqueId());
 			String name = player.getDisplayName();
-			String _format = format.replace("%alli_name%", alli.getName()).replace("%name%", name).replace("%alli_rank%", rank);
+			String _format = format.replace("%alli_name%", alli.getName()).replace("%player_name%", name).replace("%alli_rank%", rank);
 			_format = ChatColor.translateAlternateColorCodes('&', _format);
+			MessageManager.sendInfoMessage(_format);
 			event.setFormat( _format + event.getMessage());
 		}else{
 			String name = player.getDisplayName();
-			String _format = format.replace("%name%", name);
+			String _format = format.replace("%alli_name%", "").replace("%player_name%", name).replace("%alli_rank%", "");
 			_format = ChatColor.translateAlternateColorCodes('&', _format);
+			MessageManager.sendInfoMessage(_format);
 			event.setFormat(_format + event.getMessage());
 		}
 	}

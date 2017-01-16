@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Commands.Admin.Admin;
 import me.Haeseke1.Alliances.Commands.Arena.Arena;
 import me.Haeseke1.Alliances.Commands.Challenges.mainChallenges;
@@ -19,7 +20,6 @@ import me.Haeseke1.Alliances.Commands.Outpost.Outpost;
 import me.Haeseke1.Alliances.Commands.Owner.Owner;
 import me.Haeseke1.Alliances.Commands.Region.region;
 import me.Haeseke1.Alliances.Commands.Shop.mainShop;
-import me.Haeseke1.Alliances.Main.Alliance;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Alli implements CommandExecutor {

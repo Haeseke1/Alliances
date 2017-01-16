@@ -11,10 +11,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
-import me.Haeseke1.Alliances.Main.Alliance;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Outpost.Type.Blacksmith;
 import me.Haeseke1.Alliances.Outpost.Type.Dock;
