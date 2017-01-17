@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import me.Haeseke1.Alliances.Town.Town;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Alliance {
@@ -20,6 +21,10 @@ public class Alliance {
 	private HashMap<UUID, String> mMembers;
 	private String name;
 	private final AllianceType type;
+	private int exp;
+	
+	private Town town;
+	
 	
 	private List<UUID> admins = new ArrayList<UUID>();
 	
@@ -33,9 +38,10 @@ public class Alliance {
 		this.mLoses = loses;
 		this.mCoins = coins;
 		this.type = type;
+		this.exp = 0;
 	}
 
-	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type, HashMap<UUID,String> mMembers) {
+	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type, HashMap<UUID,String> mMembers, int exp) {
 		this.mMembers = mMembers;
 		this.name = name;
 		this.mOwner = owner;
@@ -43,6 +49,7 @@ public class Alliance {
 		this.mLoses = loses;
 		this.mCoins = coins;
 		this.type = type;
+		this.exp = exp;
 	}
 	
 	public UUID getOwner() {
@@ -128,6 +135,22 @@ public class Alliance {
 	}
 	public void setAdmins(List<UUID> admins){
 		this.admins = admins;
+	}
+
+	public int getExp() {
+		return exp;
+	}
+
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+
+	public Town getTown() {
+		return town;
+	}
+
+	public void setTown(Town town) {
+		this.town = town;
 	}
 	
 }

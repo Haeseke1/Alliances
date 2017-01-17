@@ -21,7 +21,10 @@ public class Time_On implements Runnable{
 							if(challenge.max_Points <= challenge.points.get(player.getUniqueId())){
 								challenge.done.add(player.getUniqueId());
 								Coins.addPlayerCoins(player, challenge.reward);
-								MessageManager.sendMessage(player, "Challenge " + challenge.name + " is completed, your reward is " + challenge.reward + " coins!");
+								String message = MessageManager.getMessage("Challenges_Get_Reward");
+								message = message.replace("%challenge_name", challenge.name)
+										.replace("%reward_coin%", "" + challenge.reward);
+								MessageManager.sendMessage(player, message);
 								return;
 							}
 						}else{

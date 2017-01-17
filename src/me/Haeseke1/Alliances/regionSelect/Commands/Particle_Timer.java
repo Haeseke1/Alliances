@@ -3,7 +3,6 @@ package me.Haeseke1.Alliances.regionSelect.Commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 

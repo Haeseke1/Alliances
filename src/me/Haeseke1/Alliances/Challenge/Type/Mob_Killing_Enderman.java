@@ -28,7 +28,10 @@ public class Mob_Killing_Enderman implements Listener{
 								challenge.points.replace(player.getUniqueId(), challenge.points.get(player.getUniqueId()) + 1);
 								if(challenge.points.get(player.getUniqueId()) >= challenge.max_Points){
 									Coins.addPlayerCoins(player, challenge.reward);
-									MessageManager.sendMessage(player, "Challenge " + challenge.name + " is completed, your reward is " + challenge.reward + " coins!");
+									String message = MessageManager.getMessage("Challenges_Get_Reward");
+									message = message.replace("%challenge_name", challenge.name)
+											.replace("%reward_coin%", "" + challenge.reward);
+									MessageManager.sendMessage(player, message);
 									challenge.done.add(player.getUniqueId());
 									return;
 								}
