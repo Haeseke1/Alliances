@@ -11,6 +11,8 @@ import me.Haeseke1.Alliances.regionSelect.regionSelect;
 public class region implements CommandExecutor {
 	
 	
+	
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(!(sender instanceof Player)){
@@ -20,6 +22,9 @@ public class region implements CommandExecutor {
 			sender.sendMessage(MessageManager.infoColorCode + "===== Region =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
 			sender.sendMessage(MessageManager.infoColorCode + "/region tool #get region select tool");
+			sender.sendMessage(MessageManager.infoColorCode + "/region pos1 #Set first loc");
+			sender.sendMessage(MessageManager.infoColorCode + "/region pos2 #Set second loc");
+			sender.sendMessage(MessageManager.infoColorCode + "/region show #show the region");
 			return false;
 		}
 		
@@ -58,6 +63,25 @@ public class region implements CommandExecutor {
 					.replace("%world_name%", player.getLocation().getWorld().getName());
 			MessageManager.sendMessage(player, message);
 			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("show")){
+			if(regionSelect.hasRegion(player)){
+				if(Particle_Timer.showRegion.contains(player)){
+					String message = MessageManager.getMessage("Command_Region_Show_Answer_Out");
+					MessageManager.sendMessage(player, message);
+					Particle_Timer.showRegion.remove(player);
+				}else{
+					String message = MessageManager.getMessage("Command_Region_Show_Answer_In");
+					MessageManager.sendMessage(player, message);
+					Particle_Timer.showRegion.add(player);
+				}
+				return false;
+			}else{
+				String message = MessageManager.getMessage("Command_Error_Select_Region");
+				MessageManager.sendMessage(player, message);
+				return false;
+			}
 		}
 		
 		MessageManager.sendMessage(player, wrong_arg);

@@ -11,14 +11,23 @@ import net.minecraft.server.v1_8_R2.PacketPlayOutWorldParticles;
 
 public class ParticleManager {
 	
+	public static void playParticle(Effect type, Location loc, int distance, int data){
+		loc.getWorld().playEffect(loc, type, distance, data);
+	}
+	public static void playParticle(Effect type, Location loc, int distance){
+		loc.getWorld().playEffect(loc, type, distance);
+	}
 	
 	public static void playParticle(EnumParticle type, Location loc, float distance, int amount){
-		PacketPlayOutWorldParticles ppowp = new PacketPlayOutWorldParticles(type, false,(float)loc.getX(),(float)(loc.getY()), (float)loc.getZ(),distance,distance,distance,0f,amount);
+		PacketPlayOutWorldParticles ppowp = new PacketPlayOutWorldParticles(type, true,(float)loc.getX(),(float)(loc.getY()), (float)loc.getZ(),distance,distance,distance,0f,amount);
 		for(Player player : Bukkit.getOnlinePlayers()){
 			((CraftPlayer)player).getHandle().playerConnection.sendPacket(ppowp);
 		}
 	}
-	public static void playParticle(Effect type, Location loc, float distance){
-		loc.getWorld().playEffect(loc, type, distance);
+	
+	public static void playParticle(EnumParticle type, Location loc, float distance, int amount, Player player){
+		PacketPlayOutWorldParticles ppowp = new PacketPlayOutWorldParticles(type, true,(float)loc.getX(),(float)(loc.getY()), (float)loc.getZ(),distance,distance,distance,0f,amount);
+		((CraftPlayer)player).getHandle().playerConnection.sendPacket(ppowp);
 	}
+	
 }

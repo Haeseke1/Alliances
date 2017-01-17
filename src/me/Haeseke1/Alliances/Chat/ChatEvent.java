@@ -9,7 +9,6 @@ import org.bukkit.event.player.PlayerChatEvent;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
-import me.Haeseke1.Alliances.Utils.MessageManager;
 
 @SuppressWarnings("deprecation")
 public class ChatEvent implements Listener{

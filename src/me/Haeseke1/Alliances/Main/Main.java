@@ -48,6 +48,7 @@ import me.Haeseke1.Alliances.Shop.Commands.ShopC;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
+import me.Haeseke1.Alliances.regionSelect.Commands.Particle_Timer;
 import me.Haeseke1.Alliances.regionSelect.Commands.region;
 import net.minecraft.server.v1_8_R2.EntityVillager;
 
@@ -69,7 +70,6 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration messageConfig;
 	public static FileConfiguration arenaConfig;
 	
-	public static File arenaFile;
 	
 	public static Main plugin;
 
@@ -154,6 +154,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Timer(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Time_On(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Mob_Killing_Time(), 20, 20);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Particle_Timer(), 25, 25);
 		java.util.Timer timer = new java.util.Timer();
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);
@@ -173,7 +174,6 @@ public class Main extends JavaPlugin {
 		shopConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "shop.yml"), this);
 		messageConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "messages.yml"), this);
 		arenaConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "arenas.yml"), this);
-		arenaFile = new File(getDataFolder(),"arenas.yml");
 		AllianceManager.registerAlliance();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();

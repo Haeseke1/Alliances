@@ -34,7 +34,7 @@ Outpost_Break_Block: "You cannot break blocks in a outpost"
 
 #Can use %outpost_name% as variables
 
-Outpost_Contested: "The outpost " + name + " is contested!"
+Outpost_Contested: "The outpost %outpost_name% is contested!"
 Outpost_Not_Taking_Over_Anymore: "You are not taking over %outpost_name% anymore!"
 Outpost_Safe: "Outpost %outpost_name% is safe!"
 Outpost_Losing: "You are losing your outpost called %outpost_name%!"
@@ -53,7 +53,8 @@ Command_Region_Tool_Answer: "Tool succesfully created!"
 Command_Region_Pos1_Answer: "1st position set! Coordinates: X%x% Y%y% Z%z%" 
 Command_Region_Pos2_Answer: "2nd position set! Coordinates: X%x% Y%y% Z%z%" 
 
-
+Command_Region_Show_Answer_In: "Showing region"
+Command_Region_Show_Answer_Out: "Disable region"
 
 
 

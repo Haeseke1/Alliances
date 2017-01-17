@@ -21,6 +21,7 @@ public class regionSelect implements Listener{
 	public static HashMap<Player,Location> leftClick = new HashMap<Player,Location>();
 	public static HashMap<Player,Location> rightClick = new HashMap<Player,Location>();
 	
+
 	
 	@EventHandler
 	private void playerInteract(PlayerInteractEvent event){
@@ -33,6 +34,7 @@ public class regionSelect implements Listener{
 		if(event.getItem().hasItemMeta() && event.getItem().getItemMeta().hasDisplayName() && 
 				event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Region Selector")){
 			Player player = event.getPlayer();
+			event.setCancelled(true);
 			if(event.getAction().equals(Action.LEFT_CLICK_BLOCK)){
 				Location loc = event.getClickedBlock().getLocation();
 				leftClick.put(event.getPlayer(), loc);
@@ -67,6 +69,12 @@ public class regionSelect implements Listener{
 		return i;
 	}
 	
+	public static boolean hasRegion(Player player){
+		if(leftClick.containsKey(player) && rightClick.containsKey(player)){
+			return true;
+		}
+		return false;
+	}
 	
 	
 }

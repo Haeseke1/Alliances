@@ -5,7 +5,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Main.Main;
-import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class ArenaManager {
@@ -32,7 +31,6 @@ public class ArenaManager {
 	  arenaConfig.set(path + ".corner1", a.getCorner1());
 	  arenaConfig.set(path + ".corner2", a.getCorner2());
 	  arenaConfig.set(path + ".status", a.getStatus());
-	  ConfigManager.saveCustomConfig(Main.arenaFile, arenaConfig);
 	  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully created an arena: " + ChatColor.GOLD + name);
 	  }
 }
