@@ -16,7 +16,7 @@ public class Arena implements CommandExecutor{
 			return false;
 		}
 		  Player player = (Player) sender;
-		if(args.length == 1){
+		if(args.length == 0){
 			MessageManager.sendMessage(player, MessageManager.infoColorCode + "===== Arena =====");
 			MessageManager.sendMessage(player, MessageManager.infoColorCode + "Commands:");
 			MessageManager.sendMessage(player, MessageManager.infoColorCode + "/arena create <name> <size> <countdown> #Creates and adds an arena to the game");
