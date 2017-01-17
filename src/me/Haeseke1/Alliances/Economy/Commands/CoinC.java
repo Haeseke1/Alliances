@@ -16,7 +16,7 @@ public class CoinC implements CommandExecutor{
 		if (args.length == 0) {
 			sender.sendMessage(MessageManager.infoColorCode + "===== Coins =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
-			sender.sendMessage(MessageManager.infoColorCode + "/coin balance #Watch your balance or from other Players");
+			sender.sendMessage(MessageManager.infoColorCode + "/coin balance [Player] #Watch your balance or from other Players");
 			sender.sendMessage(MessageManager.infoColorCode + "/coin pay <Player> <Amount> #Give another player coins");
 			sender.sendMessage(MessageManager.infoColorCode + "/coin add <Player> <Amount> #give player coins");
 			sender.sendMessage(MessageManager.infoColorCode + "/coin set <Player> <Amount> #Set a player's coins");
@@ -26,6 +26,7 @@ public class CoinC implements CommandExecutor{
 		if (!(sender instanceof Player)) {
 			String message = MessageManager.getMessage("Command_Error_Not_A_User");
 			MessageManager.sendAlertMessage(message);
+			return false;
 		}
 		Player player = (Player) sender;
 		
