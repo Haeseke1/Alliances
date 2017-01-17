@@ -85,7 +85,8 @@ public class Alliance {
 		return type;
 	}
 	
-	public void sendPlayersAlertMessage(String message){
+	
+	public void sendPlayersMessage(String message){
 		for(Player player : Bukkit.getOnlinePlayers()){
 			if(mMembers.containsKey(player.getUniqueId())){
 				MessageManager.sendMessage(player, message);
@@ -93,21 +94,6 @@ public class Alliance {
 		}
 	}
 	
-	public void sendPlayersInfoMessage(String message){
-		for(Player player : Bukkit.getOnlinePlayers()){
-			if(mMembers.containsKey(player.getUniqueId())){
-				MessageManager.sendMessage(player, message);
-			}
-		}
-	}
-	
-	public void sendPlayersRemarkMessage(String message){
-		for(Player player : Bukkit.getOnlinePlayers()){
-			if(mMembers.containsKey(player.getUniqueId())){
-				MessageManager.sendMessage(player, message);
-			}
-		}
-	}
 	
 	public void addReward(ItemStack item){
 		outpostRewards.add(item);

@@ -3,6 +3,7 @@ package me.Haeseke1.Alliances.Shop;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Villager;
@@ -24,6 +25,25 @@ public class ShopManager {
 			s.despawnVendors();
 		}
 	}
+	
+	public static boolean shopExist(String name){
+		for(Shop shop : Shop.shops){
+			if(shop.name.equalsIgnoreCase(name)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static Shop getShop(String name){
+		for(Shop shop : Shop.shops){
+			if(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', shop.name)).equalsIgnoreCase(name)){
+				return shop;
+			}
+		}
+		return null;
+	}
+	
 
 	public static void registerShops() {
 		FileConfiguration file = Main.shopConfig;

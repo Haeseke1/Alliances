@@ -1,4 +1,4 @@
-package me.Haeseke1.Alliances.Commands.Outpost.Create;
+package me.Haeseke1.Alliances.Outpost.Commands.Create;
 
 
 import org.bukkit.command.CommandSender;
@@ -13,14 +13,17 @@ public class outpostCreate {
 	
 	public static void onCommand(CommandSender sender, String[] args) {
 		if(!(sender instanceof Player)){
-			MessageManager.sendAlertMessage("You need to be a player to do this command!");
+			String message = MessageManager.getMessage("Command_Error_Not_A_User");
+			MessageManager.sendAlertMessage(message);
 			return;
 		}
 		Player player = (Player) sender;
+		
 		if(regionSelect.leftClick.containsKey(player) && regionSelect.rightClick.containsKey(player)){
 			InventoryEvents.createInventory(player);
 		}else{
-			MessageManager.sendMessage(player, "Select a region first!");
+			String message = MessageManager.getMessage("Command_Error_Select_Region");
+			MessageManager.sendMessage(player, message);
 		}
 	}
 

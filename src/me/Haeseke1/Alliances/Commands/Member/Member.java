@@ -45,7 +45,7 @@ public class Member {
 					alli.setAdmins(admins);
 				}
 				MessageManager.sendMessage(player, "You left your alliance!");
-				alli.sendPlayersInfoMessage(player.getName() + " left the alliance!");
+				alli.sendPlayersMessage(player.getName() + " left the alliance!");
 			}else{
 				MessageManager.sendMessage(player, "You are not in a alliance!");
 			}
