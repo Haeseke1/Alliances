@@ -16,3 +16,5 @@ commands:
     aliases: [reg]
   Challenges:
     aliases: [ch,chal]
+  Arena:
+    aliases: [arena,a]

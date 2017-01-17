@@ -25,7 +25,6 @@ public class ArenaManager {
 	  int size = a.getSize();
 	  int countdown = a.getCountdown();
 	  String path = "Arenas." + name;
-	  
 	  arenaConfig.set(path + ".size", size);
 	  arenaConfig.set(path + ".countdown", countdown);
 	  arenaConfig.set(path + ".corner1", a.getCorner1());
