@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Location;
+
 public class Arena {
 
 	private List<UUID> mPlayersInArena;
+	private List<Location> mSpawns;
     private int mSize;
     private int mCountdown;
     private int mCorner1;
@@ -22,6 +25,7 @@ public class Arena {
 		mCorner1 = corner1;
 		mCorner2 = corner2;
 		mStatus = "UNDER MAINTANCE";
+		mSpawns = new ArrayList<>();
 	}
 	
 	public List<UUID> getPlayersInArena() {

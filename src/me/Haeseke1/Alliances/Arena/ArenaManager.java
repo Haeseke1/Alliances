@@ -31,6 +31,7 @@ public class ArenaManager {
 	  arenaConfig.set(path + ".corner1", a.getCorner1());
 	  arenaConfig.set(path + ".corner2", a.getCorner2());
 	  arenaConfig.set(path + ".status", a.getStatus());
+	  arenaConfig.set(path + ".spawns", "");
 	  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully created an arena: " + ChatColor.GOLD + name);
 	  }
 }
