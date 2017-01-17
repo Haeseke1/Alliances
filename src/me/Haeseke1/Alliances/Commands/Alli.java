@@ -52,6 +52,7 @@ public class Alli implements CommandExecutor {
 			Admin.onCommand(sender,args);
 			return true;
 		}
+
 		
 		if(args[0].equalsIgnoreCase("Owner")){
 			Owner.onCommand(sender,args);

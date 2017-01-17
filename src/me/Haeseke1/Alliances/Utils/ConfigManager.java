@@ -132,6 +132,11 @@ public class ConfigManager {
 		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
 		Reader defConfigStream;
 		try {
+			defConfigStream = new InputStreamReader(main.getResource(f.getName()), "UTF8");
+			if (defConfigStream != null) {
+		        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+		        file.setDefaults(defConfig);
+		    }
 			if(!f.exists()){
 				defConfigStream = new InputStreamReader(main.getResource(f.getName()), "UTF8");
 			    if (defConfigStream != null) {
@@ -145,6 +150,7 @@ public class ConfigManager {
 			        file.setDefaults(defConfig);
 			    }
 			}
+
 		} catch (UnsupportedEncodingException e) {
 			Main.pm.disablePlugin(Main.plugin);
 			e.printStackTrace();
