@@ -12,12 +12,12 @@ public class Arena {
 	private List<Location> mSpawns;
     private int mSize;
     private int mCountdown;
-    private int mCorner1;
-    private int mCorner2;
+    private Location mCorner1;
+    private Location mCorner2;
     private String mName;
     private String mStatus;
 	
-	public Arena(String name,int arenaSize,int countdown,int corner1,int corner2){
+	public Arena(String name,int arenaSize,int countdown,Location corner1,Location corner2){
 		mPlayersInArena = new ArrayList<>();
 		mSize = arenaSize;
 		mCountdown = countdown;
@@ -48,11 +48,11 @@ public class Arena {
 		return mStatus;
 	}
 	
-	public int getCorner1(){
+	public Location getCorner1(){
 		return mCorner1;
 	}
 	
-	public int getCorner2(){
+	public Location getCorner2(){
 		return mCorner2;
 	}
 }

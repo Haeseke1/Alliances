@@ -76,5 +76,14 @@ public class regionSelect implements Listener{
 		return false;
 	}
 	
-	
+	public static Location getRegion(Player player,String type){
+		switch(type){
+		case "left":
+			return leftClick.get(player);
+		case "right":
+		    return rightClick.get(player);
+		default:
+			return null;
+		}
+	}
 }

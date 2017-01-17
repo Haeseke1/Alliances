@@ -16,7 +16,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
-import me.Haeseke1.Alliances.Arena.Commands.Arena;
+import me.Haeseke1.Alliances.Arena.ArenaManager;
+import me.Haeseke1.Alliances.Arena.Commands.ArenaCommand;
 import me.Haeseke1.Alliances.Challenge.ChallengeManager;
 import me.Haeseke1.Alliances.Challenge.Commands.mainChallenges;
 import me.Haeseke1.Alliances.Challenge.Type.Block_Breaking;
@@ -38,6 +39,8 @@ import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
 import me.Haeseke1.Alliances.Economy.Commands.CoinC;
+import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
+import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
@@ -100,6 +103,11 @@ public class Main extends JavaPlugin {
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
+	    try {
+			ArenaManager.loadArena();
+		} catch (EmptyIntException | EmptyLocationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -145,8 +153,8 @@ public class Main extends JavaPlugin {
 		getCommand("Outpost").setExecutor(new Outpost());
 		getCommand("Region").setExecutor(new region());
 		getCommand("Challenges").setExecutor(new mainChallenges());
-		getCommand("Arena").setExecutor(new Arena());
 		getCommand("Town").setExecutor(new TownC());
+		getCommand("Arena").setExecutor(new ArenaCommand());
 	}
 	
 	public void registerCustomEntitys(){
