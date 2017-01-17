@@ -3,7 +3,6 @@ package me.Haeseke1.Alliances.Arena;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -41,6 +40,9 @@ public class ArenaManager {
 	  arenas.add(a);
 	  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully created an arena: " + ChatColor.GOLD + name);
 	  }
+  /*
+   * Loads the arena into the config
+   */
   public static void loadArena() throws EmptyIntException, EmptyLocationException{
 	  if(arenaConfig.getConfigurationSection("Arenas").getKeys(false) != null){
 		  for(String name: arenaConfig.getConfigurationSection("Arenas").getKeys(false)){
@@ -50,6 +52,10 @@ public class ArenaManager {
 		  MessageManager.sendAlertMessage("Loaded the arenas");
 	  }
   }
+  
+  /*
+   * Removes the arena from the game
+   */
   public static void removeArena(String name, Player player){
 	  if(arenaExists(name)){
 		  arenaConfig.set("Arenas." + name.toLowerCase(), null);
@@ -76,5 +82,9 @@ public class ArenaManager {
 		  }
 	  }
 	  return null;
+  }
+  
+  public static void joinArena(Player player){
+	  
   }
 }
