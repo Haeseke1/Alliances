@@ -49,14 +49,15 @@ Outpost_Taking_Over_100: "%taking_over_name% has taken over a outpost called %ou
 #Can use no variables
 Command_Region_Tool_Answer: "Tool succesfully created!"
 
-#Can use %x% %y% %z% %world_name%
+#Can use %x% %y% %z% %world_name% as variables
 Command_Region_Pos1_Answer: "1st position set! Coordinates: X%x% Y%y% Z%z%" 
 Command_Region_Pos2_Answer: "2nd position set! Coordinates: X%x% Y%y% Z%z%" 
 
 Command_Region_Show_Answer_In: "Showing region"
 Command_Region_Show_Answer_Out: "Disable region"
 
-
+#Can use %challenge_name% %reward_coin% as variables
+Challenges_Get_Reward: "Challenge is %challenge_name% completed, your reward is %reward_coin% coins!"
 
 
 
