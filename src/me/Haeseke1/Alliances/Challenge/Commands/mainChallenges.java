@@ -1,21 +1,22 @@
-package me.Haeseke1.Alliances.Outpost.Commands;
+package me.Haeseke1.Alliances.Challenge.Commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.Haeseke1.Alliances.Outpost.Commands.Create.outpostCreate;
+import me.Haeseke1.Alliances.Challenge.Commands.Player.InventoryEvents;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
-public class Outpost implements CommandExecutor {
+public class mainChallenges implements CommandExecutor {
+
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if(args.length == 1){
-			sender.sendMessage(MessageManager.infoColorCode + "===== Outpost =====");
+		if(args.length == 0){
+			sender.sendMessage(MessageManager.infoColorCode + "===== Challenges =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
-			sender.sendMessage(MessageManager.infoColorCode + "/outpost create #Create a new outpost");
+			sender.sendMessage(MessageManager.infoColorCode + "/challenges player #See your challenges");
 			return false;
 		}
 		
@@ -25,14 +26,14 @@ public class Outpost implements CommandExecutor {
 			return false;
 		}
 		Player player = (Player) sender;
-		
 		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
 		
-		if(args[0].equalsIgnoreCase("create")){
-			outpostCreate.onCommand(sender, args);
+		if(args[0].equalsIgnoreCase("player")){
+			InventoryEvents.createInventory(player);
 			return false;
-		}	
+		}
 		MessageManager.sendMessage(player, wrong_arg);
 		return false;
 	}
+	
 }

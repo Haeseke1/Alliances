@@ -31,17 +31,28 @@ public class regionSelect implements Listener{
 			return;
 		}
 		if(event.getItem().hasItemMeta() && event.getItem().getItemMeta().hasDisplayName() && 
-				event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Region selector")){
+				event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Region Selector")){
+			Player player = event.getPlayer();
 			if(event.getAction().equals(Action.LEFT_CLICK_BLOCK)){
 				Location loc = event.getClickedBlock().getLocation();
 				leftClick.put(event.getPlayer(), loc);
-				MessageManager.sendMessage(event.getPlayer(), "1st position set! Coordinates: X" + loc.getBlockX() + " Y" + loc.getBlockY() + " Z" + loc.getBlockZ());
+				String message = MessageManager.getMessage("Command_Region_Pos1_Answer");
+				message = message.replace("%x%", "" + player.getLocation().getBlockX())
+						.replace("%y%", "" + player.getLocation().getBlockY())
+						.replace("%z%", "" + player.getLocation().getBlockZ())
+						.replace("%world_name%", player.getLocation().getWorld().getName());
+				MessageManager.sendMessage(player, message);
 				return;
 			}
 			if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
 				Location loc = event.getClickedBlock().getLocation();
 				rightClick.put(event.getPlayer(), loc);
-				MessageManager.sendMessage(event.getPlayer(), "2nd position set! Coordinates: X" + loc.getBlockX() + " Y" + loc.getBlockY() + " Z" + loc.getBlockZ());
+				String message = MessageManager.getMessage("Command_Region_Pos2_Answer");
+				message = message.replace("%x%", "" + player.getLocation().getBlockX())
+						.replace("%y%", "" + player.getLocation().getBlockY())
+						.replace("%z%", "" + player.getLocation().getBlockZ())
+						.replace("%world_name%", player.getLocation().getWorld().getName());
+				MessageManager.sendMessage(player, message);
 				return;
 			}
 		}

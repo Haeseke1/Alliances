@@ -1,4 +1,4 @@
-package me.Haeseke1.Alliances.Commands.Challenges.Player;
+package me.Haeseke1.Alliances.Challenge.Commands.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;

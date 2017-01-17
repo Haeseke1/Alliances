@@ -7,4 +7,12 @@ commands:
   alliances:
     aliases: [alli,al]
   coin:
-    alliases: [c,money,coins]
+    aliases: [c,money,coins]
+  Shop:
+    aliases: [sh]
+  Outpost:
+    aliases: [outp]
+  Region:
+    aliases: [reg]
+  Challenges:
+    aliases: [ch,chal]

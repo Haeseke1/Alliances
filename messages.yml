@@ -46,4 +46,38 @@ Outpost_Taking_Over_50: "%taking_over_name% is taking over a outpost called %out
 Outpost_Taking_Over_75: "%taking_over_name% is taking over a outpost called %outpost_name% (75%)"
 Outpost_Taking_Over_100: "%taking_over_name% has taken over a outpost called %outpost_name% (100%)"
 
+#Can use no variables
+Command_Region_Tool_Answer: "Tool succesfully created!"
+
+#Can use %x% %y% %z% %world_name%
+Command_Region_Pos1_Answer: "1st position set! Coordinates: X%x% Y%y% Z%z%" 
+Command_Region_Pos2_Answer: "2nd position set! Coordinates: X%x% Y%y% Z%z%" 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

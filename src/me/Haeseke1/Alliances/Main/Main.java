@@ -19,6 +19,7 @@ import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Arena.ArenaEvents;
 import me.Haeseke1.Alliances.Arena.ArenaTimer;
 import me.Haeseke1.Alliances.Challenge.ChallengeManager;
+import me.Haeseke1.Alliances.Challenge.Commands.mainChallenges;
 import me.Haeseke1.Alliances.Challenge.Type.Block_Breaking;
 import me.Haeseke1.Alliances.Challenge.Type.Block_Placing;
 import me.Haeseke1.Alliances.Challenge.Type.Distance_Travel;
@@ -42,11 +43,14 @@ import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.Timer;
+import me.Haeseke1.Alliances.Outpost.Commands.Outpost;
 import me.Haeseke1.Alliances.Shop.ShopEvents;
 import me.Haeseke1.Alliances.Shop.ShopManager;
+import me.Haeseke1.Alliances.Shop.Commands.ShopC;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
+import me.Haeseke1.Alliances.regionSelect.Commands.region;
 import net.minecraft.server.v1_8_R2.EntityVillager;
 
 public class Main extends JavaPlugin {
@@ -106,7 +110,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Outpost.Commands.Create.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Join.InventoryEvents(), this);
-		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Challenges.Player.InventoryEvents(), this);
+		pm.registerEvents(new me.Haeseke1.Alliances.Challenge.Commands.Player.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
 		pm.registerEvents(new regionSelect(), this);
 		pm.registerEvents(new ShopEvents(), this);
@@ -131,6 +135,10 @@ public class Main extends JavaPlugin {
 	public void registerCommands() {
 		getCommand("Alliances").setExecutor(new Alli());
 		getCommand("Coin").setExecutor(new CoinC());
+		getCommand("Shop").setExecutor(new ShopC());
+		getCommand("Outpost").setExecutor(new Outpost());
+		getCommand("Region").setExecutor(new region());
+		getCommand("Challenges").setExecutor(new mainChallenges());
 	}
 	
 	public void registerCustomEntitys(){
