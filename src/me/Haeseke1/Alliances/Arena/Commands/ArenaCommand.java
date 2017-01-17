@@ -47,6 +47,10 @@ public class ArenaCommand implements CommandExecutor{
 				return false;
 			}
 		}
+		if(args.length == 2 && args[0].equalsIgnoreCase("remove")){
+			String name = args[1];
+			ArenaManager.removeArena(name, player);
+		}
 		return false;
  }
 }
