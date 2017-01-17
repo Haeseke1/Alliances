@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
-import me.Haeseke1.Alliances.Arena.Commands.Arena;
+import me.Haeseke1.Alliances.Arena.Commands.ArenaCommand;
 import me.Haeseke1.Alliances.Challenge.ChallengeManager;
 import me.Haeseke1.Alliances.Challenge.Commands.mainChallenges;
 import me.Haeseke1.Alliances.Challenge.Type.Block_Breaking;
@@ -143,7 +143,7 @@ public class Main extends JavaPlugin {
 		getCommand("Outpost").setExecutor(new Outpost());
 		getCommand("Region").setExecutor(new region());
 		getCommand("Challenges").setExecutor(new mainChallenges());
-		getCommand("Arena").setExecutor(new Arena());
+		getCommand("Arena").setExecutor(new ArenaCommand());
 	}
 	
 	public void registerCustomEntitys(){
