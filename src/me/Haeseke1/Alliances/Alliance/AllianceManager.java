@@ -67,6 +67,7 @@ public class AllianceManager {
 			f.set(alli.getName() + ".Wins", alli.getWins());
 			f.set(alli.getName() + ".Losses", alli.getLoses());
 			f.set(alli.getName() + ".Owner", alli.getOwner().toString());
+			f.set(alli.getName() + ".Exp", alli.getExp());
 			List<String> list = new ArrayList<String>();
 			for(Entry<UUID,String> entry : alli.getMembers().entrySet()){
 				list.add(entry.getKey().toString() + "," + entry.getValue());
@@ -83,6 +84,7 @@ public class AllianceManager {
 			int coins = 0;
 			int wins = 0;
 			int losses = 0;
+			int level = 0;
 			HashMap<UUID,String> members = new HashMap<UUID,String>();
 			try {
 				type = AllianceType.getType(ConfigManager.getStringFromConfig(f, s + ".Type"));
@@ -94,6 +96,7 @@ public class AllianceManager {
 				coins = ConfigManager.getIntFromConfig(f, s + ".Coins");
 				wins = ConfigManager.getIntFromConfig(f, s + ".Wins");
 				losses = ConfigManager.getIntFromConfig(f, s + ".Losses");
+				level = ConfigManager.getIntFromConfig(f, s + ".Level");
 			} catch (EmptyIntException e) {
 				e.printStackTrace();
 			}
@@ -106,7 +109,7 @@ public class AllianceManager {
 			} catch (EmptyStringListException e) {
 				e.printStackTrace();
 			}
-			Alliance alli = new Alliance(s, owner, wins, losses, coins, type, members);
+			Alliance alli = new Alliance(s, owner, wins, losses, coins, type, members, level);
 			Main.alliances.add(alli);
 		}
 	}
