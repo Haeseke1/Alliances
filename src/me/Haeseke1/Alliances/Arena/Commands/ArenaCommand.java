@@ -33,6 +33,10 @@ public class ArenaCommand implements CommandExecutor{
 			try{
 				String name = args[1];
 				int size = Integer.parseInt(args[2]);
+				if(size%2 != 0){
+					MessageManager.sendMessage(player,ChatColor.DARK_RED + "The arena size needs to be dividable by 2");
+					return false;
+				}
 				int countdown = Integer.parseInt(args[3]);
 				if(!regionSelect.hasRegion(player)){
 					MessageManager.sendMessage(player,ChatColor.DARK_RED + "You need to select a region first");
