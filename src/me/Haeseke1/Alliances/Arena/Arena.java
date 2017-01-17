@@ -12,6 +12,7 @@ public class Arena {
     private int mCorner1;
     private int mCorner2;
     private String mName;
+    private String mStatus;
 	
 	public Arena(String name,int arenaSize,int countdown,int corner1,int corner2){
 		mPlayersInArena = new ArrayList<>();
@@ -20,6 +21,7 @@ public class Arena {
 		mName = name;
 		mCorner1 = corner1;
 		mCorner2 = corner2;
+		mStatus = "UNDER MAINTANCE";
 	}
 	
 	public List<UUID> getPlayersInArena() {
@@ -36,6 +38,10 @@ public class Arena {
 	
 	public String getName(){
 		return mName;
+	}
+	
+	public String getStatus(){
+		return mStatus;
 	}
 	
 	public int getCorner1(){

@@ -18,6 +18,7 @@ public class ArenaManager {
 	   */
 	  for(String arenaName: arenaConfig.getConfigurationSection("Arenas").getKeys(false)){
 		  if(a.getName().equalsIgnoreCase(arenaName)){
+			  MessageManager.sendMessage(player, ChatColor.RED + "This arena does already exists: " + ChatColor.GOLD + arenaName);
 			  return;
 		  }
 	  }
@@ -30,6 +31,7 @@ public class ArenaManager {
 	  arenaConfig.set(path + ".countdown", countdown);
 	  arenaConfig.set(path + ".corner1", a.getCorner1());
 	  arenaConfig.set(path + ".corner2", a.getCorner2());
+	  arenaConfig.set(path + ".status", a.getStatus());
 	  ConfigManager.saveCustomConfig(Main.arenaFile, arenaConfig);
 	  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully created an arena: " + ChatColor.GOLD + name);
 	  }
