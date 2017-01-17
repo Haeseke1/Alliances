@@ -5,14 +5,17 @@ import java.util.List;
 
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import me.Haeseke1.Alliances.Utils.MessageManager;
 
 
-public class TownEvents {
+
+public class TownEvents implements Listener {
 	
 	
 	
@@ -22,6 +25,9 @@ public class TownEvents {
 			if(town.chunks.contains(event.getBlock().getLocation().getChunk())){
 				if(!town.owner.getMembers().containsKey(event.getPlayer().getUniqueId())){
 					event.setCancelled(true);
+					String message = MessageManager.getMessage("Town_Break_Other_Town_Block");
+					message = message.replace("%town_name%", town.name);
+					MessageManager.sendMessage(event.getPlayer(), message);
 				}
 			}
 		}
@@ -33,6 +39,9 @@ public class TownEvents {
 			if(town.chunks.contains(event.getBlock().getLocation().getChunk())){
 				if(!town.owner.getMembers().containsKey(event.getPlayer().getUniqueId())){
 					event.setCancelled(true);
+					String message = MessageManager.getMessage("Town_Place_Other_Town_Block");
+					message = message.replace("%town_name%", town.name);
+					MessageManager.sendMessage(event.getPlayer(), message);
 				}
 			}
 		}
@@ -59,10 +68,16 @@ public class TownEvents {
 			if(town.chunks.contains(event.getTo().getChunk())){
 				if(!town.inTown.contains(event.getPlayer())){
 					town.inTown.add(event.getPlayer());
+					String message = MessageManager.getMessage("Town_Entering_A_Town");
+					message = message.replace("%town_name%", town.name);
+					MessageManager.sendMessage(event.getPlayer(), message);
 				}
 			}else{
 				if(town.inTown.contains(event.getPlayer())){
 					town.inTown.remove(event.getPlayer());
+					String message = MessageManager.getMessage("Town_Leaving_A_Town");
+					message = message.replace("%town_name%", town.name);
+					MessageManager.sendMessage(event.getPlayer(), message);
 				}
 			}
 		}

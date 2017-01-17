@@ -17,4 +17,6 @@ commands:
   Challenges:
     aliases: [ch,chal]
   Arena:
-    aliases: [arena,a]
+    aliases: [a]
+  Town: 
+    aliases: [t]

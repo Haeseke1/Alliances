@@ -46,6 +46,8 @@ import me.Haeseke1.Alliances.Outpost.Commands.Outpost;
 import me.Haeseke1.Alliances.Shop.ShopEvents;
 import me.Haeseke1.Alliances.Shop.ShopManager;
 import me.Haeseke1.Alliances.Shop.Commands.ShopC;
+import me.Haeseke1.Alliances.Town.TownEvents;
+import me.Haeseke1.Alliances.Town.Commands.TownC;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
@@ -117,7 +119,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new regionSelect(), this);
 		pm.registerEvents(new ShopEvents(), this);
 		pm.registerEvents(new ChatEvent(), this);
-		
+		pm.registerEvents(new TownEvents(), this);
 		/*
 		 * Challenges 
 		 */
@@ -144,6 +146,7 @@ public class Main extends JavaPlugin {
 		getCommand("Region").setExecutor(new region());
 		getCommand("Challenges").setExecutor(new mainChallenges());
 		getCommand("Arena").setExecutor(new Arena());
+		getCommand("Town").setExecutor(new TownC());
 	}
 	
 	public void registerCustomEntitys(){

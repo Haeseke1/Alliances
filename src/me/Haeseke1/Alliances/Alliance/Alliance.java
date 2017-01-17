@@ -23,7 +23,7 @@ public class Alliance {
 	private final AllianceType type;
 	private int exp;
 	
-	private Town town;
+	private List<Town> town = new ArrayList<Town>();
 	
 	
 	private List<UUID> admins = new ArrayList<UUID>();
@@ -145,12 +145,16 @@ public class Alliance {
 		this.exp = exp;
 	}
 
-	public Town getTown() {
+	public List<Town> getTown() {
 		return town;
 	}
 
-	public void setTown(Town town) {
+	public void setTown(List<Town> town) {
 		this.town = town;
+	}
+	
+	public void addTown(Town town){
+		this.town.add(town);
 	}
 	
 }

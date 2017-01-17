@@ -96,7 +96,7 @@ public class AllianceManager {
 				coins = ConfigManager.getIntFromConfig(f, s + ".Coins");
 				wins = ConfigManager.getIntFromConfig(f, s + ".Wins");
 				losses = ConfigManager.getIntFromConfig(f, s + ".Losses");
-				level = ConfigManager.getIntFromConfig(f, s + ".Level");
+				level = ConfigManager.getIntFromConfig(f, s + ".Exp");
 			} catch (EmptyIntException e) {
 				e.printStackTrace();
 			}
