@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Arena.Arena;
 import me.Haeseke1.Alliances.Arena.ArenaManager;
+import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
 
@@ -54,6 +55,15 @@ public class ArenaCommand implements CommandExecutor{
 		if(args.length == 2 && args[0].equalsIgnoreCase("remove")){
 			String name = args[1];
 			ArenaManager.removeArena(name, player);
+		}
+		
+		if(args.length == 2 && args[0].equalsIgnoreCase("join")){
+			String name = args[1];
+			try {
+				ArenaManager.joinArena(player, name);
+			} catch (EmptyStringException e) {
+				e.printStackTrace();
+			}
 		}
 		return false;
  }

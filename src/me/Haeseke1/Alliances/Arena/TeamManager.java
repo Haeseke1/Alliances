@@ -3,7 +3,9 @@ package me.Haeseke1.Alliances.Arena;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
+import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Utils.ConfigManager;
 
 public class TeamManager {
 
@@ -28,4 +30,10 @@ public class TeamManager {
 		return 0;
 	}
 	
+	public static boolean teamIsFree(int number, String arenaName) throws EmptyStringException{
+		if(ConfigManager.getStringFromConfig(arenaConfig, "Arenas." + arenaName.toLowerCase() + ".spawns.team" + number + ".alliance").equalsIgnoreCase("")){
+			return true;
+		}
+		return false;
+	}
 }
