@@ -124,4 +124,18 @@ public class ArenaManager {
 	  MessageManager.sendMessage(player, ChatColor.RED + "You're not in an alliance");
 	  return;
   }
+  public static void addSpawn(String name, int teamNumber, Player player){
+	 if(arenaExists(name)){
+	  int spawnCount = arenaConfig.getConfigurationSection("Arenas." + name.toLowerCase() + ".spawns.team" + teamNumber).getKeys(false).size();
+	  if((spawnCount - 1) != (arenaConfig.getInt("Arenas." + name.toLowerCase() + ".size") / 2)){
+	  ConfigManager.setLocationFromConfig(arenaConfig, "Arenas." + name.toLowerCase() + ".spawns.team" + teamNumber + "." + (spawnCount), player.getLocation());
+      MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully added a spawn to team " + teamNumber + ChatColor.GOLD + " #" + (spawnCount));
+	  return;
+	  }
+	  MessageManager.sendMessage(player, ChatColor.RED + "Team " + teamNumber + " has reached his maximum spawn number");
+	  return;
+    }
+	  MessageManager.sendMessage(player, ChatColor.RED + "This arena doesn't exists");
+	 return;
+  }
 }

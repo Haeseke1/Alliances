@@ -29,6 +29,7 @@ public class ArenaCommand implements CommandExecutor{
 			player.sendMessage(MessageManager.infoColorCode + "/arena create <name> <size> <countdown> #Creates and adds an arena to the game");
 			player.sendMessage(MessageManager.infoColorCode + "/arena remove <name> #Removes an arena from the game");
 			player.sendMessage(MessageManager.infoColorCode + "/arena join <name> #Join an arena by name");
+			player.sendMessage(MessageManager.infoColorCode + "/arena add spawn <name> <team> #Adds a spawnpoint to the config");
 		}
 		if(args.length == 4 && args[0].equalsIgnoreCase("create")){
 			try{
@@ -51,11 +52,11 @@ public class ArenaCommand implements CommandExecutor{
 				MessageManager.sendMessage(player,ChatColor.DARK_RED + "Something went wrong: syntax error");
 				return false;
 			}
-		}
+		}else
 		if(args.length == 2 && args[0].equalsIgnoreCase("remove")){
 			String name = args[1];
 			ArenaManager.removeArena(name, player);
-		}
+		}else
 		
 		if(args.length == 2 && args[0].equalsIgnoreCase("join")){
 			String name = args[1];
@@ -64,7 +65,16 @@ public class ArenaCommand implements CommandExecutor{
 			} catch (EmptyStringException e) {
 				e.printStackTrace();
 			}
-		}
+		}else
+		
+		if(args.length == 4 && args[0].equalsIgnoreCase("add") && args[1].equalsIgnoreCase("spawn")){
+			try{
+			ArenaManager.addSpawn(args[2], Integer.parseInt(args[3]), player);
+			}catch(Exception e){
+			MessageManager.sendMessage(player, ChatColor.RED + "Team number must be an integer");
+			}
 		return false;
  }
+		return false;
+	}
 }
