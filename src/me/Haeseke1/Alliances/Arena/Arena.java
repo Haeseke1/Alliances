@@ -1,14 +1,17 @@
 package me.Haeseke1.Alliances.Arena;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Location;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
+
 public class Arena {
 
-	private List<UUID> mPlayersInArena;
+	private HashMap<UUID,Alliance> mPlayersInArena;
 	private List<Location> mSpawns;
     private int mSize;
     private int mCountdown;
@@ -18,17 +21,17 @@ public class Arena {
     private String mStatus;
 	
 	public Arena(String name,int arenaSize,int countdown,Location corner1,Location corner2){
-		mPlayersInArena = new ArrayList<>();
+		mPlayersInArena = new HashMap<>();
 		mSize = arenaSize;
 		mCountdown = countdown;
 		mName = name;
 		mCorner1 = corner1;
 		mCorner2 = corner2;
-		mStatus = "UNDER MAINTANCE";
+		mStatus = "UNDER_MAINTANCE";
 		mSpawns = new ArrayList<>();
 	}
 	
-	public List<UUID> getPlayersInArena() {
+	public HashMap<UUID,Alliance> getPlayersInArena() {
 		return mPlayersInArena;
 	}
 	

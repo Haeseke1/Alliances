@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Arena.Arena;
 import me.Haeseke1.Alliances.Arena.ArenaManager;
+import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
@@ -73,8 +74,33 @@ public class ArenaCommand implements CommandExecutor{
 			}catch(Exception e){
 			MessageManager.sendMessage(player, ChatColor.RED + "Team number must be an integer");
 			}
-		return false;
- }
+		}else if(args.length == 3 && args[0].equalsIgnoreCase("set") && args[1].equalsIgnoreCase("lobby")){
+			ArenaManager.setLobby(args[2], player);	
+			return true;
+			}else if(args.length == 4 && args[0].equalsIgnoreCase("set") && args[1].equalsIgnoreCase("status")){
+				String status = args[3].toUpperCase();
+				String arenaname = args[2].toLowerCase();
+				switch(status){
+				case "PLAYABLE":
+					try {
+						ArenaManager.setStatus(arenaname, status, player);
+					} catch (EmptyLocationException e) {
+						e.printStackTrace();
+					}
+					break;
+				case "UNDER_MAINTANCE":
+					try {
+						ArenaManager.setStatus(arenaname, status, player);
+					} catch (EmptyLocationException e) {
+						e.printStackTrace();
+					}
+					break;
+				default:
+					MessageManager.sendMessage(player, ChatColor.RED + "You can't set the status to " + status);
+					break;
+				}
+				return true;
+				}
 		return false;
 	}
 }

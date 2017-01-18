@@ -2,6 +2,7 @@ package me.Haeseke1.Alliances.Arena;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -42,8 +43,6 @@ public class ArenaManager {
 	  arenaConfig.set(path + ".status", a.getStatus());
 	  arenaConfig.set(path + ".spawns.team1.alliance", "");
 	  arenaConfig.set(path + ".spawns.team2.alliance", "");
-	  arenaConfig.set(path + ".spawns.team1.alliance.players", "");
-	  arenaConfig.set(path + ".spawns.team2.alliance.players", "");
 	  arenas.add(a);
 	  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully created an arena: " + ChatColor.GOLD + name);
 	  }
@@ -56,8 +55,6 @@ public class ArenaManager {
 			  String path = "Arenas." + name;
 			  arenaConfig.set(path + ".spawns.team1.alliance", "");
 			  arenaConfig.set(path + ".spawns.team2.alliance", "");
-			  arenaConfig.set(path + ".spawns.team1.alliance.players", "");
-			  arenaConfig.set(path + ".spawns.team2.alliance.players", "");
 			  Arena a = new Arena(name, ConfigManager.getIntFromConfig(arenaConfig ,"Arenas." + name + ".size"), ConfigManager.getIntFromConfig(arenaConfig ,"Arenas." + name + ".countdown"), ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + name + ".corner1"), ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + name + ".corner2"));
 			  arenas.add(a);
 		  }
@@ -97,21 +94,30 @@ public class ArenaManager {
   }
   
   public static void joinArena(Player player, String arenaname) throws EmptyStringException{
+	 Arena arena = ArenaManager.getArenaByName(arenaname);
+	if(checkStatus(arenaname,"PLAYABLE")){
+	 if(!isInArena(player)){
 	  if(AllianceManager.playerIsInAlli(player)){
 		 if(ArenaManager.arenaExists(arenaname)){
 		  Alliance alliance = AllianceManager.getAlliance(player);
 		  if(TeamManager.teamExists(alliance, arenaname)){
-			  // TODO Player needs to join the game
+		    if(ArenaManager.checkTeamSize(TeamManager.getTeamNumber(alliance, arenaname), arenaname) != (arena.getSize() / 2)){
+			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
 			  return;
+		    }
+			  MessageManager.sendMessage(player, ChatColor.RED + "Your alliance team is full");
+              return;
 		  }
 		  if(TeamManager.teamIsFree(1, arenaname)){
 			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team1.alliance", alliance.getName());
+			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
 			  return;
 		  }
 		  if(TeamManager.teamIsFree(2, arenaname)){
 			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team2.alliance", alliance.getName());
+			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
 			  return;
 		  }
@@ -123,13 +129,19 @@ public class ArenaManager {
 	  }
 	  MessageManager.sendMessage(player, ChatColor.RED + "You're not in an alliance");
 	  return;
+    }
+	  MessageManager.sendMessage(player, ChatColor.RED + "You're already in an arena");
+	  return;
+	}
+	  MessageManager.sendMessage(player, ChatColor.RED + "This arena isn't joinable at the moment");
+	  return;
   }
   public static void addSpawn(String name, int teamNumber, Player player){
 	 if(arenaExists(name)){
 	  int spawnCount = arenaConfig.getConfigurationSection("Arenas." + name.toLowerCase() + ".spawns.team" + teamNumber).getKeys(false).size();
 	  if((spawnCount - 1) != (arenaConfig.getInt("Arenas." + name.toLowerCase() + ".size") / 2)){
-	  ConfigManager.setLocationFromConfig(arenaConfig, "Arenas." + name.toLowerCase() + ".spawns.team" + teamNumber + "." + (spawnCount), player.getLocation());
-      MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully added a spawn to team " + teamNumber + ChatColor.GOLD + " #" + (spawnCount));
+	  ConfigManager.setLocationFromConfig(arenaConfig, "Arenas." + name.toLowerCase() + ".spawns.team" + teamNumber + "." + (spawnCount - 1), player.getLocation());
+      MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully added a spawn to team " + teamNumber + ChatColor.GOLD + " #" + (spawnCount - 1));
 	  return;
 	  }
 	  MessageManager.sendMessage(player, ChatColor.RED + "Team " + teamNumber + " has reached his maximum spawn number");
@@ -137,5 +149,100 @@ public class ArenaManager {
     }
 	  MessageManager.sendMessage(player, ChatColor.RED + "This arena doesn't exists");
 	 return;
+  }
+  
+  public static boolean isInArena(Player player){
+	  for(Arena a: arenas){
+		  for(UUID playerUUID: a.getPlayersInArena().keySet()){
+			  if(player.getUniqueId() == playerUUID){
+				  Bukkit.broadcastMessage(playerUUID.toString());
+				  return true;
+			  }
+		  }
+	  }
+	  return false;
+  }
+  
+  public static int checkTeamSize(int team,String arenaName){
+	  Arena arena = getArenaByName(arenaName);
+	  int count = 0;
+	  String allianceName = arenaConfig.getString("Arenas." + arenaName + ".spawns.team" + team + ".alliance");
+	  for(Alliance a: arena.getPlayersInArena().values()){
+		  if(a.getName().equalsIgnoreCase(allianceName)){
+			  count ++;
+		  }
+	  }
+	  return count;
+  }
+  
+  public static void setLobby(String arenaname, Player player){
+	 if(ArenaManager.arenaExists(arenaname)){
+	  if(arenaConfig.getString("Arenas." + arenaname + ".status").equalsIgnoreCase("UNDER_MAINTANCE")){
+		  ConfigManager.setLocationFromConfig(arenaConfig, "Arenas." + arenaname + ".lobby", player.getLocation());
+		  MessageManager.sendMessage(player, ChatColor.GREEN + "Succesfully set the lobby for " + arenaname);
+		  return;
+	  }
+	  MessageManager.sendMessage(player, ChatColor.RED + "This arena isn't under maintance");
+	  return;
+  }
+	  MessageManager.sendMessage(player, ChatColor.RED + "This arena doesn't exists");
+	  return;
+ }
+  
+  public static boolean checkStatus(String arenaname, String status) throws EmptyStringException{
+	  if(ConfigManager.getStringFromConfig(arenaConfig, "Arenas." + arenaname + ".status").equalsIgnoreCase(status)){
+		  return true;
+	  }
+	  return false;
+  }
+  public static void setStatus(String arenaname, String status, Player player) throws EmptyLocationException{
+	  if(ArenaManager.arenaExists(arenaname)){
+		  if(status.equalsIgnoreCase("UNDER_MAINTANCE")){
+			  Arena a = ArenaManager.getArenaByName(arenaname);
+			  for(UUID playerUUID: a.getPlayersInArena().keySet()){
+				  Player targetPlayer = Bukkit.getPlayer(playerUUID);
+				  targetPlayer.teleport(ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname + ".lobby"));
+				  MessageManager.sendMessage(targetPlayer, ChatColor.RED + "A staff member changed the arena status to under maintance");
+				  a.getPlayersInArena().remove(playerUUID);
+			  }
+			  arenaConfig.set("Arenas." + arenaname + ".status", status);
+		  }
+		  if(status.equalsIgnoreCase("PLAYABLE")){
+			  if(checkLobby(arenaname)){
+                if(checkSpawns(arenaname)){	 
+				  arenaConfig.set("Arenas." + arenaname + ".status", status);
+				  MessageManager.sendMessage(player, ChatColor.GREEN + "Changed the arena status to " + status);
+				  return;
+                }
+  			    MessageManager.sendMessage(player, ChatColor.RED + "Their aren't enough spawns for both teams");
+                return;
+			  }
+			  MessageManager.sendMessage(player, ChatColor.RED + "You need to set a lobby to this arena");
+			  return;
+		  }
+		  MessageManager.sendMessage(player, ChatColor.GREEN + "Changed the status to " + status);
+          return;
+	  }
+	  MessageManager.sendMessage(player, ChatColor.RED + "This arena doens't exists");
+	  return;
+  }
+  public static boolean checkLobby(String arenaname){
+	  if(arenaConfig.get("Arenas." + arenaname.toLowerCase() + ".lobby") == null)  return false;
+	  return true;
+  }
+  public static boolean checkSpawns(String arenaname){
+	  int count = 0;
+	  for(String team1: arenaConfig.getConfigurationSection("Arenas." + arenaname.toLowerCase() + ".spawns.team1").getKeys(false)){
+		  count ++;
+	  }
+	  for(String team2: arenaConfig.getConfigurationSection("Arenas." + arenaname.toLowerCase() + ".spawns.team2").getKeys(false)){
+		  count ++;
+	  }
+	  count = count -= 2;
+	  Bukkit.broadcastMessage("count: " + count);
+	  if(count == arenaConfig.getInt("Arenas." + arenaname + ".size")){
+		  return true;
+	  }
+	  return false;
   }
 }
