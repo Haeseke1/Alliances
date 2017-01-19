@@ -2,7 +2,6 @@ package me.Haeseke1.Alliances.Exp;
 
 import java.util.HashMap;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;

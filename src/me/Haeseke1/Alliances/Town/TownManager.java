@@ -7,12 +7,12 @@ import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exp.Exp;
 import me.Haeseke1.Alliances.Utils.MessageManager;
-import sun.rmi.transport.proxy.CGIHandler;
 
 public class TownManager {
 	
 	public static int Town_Create_Payment;
 	public static int Town_Claim_Payment;
+	public static int Claim_Limit;
 	
 	
 	public static void createTown(Player player, Alliance alli, Chunk chunk, String name){
@@ -58,6 +58,11 @@ public class TownManager {
 		}
 		if(!TownManager.isNextTo(player.getLocation().getChunk(), town)){
 			String message = MessageManager.getMessage("Town_Not_Connected");
+			MessageManager.sendMessage(player, message);
+			return false;
+		}
+		if(town.chunks.size() >= Claim_Limit){
+			String message = MessageManager.getMessage("Town_Reached_Claim_Limit");
 			MessageManager.sendMessage(player, message);
 			return false;
 		}

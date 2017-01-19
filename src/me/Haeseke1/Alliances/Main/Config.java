@@ -79,6 +79,8 @@ public class Config {
 			}
 			
 			TownManager.Town_Create_Payment = ConfigManager.getIntFromConfig(Main.config, "Coins.Town_Starter_Cost");
+			TownManager.Town_Claim_Payment = ConfigManager.getIntFromConfig(Main.config, "Coins.Town_Claim_Cost");
+			TownManager.Claim_Limit = ConfigManager.getIntFromConfig(Main.config, "Town.Town_Claim_Limit");
 			
 		} catch (EmptyIntException e) {
 			e.printStackTrace();

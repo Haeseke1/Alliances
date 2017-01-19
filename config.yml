@@ -77,6 +77,10 @@ Outpost:
         Data: 0
         Percentage: 100
         
+        
+Town:
+  Town_Claim_Limit: 100        
+
 #Configurations for chat. var: {%alli_name%, %player_name%, %alli_rank%}
 Chat:
   Message: "%alli_name% %player_name% %alli_rank%>"
