@@ -78,7 +78,6 @@ public class ArenaManager {
 	  }
 	  MessageManager.sendMessage(player, ChatColor.RED + "This arena doesn't exists");
   }
-  
   public static boolean arenaExists(String name){
 	  for(Arena a: arenas){
 		  if(name.toLowerCase().equalsIgnoreCase(a.getName().toLowerCase())){
@@ -87,7 +86,6 @@ public class ArenaManager {
 	  }
 	  return false;
   }
-  
   public static Arena getArenaByName(String name){
 	  for(Arena a: arenas){
 		  if(a.getName().toLowerCase().equalsIgnoreCase(name)){
@@ -96,7 +94,6 @@ public class ArenaManager {
 	  }
 	  return null;
   }
-  
   public static void joinArena(Player player, String arenaname) throws EmptyStringException, EmptyLocationException{
 	 Arena arena = ArenaManager.getArenaByName(arenaname);
 	if(checkStatus(arenaname,"PLAYABLE")){
@@ -162,8 +159,7 @@ public class ArenaManager {
     }
 	  MessageManager.sendMessage(player, ChatColor.RED + "This arena doesn't exists");
 	 return;
-  }
-  
+  }  
   public static boolean isInArena(Player player){
 	  for(Arena a: arenas){
 		  for(UUID playerUUID: a.getPlayersInArena().keySet()){
@@ -174,7 +170,6 @@ public class ArenaManager {
 	  }
 	  return false;
   }
-  
   public static int checkTeamSize(int team,String arenaName){
 	  Arena arena = getArenaByName(arenaName);
 	  int count = 0;
@@ -186,7 +181,6 @@ public class ArenaManager {
 	  }
 	  return count;
   }
-  
   public static void setLobby(String arenaname, Player player){
 	 if(ArenaManager.arenaExists(arenaname)){
 	  if(arenaConfig.getString("Arenas." + arenaname + ".status").equalsIgnoreCase("UNDER_MAINTANCE")){
@@ -200,7 +194,6 @@ public class ArenaManager {
 	  MessageManager.sendMessage(player, ChatColor.RED + "This arena doesn't exists");
 	  return;
  }
-  
   public static boolean checkStatus(String arenaname, String status) throws EmptyStringException{
 	  if(ConfigManager.getStringFromConfig(arenaConfig, "Arenas." + arenaname + ".status").equalsIgnoreCase(status)){
 		  return true;
@@ -342,5 +335,6 @@ public class ArenaManager {
 	  Arena arena = getArenaOfPlayer(player);
 	  arena.getPlayersInArena().remove(player.getUniqueId());
 	  pastLocations.remove(player.getUniqueId());
+	  player.setHealth(player.getMaxHealth());
   }
 }

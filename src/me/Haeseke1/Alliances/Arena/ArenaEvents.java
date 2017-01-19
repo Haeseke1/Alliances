@@ -37,8 +37,9 @@ public class ArenaEvents implements Listener{
 			  event.setCancelled(true);
 			  return;
 		  }
-		  if(player.getHealth() < 0){
+		  if(player.getHealth() < event.getDamage()){
 			  ArenaManager.kickOnDeath(player);
+			  event.setCancelled(true);
 		  }
 	    }
 	  }
