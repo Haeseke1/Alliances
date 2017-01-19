@@ -75,6 +75,9 @@ Town_Not_Connected: "This land is not connected to your town"
 Town_Not_Owner: "You are not the owner of your alliance"
 Town_Cannot_Create_Town: "You cannot create a/more town(s)"
 
+#Can use %payment%
+Town_Cannot_Affort_Town: "Your alliance does not have enough coins! You need %payment% coins!"
+Town_Cannot_Affort_Claim: "Your alliance does not have enough coins! You need %payment% coins!"
 
 
 

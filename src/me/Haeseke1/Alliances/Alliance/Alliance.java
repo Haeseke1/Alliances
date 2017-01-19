@@ -84,6 +84,10 @@ public class Alliance {
 	public int getCoins() {
 		return mCoins;
 	}
+	
+	public void setCoins(int coins) {
+		this.mCoins = coins;
+	}
 
 	public String getName() {
 		return name;
