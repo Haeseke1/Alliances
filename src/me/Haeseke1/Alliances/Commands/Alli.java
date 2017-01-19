@@ -34,35 +34,44 @@ public class Alli implements CommandExecutor {
 			return false;
 		}
 		
+		if(!(sender instanceof Player)){
+			String message = MessageManager.getMessage("Command_Error_Not_A_User");
+			MessageManager.sendAlertMessage(message);
+			return false;
+		}
+		
+
+		Player player = (Player) sender;
+		
+		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		
 		if(args[0].equalsIgnoreCase("create")){
-			mainCreate.onCommand(sender, args);
+			mainCreate.onCommand(player, args);
 			return true;
 		}
 		
 		if(args[0].equalsIgnoreCase("join")){
-			mainJoin.onCommand(sender, args);
+			mainJoin.onCommand(player, args);
 			return true;
 		}
 		
 		if(args[0].equalsIgnoreCase("member")){
-			Member.onCommand(sender, args);
+			Member.onCommand(player, args);
 			return true;
 		}
 		
 		if(args[0].equalsIgnoreCase("Admin")){
-			Admin.onCommand(sender,args);
+			Admin.onCommand(player,args);
 			return true;
 		}
 
 		
 		if(args[0].equalsIgnoreCase("Owner")){
-			Owner.onCommand(sender,args);
+			Owner.onCommand(player,args);
 			return true;
 		}
 		
-		
-		
-		MessageManager.sendMessage((Player) sender, "Unknown command use /alliances for more help!");
+		MessageManager.sendMessage(player, wrong_arg);
 		return false;
 	}
 

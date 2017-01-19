@@ -35,6 +35,11 @@ public class CoinC implements CommandExecutor{
 		
 		if (args[0].equalsIgnoreCase("balance")) {
 			if (args.length > 1) {
+				if(!PlayerManager.isPlayerOnline(args[1])){
+					String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
+					MessageManager.sendMessage(player, message);
+					return false;
+				}
 				String message = MessageManager.getMessage("Command_Coin_Balance_Other_Answer");
 				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
 				.replace("%coin%", "")
@@ -42,7 +47,6 @@ public class CoinC implements CommandExecutor{
 				.replace("%sender_name%", "" + sender.getName())
 				.replace("%target_name%", "" + args[1]);
 				MessageManager.sendMessage(player, message);
-				return false;
 			} else {
 				String message = MessageManager.getMessage("command_coin_balance_answer");
 				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
@@ -60,14 +64,86 @@ public class CoinC implements CommandExecutor{
 			if (args.length < 3) {
 				MessageManager.sendMessage(player, wrong_arg);
 				return false;
-			} else {
-				try {
-					Coins.addPlayerCoins(args[1], Integer.parseInt(args[2]));
-				} catch (Exception e) {
-					MessageManager.sendMessage(player, wrong_arg);
+			}
+			if(!PlayerManager.isPlayerOnline(args[1])){
+				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
+				MessageManager.sendMessage(player, message);
+				return false;
+			}
+			try {
+				Coins.addPlayerCoins(args[1], Integer.parseInt(args[2]));
+			} catch (Exception e) {
+				MessageManager.sendMessage(player, wrong_arg);
+				return false;
+			}
+			String message = MessageManager.getMessage("Command_Coin_Add_Answer");
+			message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+			.replace("%coin%", "" + Integer.parseInt(args[2]))
+			.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
+			.replace("%sender_name%", "" + sender.getName())
+			.replace("%target_name%", "" + args[1]);
+			MessageManager.sendMessage(player, message);
+			if(PlayerManager.isPlayerOnline(args[1])){
+				message = MessageManager.getMessage("Command_Coin_Get_Answer");
+				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+				.replace("%coin%", "" + Integer.parseInt(args[2]))
+				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
+				.replace("%sender_name%", "" + sender.getName())
+				.replace("%target_name%", "" + args[1]);
+				MessageManager.sendMessage(PlayerManager.getPlayer(args[1]), message);
+			}
+			return false;
+		}
+		
+		if (args[0].equalsIgnoreCase("set")) {
+			if (args.length < 3) {
+				MessageManager.sendMessage((Player) sender, wrong_arg);
+				return false;
+			}
+			if(!PlayerManager.isPlayerOnline(args[1])){
+				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
+				MessageManager.sendMessage(player, message);
+				return false;
+			}
+			try {
+				Coins.setPlayerCoins(args[1], Integer.parseInt(args[2]));
+			} catch (Exception e) {
+				MessageManager.sendMessage((Player) sender, wrong_arg);
+				return false;
+			}
+			String message = MessageManager.getMessage("Command_Coin_Set_Answer");
+			message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+			.replace("%coin%", "" + Integer.parseInt(args[2]))
+			.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
+			.replace("%sender_name%", "" + sender.getName())
+			.replace("%target_name%", "" + args[1]);
+			MessageManager.sendMessage(player, message);
+			return false;
+		}
+		
+		if (args[0].equalsIgnoreCase("pay")) {
+			if (args.length < 3) {
+				MessageManager.sendMessage((Player) sender, wrong_arg);
+				return false;
+			}
+			if(!PlayerManager.isPlayerOnline(args[1])){
+				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
+				MessageManager.sendMessage(player, message);
+				return false;
+			}
+			try {
+				if (!Coins.removePlayerCoins(player, Integer.parseInt(args[2]))) {
+					String message = MessageManager.getMessage("Command_Coin_Pay_Not_Enough_Coins");
+					message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
+					.replace("%coin%", "" + Integer.parseInt(args[2]))
+					.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
+					.replace("%sender_name%", "" + sender.getName())
+					.replace("%target_name%", "" + args[1]);
+					MessageManager.sendMessage(player, message);
 					return false;
 				}
-				String message = MessageManager.getMessage("Command_Coin_Add_Answer");
+				Coins.addPlayerCoins(args[1], Integer.parseInt(args[2]));
+				String message = MessageManager.getMessage("Command_Coin_Pay_Answer");
 				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
 				.replace("%coin%", "" + Integer.parseInt(args[2]))
 				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
@@ -83,71 +159,10 @@ public class CoinC implements CommandExecutor{
 					.replace("%target_name%", "" + args[1]);
 					MessageManager.sendMessage(PlayerManager.getPlayer(args[1]), message);
 				}
-			}
-			return false;
-		}
-		
-		if (args[0].equalsIgnoreCase("set")) {
-			if (args.length < 3) {
+				return false;
+			} catch (Exception e) {
 				MessageManager.sendMessage((Player) sender, wrong_arg);
 				return false;
-			} else {
-				try {
-					Coins.setPlayerCoins(args[1], Integer.parseInt(args[2]));
-				} catch (Exception e) {
-					MessageManager.sendMessage((Player) sender, wrong_arg);
-					return false;
-				}
-				String message = MessageManager.getMessage("Command_Coin_Set_Answer");
-				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-				.replace("%coin%", "" + Integer.parseInt(args[2]))
-				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
-				.replace("%sender_name%", "" + sender.getName())
-				.replace("%target_name%", "" + args[1]);
-				MessageManager.sendMessage(player, message);
-			}
-			return false;
-		}
-		
-		if (args[0].equalsIgnoreCase("pay")) {
-			if (args.length < 3) {
-				MessageManager.sendMessage((Player) sender, wrong_arg);
-				return false;
-			} else {
-				try {
-					if (Coins.removePlayerCoins(player, Integer.parseInt(args[2]))) {
-						Coins.addPlayerCoins(args[1], Integer.parseInt(args[2]));
-						String message = MessageManager.getMessage("Command_Coin_Pay_Answer");
-						message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-						.replace("%coin%", "" + Integer.parseInt(args[2]))
-						.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
-						.replace("%sender_name%", "" + sender.getName())
-						.replace("%target_name%", "" + args[1]);
-						MessageManager.sendMessage(player, message);
-						if(PlayerManager.isPlayerOnline(args[1])){
-							message = MessageManager.getMessage("Command_Coin_Get_Answer");
-							message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-							.replace("%coin%", "" + Integer.parseInt(args[2]))
-							.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
-							.replace("%sender_name%", "" + sender.getName())
-							.replace("%target_name%", "" + args[1]);
-							MessageManager.sendMessage(PlayerManager.getPlayer(args[1]), message);
-						}
-						return false;
-					} else {
-						String message = MessageManager.getMessage("Command_Coin_Pay_Not_Enough_Coins");
-						message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-						.replace("%coin%", "" + Integer.parseInt(args[2]))
-						.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
-						.replace("%sender_name%", "" + sender.getName())
-						.replace("%target_name%", "" + args[1]);
-						MessageManager.sendMessage(player, message);
-						return false;
-					}
-				} catch (Exception e) {
-					MessageManager.sendMessage((Player) sender, wrong_arg);
-					return false;
-				}
 			}
 		}
 		MessageManager.sendMessage((Player) sender, wrong_arg);

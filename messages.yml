@@ -1,6 +1,10 @@
 Command_Error_Not_A_User: "&4&lyou need to be a player to do this command!"
 Command_Error_Wrong_Arguments: "&4&lWrong arguments! use /alliance for more information!"
 Command_Error_Select_Region: "Select a region first!"
+Command_Error_Not_A_Owner: "You are not a owner of a alliance"
+Command_Error_Not_A_Admin: "You are not a admin of a alliance"
+Command_Error_Not_A_Online_Player: "This player is not online"
+Command_Error_Not_In_Your_Alliance: "This player is not in your alliance"
 
 #Can use %sender_coin%, %target_coin%, %coin%, %sender_name% and %target_name% as variables
 Command_Coin_Balance_Answer: "Balance: %sender_coin%"
@@ -80,10 +84,25 @@ Town_Reached_Claim_Limit: "You claim more land, you are at your max!"
 Town_Cannot_Affort_Town: "Your alliance does not have enough coins! You need %payment% coins!"
 Town_Cannot_Affort_Claim: "Your alliance does not have enough coins! You need %payment% coins!"
 
+#Can use %alli_name%
+Command_Alliance_Owner_Disband_Answer: "You disbanded your alliance!"
+Command_Alliance_Owner_Disband_Broadcast: "Alliance %alli_name% is disbanded!"
 
+#Can use %player_name%, %alli_name%
+Command_Alliance_Owner_Change_Owner_Answer: "Changed ownership succesfully to %player_name%!"
+Command_Alliance_Owner_Change_Owner_Changed_Answer: "You are now the owner of %alli_name%!"
+Command_Alliance_Owner_Change_Owner_Alli_Broadcast: "The owner of this alliance is changed to %player_name%!"
 
+#Can use %player_name%, %alli_name%
+Command_Alliance_Owner_Add_Admin_Answer: "Added admin succesfully to %player_name%!"
+Command_Alliance_Owner_Add_Admin_Changed_Answer: "You are now a admin of %alli_name%!"
+Command_Alliance_Owner_Add_Admin_Alli_Broadcast: "%player_name% is now admin of this alliance!"
 
-
+#Can use %player_name%, %alli_name%
+Command_Alliance_Owner_Remove_Admin_Not_Admin: "This player is not a admin!"
+Command_Alliance_Owner_Remove_Admin_Answer: "Removed admin succesfully to %player_name%!"
+Command_Alliance_Owner_Remove_Admin_Changed_Answer: "You are no longer a admin of %alli_name%!"
+Command_Alliance_Owner_Remove_Admin_Alli_Broadcast: "%player_name% is no longer admin of this alliance!"
 
 
 
