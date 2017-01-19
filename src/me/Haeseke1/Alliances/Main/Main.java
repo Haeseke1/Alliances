@@ -190,13 +190,12 @@ public class Main extends JavaPlugin {
 		outpostConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "outpost.yml"), this);
 		challengeConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "challenges.yml"), this);
 		shopConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "shop.yml"), this);
-		messageConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "messages.yml"), this);
 		arenaConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "arenas.yml"), this);
 		AllianceManager.registerAlliance();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();
 		ShopManager.registerShops();
-		MessageManager.registerMessages();
+		MessageManager.registerMessages(this);
 	}
 
 	public void saveAllCustomConfigs() {

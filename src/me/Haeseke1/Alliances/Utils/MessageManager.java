@@ -1,10 +1,15 @@
 package me.Haeseke1.Alliances.Utils;
 
+import java.io.File;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
@@ -44,8 +49,25 @@ public class MessageManager {
 	}
 
 	
-	public static void registerMessages(){
-		FileConfiguration file = Main.messageConfig;
+	public static void registerMessages(Main main){
+		File f = new File(main.getDataFolder(), "messages.yml");
+		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
+		Reader defConfigStream;
+		try {
+			if(!f.exists()){
+				main.saveResource(f.getName(), false);
+				file = YamlConfiguration.loadConfiguration(f);
+			}else{
+				defConfigStream = new InputStreamReader(main.getResource(f.getName()), "UTF8");
+			    if (defConfigStream != null) {
+			        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+			        file.setDefaults(defConfig);
+			    }
+			}
+		} catch (UnsupportedEncodingException e) {
+			Main.pm.disablePlugin(Main.plugin);
+			e.printStackTrace();
+		}
 		for(String s : file.getKeys(false)){
 			try {
 				messages.put(s.toLowerCase(), ConfigManager.getStringFromConfig(file, s));
