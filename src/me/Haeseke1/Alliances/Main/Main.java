@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
+import me.Haeseke1.Alliances.Arena.ArenaEvents;
 import me.Haeseke1.Alliances.Arena.ArenaManager;
 import me.Haeseke1.Alliances.Arena.Commands.ArenaCommand;
 import me.Haeseke1.Alliances.Challenge.ChallengeManager;
@@ -144,6 +145,10 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new Mob_Killing_Wither(), this);
 		pm.registerEvents(new Mob_Killing_Zombie(), this);
 		pm.registerEvents(new Player_Kill(), this);
+		/*
+		 * Arena events
+		 */
+		pm.registerEvents(new ArenaEvents(), this);
 	}
 
 	public void registerCommands() {

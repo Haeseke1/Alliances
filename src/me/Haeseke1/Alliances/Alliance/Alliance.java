@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import me.Haeseke1.Alliances.Town.Town;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class Alliance {
 
@@ -155,6 +156,16 @@ public class Alliance {
 	
 	public void addTown(Town town){
 		this.town.add(town);
+	}
+	
+	public void addLose(Player playerInArena){
+		this.mLoses = this.mLoses + 1;
+		for(UUID playerUUID: this.getMembers().keySet()){
+			Player player = Bukkit.getPlayer(playerUUID);
+			if(player.isOnline()){
+				MessageManager.sendMessage(player, ChatColor.GOLD + playerInArena.getName() + ChatColor.RED + " lost an arena fight " + ChatColor.GOLD + "(+1 lose)");
+			}
+		}
 	}
 	
 }

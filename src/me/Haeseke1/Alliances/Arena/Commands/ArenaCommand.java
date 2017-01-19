@@ -31,6 +31,8 @@ public class ArenaCommand implements CommandExecutor{
 			player.sendMessage(MessageManager.infoColorCode + "/arena remove <name> #Removes an arena from the game");
 			player.sendMessage(MessageManager.infoColorCode + "/arena join <name> #Join an arena by name");
 			player.sendMessage(MessageManager.infoColorCode + "/arena add spawn <name> <team> #Adds a spawnpoint to the config");
+			player.sendMessage(MessageManager.infoColorCode + "/arena set lobby <name> #Sets the lobby for an arena");
+			player.sendMessage(MessageManager.infoColorCode + "/arena set status <name> <PLAYABLE/UNDER_MAINTANCE> #Sets the status for an arena");
 		}
 		if(args.length == 4 && args[0].equalsIgnoreCase("create")){
 			try{
@@ -63,7 +65,7 @@ public class ArenaCommand implements CommandExecutor{
 			String name = args[1];
 			try {
 				ArenaManager.joinArena(player, name);
-			} catch (EmptyStringException e) {
+			} catch (EmptyStringException | EmptyLocationException e) {
 				e.printStackTrace();
 			}
 		}else
@@ -100,6 +102,23 @@ public class ArenaCommand implements CommandExecutor{
 					break;
 				}
 				return true;
+				}else if(args.length == 1 && args[0].equalsIgnoreCase("leave")){
+						try {
+							ArenaManager.leaveArena(player);
+						} catch (EmptyStringException e) {
+							e.printStackTrace();
+						}
+					return true;
+				}else{
+					player.sendMessage(MessageManager.infoColorCode + "===== Arena =====");
+					player.sendMessage(MessageManager.infoColorCode + "Commands:");
+					player.sendMessage(MessageManager.infoColorCode + "/arena create <name> <size> <countdown> #Creates and adds an arena to the game");
+					player.sendMessage(MessageManager.infoColorCode + "/arena remove <name> #Removes an arena from the game");
+					player.sendMessage(MessageManager.infoColorCode + "/arena join <name> #Join an arena by name");
+					player.sendMessage(MessageManager.infoColorCode + "/arena add spawn <name> <team> #Adds a spawnpoint to the config");
+					player.sendMessage(MessageManager.infoColorCode + "/arena set lobby <name> #Sets the lobby for an arena");
+					player.sendMessage(MessageManager.infoColorCode + "/arena set status <name> <PLAYABLE/UNDER_MAINTANCE> #Sets the status for an arena");
+					return true;
 				}
 		return false;
 	}

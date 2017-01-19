@@ -1,11 +1,14 @@
 package me.Haeseke1.Alliances.Arena;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -23,6 +26,7 @@ public class ArenaManager {
 	
 	private static FileConfiguration arenaConfig = Main.arenaConfig;
 	public static List<Arena> arenas = new ArrayList<>();
+	public static HashMap<UUID,Location> pastLocations = new HashMap<>();
 	
   public static void createArena(Arena a, Player player){
 	  /*
@@ -93,7 +97,7 @@ public class ArenaManager {
 	  return null;
   }
   
-  public static void joinArena(Player player, String arenaname) throws EmptyStringException{
+  public static void joinArena(Player player, String arenaname) throws EmptyStringException, EmptyLocationException{
 	 Arena arena = ArenaManager.getArenaByName(arenaname);
 	if(checkStatus(arenaname,"PLAYABLE")){
 	 if(!isInArena(player)){
@@ -104,21 +108,30 @@ public class ArenaManager {
 		    if(ArenaManager.checkTeamSize(TeamManager.getTeamNumber(alliance, arenaname), arenaname) != (arena.getSize() / 2)){
 			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
+			  pastLocations.put(player.getUniqueId(), player.getLocation());
+			  player.teleport(ArenaManager.getLobby(arenaname));
+			  startArena(arenaname.toLowerCase());
 			  return;
 		    }
 			  MessageManager.sendMessage(player, ChatColor.RED + "Your alliance team is full");
-              return;
+			  return;
 		  }
 		  if(TeamManager.teamIsFree(1, arenaname)){
 			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team1.alliance", alliance.getName());
 			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
+			  pastLocations.put(player.getUniqueId(), player.getLocation());
+			  player.teleport(ArenaManager.getLobby(arenaname));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
+			  startArena(arenaname.toLowerCase());
 			  return;
 		  }
 		  if(TeamManager.teamIsFree(2, arenaname)){
 			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team2.alliance", alliance.getName());
 			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
+			  pastLocations.put(player.getUniqueId(), player.getLocation());
+			  player.teleport(ArenaManager.getLobby(arenaname));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
+			  startArena(arenaname.toLowerCase());
 			  return;
 		  }
 		  MessageManager.sendMessage(player, ChatColor.RED + "This arena is full");
@@ -155,7 +168,6 @@ public class ArenaManager {
 	  for(Arena a: arenas){
 		  for(UUID playerUUID: a.getPlayersInArena().keySet()){
 			  if(player.getUniqueId() == playerUUID){
-				  Bukkit.broadcastMessage(playerUUID.toString());
 				  return true;
 			  }
 		  }
@@ -201,9 +213,10 @@ public class ArenaManager {
 			  Arena a = ArenaManager.getArenaByName(arenaname);
 			  for(UUID playerUUID: a.getPlayersInArena().keySet()){
 				  Player targetPlayer = Bukkit.getPlayer(playerUUID);
-				  targetPlayer.teleport(ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname + ".lobby"));
+				  targetPlayer.teleport(pastLocations.get(playerUUID));
 				  MessageManager.sendMessage(targetPlayer, ChatColor.RED + "A staff member changed the arena status to under maintance");
 				  a.getPlayersInArena().remove(playerUUID);
+				  pastLocations.remove(playerUUID);
 			  }
 			  arenaConfig.set("Arenas." + arenaname + ".status", status);
 		  }
@@ -211,13 +224,20 @@ public class ArenaManager {
 			  if(checkLobby(arenaname)){
                 if(checkSpawns(arenaname)){	 
 				  arenaConfig.set("Arenas." + arenaname + ".status", status);
+				  if(player != null){
 				  MessageManager.sendMessage(player, ChatColor.GREEN + "Changed the arena status to " + status);
+				  }
 				  return;
                 }
   			    MessageManager.sendMessage(player, ChatColor.RED + "Their aren't enough spawns for both teams");
                 return;
 			  }
 			  MessageManager.sendMessage(player, ChatColor.RED + "You need to set a lobby to this arena");
+			  return;
+		  }
+		  if(status.equalsIgnoreCase("COUNTING")
+				  || status.equalsIgnoreCase("PLAYING")){
+			  arenaConfig.set("Arenas." + arenaname + ".status", status);
 			  return;
 		  }
 		  MessageManager.sendMessage(player, ChatColor.GREEN + "Changed the status to " + status);
@@ -239,10 +259,88 @@ public class ArenaManager {
 		  count ++;
 	  }
 	  count = count -= 2;
-	  Bukkit.broadcastMessage("count: " + count);
 	  if(count == arenaConfig.getInt("Arenas." + arenaname + ".size")){
 		  return true;
 	  }
 	  return false;
+  }
+  public static Location getLobby(String arenaname) throws EmptyLocationException{
+	  return ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".lobby");
+  }
+  public static void startArena(String arenaname) throws IllegalArgumentException, EmptyStringException{
+	  Arena a = ArenaManager.getArenaByName(arenaname);
+	if(ArenaManager.checkTeamSize(1, arenaname) + ArenaManager.checkTeamSize(2, arenaname) == a.getSize()){
+		Bukkit.broadcastMessage("test");
+	 if(ArenaManager.checkStatus(arenaname, "PLAYABLE")){
+	  Countdown counter = new Countdown(arenaname);
+	  counter.runTaskTimer(Main.plugin, 0L, 20L);
+
+     }
+	}
+  }
+  public static void leaveArena(Player player) throws EmptyStringException{
+	 if(ArenaManager.isInArena(player)){
+		 String arenaname = ArenaManager.getArenaOfPlayer(player).getName();
+	  if(ArenaManager.checkStatus(arenaname, "COUNTING")){
+		  MessageManager.sendMessage(player, ChatColor.RED + "You can't leave the arena while it's counting down");
+		  return;
+	  }
+	  if(ArenaManager.checkStatus(arenaname,"PLAYING")){
+		  player.teleport(pastLocations.get(player.getUniqueId()));
+		  Arena a = ArenaManager.getArenaByName(arenaname);
+		  a.getPlayersInArena().remove(player.getUniqueId());
+		  pastLocations.remove(player.getUniqueId());
+		  if(player != null){
+		  MessageManager.sendMessage(player, ChatColor.GREEN + "You've left the arena");
+		  }
+		  AllianceManager.getAlliance(player).addLose(player);
+		  return;
+	  }
+     player.teleport(pastLocations.get(player.getUniqueId()));
+	 Arena a = ArenaManager.getArenaByName(arenaname);
+	 a.getPlayersInArena().remove(player.getUniqueId());
+	 pastLocations.remove(player.getUniqueId());
+	 MessageManager.sendMessage(player, ChatColor.GREEN + "You've left the arena");
+	  return;
+    }
+	 MessageManager.sendMessage(player, ChatColor.RED + "You aren't in an arena");
+	 return;
+  }
+  public static void spawnPlayers(String arenaname) throws EmptyLocationException{
+	  Arena a = ArenaManager.getArenaByName(arenaname);
+	 for(UUID playerUUID: a.getPlayersInArena().keySet()){
+		 Player player = Bukkit.getPlayer(playerUUID);
+		 Alliance al = AllianceManager.getAlliance(player);
+		 int count1 = 0;
+		 int count2 = 0;
+		 if(TeamManager.getTeamNumber(al, arenaname) == 1){
+			 player.teleport(ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".spawns.team1." + count1));
+			 count1 ++;
+		 }
+		 if(TeamManager.getTeamNumber(al, arenaname) == 2){
+			 player.teleport(ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".spawns.team2." + count2));
+			 count2 ++;
+		 }
+		 player.setGameMode(GameMode.SURVIVAL);
+		 player.setHealth(player.getMaxHealth());
+	 }
+  }
+  public static Arena getArenaOfPlayer(Player player){
+	  for(Arena a: arenas){
+		  for(UUID playerUUID: a.getPlayersInArena().keySet()){
+			  if(playerUUID == player.getUniqueId()){
+				  return a;
+			  }
+		  }
+	  }
+	  return null;
+  }
+  public static void kickOnDeath(Player player){
+	  Alliance al = AllianceManager.getAlliance(player);
+	  al.addLose(player);
+	  player.teleport(pastLocations.get(player.getUniqueId()));
+	  Arena arena = getArenaOfPlayer(player);
+	  arena.getPlayersInArena().remove(player.getUniqueId());
+	  pastLocations.remove(player.getUniqueId());
   }
 }
