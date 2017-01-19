@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
@@ -30,14 +29,13 @@ public class Owner {
 			return;
 		}
 		
+		if(!AllianceManager.playerIsInAlli(player) || !AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId())){
+			String message = MessageManager.getMessage("Command_Error_Not_A_Owner");
+			MessageManager.sendMessage(player, message);
+			return;
+		}
 		
 		if(args[1].equalsIgnoreCase("disband")){
-			if(!AllianceManager.playerIsInAlli(player) || !AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId())){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Owner");
-				MessageManager.sendMessage(player, message);
-				return;
-			}
-			
 			Alliance alli = AllianceManager.getAlliance(player);
 			String name = alli.getName();
 			Main.alliances.remove(alli);
@@ -52,11 +50,6 @@ public class Owner {
 		}
 		
 		if(args[1].equalsIgnoreCase("change") && args.length > 2){
-			if(!AllianceManager.playerIsInAlli(player) || !AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId())){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Owner");
-				MessageManager.sendMessage(player, message);
-				return;
-			}
 			if(!PlayerManager.isPlayerOnline(args[1])){
 				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
 				MessageManager.sendMessage(player, message);
@@ -87,11 +80,6 @@ public class Owner {
 		}
 		
 		if(args[1].equalsIgnoreCase("addadmin") && args.length > 2){
-			if(!AllianceManager.playerIsInAlli(player) || !AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId())){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Owner");
-				MessageManager.sendMessage(player, message);
-				return;
-			}
 			if(!PlayerManager.isPlayerOnline(args[1])){
 				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
 				MessageManager.sendMessage(player, message);
@@ -122,11 +110,6 @@ public class Owner {
 		}
 		
 		if(args[1].equalsIgnoreCase("removeadmin") && args.length > 2){
-			if(!AllianceManager.playerIsInAlli(player) || !AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId())){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Owner");
-				MessageManager.sendMessage(player, message);
-				return;
-			}
 			if(!PlayerManager.isPlayerOnline(args[1])){
 				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
 				MessageManager.sendMessage(player, message);
