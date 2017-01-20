@@ -3,6 +3,7 @@ Command_Error_Wrong_Arguments: "&4&lWrong arguments! use /alliance for more info
 Command_Error_Select_Region: "Select a region first!"
 Command_Error_Not_A_Owner: "You are not a owner of a alliance"
 Command_Error_Not_A_Admin: "You are not a admin of a alliance"
+Command_Error_Not_In_A_Alliance: "You are not in a alliance"
 Command_Error_Not_A_Online_Player: "This player is not online"
 Command_Error_Not_In_Your_Alliance: "This player is not in your alliance"
 
@@ -111,7 +112,26 @@ Command_Alliance_Owner_Invited_Answer: "You are invited by the alliance %alli_na
 Command_Alliance_Owner_SetRank_Answer: "You changed the rank for %player_name% to %rank%!"
 Command_Alliance_Owner_SetRank_Changed_Answer: "Your rank is changed to %rank%!"
 
+#Can use %player_name%, %alli_name%
+Command_Alliance_Member_Leave_Is_Owner: "You cannot leave a alliance if you are the owner!"
+Command_Alliance_Member_Leave_Answer: "you left %alli_name%!"
+Command_Alliance_Member_Leave_Alli_Broadcast: "%player_name% left the alliance!"
 
+#Can use no var
+Command_Alliance_Join_And_Create_Already_In_A_Alliance: "You are already in a alliance!"
+
+#Can use %alli_name%
+Command_Alliance_Join_Answer: "You are member of the alliance %alli_name%!" 
+Command_Alliance_Join_Not_Exist: "Something went wrong, the alliance does not exist anymore!"
+
+#Can use no var
+Command_Alliance_Create_Type_Name: "Type your name of your alliance in the chat!"
+Command_Alliance_Create_Not_Enough_Coins: "You don't have enough coins!"
+
+#Can use %alli_name%
+Command_Alliance_Create_Answer: "Alliance created succesfully!"
+Command_Alliance_Create_Broadcast: "%alli_name% is born!"
+Command_Alliance_Create_Already_Exist: "Alliance with this name already exists"
 
 
 

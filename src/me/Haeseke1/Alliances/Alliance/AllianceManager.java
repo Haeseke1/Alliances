@@ -19,21 +19,24 @@ import me.Haeseke1.Alliances.Utils.MessageManager;
 public class AllianceManager {
 
 	public static boolean createNewAlliance(String name, Player owner, AllianceType type) {
-		if (!playerIsInAlli(owner)) {
-			if(!alliExist(name)){
-				int mCoins = 0;
-				int mWins = 0;
-				int mLoses = 0;
-				Alliance alliance = new Alliance(name, owner.getUniqueId(), mWins, mLoses, mCoins, type);
-				Main.alliances.add(alliance);
-				alliance.getMembers().put(owner.getUniqueId(), "Owner");
-				return true;
-			}
-			MessageManager.sendMessage(owner, "Alliance already exist.");
+		if (playerIsInAlli(owner)) {
+			String message = MessageManager.getMessage("Command_Alliance_Join_And_Create_Already_In_A_Alliance");
+			MessageManager.sendMessage(owner, message);
 			return false;
 		}
-		MessageManager.sendMessage(owner, "You're already in an alliance.");
-		return false;
+		if(alliExist(name)){
+			String message = MessageManager.getMessage("Command_Alliance_Create_Already_Exist");
+			message = message.replace("%alli_name%", name);
+			MessageManager.sendMessage(owner, message);
+			return false;
+		}
+		int mCoins = 0;
+		int mWins = 0;
+		int mLoses = 0;
+		Alliance alliance = new Alliance(name, owner.getUniqueId(), mWins, mLoses, mCoins, type);
+		Main.alliances.add(alliance);
+		alliance.getMembers().put(owner.getUniqueId(), "Owner");
+		return true;
 	}
 	
 
