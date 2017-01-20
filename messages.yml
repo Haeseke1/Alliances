@@ -1,6 +1,11 @@
 Command_Error_Not_A_User: "&4&lyou need to be a player to do this command!"
 Command_Error_Wrong_Arguments: "&4&lWrong arguments! use /alliance for more information!"
 Command_Error_Select_Region: "Select a region first!"
+Command_Error_Not_A_Owner: "You are not a owner of a alliance"
+Command_Error_Not_A_Admin: "You are not a admin of a alliance"
+Command_Error_Not_In_A_Alliance: "You are not in a alliance"
+Command_Error_Not_A_Online_Player: "This player is not online"
+Command_Error_Not_In_Your_Alliance: "This player is not in your alliance"
 
 #Can use %sender_coin%, %target_coin%, %coin%, %sender_name% and %target_name% as variables
 Command_Coin_Balance_Answer: "Balance: %sender_coin%"
@@ -74,18 +79,59 @@ Town_Already_Claimed: "This land is already claimed"
 Town_Not_Connected: "This land is not connected to your town"
 Town_Not_Owner: "You are not the owner of your alliance"
 Town_Cannot_Create_Town: "You cannot create a/more town(s)"
+Town_Reached_Claim_Limit: "You claim more land, you are at your max!"
 
+#Can use %payment%
+Town_Cannot_Affort_Town: "Your alliance does not have enough coins! You need %payment% coins!"
+Town_Cannot_Affort_Claim: "Your alliance does not have enough coins! You need %payment% coins!"
 
+#Can use %alli_name%
+Command_Alliance_Owner_Disband_Answer: "You disbanded your alliance!"
+Command_Alliance_Owner_Disband_Broadcast: "Alliance %alli_name% is disbanded!"
 
+#Can use %player_name%, %alli_name%
+Command_Alliance_Owner_Change_Owner_Answer: "Changed ownership succesfully to %player_name%!"
+Command_Alliance_Owner_Change_Owner_Changed_Answer: "You are now the owner of %alli_name%!"
+Command_Alliance_Owner_Change_Owner_Alli_Broadcast: "The owner of this alliance is changed to %player_name%!"
 
+Command_Alliance_Owner_Add_Admin_Answer: "Added admin succesfully to %player_name%!"
+Command_Alliance_Owner_Add_Admin_Changed_Answer: "You are now a admin of %alli_name%!"
+Command_Alliance_Owner_Add_Admin_Alli_Broadcast: "%player_name% is now admin of this alliance!"
 
+Command_Alliance_Owner_Remove_Admin_Not_Admin: "This player is not a admin!"
+Command_Alliance_Owner_Remove_Admin_Answer: "Removed admin succesfully to %player_name%!"
+Command_Alliance_Owner_Remove_Admin_Changed_Answer: "You are no longer a admin of %alli_name%!"
+Command_Alliance_Owner_Remove_Admin_Alli_Broadcast: "%player_name% is no longer admin of this alliance!"
 
+Command_Alliance_Owner_Invite_Already_In_Alliance: "This player is already in your alliance!"
+Command_Alliance_Owner_Invite_Already_Invited_To_Alliance: "This player is already invited to your alliance!"
+Command_Alliance_Owner_Invite_Answer: "You invited %player_name% to your alliance!"
+Command_Alliance_Owner_Invited_Answer: "You are invited by the alliance %alli_name%!"
 
+#Can use %player_name%, %alli_name%, %rank%
+Command_Alliance_Owner_SetRank_Answer: "You changed the rank for %player_name% to %rank%!"
+Command_Alliance_Owner_SetRank_Changed_Answer: "Your rank is changed to %rank%!"
 
+#Can use %player_name%, %alli_name%
+Command_Alliance_Member_Leave_Is_Owner: "You cannot leave a alliance if you are the owner!"
+Command_Alliance_Member_Leave_Answer: "you left %alli_name%!"
+Command_Alliance_Member_Leave_Alli_Broadcast: "%player_name% left the alliance!"
 
+#Can use no var
+Command_Alliance_Join_And_Create_Already_In_A_Alliance: "You are already in a alliance!"
 
+#Can use %alli_name%
+Command_Alliance_Join_Answer: "You are member of the alliance %alli_name%!" 
+Command_Alliance_Join_Not_Exist: "Something went wrong, the alliance does not exist anymore!"
 
+#Can use no var
+Command_Alliance_Create_Type_Name: "Type your name of your alliance in the chat!"
+Command_Alliance_Create_Not_Enough_Coins: "You don't have enough coins!"
 
+#Can use %alli_name%
+Command_Alliance_Create_Answer: "Alliance created succesfully!"
+Command_Alliance_Create_Broadcast: "%alli_name% is born!"
+Command_Alliance_Create_Already_Exist: "Alliance with this name already exists"
 
 
 
