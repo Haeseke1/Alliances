@@ -24,7 +24,7 @@ public class Alliance {
 	private final AllianceType type;
 	private int exp;
 	
-	private List<Town> town = new ArrayList<Town>();
+	private List<Town> towns = new ArrayList<Town>();
 	
 	
 	private List<UUID> admins = new ArrayList<UUID>();
@@ -94,6 +94,17 @@ public class Alliance {
 	}
 	
 	
+	public void sendPlayersMessage(String message, Player exception){
+	  if(exception != null){
+		for(Player player : Bukkit.getOnlinePlayers()){
+			if(mMembers.containsKey(player.getUniqueId()) && player != exception){
+				MessageManager.sendMessage(player, message);
+			}
+		}
+		return;
+	  }
+	}
+	
 	public void sendPlayersMessage(String message){
 		for(Player player : Bukkit.getOnlinePlayers()){
 			if(mMembers.containsKey(player.getUniqueId())){
@@ -101,7 +112,6 @@ public class Alliance {
 			}
 		}
 	}
-	
 	
 	public void addReward(ItemStack item){
 		outpostRewards.add(item);
@@ -147,25 +157,21 @@ public class Alliance {
 	}
 
 	public List<Town> getTown() {
-		return town;
+		return towns;
 	}
 
 	public void setTown(List<Town> town) {
-		this.town = town;
+		this.towns = town;
 	}
 	
 	public void addTown(Town town){
-		this.town.add(town);
+		this.towns.add(town);
 	}
 	
 	public void addLose(Player playerInArena){
 		this.mLoses = this.mLoses + 1;
-		for(UUID playerUUID: this.getMembers().keySet()){
-			Player player = Bukkit.getPlayer(playerUUID);
-			if(player.isOnline()){
-				MessageManager.sendMessage(player, ChatColor.GOLD + playerInArena.getName() + ChatColor.RED + " lost an arena fight " + ChatColor.GOLD + "(+1 lose)");
-			}
-		}
+		this.sendPlayersMessage(ChatColor.RED + "Your alliance lost an arena fight " + ChatColor.GOLD + "(+1 lose)",playerInArena);
+		MessageManager.sendMessage(playerInArena, ChatColor.RED + "You've lost an arena fight " + ChatColor.GOLD + "(1+ lose)");
 	}
 	
 }
