@@ -156,7 +156,7 @@ public class Alliance {
 		this.exp = exp;
 	}
 
-	public List<Town> getTown() {
+	public List<Town> getTowns() {
 		return towns;
 	}
 
