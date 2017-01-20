@@ -93,20 +93,23 @@ Command_Alliance_Owner_Change_Owner_Answer: "Changed ownership succesfully to %p
 Command_Alliance_Owner_Change_Owner_Changed_Answer: "You are now the owner of %alli_name%!"
 Command_Alliance_Owner_Change_Owner_Alli_Broadcast: "The owner of this alliance is changed to %player_name%!"
 
-#Can use %player_name%, %alli_name%
 Command_Alliance_Owner_Add_Admin_Answer: "Added admin succesfully to %player_name%!"
 Command_Alliance_Owner_Add_Admin_Changed_Answer: "You are now a admin of %alli_name%!"
 Command_Alliance_Owner_Add_Admin_Alli_Broadcast: "%player_name% is now admin of this alliance!"
 
-#Can use %player_name%, %alli_name%
 Command_Alliance_Owner_Remove_Admin_Not_Admin: "This player is not a admin!"
 Command_Alliance_Owner_Remove_Admin_Answer: "Removed admin succesfully to %player_name%!"
 Command_Alliance_Owner_Remove_Admin_Changed_Answer: "You are no longer a admin of %alli_name%!"
 Command_Alliance_Owner_Remove_Admin_Alli_Broadcast: "%player_name% is no longer admin of this alliance!"
 
+Command_Alliance_Owner_Invite_Already_In_Alliance: "This player is already in your alliance!"
+Command_Alliance_Owner_Invite_Already_Invited_To_Alliance: "This player is already invited to your alliance!"
+Command_Alliance_Owner_Invite_Answer: "You invited %player_name% to your alliance!"
+Command_Alliance_Owner_Invited_Answer: "You are invited by the alliance %alli_name%!"
 
-
-
+#Can use %player_name%, %alli_name%, %rank%
+Command_Alliance_Owner_SetRank_Answer: "You changed the rank for %player_name% to %rank%!"
+Command_Alliance_Owner_SetRank_Changed_Answer: "Your rank is changed to %rank%!"
 
 
 
