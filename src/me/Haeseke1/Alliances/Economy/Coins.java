@@ -3,6 +3,8 @@ package me.Haeseke1.Alliances.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
+import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
@@ -117,5 +119,62 @@ public class Coins {
 			}
 		}
 	}
+	
+	
+	public static void setAllianceCoins(String alli, int amount) {
+		Alliance alliance = AllianceManager.getAlliance(alli);
+		alliance.setCoins(amount);
+	}
+	
+	public static void setAllianceCoins(Player player, int amount) {
+		Alliance alliance = AllianceManager.getAlliance(player);
+		alliance.setCoins(amount);
+	}
+	
+	public static void setAllianceCoins(Alliance alli, int amount) {
+		alli.setCoins(amount);
+	}
+	
+	public static int addAllianceCoins(Player player, int amount) {
+		Alliance alliance = AllianceManager.getAlliance(player);
+		alliance.setCoins(alliance.getCoins() + amount);
+		return alliance.getCoins() + amount;
+	}
 
+	public static int addAllianceCoins(String alli, int amount) {
+		Alliance alliance = AllianceManager.getAlliance(alli);
+		alliance.setCoins(alliance.getCoins() + amount);
+		return alliance.getCoins() + amount;
+	}
+	
+	public static int addAllianceCoins(Alliance alli, int amount) {
+		alli.setCoins(alli.getCoins() + amount);
+		return alli.getCoins() + amount;
+	}
+
+	public static boolean removeAllianceCoins(Player player, int amount) {
+		Alliance alliance = AllianceManager.getAlliance(player);
+		if(alliance.getCoins() >= amount){
+			alliance.setCoins(alliance.getCoins() - amount);
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean removeAllianceCoins(String alli, int amount) {
+		Alliance alliance = AllianceManager.getAlliance(alli);
+		if(alliance.getCoins() >= amount){
+			alliance.setCoins(alliance.getCoins() - amount);
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean removeAllianceCoins(Alliance alli, int amount) {
+		if(alli.getCoins() >= amount){
+			alli.setCoins(alli.getCoins() - amount);
+			return true;
+		}
+		return false;
+	}
 }

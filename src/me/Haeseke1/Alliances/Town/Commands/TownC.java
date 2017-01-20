@@ -53,17 +53,7 @@ public class TownC implements CommandExecutor{
 				return false;
 			}
 			Town town = TownManager.getTown(args[1]);
-			if(TownManager.isClaimed(player.getLocation().getChunk())){
-				String message = MessageManager.getMessage("Town_Already_Claimed");
-				MessageManager.sendMessage(player, message);
-				return false;
-			}
-			if(!TownManager.isNextTo(player.getLocation().getChunk(), town)){
-				String message = MessageManager.getMessage("Town_Not_Connected");
-				MessageManager.sendMessage(player, message);
-				return false;
-			}
-			town.addChunck(player.getLocation().getChunk());
+			TownManager.claimLand(player, town);
 			return false;
 		}
 		

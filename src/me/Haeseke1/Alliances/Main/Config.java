@@ -1,7 +1,6 @@
 package me.Haeseke1.Alliances.Main;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.Map.Entry;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -30,6 +29,7 @@ import me.Haeseke1.Alliances.Outpost.Type.God;
 import me.Haeseke1.Alliances.Outpost.Type.Magic_Tower;
 import me.Haeseke1.Alliances.Outpost.Type.Mine;
 import me.Haeseke1.Alliances.Outpost.Type.Mob_Farm;
+import me.Haeseke1.Alliances.Town.TownManager;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -77,6 +77,10 @@ public class Config {
 			for(int i = 2; i <= 30; i++){
 				Exp.table.put(i, ConfigManager.getIntFromConfig(Main.config, "Level.Amount_Exp." + i));
 			}
+			
+			TownManager.Town_Create_Payment = ConfigManager.getIntFromConfig(Main.config, "Coins.Town_Starter_Cost");
+			TownManager.Town_Claim_Payment = ConfigManager.getIntFromConfig(Main.config, "Coins.Town_Claim_Cost");
+			TownManager.Claim_Limit = ConfigManager.getIntFromConfig(Main.config, "Town.Town_Claim_Limit");
 			
 		} catch (EmptyIntException e) {
 			e.printStackTrace();

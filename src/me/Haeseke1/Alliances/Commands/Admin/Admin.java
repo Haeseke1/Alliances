@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
@@ -16,24 +15,16 @@ import me.Haeseke1.Alliances.Utils.PlayerManager;
 
 public class Admin {
 
-	public static void onCommand(CommandSender sender, String[] args) {
-		if(!(sender instanceof Player)){
-			return;
-		}
+	public static void onCommand(Player player, String[] args) {
 		if(args.length == 1){
-			sender.sendMessage(MessageManager.infoColorCode + "===== Admin =====");
-			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
-			sender.sendMessage(MessageManager.infoColorCode + "/... admin invite <Player> #Invite players to your alliance");
-			sender.sendMessage(MessageManager.infoColorCode + "/... admin setrank <Player> <Name> #Set rank of a player");
+			player.sendMessage(MessageManager.infoColorCode + "===== Admin =====");
+			player.sendMessage(MessageManager.infoColorCode + "Commands:");
+			player.sendMessage(MessageManager.infoColorCode + "/... admin invite <Player> #Invite players to your alliance");
+			player.sendMessage(MessageManager.infoColorCode + "/... admin setrank <Player> <Name> #Set rank of a player");
 			return;
 		}
 		
 		if(args[1].equalsIgnoreCase("invite") && args.length > 2){
-			if(!(sender instanceof Player)){
-				MessageManager.sendAlertMessage("You need to be a player to do this command!");
-				return;
-			}
-			Player player = (Player) sender;
 			if(AllianceManager.playerIsInAlli(player) && (AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId()) || AllianceManager.getAlliance(player).getAdmins().contains(player.getUniqueId()))){
 				if(!PlayerManager.isPlayerOnline(args[2])){
 					MessageManager.sendMessage(player, "This player is not online!");
@@ -67,11 +58,6 @@ public class Admin {
 		}
 		
 		if(args[1].equalsIgnoreCase("setrank") && args.length > 3){
-			if(!(sender instanceof Player)){
-				MessageManager.sendAlertMessage("You need to be a player to do this command!");
-				return;
-			}
-			Player player = (Player) sender;
 			if(AllianceManager.playerIsInAlli(player) && (AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId()) || AllianceManager.getAlliance(player).getAdmins().contains(player.getUniqueId()))){
 				if(!PlayerManager.isPlayerOnline(args[2])){
 					MessageManager.sendMessage(player, "This player is not online!");

@@ -3,7 +3,10 @@ Command_Error_Wrong_Arguments: "&4&lWrong arguments! use /alliance for more info
 Command_Error_Select_Region: "Select a region first!"
 Command_Error_Not_A_Owner: "You are not a owner of a alliance"
 Command_Error_Not_A_Admin: "You are not a admin of a alliance"
+<<<<<<< HEAD
 Command_Error_Not_In_A_Alliance: "You are not in a alliance"
+=======
+>>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 Command_Error_Not_A_Online_Player: "This player is not online"
 Command_Error_Not_In_Your_Alliance: "This player is not in your alliance"
 
@@ -111,6 +114,7 @@ Command_Alliance_Owner_Invited_Answer: "You are invited by the alliance %alli_na
 #Can use %player_name%, %alli_name%, %rank%
 Command_Alliance_Owner_SetRank_Answer: "You changed the rank for %player_name% to %rank%!"
 Command_Alliance_Owner_SetRank_Changed_Answer: "Your rank is changed to %rank%!"
+<<<<<<< HEAD
 
 #Can use %player_name%, %alli_name%
 Command_Alliance_Member_Leave_Is_Owner: "You cannot leave a alliance if you are the owner!"
@@ -123,6 +127,8 @@ Command_Alliance_Join_And_Create_Already_In_A_Alliance: "You are already in a al
 #Can use %alli_name%
 Command_Alliance_Join_Answer: "You are member of the alliance %alli_name%!" 
 Command_Alliance_Join_Not_Exist: "Something went wrong, the alliance does not exist anymore!"
+=======
+>>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 
 #Can use no var
 Command_Alliance_Create_Type_Name: "Type your name of your alliance in the chat!"

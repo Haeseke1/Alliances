@@ -24,7 +24,9 @@ Coins:
     Spriggan: 1000
     Sylph: 1000
     Undine: 1000 
-    
+  
+  Town_Starter_Cost: 10000
+  Town_Claim_Cost: 150
     
 Outpost:
   # the time per reward (in seconds) and the time it takes to take over a outpost (in sec) (best to take a number divisible by 4)
@@ -75,6 +77,10 @@ Outpost:
         Data: 0
         Percentage: 100
         
+        
+Town:
+  Town_Claim_Limit: 100        
+
 #Configurations for chat. var: {%alli_name%, %player_name%, %alli_rank%}
 Chat:
   Message: "%alli_name% %player_name% %alli_rank%>"
