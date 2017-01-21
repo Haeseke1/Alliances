@@ -78,6 +78,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration shopConfig;
 	public static FileConfiguration messageConfig;
 	public static FileConfiguration arenaConfig;
+	public static FileConfiguration settingsConfig;
 	
 	
 	public static Main plugin;
@@ -195,6 +196,7 @@ public class Main extends JavaPlugin {
 		challengeConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "challenges.yml"), this);
 		shopConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "shop.yml"), this);
 		arenaConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "arenas.yml"), this);
+		settingsConfig = ConfigManager.getCustomConfig(new File(getDataFolder(),"settings.yml"), this);
 		AllianceManager.registerAlliance();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();

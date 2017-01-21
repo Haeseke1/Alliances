@@ -81,4 +81,11 @@ public class Arena {
 			  }
 		}
 	}
+	
+	public void teleportToPast(){
+		for(UUID playerUUID: mPlayersInArena.keySet()){
+			Player player = Bukkit.getPlayer(playerUUID);
+			player.teleport(ArenaManager.pastLocations.get(playerUUID));
+		}
+	}
 }

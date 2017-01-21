@@ -119,7 +119,9 @@ public class ArenaManager {
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
 			  player.teleport(ArenaManager.getLobby(arenaname));
 			  startArena(arenaname.toLowerCase());
+			  if(checkSign(arenaname)){
 			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), arena);
+			  }
 			  al.sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " queued up for an arena fight!",player);
 			  return;
 		    }
@@ -134,7 +136,9 @@ public class ArenaManager {
 			  player.teleport(ArenaManager.getLobby(arenaname));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena " + ChatColor.GOLD + "[" + arena.getCurrentSize() + "/" + arena.getSize() + "]");
 			  startArena(arenaname.toLowerCase());
+			  if(checkSign(arenaname)){
 			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), arena);
+			  }
 			  al.sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined your alliance in an arena fight!",player);			  return;
 		  }
 		  if(TeamManager.teamIsFree(2, arenaname)){
@@ -145,7 +149,9 @@ public class ArenaManager {
 			  player.teleport(ArenaManager.getLobby(arenaname));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena " + ChatColor.GOLD + "[" + arena.getCurrentSize() + "/" + arena.getSize() + "]");
 			  startArena(arenaname.toLowerCase());
+			  if(checkSign(arenaname)){
 			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), arena);
+			  }
 			  al.sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined your alliance in an arena fight!",player);
 			  return;
 		  }
@@ -243,11 +249,13 @@ public class ArenaManager {
 				  if(player != null){
 				  MessageManager.sendMessage(player, ChatColor.GREEN + "Changed the arena status to " + status);
 				  }
+				 if(checkSign(arenaname)){
 				  try {
 						ArenaManager.updateSign(ArenaManager.getSign(arenaname), ArenaManager.getArenaByName(arenaname));
 					} catch (EmptyLocationException | EmptyStringException e) {
 						e.printStackTrace();
 					}
+				 }
 				  return;
                 }
   			    MessageManager.sendMessage(player, ChatColor.RED + "Their aren't enough spawns for both teams");
@@ -314,11 +322,18 @@ public class ArenaManager {
 		  MessageManager.sendMessage(player, ChatColor.GREEN + "You've left the arena");
 		  }
 		  try {
-			ArenaManager.updateSign(ArenaManager.getSign(arenaname), a);
+			  if(checkSign(arenaname)){
+			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), a);
+			  }
 		} catch (EmptyLocationException e) {
 			e.printStackTrace();
 		}
+		  if(!TeamManager.checkTeams(arenaname)){
 		  AllianceManager.getAlliance(player).addLose(player);
+		  }else{
+		  a.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.RED + " left the game",player);
+		  AllianceManager.getAlliance(player).sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.RED + " left an arena fight!", player);
+		  }
 		  return;
 	  }
      player.teleport(pastLocations.get(player.getUniqueId()));
@@ -326,7 +341,9 @@ public class ArenaManager {
 	 a.getPlayersInArena().remove(player.getUniqueId());
 	 pastLocations.remove(player.getUniqueId());
 	  try {
-		ArenaManager.updateSign(ArenaManager.getSign(arenaname), a);
+		  if(checkSign(arenaname)){
+		  ArenaManager.updateSign(ArenaManager.getSign(arenaname), a);
+		  }
 	} catch (EmptyLocationException e) {
 		e.printStackTrace();
 	}
@@ -406,8 +423,8 @@ public class ArenaManager {
 	  }
 	  return false;
   }
-  public static Sign getSign(String arenaname) throws EmptyLocationException{
-	  Location location = ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".sign");
+  public static Sign getSign(String arenaname) throws EmptyLocationException{ 
+	 Location location = ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".sign");
      if(location.getBlock() != null){
 	  Block block = location.getBlock();
       if(block.getType() == Material.WALL_SIGN 

@@ -8,6 +8,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
+import me.Haeseke1.Alliances.Arena.ArenaManager;
 import me.Haeseke1.Alliances.Challenge.Challenge;
 import me.Haeseke1.Alliances.Challenge.challengeType;
 import me.Haeseke1.Alliances.Economy.Coins;
@@ -17,6 +18,8 @@ public class Player_Kill implements Listener{
 	
 	@EventHandler
 	private void onEntityKill(EntityDeathEvent event){
+	 if(event.getEntity() instanceof Player){
+	  if(ArenaManager.isInArena((Player) event.getEntity())){
 		for(Challenge challenge : Challenge.challenges){
 			if(challenge.type.equals(challengeType.Player_Kill)){
 				EntityDamageEvent devent = event.getEntity().getLastDamageCause();
@@ -44,5 +47,6 @@ public class Player_Kill implements Listener{
 			}
 		}
 	}
-
+  }
+ }
 }

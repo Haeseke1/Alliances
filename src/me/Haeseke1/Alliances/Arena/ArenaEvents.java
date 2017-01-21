@@ -1,5 +1,7 @@
 package me.Haeseke1.Alliances.Arena;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -7,6 +9,8 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,8 +20,11 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
+import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Main.Main;
@@ -36,15 +43,13 @@ public class ArenaEvents implements Listener{
 			event.setCancelled(true);
 		}
 	}
-	
 	@EventHandler
 	public void onPlaceInArena(BlockPlaceEvent event){
 		Player player = event.getPlayer();
 		if(ArenaManager.isInArena(player)){
 			event.setCancelled(true);
 		}
-	}
-	
+	}	
 	@EventHandler
 	public void onDamage(EntityDamageEvent event) throws EmptyStringException{
 	  if(event.getEntity() instanceof Player){
@@ -57,12 +62,16 @@ public class ArenaEvents implements Listener{
 		  }
 		  if(player.getHealth() < event.getDamage()){
 			  try {
-					ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
+				  if(ArenaManager.checkSign(arena.getName())){
+					  ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
+					  }
 				} catch (EmptyLocationException e) {
 					e.printStackTrace();
 				}
+			  if(event.getCause() != DamageCause.ENTITY_ATTACK){
 			  ArenaManager.kickOnDeath(player);
 			  event.setCancelled(true);
+			  }
 		  }
 	    }
 	  }
@@ -77,18 +86,24 @@ public class ArenaEvents implements Listener{
 			  event.setCancelled(true);
 			  return;
 		  }
-		  Bukkit.broadcastMessage("test");
 		  if(player.getHealth() < event.getDamage()){
+			  if(event.getDamager().getType() == EntityType.PLAYER){
+				  Bukkit.broadcastMessage("test");
 				  Player attacker = (Player) event.getDamager();
-				  MessageManager.sendMessage(attacker, ChatColor.GREEN + "You've slain " + ChatColor.GOLD + player.getName());
-			      attacker.playSound(attacker.getLocation(), Sound.NOTE_PLING, 1, 1);
+				  Coins.addPlayerCoins(attacker, Main.settingsConfig.getInt("Arena_kill_player_reward"));
+				  MessageManager.sendMessage(attacker, ChatColor.GREEN + "You've slain " + ChatColor.GOLD + player.getName() + " (+" + Main.settingsConfig.getInt("Arena_kill_player_reward") + " coins)");
+			      arena.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.AQUA + " has been slain by " + ChatColor.GOLD + attacker.getName(), attacker);
+				  attacker.playSound(attacker.getLocation(), Sound.FIREWORK_BLAST, 1, 1);
 			  try {
-					ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
+				  if(ArenaManager.checkSign(arena.getName())){
+					  ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
+					  }
 				} catch (EmptyLocationException e) {
 					e.printStackTrace();
 				}
 			  ArenaManager.kickOnDeath(player);
 			  event.setCancelled(true);
+		   }
 		  }
 	    }
 	  }
@@ -149,8 +164,31 @@ public class ArenaEvents implements Listener{
     		}
     	}
     }
-   
     public static void saveSign(String arenaname, Location loc){
 	   ConfigManager.setLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".sign", loc);
    }
+    @EventHandler
+    public void onLeave(PlayerQuitEvent event) throws EmptyStringException{
+    	Player player = event.getPlayer();
+    	if(ArenaManager.isInArena(player)){
+    	  Arena arena = ArenaManager.getArenaOfPlayer(player);
+    	   if(ArenaManager.checkStatus(arena.getName(), "COUNTING")){
+    		   player.teleport(ArenaManager.pastLocations.get(player.getUniqueId()));
+    		   ArenaManager.pastLocations.remove(player.getUniqueId());
+    		   arena.getPlayersInArena().remove(player.getUniqueId());
+    		   arena.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.RED + " left! So we stopped the game");
+    		   arena.teleportToPast();
+    		   arena.getPlayersInArena().clear();
+    		   ArenaManager.pastLocations.clear();
+    		   Main.arenaConfig.set("Arenas." + arena.getName().toLowerCase() + ".spawns.team1.alliance", "");
+    		   Main.arenaConfig.set("Arenas." + arena.getName().toLowerCase() + ".spawns.team2.alliance", "");
+    	   }
+    		try {
+				ArenaManager.leaveArena(player);
+			} catch (EmptyStringException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    }
 }

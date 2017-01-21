@@ -88,7 +88,9 @@ public class WinnerCountdown extends BukkitRunnable{
 			  mArena.getPlayersInArena().remove(playerUUID);
          	}
 			  try {
-					ArenaManager.updateSign(ArenaManager.getSign(mArena.getName()), mArena);
+				  if(ArenaManager.checkSign(mArena.getName())){
+					  ArenaManager.updateSign(ArenaManager.getSign(mArena.getName()), mArena);
+					  }
 				} catch (EmptyLocationException | EmptyStringException e) {
 					e.printStackTrace();
 				}
