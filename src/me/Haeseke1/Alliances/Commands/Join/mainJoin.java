@@ -2,7 +2,6 @@ package me.Haeseke1.Alliances.Commands.Join;
 
 import java.util.ArrayList;
 
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
@@ -12,14 +11,10 @@ import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class mainJoin {
 	
-	public static void onCommand(CommandSender sender, String[] args) {
-		if(!(sender instanceof Player)){
-			MessageManager.sendAlertMessage("You need to be a player to do this command!");
-			return;
-		}
-		Player player = (Player) sender;
+	public static void onCommand(Player player, String[] args) {
 		if(AllianceManager.playerIsInAlli(player)){
-			MessageManager.sendMessage(player, "You are already in a alliance!");
+			String message = MessageManager.getMessage("Command_Alliance_Join_And_Create_Already_In_A_Alliance");
+			MessageManager.sendMessage(player, message);
 			return;
 		}
 		if(!Alli.invited.containsKey(player)){
