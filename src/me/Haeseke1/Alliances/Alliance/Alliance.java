@@ -9,6 +9,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import me.Haeseke1.Alliances.Arena.Arena;
+import me.Haeseke1.Alliances.Arena.ArenaManager;
+import me.Haeseke1.Alliances.Arena.TeamManager;
+import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
+import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
+import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Town.Town;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
@@ -176,6 +182,18 @@ public class Alliance {
 		this.mLoses = this.mLoses + 1;
 		this.sendPlayersMessage(ChatColor.RED + "Your alliance lost an arena fight " + ChatColor.GOLD + "(+1 lose)",playerInArena);
 		MessageManager.sendMessage(playerInArena, ChatColor.RED + "You've lost an arena fight " + ChatColor.GOLD + "(1+ lose)");
+		Arena arena = ArenaManager.getArenaOfPlayer(playerInArena);
+		Main.arenaConfig.set("Arenas." + arena.getName().toLowerCase() + ".spawns.team" + TeamManager.getTeamNumber(this, arena.getName()) + ".alliance", "");
+		try {
+			ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
+		} catch (IndexOutOfBoundsException | EmptyStringException | EmptyLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void addWin(){
+		this.mWins = this.mWins + 1;
 	}
 	
 }

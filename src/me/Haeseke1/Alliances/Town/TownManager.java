@@ -137,6 +137,7 @@ public class TownManager {
     public static void loadTowns(){
     	for(String alliancename: allianceConfig.getConfigurationSection("").getKeys(false)){
     		Alliance al = AllianceManager.getAlliance(alliancename);
+    	  if(allianceConfig.getConfigurationSection(alliancename + ".towns") != null){
     	    for(String townName: allianceConfig.getConfigurationSection(alliancename + ".towns").getKeys(false)){
     	    	Town town = new Town(townName,null,al);
     	    	for(String chunk: allianceConfig.getConfigurationSection(alliancename + ".towns." + townName + ".chunks").getKeys(false)){
@@ -150,6 +151,8 @@ public class TownManager {
     	    	}
     	    	Town.towns.add(town);
     	    }
+    	    MessageManager.sendAlertMessage("Towns have been loaded");
+    	  }
     	}
     }
 }

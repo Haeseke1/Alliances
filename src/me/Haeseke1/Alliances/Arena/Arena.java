@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
+import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Arena {
 
@@ -57,5 +60,25 @@ public class Arena {
 	
 	public Location getCorner2(){
 		return mCorner2;
+	}
+	
+	public int getCurrentSize(){
+		return mPlayersInArena.size();
+	}
+	
+	public void sendMessage(String message){
+		for(UUID playerUUID: mPlayersInArena.keySet()){
+			Player player = Bukkit.getPlayer(playerUUID);
+			MessageManager.sendMessage(player, message);
+		}
+	}
+	
+	public void sendMessage(String message, Player exception){
+		for(UUID playerUUID: mPlayersInArena.keySet()){
+			Player player = Bukkit.getPlayer(playerUUID);
+			if(player != exception){
+			 MessageManager.sendMessage(player, message);
+			  }
+		}
 	}
 }

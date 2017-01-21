@@ -56,12 +56,12 @@ public class ArenaEvents implements Listener{
 			  return;
 		  }
 		  if(player.getHealth() < event.getDamage()){
-			  ArenaManager.kickOnDeath(player);
 			  try {
 					ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
 				} catch (EmptyLocationException e) {
 					e.printStackTrace();
 				}
+			  ArenaManager.kickOnDeath(player);
 			  event.setCancelled(true);
 		  }
 	    }
@@ -77,12 +77,11 @@ public class ArenaEvents implements Listener{
 			  event.setCancelled(true);
 			  return;
 		  }
+		  Bukkit.broadcastMessage("test");
 		  if(player.getHealth() < event.getDamage()){
-			  if(event.getDamager() instanceof Player){
 				  Player attacker = (Player) event.getDamager();
 				  MessageManager.sendMessage(attacker, ChatColor.GREEN + "You've slain " + ChatColor.GOLD + player.getName());
 			      attacker.playSound(attacker.getLocation(), Sound.NOTE_PLING, 1, 1);
-			  }
 			  try {
 					ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
 				} catch (EmptyLocationException e) {

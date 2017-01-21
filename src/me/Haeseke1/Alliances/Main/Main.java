@@ -52,6 +52,7 @@ import me.Haeseke1.Alliances.Shop.ShopEvents;
 import me.Haeseke1.Alliances.Shop.ShopManager;
 import me.Haeseke1.Alliances.Shop.Commands.ShopC;
 import me.Haeseke1.Alliances.Town.TownEvents;
+import me.Haeseke1.Alliances.Town.TownManager;
 import me.Haeseke1.Alliances.Town.Commands.TownC;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -110,6 +111,7 @@ public class Main extends JavaPlugin {
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
 			e.printStackTrace();
 		}
+	    TownManager.loadTowns();
 	}
 
 	@Override
@@ -117,6 +119,7 @@ public class Main extends JavaPlugin {
 		Config.saveConfigFile(this);
 		saveAllCustomConfigs();
 		ShopManager.despawnVendors();
+		TownManager.saveTowns();
 		MessageManager.sendAlertMessage("The plugin has been shutted down! *-* The cake wasn't a lie thought *-*");
 	}
 
