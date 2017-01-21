@@ -9,6 +9,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -53,7 +56,7 @@ public class ArenaManager {
   /*
    * Loads the arena into the config
    */
-  public static void loadArena() throws EmptyIntException, EmptyLocationException{
+  public static void loadArena() throws EmptyIntException, EmptyLocationException, EmptyStringException{
 	  if(arenaConfig.getConfigurationSection("Arenas").getKeys(false) != null){
 		  for(String name: arenaConfig.getConfigurationSection("Arenas").getKeys(false)){
 			  String path = "Arenas." + name;
@@ -61,8 +64,14 @@ public class ArenaManager {
 			  arenaConfig.set(path + ".spawns.team2.alliance", "");
 			  Arena a = new Arena(name, ConfigManager.getIntFromConfig(arenaConfig ,"Arenas." + name + ".size"), ConfigManager.getIntFromConfig(arenaConfig ,"Arenas." + name + ".countdown"), ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + name + ".corner1"), ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + name + ".corner2"));
 			  arenas.add(a);
+		      if(!ConfigManager.getStringFromConfig(arenaConfig, path + ".status").equalsIgnoreCase("UNDER_MAINTANCE")){
+		      arenaConfig.set(path + ".status", "PLAYABLE");
+		      }
+		      if(arenaConfig.get(path + ".sign") != null){
+		      ArenaManager.updateSign(ArenaManager.getSign(a.getName()), a);
+		      }
 		  }
-		  MessageManager.sendAlertMessage("Loaded the arenas");
+		  MessageManager.sendInfoMessage("Loaded the arenas");
 	  }
   }
   
@@ -101,6 +110,7 @@ public class ArenaManager {
 	  if(AllianceManager.playerIsInAlli(player)){
 		 if(ArenaManager.arenaExists(arenaname)){
 		  Alliance alliance = AllianceManager.getAlliance(player);
+		  Alliance al = AllianceManager.getAlliance(player);
 		  if(TeamManager.teamExists(alliance, arenaname)){
 		    if(ArenaManager.checkTeamSize(TeamManager.getTeamNumber(alliance, arenaname), arenaname) != (arena.getSize() / 2)){
 			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
@@ -108,6 +118,8 @@ public class ArenaManager {
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
 			  player.teleport(ArenaManager.getLobby(arenaname));
 			  startArena(arenaname.toLowerCase());
+			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), arena);
+			  al.sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " queued up for an arena fight!",player);
 			  return;
 		    }
 			  MessageManager.sendMessage(player, ChatColor.RED + "Your alliance team is full");
@@ -120,6 +132,8 @@ public class ArenaManager {
 			  player.teleport(ArenaManager.getLobby(arenaname));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
 			  startArena(arenaname.toLowerCase());
+			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), arena);
+			  al.sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined your alliance in an arena fight!",player);
 			  return;
 		  }
 		  if(TeamManager.teamIsFree(2, arenaname)){
@@ -129,6 +143,8 @@ public class ArenaManager {
 			  player.teleport(ArenaManager.getLobby(arenaname));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
 			  startArena(arenaname.toLowerCase());
+			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), arena);
+			  al.sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined your alliance in an arena fight!",player);
 			  return;
 		  }
 		  MessageManager.sendMessage(player, ChatColor.RED + "This arena is full");
@@ -211,6 +227,11 @@ public class ArenaManager {
 				  a.getPlayersInArena().remove(playerUUID);
 				  pastLocations.remove(playerUUID);
 			  }
+			  try {
+					ArenaManager.updateSign(ArenaManager.getSign(arenaname), a);
+				} catch (EmptyLocationException | EmptyStringException e) {
+					e.printStackTrace();
+				}
 			  arenaConfig.set("Arenas." + arenaname + ".status", status);
 		  }
 		  if(status.equalsIgnoreCase("PLAYABLE")){
@@ -220,6 +241,11 @@ public class ArenaManager {
 				  if(player != null){
 				  MessageManager.sendMessage(player, ChatColor.GREEN + "Changed the arena status to " + status);
 				  }
+				  try {
+						ArenaManager.updateSign(ArenaManager.getSign(arenaname), ArenaManager.getArenaByName(arenaname));
+					} catch (EmptyLocationException | EmptyStringException e) {
+						e.printStackTrace();
+					}
 				  return;
                 }
   			    MessageManager.sendMessage(player, ChatColor.RED + "Their aren't enough spawns for both teams");
@@ -286,6 +312,11 @@ public class ArenaManager {
 		  if(player != null){
 		  MessageManager.sendMessage(player, ChatColor.GREEN + "You've left the arena");
 		  }
+		  try {
+			ArenaManager.updateSign(ArenaManager.getSign(arenaname), a);
+		} catch (EmptyLocationException e) {
+			e.printStackTrace();
+		}
 		  AllianceManager.getAlliance(player).addLose(player);
 		  return;
 	  }
@@ -293,6 +324,11 @@ public class ArenaManager {
 	 Arena a = ArenaManager.getArenaByName(arenaname);
 	 a.getPlayersInArena().remove(player.getUniqueId());
 	 pastLocations.remove(player.getUniqueId());
+	  try {
+		ArenaManager.updateSign(ArenaManager.getSign(arenaname), a);
+	} catch (EmptyLocationException e) {
+		e.printStackTrace();
+	}
 	 MessageManager.sendMessage(player, ChatColor.GREEN + "You've left the arena");
 	  return;
     }
@@ -330,11 +366,86 @@ public class ArenaManager {
   }
   public static void kickOnDeath(Player player){
 	  Alliance al = AllianceManager.getAlliance(player);
-	  al.addLose(player);
+	  Arena arena = ArenaManager.getArenaOfPlayer(player);
 	  player.teleport(pastLocations.get(player.getUniqueId()));
-	  Arena arena = getArenaOfPlayer(player);
 	  arena.getPlayersInArena().remove(player.getUniqueId());
 	  pastLocations.remove(player.getUniqueId());
 	  player.setHealth(player.getMaxHealth());
+      if(teamIsEmpty(player,arena)){
+	  al.addLose(player);
+	  return;
+        }
+      ArenaManager.sendMessage(arena, ChatColor.GOLD + player.getName() + ChatColor.AQUA + " has been slain");
+      return;
+  }
+  public static boolean teamIsEmpty(Player player, Arena arena){
+	  Alliance al = AllianceManager.getAlliance(player);
+	  for(UUID playerUUID: arena.getPlayersInArena().keySet()){
+		  if(al == arena.getPlayersInArena().get(playerUUID)){
+			  return false;
+		  }
+	  }
+	  return true;
+  }
+  public static void sendMessage(Arena arena,String message){
+	  for(UUID playerUUID: arena.getPlayersInArena().keySet()){
+		  Player player = Bukkit.getPlayer(playerUUID);
+		  MessageManager.sendMessage(player, message);
+	  }
+  }
+  public static boolean checkSign(String arenaname) throws EmptyLocationException{
+	  if(arenaConfig.get("Arenas." + arenaname.toLowerCase() + ".sign") != null){
+		  Location loc = ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".sign");
+		  Block block = loc.getBlock();
+		  if(block.getType() != Material.WALL_SIGN){
+			  Bukkit.broadcastMessage(block.getType().toString());
+			  return false;
+		  }
+		  return true;
+	  }
+	  return false;
+  }
+  public static Sign getSign(String arenaname) throws EmptyLocationException{
+	  Location location = ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".sign");
+     if(location.getBlock() != null){
+	  Block block = location.getBlock();
+      if(block.getType() == Material.WALL_SIGN 
+    		  || block.getType() == Material.SIGN){
+    	  Sign sign = (Sign) location.getBlock().getState();
+    	  return sign;
+      }
+      return null;
+   }
+     return null;
+  }
+  public static void updateSign(Sign sign, Arena arena) throws EmptyStringException, IndexOutOfBoundsException, EmptyLocationException{
+	 if(checkSign(arena.getName())){
+	  String arenaname = arena.getName();
+	  arenaname = arenaname.substring(0, 1).toUpperCase() + arenaname.substring(1);
+	  sign.setLine(0, ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + arenaname);
+	  sign.setLine(1, ChatColor.AQUA + "" + ChatColor.BOLD + arena.getSize() / 2 + "V" + arena.getSize() / 2);
+      int arenaSize = arena.getSize();
+      int currentSize = arena.getPlayersInArena().size();
+      ChatColor chatcolor = null;
+      String status = ConfigManager.getStringFromConfig(arenaConfig, "Arenas." + arena.getName().toLowerCase() + ".status");
+      switch(status){
+      case "PLAYABLE":
+    	  chatcolor = ChatColor.GREEN;
+    	  break;
+      case "COUNTING":
+    	  chatcolor = ChatColor.GOLD;
+    	  break;
+      case "PLAYING":
+    	  chatcolor = ChatColor.RED;
+      case "UNDER_MAINTANCE":
+    	  chatcolor = ChatColor.RED;
+      default:
+    	  break;
+      }
+      sign.setLine(2, chatcolor + "[" + currentSize + "/" + arenaSize + "]");
+      sign.setLine(3, chatcolor + status);
+      sign.update();
+      return;
+	 }
   }
 }

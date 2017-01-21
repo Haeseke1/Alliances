@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
+import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
@@ -32,6 +33,14 @@ public class Countdown extends BukkitRunnable{
 			} catch (EmptyLocationException e) {
 				e.printStackTrace();
 			}
+  		  try {
+  			ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
+  		} catch (EmptyLocationException e) {
+  			e.printStackTrace();
+  		} catch (EmptyStringException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         }
         if(time == 0){
         	String arenaname = this.arena.getName();
@@ -40,6 +49,11 @@ public class Countdown extends BukkitRunnable{
 			} catch (EmptyLocationException e) {
 				e.printStackTrace();
 			}
+  		  try {
+  			ArenaManager.updateSign(ArenaManager.getSign(arenaname), arena);
+  		} catch (EmptyLocationException | EmptyStringException e) {
+  			e.printStackTrace();
+  		}
         }
         for(UUID playerUUID: arena.getPlayersInArena().keySet()){
         	Player player = Bukkit.getPlayer(playerUUID);
@@ -91,6 +105,11 @@ public class Countdown extends BukkitRunnable{
 			}
 			  ArenaManager.pastLocations.remove(playerUUID);
 			  arena.getPlayersInArena().remove(playerUUID);
+			  try {
+					ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
+				} catch (EmptyLocationException | EmptyStringException e) {
+					e.printStackTrace();
+				}
 		    }
 		  arenaConfig.set("Arenas." + arena.getName().toLowerCase() + ".spawns.team1.alliance", "");
 		  arenaConfig.set("Arenas." + arena.getName().toLowerCase() + ".spawns.team2.alliance", "");

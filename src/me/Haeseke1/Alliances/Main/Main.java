@@ -42,6 +42,7 @@ import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
 import me.Haeseke1.Alliances.Economy.Commands.CoinC;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
+import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
@@ -106,7 +107,7 @@ public class Main extends JavaPlugin {
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 	    try {
 			ArenaManager.loadArena();
-		} catch (EmptyIntException | EmptyLocationException e) {
+		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
 			e.printStackTrace();
 		}
 	}
