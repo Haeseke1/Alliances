@@ -30,7 +30,7 @@ public class aPlayer{
 		this.file = file;
 		this.f = f;
 		registerConfig();
-		aPlayer.online_Players.add(this);
+		online_Players.add(this);
 	}
 	
 	

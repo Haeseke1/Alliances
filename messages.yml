@@ -103,6 +103,7 @@ Command_Alliance_Create_Answer: "Alliance created succesfully!"
 Command_Alliance_Create_Broadcast: "%alli_name% is born!"
 Command_Alliance_Create_Already_Exist: "Alliance with this name already exists"
 
+#Can use no var
 Command_Alliance_getrewards_Answer_Not_All: "You got some of the rewards!"
 Command_Alliance_getrewards_Answer_All: "You got all of the rewards!"
 
