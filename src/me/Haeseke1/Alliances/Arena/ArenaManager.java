@@ -1,5 +1,6 @@
 package me.Haeseke1.Alliances.Arena;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +58,7 @@ public class ArenaManager {
    * Loads the arena into the config
    */
   public static void loadArena() throws EmptyIntException, EmptyLocationException, EmptyStringException{
+	 if((new File(Main.plugin.getDataFolder(),"arena.yml").exists())){
 	  if(arenaConfig.getConfigurationSection("Arenas").getKeys(false) != null){
 		  for(String name: arenaConfig.getConfigurationSection("Arenas").getKeys(false)){
 			  String path = "Arenas." + name;
@@ -73,6 +75,7 @@ public class ArenaManager {
 		  }
 		  MessageManager.sendRemarkMessage("Loaded the arenas");
 	  }
+	 }
   }
   
   /*
