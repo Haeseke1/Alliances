@@ -3,14 +3,7 @@ Command_Error_Wrong_Arguments: "&4&lWrong arguments! use /alliance for more info
 Command_Error_Select_Region: "Select a region first!"
 Command_Error_Not_A_Owner: "You are not a owner of a alliance"
 Command_Error_Not_A_Admin: "You are not a admin of a alliance"
-<<<<<<< HEAD
 Command_Error_Not_In_A_Alliance: "You are not in a alliance"
-=======
-<<<<<<< HEAD
-Command_Error_Not_In_A_Alliance: "You are not in a alliance"
-=======
->>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
->>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 Command_Error_Not_A_Online_Player: "This player is not online"
 Command_Error_Not_In_Your_Alliance: "This player is not in your alliance"
 
