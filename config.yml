@@ -33,6 +33,8 @@ Outpost:
   Time_Per_Reward: 240
   Time_For_Take_Over: 600
   
+  Exp_Per_Reward: 10
+  
   Rewards:
     Blacksmith:
       "1":

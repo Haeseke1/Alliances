@@ -15,6 +15,7 @@ import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
+import me.Haeseke1.Alliances.Exp.Exp;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Outpost.Type.Blacksmith;
 import me.Haeseke1.Alliances.Outpost.Type.Dock;
@@ -24,8 +25,12 @@ import me.Haeseke1.Alliances.Outpost.Type.Magic_Tower;
 import me.Haeseke1.Alliances.Outpost.Type.Mine;
 import me.Haeseke1.Alliances.Outpost.Type.Mob_Farm;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
+import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class OutpostManager {
+	
+	
+	public static int Reward_Exp;
 	
 	
 	public static void addReward(ItemStack reward, Integer luck, OutpostType type){
@@ -60,36 +65,64 @@ public class OutpostManager {
 		for(Farm f : Farm.farms){
 			if(f.owner != null){
 				f.owner.addReward(chooseReward(Farm.rewards));
+				String message = MessageManager.getMessage("Outpost_Reward");
+				message = message.replace("%outpost_name%", f.name);
+				f.owner.sendPlayersMessage(message);
+				Exp.addAllianceEXP(f.owner, Reward_Exp);
 			}
 		}
 		for(Blacksmith b : Blacksmith.blacksmiths){
 			if(b.owner != null){
 				b.owner.addReward(chooseReward(Blacksmith.rewards));
+				Exp.addAllianceEXP(b.owner, Reward_Exp);
+				String message = MessageManager.getMessage("Outpost_Reward");
+				message = message.replace("%outpost_name%", b.name);
+				b.owner.sendPlayersMessage(message);
 			}
 		}
 		for(Dock d : Dock.docks){
 			if(d.owner != null){
 				d.owner.addReward(chooseReward(Dock.rewards));
+				Exp.addAllianceEXP(d.owner, Reward_Exp);
+				String message = MessageManager.getMessage("Outpost_Reward");
+				message = message.replace("%outpost_name%", d.name);
+				d.owner.sendPlayersMessage(message);
 			}
 		}
 		for(God g : God.gods){
 			if(g.owner != null){
 				g.owner.addReward(chooseReward(God.rewards));
+				Exp.addAllianceEXP(g.owner, Reward_Exp);
+				String message = MessageManager.getMessage("Outpost_Reward");
+				message = message.replace("%outpost_name%", g.name);
+				g.owner.sendPlayersMessage(message);
 			}
 		}
 		for(Magic_Tower mt : Magic_Tower.magic_towers){
 			if(mt.owner != null){
 				mt.owner.addReward(chooseReward(Magic_Tower.rewards));
+				Exp.addAllianceEXP(mt.owner, Reward_Exp);
+				String message = MessageManager.getMessage("Outpost_Reward");
+				message = message.replace("%outpost_name%", mt.name);
+				mt.owner.sendPlayersMessage(message);
 			}
 		}
 		for(Mine m : Mine.mines){
 			if(m.owner != null){
 				m.owner.addReward(chooseReward(Mine.rewards));
+				Exp.addAllianceEXP(m.owner, Reward_Exp);
+				String message = MessageManager.getMessage("Outpost_Reward");
+				message = message.replace("%outpost_name%", m.name);
+				m.owner.sendPlayersMessage(message);
 			}
 		}
 		for(Mob_Farm mf : Mob_Farm.mob_farms){
 			if(mf.owner != null){
 				mf.owner.addReward(chooseReward(Mob_Farm.rewards));
+				Exp.addAllianceEXP(mf.owner, Reward_Exp);
+				String message = MessageManager.getMessage("Outpost_Reward");
+				message = message.replace("%outpost_name%", mf.name);
+				mf.owner.sendPlayersMessage(message);
 			}
 		}
 	}

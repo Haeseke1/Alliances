@@ -26,6 +26,7 @@ public class Owner {
 			player.sendMessage(MessageManager.infoColorCode + "/... owner setrank <Player> <Name> #Set rank of a player");
 			player.sendMessage(MessageManager.infoColorCode + "/... owner addadmin <Player> #Set rank of a player");
 			player.sendMessage(MessageManager.infoColorCode + "/... owner removeadmin <Player> #Set rank of a player");
+			player.sendMessage(MessageManager.infoColorCode + "/... owner getrewards #Take items your alliance was rewarded!");
 			return;
 		}
 		
@@ -213,6 +214,20 @@ public class Owner {
 			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
 					.replace("%player_name%", cplayer.getName());
 			MessageManager.sendMessage(cplayer, message);
+			return;
+		}
+		
+		if(args[1].equalsIgnoreCase("getrewards")){
+			Alliance alli = AllianceManager.getAlliance(player);
+			if(alli.claimReward(player)){
+				String message = MessageManager.getMessage("Command_Alliance_getrewards_Answer_All");
+				message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName());
+				MessageManager.sendMessage(player, message);
+			}else{
+				String message = MessageManager.getMessage("Command_Alliance_getrewards_Answer_Not_All");
+				message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName());
+				MessageManager.sendMessage(player, message);
+			}
 			return;
 		}
 		

@@ -103,7 +103,8 @@ Command_Alliance_Create_Answer: "Alliance created succesfully!"
 Command_Alliance_Create_Broadcast: "%alli_name% is born!"
 Command_Alliance_Create_Already_Exist: "Alliance with this name already exists"
 
-
+Command_Alliance_getrewards_Answer_Not_All: "You got some of the rewards!"
+Command_Alliance_getrewards_Answer_All: "You got all of the rewards!"
 
 #Can use %outpost_name% as variables
 
@@ -111,6 +112,9 @@ Outpost_Contested: "The outpost %outpost_name% is contested!"
 Outpost_Not_Taking_Over_Anymore: "You are not taking over %outpost_name% anymore!"
 Outpost_Safe: "Outpost %outpost_name% is safe!"
 Outpost_Losing: "You are losing your outpost called %outpost_name%!"
+
+#Can use %outpost_name% as variables
+Outpost_Reward: "You gained XP and a reward from %outpost_name%!"
 
 #Can use %outpost_name% and %taking_over_name% as variables
 Outpost_Taking_Over_0: "%taking_over_name% is taking over a outpost called %outpost_name% (0%)"

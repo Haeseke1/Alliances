@@ -21,6 +21,7 @@ import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyItemStackException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exp.Exp;
+import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.Timer;
 import me.Haeseke1.Alliances.Outpost.Type.Blacksmith;
 import me.Haeseke1.Alliances.Outpost.Type.Dock;
@@ -73,6 +74,7 @@ public class Config {
 			
 			Timer.rewardTime = ConfigManager.getIntFromConfig(Main.config, "Outpost.Time_Per_Reward");
 			Timer.take_overTime = ConfigManager.getIntFromConfig(Main.config, "Outpost.Time_For_Take_Over");
+			OutpostManager.Reward_Exp = ConfigManager.getIntFromConfig(Main.config, "Outpost.Exp_Per_Reward");
 			
 			for(int i = 2; i <= 30; i++){
 				Exp.table.put(i, ConfigManager.getIntFromConfig(Main.config, "Level.Amount_Exp." + i));

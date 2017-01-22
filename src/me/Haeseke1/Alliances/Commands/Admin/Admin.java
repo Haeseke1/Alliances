@@ -21,6 +21,8 @@ public class Admin {
 			player.sendMessage(MessageManager.infoColorCode + "Commands:");
 			player.sendMessage(MessageManager.infoColorCode + "/... admin invite <Player> #Invite players to your alliance");
 			player.sendMessage(MessageManager.infoColorCode + "/... admin setrank <Player> <Name> #Set rank of a player");
+			player.sendMessage(MessageManager.infoColorCode + "/... admin getrewards #Take items your alliance was rewarded!");
+			player.sendMessage(MessageManager.infoColorCode + "/... admin leave #Leave the alliance");
 			return;
 		}
 		
@@ -95,6 +97,31 @@ public class Admin {
 			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
 					.replace("%player_name%", cplayer.getName());
 			MessageManager.sendMessage(cplayer, message);
+			return;
+		}
+		
+		if(args[1].equalsIgnoreCase("leave")){
+			if(AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId())){
+				String message = MessageManager.getMessage("Command_Alliance_Member_Leave_Is_Owner");
+				MessageManager.sendMessage(player, message);
+				return;
+			}
+			Alliance alli = AllianceManager.getAlliance(player);
+			HashMap<UUID,String> members = alli.getMembers();
+			members.remove(player.getUniqueId());
+			if(alli.getAdmins().contains(player.getUniqueId())){
+				List<UUID> admins = alli.getAdmins();
+				admins.remove(player.getUniqueId());
+				alli.setAdmins(admins);
+			}
+			String message = MessageManager.getMessage("Command_Alliance_Member_Leave_Answer");
+			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
+					.replace("%player_name%", player.getName());
+			MessageManager.sendMessage(player, message);
+			message = MessageManager.getMessage("Command_Alliance_Member_Leave_Alli_Broadcast");
+			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
+					.replace("%player_name%", player.getName());
+			alli.sendPlayersMessage(message);
 			return;
 		}
 		
