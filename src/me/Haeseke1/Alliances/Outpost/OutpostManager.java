@@ -28,6 +28,34 @@ import me.Haeseke1.Alliances.Utils.ConfigManager;
 public class OutpostManager {
 	
 	
+	public static void addReward(ItemStack reward, Integer luck, OutpostType type){
+		switch(type){
+		case BLACKSMITH:
+			Blacksmith.rewards.put(reward, luck);
+			break;
+		case DOCK:
+			Dock.rewards.put(reward, luck);
+			break;
+		case FARM:
+			Farm.rewards.put(reward, luck);
+			break;
+		case GOD:
+			God.rewards.put(reward, luck);
+			break;
+		case MAGIC_TOWER:
+			Magic_Tower.rewards.put(reward, luck);
+			break;
+		case MINE:
+			Mine.rewards.put(reward, luck);
+			break;
+		case MOB_FARM:
+			Mob_Farm.rewards.put(reward, luck);
+			break;
+		default:
+			break;
+		}
+	}
+	
 	public static void giveReward(){
 		for(Farm f : Farm.farms){
 			if(f.owner != null){

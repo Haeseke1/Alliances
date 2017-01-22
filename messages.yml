@@ -34,22 +34,8 @@ Command_Outpost_ChooseName: "Type the name of the outpost in the chat!"
 Command_Outpost_Creating_On_Existing_outpost: "You are trying to construct a outpost on a existing outpost!"
 Command_Outpost_Create_Answer: "Outpost constructed!"
 
-Outpost_Place_Block: "You cannot place blocks in a outpost"
-Outpost_Break_Block: "You cannot break blocks in a outpost"
-
-#Can use %outpost_name% as variables
-
-Outpost_Contested: "The outpost %outpost_name% is contested!"
-Outpost_Not_Taking_Over_Anymore: "You are not taking over %outpost_name% anymore!"
-Outpost_Safe: "Outpost %outpost_name% is safe!"
-Outpost_Losing: "You are losing your outpost called %outpost_name%!"
-
-#Can use %outpost_name% and %taking_over_name% as variables
-Outpost_Taking_Over_0: "%taking_over_name% is taking over a outpost called %outpost_name% (0%)"
-Outpost_Taking_Over_25: "%taking_over_name% is taking over a outpost called %outpost_name% (25%)"
-Outpost_Taking_Over_50: "%taking_over_name% is taking over a outpost called %outpost_name% (50%)"
-Outpost_Taking_Over_75: "%taking_over_name% is taking over a outpost called %outpost_name% (75%)"
-Outpost_Taking_Over_100: "%taking_over_name% has taken over a outpost called %outpost_name% (100%)"
+Command_Outpost_AddReward_Answer: "Added reward succesfully!"
+Command_Outpost_AddReward_WrongType: "Wrong type! use /outpost listtype for a list of all the different types!"
 
 #Can use no variables
 Command_Region_Tool_Answer: "Tool succesfully created!"
@@ -61,29 +47,9 @@ Command_Region_Pos2_Answer: "2nd position set! Coordinates: X%x% Y%y% Z%z%"
 Command_Region_Show_Answer_In: "Showing region"
 Command_Region_Show_Answer_Out: "Disable region"
 
-#Can use %challenge_name% %reward_coin% as variables
-Challenges_Get_Reward: "Challenge is %challenge_name% completed, your reward is %reward_coin% coins!"
+Outpost_Place_Block: "You cannot place blocks in a outpost"
+Outpost_Break_Block: "You cannot break blocks in a outpost"
 
-#Can use %town_name% variables
-Town_Entering_A_Town: "You entered %town_name%"
-Town_Leaving_A_Town: "You left %town_name%"
-
-Town_Break_Other_Town_Block: "You cannot break the block of %town_Name%" 
-Town_Place_Other_Town_Block: "You cannot place the block of %town_Name%" 
-
-Command_Town_Create_Town_Already_Exist: "This town already exist"
-Command_Town_Claim_Town_Doesnt_Exist: "This town does not exist"
-
-#Can use no variables
-Town_Already_Claimed: "This land is already claimed"
-Town_Not_Connected: "This land is not connected to your town"
-Town_Not_Owner: "You are not the owner of your alliance"
-Town_Cannot_Create_Town: "You cannot create a/more town(s)"
-Town_Reached_Claim_Limit: "You claim more land, you are at your max!"
-
-#Can use %payment%
-Town_Cannot_Affort_Town: "Your alliance does not have enough coins! You need %payment% coins!"
-Town_Cannot_Affort_Claim: "Your alliance does not have enough coins! You need %payment% coins!"
 
 #Can use %alli_name%
 Command_Alliance_Owner_Disband_Answer: "You disbanded your alliance!"
@@ -137,6 +103,47 @@ Command_Alliance_Create_Answer: "Alliance created succesfully!"
 Command_Alliance_Create_Broadcast: "%alli_name% is born!"
 Command_Alliance_Create_Already_Exist: "Alliance with this name already exists"
 
+
+
+#Can use %outpost_name% as variables
+
+Outpost_Contested: "The outpost %outpost_name% is contested!"
+Outpost_Not_Taking_Over_Anymore: "You are not taking over %outpost_name% anymore!"
+Outpost_Safe: "Outpost %outpost_name% is safe!"
+Outpost_Losing: "You are losing your outpost called %outpost_name%!"
+
+#Can use %outpost_name% and %taking_over_name% as variables
+Outpost_Taking_Over_0: "%taking_over_name% is taking over a outpost called %outpost_name% (0%)"
+Outpost_Taking_Over_25: "%taking_over_name% is taking over a outpost called %outpost_name% (25%)"
+Outpost_Taking_Over_50: "%taking_over_name% is taking over a outpost called %outpost_name% (50%)"
+Outpost_Taking_Over_75: "%taking_over_name% is taking over a outpost called %outpost_name% (75%)"
+Outpost_Taking_Over_100: "%taking_over_name% has taken over a outpost called %outpost_name% (100%)"
+
+
+
+#Can use %challenge_name% %reward_coin% as variables
+Challenges_Get_Reward: "Challenge is %challenge_name% completed, your reward is %reward_coin% coins!"
+
+#Can use %town_name% variables
+Town_Entering_A_Town: "You entered %town_name%"
+Town_Leaving_A_Town: "You left %town_name%"
+
+Town_Break_Other_Town_Block: "You cannot break the block of %town_Name%" 
+Town_Place_Other_Town_Block: "You cannot place the block of %town_Name%" 
+
+Command_Town_Create_Town_Already_Exist: "This town already exist"
+Command_Town_Claim_Town_Doesnt_Exist: "This town does not exist"
+
+#Can use no variables
+Town_Already_Claimed: "This land is already claimed"
+Town_Not_Connected: "This land is not connected to your town"
+Town_Not_Owner: "You are not the owner of your alliance"
+Town_Cannot_Create_Town: "You cannot create a/more town(s)"
+Town_Reached_Claim_Limit: "You claim more land, you are at your max!"
+
+#Can use %payment%
+Town_Cannot_Affort_Town: "Your alliance does not have enough coins! You need %payment% coins!"
+Town_Cannot_Affort_Claim: "Your alliance does not have enough coins! You need %payment% coins!"
 
 
 
