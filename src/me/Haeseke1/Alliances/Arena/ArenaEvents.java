@@ -158,7 +158,8 @@ public class ArenaEvents implements Listener{
     			Player player = event.getPlayer();
     			try {
 					ArenaManager.joinArena(player, arenaname.toLowerCase());
-				} catch (EmptyStringException | EmptyLocationException e) {					e.printStackTrace();
+				} catch (EmptyStringException | EmptyLocationException e) {					
+					e.printStackTrace();
 				}
     		  }
     		}
