@@ -14,6 +14,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.Haeseke1.Alliances.APlayer.APlayerEvents;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Arena.ArenaEvents;
@@ -134,6 +135,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new ShopEvents(), this);
 		pm.registerEvents(new ChatEvent(), this);
 		pm.registerEvents(new TownEvents(), this);
+		pm.registerEvents(new APlayerEvents(), this);
 		/*
 		 * Challenges 
 		 */
