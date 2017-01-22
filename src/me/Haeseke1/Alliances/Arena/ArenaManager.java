@@ -1,5 +1,6 @@
 package me.Haeseke1.Alliances.Arena;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +58,7 @@ public class ArenaManager {
    * Loads the arena into the config
    */
   public static void loadArena() throws EmptyIntException, EmptyLocationException, EmptyStringException{
+	 if((new File(Main.plugin.getDataFolder(),"arena.yml").exists())){
 	  if(arenaConfig.getConfigurationSection("Arenas").getKeys(false) != null){
 		  for(String name: arenaConfig.getConfigurationSection("Arenas").getKeys(false)){
 			  String path = "Arenas." + name;
@@ -71,8 +73,9 @@ public class ArenaManager {
 		      ArenaManager.updateSign(ArenaManager.getSign(a.getName()), a);
 		      }
 		  }
-		  MessageManager.sendInfoMessage("Loaded the arenas");
+		  MessageManager.sendRemarkMessage("Loaded the arenas");
 	  }
+	 }
   }
   
   /*
@@ -113,12 +116,15 @@ public class ArenaManager {
 		  Alliance al = AllianceManager.getAlliance(player);
 		  if(TeamManager.teamExists(alliance, arenaname)){
 		    if(ArenaManager.checkTeamSize(TeamManager.getTeamNumber(alliance, arenaname), arenaname) != (arena.getSize() / 2)){
-			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
+			  arena.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined the arena!",player);
+		      ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
 			  player.teleport(ArenaManager.getLobby(arenaname));
 			  startArena(arenaname.toLowerCase());
+			  if(checkSign(arenaname)){
 			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), arena);
+			  }
 			  al.sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " queued up for an arena fight!",player);
 			  return;
 		    }
@@ -126,24 +132,29 @@ public class ArenaManager {
 			  return;
 		  }
 		  if(TeamManager.teamIsFree(1, arenaname)){
+			  arena.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined the arena!",player);
 			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team1.alliance", alliance.getName());
 			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
 			  player.teleport(ArenaManager.getLobby(arenaname));
-			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
+			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena " + ChatColor.GOLD + "[" + arena.getCurrentSize() + "/" + arena.getSize() + "]");
 			  startArena(arenaname.toLowerCase());
+			  if(checkSign(arenaname)){
 			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), arena);
-			  al.sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined your alliance in an arena fight!",player);
-			  return;
+			  }
+			  al.sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined your alliance in an arena fight!",player);			  return;
 		  }
 		  if(TeamManager.teamIsFree(2, arenaname)){
+			  arena.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined the arena!",player);
 			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team2.alliance", alliance.getName());
 			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
 			  player.teleport(ArenaManager.getLobby(arenaname));
-			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
+			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena " + ChatColor.GOLD + "[" + arena.getCurrentSize() + "/" + arena.getSize() + "]");
 			  startArena(arenaname.toLowerCase());
+			  if(checkSign(arenaname)){
 			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), arena);
+			  }
 			  al.sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined your alliance in an arena fight!",player);
 			  return;
 		  }
@@ -241,11 +252,13 @@ public class ArenaManager {
 				  if(player != null){
 				  MessageManager.sendMessage(player, ChatColor.GREEN + "Changed the arena status to " + status);
 				  }
+				 if(checkSign(arenaname)){
 				  try {
 						ArenaManager.updateSign(ArenaManager.getSign(arenaname), ArenaManager.getArenaByName(arenaname));
 					} catch (EmptyLocationException | EmptyStringException e) {
 						e.printStackTrace();
 					}
+				 }
 				  return;
                 }
   			    MessageManager.sendMessage(player, ChatColor.RED + "Their aren't enough spawns for both teams");
@@ -289,11 +302,10 @@ public class ArenaManager {
   public static void startArena(String arenaname) throws IllegalArgumentException, EmptyStringException{
 	  Arena a = ArenaManager.getArenaByName(arenaname);
 	if(ArenaManager.checkTeamSize(1, arenaname) + ArenaManager.checkTeamSize(2, arenaname) == a.getSize()){
-		Bukkit.broadcastMessage("test");
 	 if(ArenaManager.checkStatus(arenaname, "PLAYABLE")){
 	  Countdown counter = new Countdown(arenaname);
 	  counter.runTaskTimer(Main.plugin, 0L, 20L);
-
+	  a.sendMessage(ChatColor.GREEN + "The arena is full right now");
      }
 	}
   }
@@ -313,11 +325,18 @@ public class ArenaManager {
 		  MessageManager.sendMessage(player, ChatColor.GREEN + "You've left the arena");
 		  }
 		  try {
-			ArenaManager.updateSign(ArenaManager.getSign(arenaname), a);
+			  if(checkSign(arenaname)){
+			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), a);
+			  }
 		} catch (EmptyLocationException e) {
 			e.printStackTrace();
 		}
+		  if(!TeamManager.checkTeams(arenaname)){
 		  AllianceManager.getAlliance(player).addLose(player);
+		  }else{
+		  a.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.RED + " left the game",player);
+		  AllianceManager.getAlliance(player).sendPlayersMessage(ChatColor.GOLD + player.getName() + ChatColor.RED + " left an arena fight!", player);
+		  }
 		  return;
 	  }
      player.teleport(pastLocations.get(player.getUniqueId()));
@@ -325,7 +344,9 @@ public class ArenaManager {
 	 a.getPlayersInArena().remove(player.getUniqueId());
 	 pastLocations.remove(player.getUniqueId());
 	  try {
-		ArenaManager.updateSign(ArenaManager.getSign(arenaname), a);
+		  if(checkSign(arenaname)){
+		  ArenaManager.updateSign(ArenaManager.getSign(arenaname), a);
+		  }
 	} catch (EmptyLocationException e) {
 		e.printStackTrace();
 	}
@@ -405,8 +426,8 @@ public class ArenaManager {
 	  }
 	  return false;
   }
-  public static Sign getSign(String arenaname) throws EmptyLocationException{
-	  Location location = ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".sign");
+  public static Sign getSign(String arenaname) throws EmptyLocationException{ 
+	 Location location = ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".sign");
      if(location.getBlock() != null){
 	  Block block = location.getBlock();
       if(block.getType() == Material.WALL_SIGN 

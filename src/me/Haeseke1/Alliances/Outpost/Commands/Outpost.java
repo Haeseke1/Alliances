@@ -25,7 +25,6 @@ public class Outpost implements CommandExecutor {
 			return false;
 		}
 		Player player = (Player) sender;
-		
 		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
 		
 		if(args[0].equalsIgnoreCase("create")){

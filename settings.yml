@@ -1,0 +1,11 @@
+#Contains all the settings for the plugin
+
+Arena_win_player_reward: 100
+Arena_win_alliance_reward_coins: 50
+Arena_win_alliance_reward_exp: 200
+
+Arena_lose_player_reward: 0
+Arena_lose_alliance_reward_coins: 0
+Arena_lose_alliance_reward_exp: 100
+
+Arena_kill_player_reward: 1

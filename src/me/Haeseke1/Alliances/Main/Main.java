@@ -52,6 +52,7 @@ import me.Haeseke1.Alliances.Shop.ShopEvents;
 import me.Haeseke1.Alliances.Shop.ShopManager;
 import me.Haeseke1.Alliances.Shop.Commands.ShopC;
 import me.Haeseke1.Alliances.Town.TownEvents;
+import me.Haeseke1.Alliances.Town.TownManager;
 import me.Haeseke1.Alliances.Town.Commands.TownC;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -77,6 +78,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration shopConfig;
 	public static FileConfiguration messageConfig;
 	public static FileConfiguration arenaConfig;
+	public static FileConfiguration settingsConfig;
 	
 	
 	public static Main plugin;
@@ -110,6 +112,7 @@ public class Main extends JavaPlugin {
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
 			e.printStackTrace();
 		}
+	    TownManager.loadTowns();
 	}
 
 	@Override
@@ -117,6 +120,7 @@ public class Main extends JavaPlugin {
 		Config.saveConfigFile(this);
 		saveAllCustomConfigs();
 		ShopManager.despawnVendors();
+		TownManager.saveTowns();
 		MessageManager.sendAlertMessage("The plugin has been shutted down! *-* The cake wasn't a lie thought *-*");
 	}
 
@@ -192,6 +196,7 @@ public class Main extends JavaPlugin {
 		challengeConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "challenges.yml"), this);
 		shopConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "shop.yml"), this);
 		arenaConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "arenas.yml"), this);
+		settingsConfig = ConfigManager.getCustomConfig(new File(getDataFolder(),"settings.yml"), this);
 		AllianceManager.registerAlliance();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();

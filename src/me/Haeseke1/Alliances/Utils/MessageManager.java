@@ -49,13 +49,14 @@ public class MessageManager {
 	}
 
 	
+	@SuppressWarnings("static-access")
 	public static void registerMessages(Main main){
 		File f = new File(main.getDataFolder(), "messages.yml");
 		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
 		Reader defConfigStream;
 		try {
 			if(!f.exists()){
-				main.saveResource(f.getName(), false);
+				main.saveResource(f.getName(), true);
 				file = YamlConfiguration.loadConfiguration(f);
 			}else{
 				defConfigStream = new InputStreamReader(main.getResource(f.getName()), "UTF8");

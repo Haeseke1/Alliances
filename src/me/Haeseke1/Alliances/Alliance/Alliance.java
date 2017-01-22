@@ -6,11 +6,21 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import me.Haeseke1.Alliances.Arena.Arena;
+import me.Haeseke1.Alliances.Arena.ArenaManager;
+import me.Haeseke1.Alliances.Arena.TeamManager;
+import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
+import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
+import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
+import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Town.Town;
+import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import me.Haeseke1.Alliances.Utils.SoundManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class Alliance {
@@ -141,6 +151,13 @@ public class Alliance {
 		return false;
 	}
 
+	public void playSound(Sound sound){
+		for(UUID uuid: this.mMembers.keySet()){
+			Player player = Bukkit.getPlayer(uuid);
+			SoundManager.playSoundToPlayer(sound, player);
+		}
+	}
+	
 	public List<UUID> getAdmins() {
 		return admins;
 	}
@@ -175,7 +192,51 @@ public class Alliance {
 	public void addLose(Player playerInArena){
 		this.mLoses = this.mLoses + 1;
 		this.sendPlayersMessage(ChatColor.RED + "Your alliance lost an arena fight " + ChatColor.GOLD + "(+1 lose)",playerInArena);
-		MessageManager.sendMessage(playerInArena, ChatColor.RED + "You've lost an arena fight " + ChatColor.GOLD + "(1+ lose)");
+		MessageManager.sendMessage(playerInArena, ChatColor.RED + "Your team lost the arena fight! " + ChatColor.GOLD + "(- " + Main.settingsConfig.getInt("Arenas_lose_player_reward") +")");
+		try {
+			if(ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_lose_alliance_reward_exp") != 0){
+			int lostexp = ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_lose_alliance_reward_exp");
+			this.sendPlayersMessage(ChatColor.RED + "(-" + lostexp + " alliance exp)");
+			this.setExp(this.getExp() - lostexp);
+			}
+			if(ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_lose_alliance_reward_coins") != 0){
+				int lostCoins = ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_lose_alliance_reward_coins");
+				this.sendPlayersMessage(ChatColor.RED + "(-" + lostCoins + " alliance coins)");
+				this.setCoins(this.getCoins() - lostCoins);
+			}
+		} catch (EmptyIntException e1) {
+			e1.printStackTrace();
+		}
+		Arena arena = ArenaManager.getArenaOfPlayer(playerInArena);
+		try {
+		   if(ArenaManager.checkSign(arena.getName())){
+			ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
+		   }
+		} catch (IndexOutOfBoundsException | EmptyStringException | EmptyLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.playSound(Sound.NOTE_BASS_DRUM);
+	}
+	
+	public void addWin(){
+		this.mWins = this.mWins + 1;
+		this.playSound(Sound.ORB_PICKUP);
+		try {
+			if(ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_win_alliance_reward_exp") != 0){
+			int gainedexp = ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_win_alliance_reward_exp");
+			this.sendPlayersMessage(ChatColor.GREEN + "(+" + gainedexp + " alliance exp)");
+			this.setExp(this.getExp() + gainedexp);
+			
+			}
+			if(ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_win_alliance_reward_coins") != 0){
+				int gainedCoins = ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_win_alliance_reward_coins");
+				this.sendPlayersMessage(ChatColor.GREEN + "(+" + gainedCoins + " alliance coins)");
+				this.setCoins(this.getCoins() + gainedCoins);
+			}
+		} catch (EmptyIntException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 }

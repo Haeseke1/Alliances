@@ -122,7 +122,11 @@ Command_Alliance_Join_And_Create_Already_In_A_Alliance: "You are already in a al
 
 #Can use %alli_name%
 Command_Alliance_Join_Answer: "You are member of the alliance %alli_name%!" 
+
 Command_Alliance_Join_Not_Exist: "Something went wrong, the alliance does not exist anymore!"
+
+Command_Alliance_Join_Not_Exist: "Something went wrong, the alliance does not exist anymore!"
+
 
 #Can use no var
 Command_Alliance_Create_Type_Name: "Type your name of your alliance in the chat!"
