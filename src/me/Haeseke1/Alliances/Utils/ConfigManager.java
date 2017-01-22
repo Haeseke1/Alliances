@@ -133,7 +133,7 @@ public class ConfigManager {
 		Reader defConfigStream;
 		try {
 			if(!f.exists()){
-				main.saveResource(f.getName(), false);
+				main.saveResource(f.getName(), true);
 				file = YamlConfiguration.loadConfiguration(f);
 			}else{
 				defConfigStream = new InputStreamReader(main.getResource(f.getName()), "UTF8");
