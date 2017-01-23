@@ -3,21 +3,20 @@ package me.Haeseke1.Alliances.Chat;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 
-@SuppressWarnings("deprecation")
 public class ChatEvent implements Listener{
 	
 	
 	public static String format;
 	
-	@EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
-	private void playerChat(PlayerChatEvent event){
+	
+	@EventHandler
+	private void playerchat2(AsyncPlayerChatEvent event){
 		Player player = event.getPlayer();
 		if(AllianceManager.playerIsInAlli(player)){
 			Alliance alli = AllianceManager.getAlliance(player);

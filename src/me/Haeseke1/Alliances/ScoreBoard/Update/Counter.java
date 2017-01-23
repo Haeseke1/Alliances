@@ -15,7 +15,7 @@ public class Counter extends BukkitRunnable{
 	@Override
 	public void run() {
 		for(Player player: Bukkit.getOnlinePlayers()){
-		aScoreBoard.updateScoreboard(player);
+			aScoreBoard.updateScoreboard(player);
 		}
 	}
 

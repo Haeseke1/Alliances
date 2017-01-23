@@ -37,9 +37,9 @@ public class aScoreBoard {
 		Score space = obj.getScore(ChatColor.RED.toString());
 		space.setScore(10);
 		if(!AllianceManager.playerIsInAlli(player)){
-		Score score = obj.getScore(ChatColor.RED + "No Alliance");
-		score.setScore(9);
-		return board;
+			Score score = obj.getScore(ChatColor.RED + "No Alliance");
+			score.setScore(9);
+			return board;
 		}
 		Score score = obj.getScore(ChatColor.GREEN + "Alliance:");
 		score.setScore(9);
@@ -65,10 +65,10 @@ public class aScoreBoard {
 		Score space = obj.getScore(ChatColor.AQUA.toString());
 		space.setScore(10);
 		if(!AllianceManager.playerIsInAlli(player)){
-		Score score = obj.getScore(ChatColor.RED + "No Alliance");
-		score.setScore(9);
-		player.setScoreboard(board);
-		return;
+			Score score = obj.getScore(ChatColor.RED + "No Alliance");
+			score.setScore(9);
+			player.setScoreboard(board);
+			return;
 		}
 		Score score = obj.getScore(ChatColor.GREEN + "Alliance:");
 		score.setScore(9);
