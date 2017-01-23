@@ -20,13 +20,13 @@ public class aScoreBoardManager {
 			space.setScore(score - 2);
 			aplayer.addScore(scorename);
 			aplayer.addScore(value);
-			aplayer.addScore(space.toString());
+			aplayer.addScore(color.toString());
 			return;
 		}
 		Score space = obj.getScore(color.toString());
 		space.setScore(score - 1);
 		aplayer.addScore(scorename);
-		aplayer.addScore(space.toString());
+		aplayer.addScore(color.toString());
 		return;
 	}
 }
