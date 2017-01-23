@@ -29,6 +29,8 @@ public class aPlayer{
 		this.player = player;
 		this.file = file;
 		this.f = f;
+		this.wins = 0;
+		this.losses = 0;
 		registerConfig();
 		online_Players.add(this);
 	}
@@ -45,4 +47,12 @@ public class aPlayer{
 			MessageManager.sendAlertMessage("Could not save " + file.getName() + "!");
 		}
 	}
+	
+	public void addWin(){
+		this.wins = this.wins + 1;
+	}
+	
+    public int getWins(){
+    	return this.wins;
+    }
 }

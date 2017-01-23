@@ -30,7 +30,7 @@ public class Outpost implements CommandExecutor {
 		}
 		Player player = (Player) sender;
 		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
-		
+	 if(player.hasPermission("Alliances.outpost.*")){
 		if(args[0].equalsIgnoreCase("addreward") && args.length > 2){
 			try{
 				if(OutpostType.getOutpostType(args[2]) == null){
@@ -69,4 +69,6 @@ public class Outpost implements CommandExecutor {
 		MessageManager.sendMessage(player, wrong_arg);
 		return false;
 	}
+	return false;
+  }
 }

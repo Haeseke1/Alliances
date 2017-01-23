@@ -34,8 +34,7 @@ public class ShopC implements CommandExecutor {
 		Player player = (Player) sender;
 		
 		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
-		
-		
+	if(player.hasPermission("Alliances.shop.*")){
 		if(args[0].equalsIgnoreCase("create") && args.length >= 2){
 			if(ShopManager.shopExist(args[1])){
 				String message = MessageManager.getMessage("Command_Shop_Create_Already_Exist");
@@ -91,5 +90,7 @@ public class ShopC implements CommandExecutor {
 		}
 		MessageManager.sendMessage(player, wrong_arg);
 		return false;
+	  }
+	return false;
 	}
 }

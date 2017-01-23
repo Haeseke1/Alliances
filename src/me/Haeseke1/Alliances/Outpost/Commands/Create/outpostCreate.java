@@ -18,7 +18,7 @@ public class outpostCreate {
 			return;
 		}
 		Player player = (Player) sender;
-		
+	if(player.hasPermission("Alliances.outpost.*")){
 		if(regionSelect.leftClick.containsKey(player) && regionSelect.rightClick.containsKey(player)){
 			InventoryEvents.createInventory(player);
 		}else{
@@ -26,5 +26,5 @@ public class outpostCreate {
 			MessageManager.sendMessage(player, message);
 		}
 	}
-
+  }
 }

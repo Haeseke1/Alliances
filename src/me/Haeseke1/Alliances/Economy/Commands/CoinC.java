@@ -19,15 +19,18 @@ public class CoinC implements CommandExecutor{
 			sender.sendMessage(MessageManager.infoColorCode + "===== Coins =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
 			sender.sendMessage(MessageManager.infoColorCode + "/coin balance [Player] #Watch your balance or from other Players");
+			if(sender.hasPermission("Alliances.coins.*")){
 			sender.sendMessage(MessageManager.infoColorCode + "/coin pay <Player> <Amount> #Give another player coins");
 			sender.sendMessage(MessageManager.infoColorCode + "/coin add <Player> <Amount> #give player coins");
 			sender.sendMessage(MessageManager.infoColorCode + "/coin set <Player> <Amount> #Set a player's coins");
+			}
 			return false;
 		}
 		
 		if (!(sender instanceof Player)) {
 			if(args[0].equalsIgnoreCase("add") && args.length >= 3){
 				try{
+				@SuppressWarnings("deprecation")
 				OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
 				int amount = Integer.parseInt(args[2]);
 				Coins.addPlayerCoins(player.getUniqueId(), amount);
@@ -71,7 +74,7 @@ public class CoinC implements CommandExecutor{
 			return false;
 		}
 		
-		
+	if(player.hasPermission("Alliances.coins.*")){
 		if (args[0].equalsIgnoreCase("add")) {
 			if (args.length < 3) {
 				MessageManager.sendMessage(player, wrong_arg);
@@ -179,6 +182,8 @@ public class CoinC implements CommandExecutor{
 		}
 		MessageManager.sendMessage((Player) sender, wrong_arg);
 		return false;
+	 }
+	return false;
 	}
 
 }

@@ -58,7 +58,7 @@ public class ArenaManager {
    * Loads the arena into the config
    */
   public static void loadArena() throws EmptyIntException, EmptyLocationException, EmptyStringException{
-	 if((new File(Main.plugin.getDataFolder(),"arena.yml").exists())){
+     if((new File(Main.plugin.getDataFolder(),"arenas.yml")).exists()){
 	  if(arenaConfig.getConfigurationSection("Arenas").getKeys(false) != null){
 		  for(String name: arenaConfig.getConfigurationSection("Arenas").getKeys(false)){
 			  String path = "Arenas." + name;
@@ -75,7 +75,8 @@ public class ArenaManager {
 		  }
 		  MessageManager.sendRemarkMessage("Loaded the arenas");
 	  }
-	 }
+     }
+     return;
   }
   
   /*
@@ -108,6 +109,7 @@ public class ArenaManager {
   }
   public static void joinArena(Player player, String arenaname) throws EmptyStringException, EmptyLocationException{
 	 Arena arena = ArenaManager.getArenaByName(arenaname);
+   if(ArenaManager.arenaExists(arenaname)){
 	if(checkStatus(arenaname,"PLAYABLE")){
 	 if(!isInArena(player)){
 	  if(AllianceManager.playerIsInAlli(player)){
@@ -172,6 +174,9 @@ public class ArenaManager {
 	}
 	  MessageManager.sendMessage(player, ChatColor.RED + "This arena isn't joinable at the moment");
 	  return;
+   }
+	 MessageManager.sendMessage(player, ChatColor.RED + "This arena doesn't exists");
+	 return;
   }
   public static void addSpawn(String name, int teamNumber, Player player){
 	 if(arenaExists(name)){

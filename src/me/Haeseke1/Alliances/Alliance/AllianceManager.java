@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -134,5 +135,14 @@ public class AllianceManager {
 		}
 		return null;
 	}
-	
+	public static int getMemberCount(Alliance alli){
+		int count = 0;
+		for(UUID uuid: alli.getMembers().keySet()){
+			Player player = Bukkit.getPlayer(uuid);
+			if(player.isOnline()){
+				count ++;
+			}
+		}
+		return count;
+	}
 }

@@ -18,6 +18,7 @@ public class region implements CommandExecutor {
 		if(!(sender instanceof Player)){
 			return false;
 		}
+	if(sender.hasPermission("Alliances.region.*")){
 		if(args.length == 0){
 			sender.sendMessage(MessageManager.infoColorCode + "===== Region =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
@@ -86,5 +87,7 @@ public class region implements CommandExecutor {
 		
 		MessageManager.sendMessage(player, wrong_arg);
 		return false;
+	}
+     return false;
 	}
 }

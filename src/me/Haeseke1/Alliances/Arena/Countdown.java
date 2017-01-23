@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Economy.Coins;
@@ -113,10 +114,10 @@ public class Countdown extends BukkitRunnable{
 		  }else if(!ArenaManager.checkStatus(arena.getName(), "COUNTING")){
 			  for(UUID playerUUID: arena.getPlayersInArena().keySet()){
 				  Player player = Bukkit.getPlayer(playerUUID);
+				  APlayerManager.getAPlayer(player).addWin();
 				  MessageManager.sendMessage(player, ChatColor.GREEN + "Your team won the game " + ChatColor.GOLD + "(+" + Main.settingsConfig.getInt("Arena_win_player_reward") + " coins)");
 				  Coins.addPlayerCoins(player, Main.settingsConfig.getInt("Arena_win_player_reward"));
 				  Alliance al = AllianceManager.getAlliance(player);
-				  Coins.addAllianceCoins(al, 5);
 				  al.sendPlayersMessage(ChatColor.GREEN + "Your alliance won an arena fight! " + ChatColor.GOLD + "(+1 win)", player);
 				  al.addWin();
 				  try {
