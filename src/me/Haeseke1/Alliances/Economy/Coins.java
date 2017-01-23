@@ -1,6 +1,11 @@
 package me.Haeseke1.Alliances.Economy;
 
+import java.io.File;
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
@@ -8,6 +13,9 @@ import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
+import me.Haeseke1.Alliances.Utils.MessageManager;
+import me.Haeseke1.Alliances.Utils.SoundManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class Coins {
 
@@ -58,6 +66,31 @@ public class Coins {
 		return 0;
 	}
 
+	public static int addPlayerCoins(UUID uuid, int amount) {
+		try {
+			int i = ConfigManager.getIntFromConfig(Main.coinsConfig, uuid.toString());
+			i += amount;
+			Main.coinsConfig.set(uuid.toString(), i);
+			OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
+			if(player.isOnline()){
+				MessageManager.sendMessage(player.getPlayer(), ChatColor.GREEN + "You've received " + amount + " coins!");
+				SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player.getPlayer());
+			}
+			MessageManager.sendRemarkMessage("Successfully added " + amount + " to " + player.getName() + "'s bank account!");
+			File file = new File(Main.plugin.getDataFolder(),"coins.yml");
+			ConfigManager.saveCustomConfig(file, Main.coinsConfig);
+			return ConfigManager.getIntFromConfig(Main.coinsConfig, uuid.toString());
+		} catch (Exception e) {
+			Main.coinsConfig.set(uuid.toString(), defaultCoins + amount);
+			try {
+				return ConfigManager.getIntFromConfig(Main.coinsConfig, uuid.toString());
+			} catch (EmptyIntException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
 	@SuppressWarnings("deprecation")
 	public static int addPlayerCoins(String player, int amount) {
 		try {

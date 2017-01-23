@@ -1,5 +1,7 @@
 package me.Haeseke1.Alliances.Economy.Commands;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,6 +26,16 @@ public class CoinC implements CommandExecutor{
 		}
 		
 		if (!(sender instanceof Player)) {
+			if(args[0].equalsIgnoreCase("add") && args.length >= 3){
+				try{
+				OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
+				int amount = Integer.parseInt(args[2]);
+				Coins.addPlayerCoins(player.getUniqueId(), amount);
+				}catch(Exception e){
+				e.printStackTrace();
+				}
+				return true;
+			}
 			String message = MessageManager.getMessage("Command_Error_Not_A_User");
 			MessageManager.sendAlertMessage(message);
 			return false;
