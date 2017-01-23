@@ -148,7 +148,7 @@ public class aPlayer{
 					   !scores.contains(ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins") ||
 					   !scores.contains(ChatColor.translateAlternateColorCodes('&', alli.getName()))){
 					resetScore();
-					aScoreBoardManager.setScore(this, ChatColor.GREEN + "Alliance:", 15, sideBar, ChatColor.BLACK, ChatColor.RED + "No alliance");
+					aScoreBoardManager.setScore(this, ChatColor.GREEN + "Alliance:", 15, sideBar, ChatColor.BLACK, ChatColor.translateAlternateColorCodes('&', alli.getName()));
 					aScoreBoardManager.setScore(this, ChatColor.GREEN + "Wins:", 12, sideBar, ChatColor.YELLOW, ChatColor.AQUA + "" + wins + "W");
 					aScoreBoardManager.setScore(this, ChatColor.GREEN + "Loses:", 9, sideBar, ChatColor.DARK_PURPLE, ChatColor.AQUA + "" + losses + "L");
 					aScoreBoardManager.setScore(this, ChatColor.GREEN + "Coins:", 6, sideBar, ChatColor.LIGHT_PURPLE, ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins");
