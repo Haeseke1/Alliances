@@ -31,6 +31,15 @@ public class Town {
 		towns.add(this);
 	}
 	
+	public Town(String name, List<Chunk> chunk, Alliance alli) {
+		this.chunks = chunk;
+		this.owner = alli;
+		this.name = ChatColor.translateAlternateColorCodes('&', name);
+		this.nameWithColorCodes = name;
+		alli.addTown(this);
+		towns.add(this);
+	}
+	
 	public void addChunck(Chunk chunk) {
 		chunks.add(chunk);
 	}

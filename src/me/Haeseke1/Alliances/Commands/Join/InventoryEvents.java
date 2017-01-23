@@ -44,8 +44,8 @@ public class InventoryEvents implements Listener{
 			if(event.getCurrentItem() != null){
 				Player player = (Player) event.getWhoClicked();
 				if(event.getCurrentItem().hasItemMeta() && event.getCurrentItem().getItemMeta().hasDisplayName()){
-					if(AllianceManager.alliExist(ChatColor.stripColor(event.getCurrentItem().getItemMeta().getDisplayName()))){
-						Alliance alli = AllianceManager.getAlliance(ChatColor.stripColor(event.getCurrentItem().getItemMeta().getDisplayName()));
+					if(AllianceManager.alliExist(event.getCurrentItem().getItemMeta().getDisplayName())){
+						Alliance alli = AllianceManager.getAlliance(event.getCurrentItem().getItemMeta().getDisplayName());
 						alli.addMember(player.getUniqueId());
 						String message = MessageManager.getMessage("Command_Alliance_Join_Answer");
 						message = message.replace("%alli_name%", alli.getName());

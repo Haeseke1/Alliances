@@ -1,14 +1,15 @@
 package me.Haeseke1.Alliances.Town;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
-import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
-
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exp.Exp;
 import me.Haeseke1.Alliances.Main.Main;
@@ -150,17 +151,15 @@ public class TownManager {
     		Alliance al = AllianceManager.getAlliance(alliancename);
     	  if(allianceConfig.getConfigurationSection(alliancename + ".towns") != null){
     	    for(String townName: allianceConfig.getConfigurationSection(alliancename + ".towns").getKeys(false)){
-    	    	Town town = new Town(townName,null,al);
+    	    	List<Chunk> chunkList = new ArrayList<Chunk>();
     	    	for(String chunk: allianceConfig.getConfigurationSection(alliancename + ".towns." + townName + ".chunks").getKeys(false)){
     	    		int chunkNumber = Integer.parseInt(chunk);
     	    		int x = allianceConfig.getInt(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".x");
     	    		int z = allianceConfig.getInt(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".z");
     	    		String world = allianceConfig.getString(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".world");
-    	    		Location loc = new Location(Bukkit.getWorld(world),x,0,z);
-    	    		Chunk tchunk = loc.getChunk();
-    	    		town.addChunck(tchunk);
+    	    		chunkList.add(Bukkit.getWorld(world).getChunkAt(x, z));
     	    	}
-    	    	Town.towns.add(town);
+    	    	new Town(townName,chunkList,al);
     	    }
     	    MessageManager.sendAlertMessage("Towns have been registered");
     	  }

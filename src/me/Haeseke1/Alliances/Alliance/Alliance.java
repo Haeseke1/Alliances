@@ -56,7 +56,8 @@ public class Alliance {
 
 	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type, HashMap<UUID,String> mMembers, int exp) {
 		this.mMembers = mMembers;
-		this.name = name;
+		this.nameWithColorCodes = name;
+		this.name = ChatColor.translateAlternateColorCodes('&', name);
 		this.mOwner = owner;
 		this.mWins = wins;
 		this.mLoses = loses;

@@ -64,7 +64,8 @@ public class Blacksmith {
 	}
 	
 	public Blacksmith(String name, World world, int xmin, int xmax, int zmin, int zmax, Alliance alli) {
-		this.name = name;
+		this.nameWithColorCodes = name;
+		this.name = ChatColor.translateAlternateColorCodes('&', name);
 		this.world = world;
 		this.xmin = xmin;
 		this.xmax = xmax;
