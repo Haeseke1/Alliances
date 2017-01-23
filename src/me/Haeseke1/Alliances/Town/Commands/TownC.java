@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Town.Town;
 import me.Haeseke1.Alliances.Town.TownManager;
@@ -19,6 +20,7 @@ public class TownC implements CommandExecutor{
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
 			sender.sendMessage(MessageManager.infoColorCode + "/town create <Name> #Create a new town");
 			sender.sendMessage(MessageManager.infoColorCode + "/town claim <Name> #Claim more land for your town");
+			sender.sendMessage(MessageManager.infoColorCode + "/town show #Show your land");
 			return false;
 		}
 		
@@ -54,6 +56,18 @@ public class TownC implements CommandExecutor{
 			}
 			Town town = TownManager.getTown(args[1]);
 			TownManager.claimLand(player, town);
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("show")){
+			if(!AllianceManager.playerIsInAlli(player)){
+				String message = MessageManager.getMessage("Command_Error_Not_In_A_Alliance");
+				MessageManager.sendMessage(player, message);
+				return false;
+			}
+			String message = MessageManager.getMessage("Command_Town_Show_Answer");
+			MessageManager.sendMessage(player, message);
+			Particle_Timer.showRegion.add(player);
 			return false;
 		}
 		

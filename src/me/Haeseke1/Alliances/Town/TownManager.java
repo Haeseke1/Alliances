@@ -102,6 +102,16 @@ public class TownManager {
 		return false;
 	}
 	
+	public static boolean isNextTo(Chunk chunk, Chunk cChunk){
+		if((cChunk.getX() - 1 == chunk.getX() || cChunk.getX() + 1 == chunk.getX()) && cChunk.getZ() == chunk.getZ()){
+			return true;
+		}
+		if((cChunk.getZ() - 1 == chunk.getZ() || cChunk.getZ() + 1 == chunk.getZ()) && cChunk.getX() == chunk.getX()){
+			return true;
+		}
+		return false;
+	}
+	
 	public static boolean isTown(String name){
 		for(Town town : Town.towns){
 			if(town.name.equalsIgnoreCase(name)){

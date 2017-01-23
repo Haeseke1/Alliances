@@ -139,6 +139,8 @@ Town_Place_Other_Town_Block: "You cannot place the block of %town_Name%"
 Command_Town_Create_Town_Already_Exist: "This town already exist"
 Command_Town_Claim_Town_Doesnt_Exist: "This town does not exist"
 
+Command_Town_Show_Answer: "Showing regions"
+
 #Can use no variables
 Town_Already_Claimed: "This land is already claimed"
 Town_Not_Connected: "This land is not connected to your town"
