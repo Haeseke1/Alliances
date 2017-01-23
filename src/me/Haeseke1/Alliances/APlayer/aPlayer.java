@@ -66,6 +66,10 @@ public class aPlayer{
 		this.wins = this.wins + 1;
 	}
 	
+	public void addLose(){
+		this.losses = this.losses + 1;
+	}
+	
     public int getWins(){
     	return this.wins;
     }
@@ -73,13 +77,7 @@ public class aPlayer{
     public int getLoses(){
     	return this.losses;
     }
-    
-    
-    
-    
-    
-    
-    
+
     public void addScore(String s){
     	scores.add(s);
     }
@@ -157,10 +155,4 @@ public class aPlayer{
 	  }
 		return;
 	}
-    
-    
-    
-    
-    
-    
 }
