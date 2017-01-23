@@ -8,7 +8,6 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
-import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Economy.Coins;

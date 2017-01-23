@@ -289,12 +289,8 @@ public class ArenaManager {
   }
   public static boolean checkSpawns(String arenaname){
 	  int count = 0;
-	  for(String team1: arenaConfig.getConfigurationSection("Arenas." + arenaname.toLowerCase() + ".spawns.team1").getKeys(false)){
-		  count ++;
-	  }
-	  for(String team2: arenaConfig.getConfigurationSection("Arenas." + arenaname.toLowerCase() + ".spawns.team2").getKeys(false)){
-		  count ++;
-	  }
+	  count = arenaConfig.getConfigurationSection("Arenas." + arenaname.toLowerCase() + ".spawns.team1").getKeys(false).size() 
+			  + arenaConfig.getConfigurationSection("Arenas." + arenaname.toLowerCase() + ".spawns.team2").getKeys(false).size();
 	  count = count -= 2;
 	  if(count == arenaConfig.getInt("Arenas." + arenaname + ".size")){
 		  return true;

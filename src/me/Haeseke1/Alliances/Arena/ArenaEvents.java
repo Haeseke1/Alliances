@@ -1,6 +1,6 @@
 package me.Haeseke1.Alliances.Arena;
 
-import java.util.UUID;
+
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -10,7 +10,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
