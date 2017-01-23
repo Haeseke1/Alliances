@@ -58,8 +58,7 @@ public class ArenaManager {
    * Loads the arena into the config
    */
   public static void loadArena() throws EmptyIntException, EmptyLocationException, EmptyStringException{
-     if((new File(Main.plugin.getDataFolder(),"arenas.yml")).exists()){
-	  if(arenaConfig.getConfigurationSection("Arenas").getKeys(false) != null){
+	  if(arenaConfig.get("Arenas") != null){
 		  for(String name: arenaConfig.getConfigurationSection("Arenas").getKeys(false)){
 			  String path = "Arenas." + name;
 			  arenaConfig.set(path + ".spawns.team1.alliance", "");
@@ -75,7 +74,6 @@ public class ArenaManager {
 		  }
 		  MessageManager.sendRemarkMessage("Loaded the arenas");
 	  }
-     }
      return;
   }
   
