@@ -6,7 +6,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import me.Haeseke1.Alliances.ScoreBoard.aScoreBoard;
-import me.Haeseke1.Alliances.ScoreBoard.aScoreBoardManager;
 
 public class Join implements Listener{
 

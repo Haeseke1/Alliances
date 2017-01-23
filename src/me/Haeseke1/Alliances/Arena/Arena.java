@@ -31,7 +31,7 @@ public class Arena {
 		mCorner1 = corner1;
 		mCorner2 = corner2;
 		mStatus = "UNDER_MAINTANCE";
-		mSpawns = new ArrayList<>();
+		setmSpawns(new ArrayList<>());
 	}
 	
 	public HashMap<UUID,Alliance> getPlayersInArena() {
@@ -87,5 +87,13 @@ public class Arena {
 			Player player = Bukkit.getPlayer(playerUUID);
 			player.teleport(ArenaManager.pastLocations.get(playerUUID));
 		}
+	}
+
+	public List<Location> getmSpawns() {
+		return mSpawns;
+	}
+
+	public void setmSpawns(List<Location> mSpawns) {
+		this.mSpawns = mSpawns;
 	}
 }
