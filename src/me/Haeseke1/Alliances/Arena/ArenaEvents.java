@@ -27,6 +27,13 @@ import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Outpost.Type.Blacksmith;
+import me.Haeseke1.Alliances.Outpost.Type.Dock;
+import me.Haeseke1.Alliances.Outpost.Type.Farm;
+import me.Haeseke1.Alliances.Outpost.Type.God;
+import me.Haeseke1.Alliances.Outpost.Type.Magic_Tower;
+import me.Haeseke1.Alliances.Outpost.Type.Mine;
+import me.Haeseke1.Alliances.Outpost.Type.Mob_Farm;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
@@ -36,17 +43,39 @@ public class ArenaEvents implements Listener{
 	private static FileConfiguration arenaConfig = Main.arenaConfig;
 	
 	@EventHandler
-	public void onBreakInArena(BlockBreakEvent event){
+	public void onBreakInArena(BlockBreakEvent event) throws EmptyLocationException, EmptyStringException{
 		Player player = event.getPlayer();
+		Block block = event.getBlock();
+		Arena arena = ArenaManager.getArenaOfPlayer(player);
 		if(ArenaManager.isInArena(player)){
 			event.setCancelled(true);
+			return;
+		}
+		if(blockIsInArena(block.getLocation(),arena.getName())){
+			if(ArenaManager.checkStatus(arena.getName(), "UNDER_MAINTANCE")){
+			return;
+			}else{
+		    MessageManager.sendMessage(player, "You can't edit the arena while it isn't under maintance");
+			event.setCancelled(true);
+			}
 		}
 	}
 	@EventHandler
-	public void onPlaceInArena(BlockPlaceEvent event){
+	public void onPlaceInArena(BlockPlaceEvent event) throws EmptyLocationException, EmptyStringException{
 		Player player = event.getPlayer();
+	    Block block = event.getBlock();
+	    Arena arena = ArenaManager.getArenaOfPlayer(player);
 		if(ArenaManager.isInArena(player)){
 			event.setCancelled(true);
+			return;
+		}
+		if(blockIsInArena(block.getLocation(),arena.getName())){
+			if(ArenaManager.checkStatus(arena.getName(), "UNDER_MAINTANCE")){
+			return;
+			}else{
+		    MessageManager.sendMessage(player, "You can't edit the arena while it isn't under maintance");
+			event.setCancelled(true);
+			}
 		}
 	}	
 	@EventHandler
@@ -191,4 +220,32 @@ public class ArenaEvents implements Listener{
 			}
     	}
     }
+    
+	public static boolean blockIsInArena(Location blockLocation, String arenaname) throws EmptyLocationException{
+		Location corner1 = ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".corner1");
+		Location corner2 = ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".corner2");
+		
+		int x1 = (int) corner1.getX();
+		int z1 = (int) corner1.getZ();
+		
+		int x2 = (int) corner2.getX();
+		int z2 = (int) corner2.getZ();
+		
+		int xblock = (int) blockLocation.getX();
+		int zblock = (int) blockLocation.getZ();
+		
+		if(x1 < xblock && xblock < x2 && z1 < zblock && zblock < z2){
+			return true;
+		}
+		if(x1 > xblock && xblock > x2 && z1 > zblock && zblock > z2){
+			return true;
+		}
+		if(x1 > xblock && xblock > x2 && z1 < zblock && zblock < z2){
+			return true;
+		}
+		if(x1 < xblock && xblock < x2 && z1 > zblock && zblock > z2){
+			return true;
+		}
+		return false;
+	}
 }
