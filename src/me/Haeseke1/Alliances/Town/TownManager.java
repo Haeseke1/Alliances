@@ -13,6 +13,7 @@ import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exp.Exp;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class TownManager {
 	
@@ -114,7 +115,7 @@ public class TownManager {
 	
 	public static boolean isTown(String name){
 		for(Town town : Town.towns){
-			if(town.name.equalsIgnoreCase(name)){
+			if(ChatColor.stripColor(town.name).equalsIgnoreCase(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', name)))){
 				return true;
 			}
 		}
@@ -123,7 +124,7 @@ public class TownManager {
 	
 	public static Town getTown(String name){
 		for(Town town : Town.towns){
-			if(town.name.equalsIgnoreCase(name)){
+			if(ChatColor.stripColor(town.name).equalsIgnoreCase(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', name)))){
 				return town;
 			}
 		}
@@ -135,16 +136,16 @@ public class TownManager {
     		for(Town town: al.getTowns()){
     			int chunkCount = 0;
     			for(Chunk chunk: town.chunks){
-    				allianceConfig.set(al.getName() + ".towns." + town.name + ".chunks." + chunkCount + ".x", chunk.getX());
-    				allianceConfig.set(al.getName() + ".towns." + town.name + ".chunks." + chunkCount + ".z", chunk.getZ());
-    				allianceConfig.set(al.getName() + ".towns." + town.name + ".chunks." + chunkCount + ".world", chunk.getWorld().getName());
+    				allianceConfig.set(al.getNameWithColorCodes() + ".towns." + town.nameWithColorCodes + ".chunks." + chunkCount + ".x", chunk.getX());
+    				allianceConfig.set(al.getNameWithColorCodes() + ".towns." + town.nameWithColorCodes + ".chunks." + chunkCount + ".z", chunk.getZ());
+    				allianceConfig.set(al.getNameWithColorCodes() + ".towns." + town.nameWithColorCodes + ".chunks." + chunkCount + ".world", chunk.getWorld().getName());
     				chunkCount ++;
     			}
     		}
     	}
     }
     
-    public static void loadTowns(){
+    public static void registerTowns(){
     	for(String alliancename: allianceConfig.getConfigurationSection("").getKeys(false)){
     		Alliance al = AllianceManager.getAlliance(alliancename);
     	  if(allianceConfig.getConfigurationSection(alliancename + ".towns") != null){
@@ -161,7 +162,7 @@ public class TownManager {
     	    	}
     	    	Town.towns.add(town);
     	    }
-    	    MessageManager.sendAlertMessage("Towns have been loaded");
+    	    MessageManager.sendAlertMessage("Towns have been registered");
     	  }
     	}
     }

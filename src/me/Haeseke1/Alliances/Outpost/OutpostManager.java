@@ -581,73 +581,73 @@ public class OutpostManager {
 		FileConfiguration file = Main.outpostConfig;
 		for(Blacksmith f : Blacksmith.blacksmiths){
 			if(f.owner != null){
-				file.set("Blacksmith." + f.name + ".Owner", f.owner);
+				file.set("Blacksmith." + f.nameWithColorCodes + ".Owner", f.owner);
 			}
-			file.set("Blacksmith." + f.name + ".World", f.world.getName());
-			file.set("Blacksmith." + f.name + ".Xmin", f.xmin);
-			file.set("Blacksmith." + f.name + ".Xmax", f.xmax);
-			file.set("Blacksmith." + f.name + ".Zmin", f.zmin);
-			file.set("Blacksmith." + f.name + ".Zmax", f.zmax);
+			file.set("Blacksmith." + f.nameWithColorCodes + ".World", f.world.getName());
+			file.set("Blacksmith." + f.nameWithColorCodes + ".Xmin", f.xmin);
+			file.set("Blacksmith." + f.nameWithColorCodes + ".Xmax", f.xmax);
+			file.set("Blacksmith." + f.nameWithColorCodes + ".Zmin", f.zmin);
+			file.set("Blacksmith." + f.nameWithColorCodes + ".Zmax", f.zmax);
 		}
 		for(Dock f : Dock.docks){
 			if(f.owner != null){
-				file.set("Dock." + f.name + ".Owner", f.owner);
+				file.set("Dock." + f.nameWithColorCodes + ".Owner", f.owner);
 			}
-			file.set("Dock." + f.name + ".World", f.world.getName());
-			file.set("Dock." + f.name + ".Xmin", f.xmin);
-			file.set("Dock." + f.name + ".Xmax", f.xmax);
-			file.set("Dock." + f.name + ".Zmin", f.zmin);
-			file.set("Dock." + f.name + ".Zmax", f.zmax);
+			file.set("Dock." + f.nameWithColorCodes + ".World", f.world.getName());
+			file.set("Dock." + f.nameWithColorCodes + ".Xmin", f.xmin);
+			file.set("Dock." + f.nameWithColorCodes + ".Xmax", f.xmax);
+			file.set("Dock." + f.nameWithColorCodes + ".Zmin", f.zmin);
+			file.set("Dock." + f.nameWithColorCodes + ".Zmax", f.zmax);
 		}
 		for(Farm f : Farm.farms){
 			if(f.owner != null){
-				file.set("Farm." + f.name + ".Owner", f.owner);
+				file.set("Farm." + f.nameWithColorCodes + ".Owner", f.owner);
 			}
-			file.set("Farm." + f.name + ".World", f.world.getName());
-			file.set("Farm." + f.name + ".Xmin", f.xmin);
-			file.set("Farm." + f.name + ".Xmax", f.xmax);
-			file.set("Farm." + f.name + ".Zmin", f.zmin);
-			file.set("Farm." + f.name + ".Zmax", f.zmax);
+			file.set("Farm." + f.nameWithColorCodes + ".World", f.world.getName());
+			file.set("Farm." + f.nameWithColorCodes + ".Xmin", f.xmin);
+			file.set("Farm." + f.nameWithColorCodes + ".Xmax", f.xmax);
+			file.set("Farm." + f.nameWithColorCodes + ".Zmin", f.zmin);
+			file.set("Farm." + f.nameWithColorCodes + ".Zmax", f.zmax);
 		}
 		for(God f : God.gods){
 			if(f.owner != null){
-				file.set("God." + f.name + ".Owner", f.owner);
+				file.set("God." + f.nameWithColorCodes + ".Owner", f.owner);
 			}
-			file.set("God." + f.name + ".World", f.world.getName());
-			file.set("God." + f.name + ".Xmin", f.xmin);
-			file.set("God." + f.name + ".Xmax", f.xmax);
-			file.set("God." + f.name + ".Zmin", f.zmin);
-			file.set("God." + f.name + ".Zmax", f.zmax);
+			file.set("God." + f.nameWithColorCodes + ".World", f.world.getName());
+			file.set("God." + f.nameWithColorCodes + ".Xmin", f.xmin);
+			file.set("God." + f.nameWithColorCodes + ".Xmax", f.xmax);
+			file.set("God." + f.nameWithColorCodes + ".Zmin", f.zmin);
+			file.set("God." + f.nameWithColorCodes + ".Zmax", f.zmax);
 		}
 		for(Magic_Tower f : Magic_Tower.magic_towers){
 			if(f.owner != null){
-				file.set("Magic_Tower." + f.name + ".Owner", f.owner);
+				file.set("Magic_Tower." + f.nameWithColorCodes + ".Owner", f.owner);
 			}
-			file.set("Magic_Tower." + f.name + ".World", f.world.getName());
-			file.set("Magic_Tower." + f.name + ".Xmin", f.xmin);
-			file.set("Magic_Tower." + f.name + ".Xmax", f.xmax);
-			file.set("Magic_Tower." + f.name + ".Zmin", f.zmin);
-			file.set("Magic_Tower." + f.name + ".Zmax", f.zmax);
+			file.set("Magic_Tower." + f.nameWithColorCodes + ".World", f.world.getName());
+			file.set("Magic_Tower." + f.nameWithColorCodes + ".Xmin", f.xmin);
+			file.set("Magic_Tower." + f.nameWithColorCodes + ".Xmax", f.xmax);
+			file.set("Magic_Tower." + f.nameWithColorCodes + ".Zmin", f.zmin);
+			file.set("Magic_Tower." + f.nameWithColorCodes + ".Zmax", f.zmax);
 		}
 		for(Mine f : Mine.mines){
 			if(f.owner != null){
-				file.set("Mine." + f.name + ".Owner", f.owner);
+				file.set("Mine." + f.nameWithColorCodes + ".Owner", f.owner);
 			}
-			file.set("Mine." + f.name + ".World", f.world.getName());
-			file.set("Mine." + f.name + ".Xmin", f.xmin);
-			file.set("Mine." + f.name + ".Xmax", f.xmax);
-			file.set("Mine." + f.name + ".Zmin", f.zmin);
-			file.set("Mine." + f.name + ".Zmax", f.zmax);
+			file.set("Mine." + f.nameWithColorCodes + ".World", f.world.getName());
+			file.set("Mine." + f.nameWithColorCodes + ".Xmin", f.xmin);
+			file.set("Mine." + f.nameWithColorCodes + ".Xmax", f.xmax);
+			file.set("Mine." + f.nameWithColorCodes + ".Zmin", f.zmin);
+			file.set("Mine." + f.nameWithColorCodes + ".Zmax", f.zmax);
 		}
 		for(Mob_Farm f : Mob_Farm.mob_farms){
 			if(f.owner != null){
-				file.set("Mob_Farm." + f.name + ".Owner", f.owner);
+				file.set("Mob_Farm." + f.nameWithColorCodes + ".Owner", f.owner);
 			}
-			file.set("Mob_Farm." + f.name + ".World", f.world.getName());
-			file.set("Mob_Farm." + f.name + ".Xmin", f.xmin);
-			file.set("Mob_Farm." + f.name + ".Xmax", f.xmax);
-			file.set("Mob_Farm." + f.name + ".Zmin", f.zmin);
-			file.set("Mob_Farm." + f.name + ".Zmax", f.zmax);
+			file.set("Mob_Farm." + f.nameWithColorCodes + ".World", f.world.getName());
+			file.set("Mob_Farm." + f.nameWithColorCodes + ".Xmin", f.xmin);
+			file.set("Mob_Farm." + f.nameWithColorCodes + ".Xmax", f.xmax);
+			file.set("Mob_Farm." + f.nameWithColorCodes + ".Zmin", f.zmin);
+			file.set("Mob_Farm." + f.nameWithColorCodes + ".Zmax", f.zmax);
 		}
 	}
 	

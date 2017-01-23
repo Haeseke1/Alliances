@@ -5,7 +5,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Town.Town;
 import me.Haeseke1.Alliances.Town.TownManager;
