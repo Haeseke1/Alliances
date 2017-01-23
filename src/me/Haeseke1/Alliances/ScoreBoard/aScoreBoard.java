@@ -1,5 +1,9 @@
 package me.Haeseke1.Alliances.ScoreBoard;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -8,6 +12,8 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
+import me.Haeseke1.Alliances.APlayer.APlayerManager;
+import me.Haeseke1.Alliances.APlayer.aPlayer;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Economy.Coins;
@@ -18,90 +24,101 @@ import net.md_5.bungee.api.ChatColor;
 public class aScoreBoard {
 
 	public static Counter updater;
+	public static Scoreboard board;
+	public static ScoreboardManager sbm;
+
+	private static Objective obj = null;
+
+	public static HashMap<Player, List<String>> scores = new HashMap<>();
 	
-	public static void startUpdater(){
+	public static int timer = 0;
+	
+	public static boolean playerScoreboard = false;
+	public static boolean alliScoreboard = true;
+	
+
+	public static void startUpdater() {
 		updater = new Counter();
-        updater.runTaskTimer(Main.plugin, 0L, 10L);
+		updater.runTaskTimer(Main.plugin, 0L, 10L);
+		sbm = Bukkit.getScoreboardManager();
+		board = sbm.getMainScoreboard();
 	}
-	
-	public static void stopUpdate(){
+
+	public static void stopUpdate() {
 		updater.cancel();
 	}
-	
-	public static Scoreboard createScoreBoard(Player player){
-		ScoreboardManager sbm = Bukkit.getScoreboardManager();
-		Scoreboard board = sbm.getNewScoreboard();
-		Objective obj = board.registerNewObjective("dummy", "test");
-		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-		obj.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "Alliances" + ChatColor.GOLD + "  ===");
-		Score space = obj.getScore(ChatColor.RED.toString());
-		space.setScore(10);
-		if(!AllianceManager.playerIsInAlli(player)){
-			Score score = obj.getScore(ChatColor.RED + "No Alliance");
-			score.setScore(9);
-			return board;
+
+	public static void setAllianceScoreBoard(Player player) {
+		if (player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) {
+			obj = board.registerNewObjective("dummy", "test");
+			obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+			obj.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "Alliance"
+					+ ChatColor.GOLD + "  ===");
 		}
-		Score score = obj.getScore(ChatColor.GREEN + "Alliance:");
-		score.setScore(9);
-		Alliance alliance = AllianceManager.getAlliance(player);
-		Score score1 = obj.getScore(ChatColor.GOLD + AllianceManager.getAlliance(player).getName());
-		score1.setScore(8);
-		Score online = obj.getScore(ChatColor.GREEN + "Online:");
-		online.setScore(6);
-		int count = AllianceManager.getMemberCount(alliance);
-		Score space2 = obj.getScore(ChatColor.RED.toString());
-		space2.setScore(7);
-		Score score2 = obj.getScore(ChatColor.AQUA + "" + count);
-		score2.setScore(5);
-		return board;
-	}
-	
-	public static void updateScoreboard(Player player){
-		player.getScoreboard().getObjective(DisplaySlot.SIDEBAR).unregister();
-		Scoreboard board = player.getScoreboard();
-		Objective obj = board.registerNewObjective("dummy", "test");
-		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-		obj.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "Alliances" + ChatColor.GOLD + "  ===");
-		Score space = obj.getScore(ChatColor.AQUA.toString());
-		space.setScore(10);
-		if(!AllianceManager.playerIsInAlli(player)){
-			Score score = obj.getScore(ChatColor.RED + "No Alliance");
-			score.setScore(9);
-			player.setScoreboard(board);
+		obj = board.getObjective(DisplaySlot.SIDEBAR);
+		if (scores.containsKey(player)) {
+			for (String str : scores.get(player)) {
+				board.resetScores(str);
+			}
+		}
+		if (!AllianceManager.playerIsInAlli(player)) {
+			setScore(player, ChatColor.RED + "No Alliance", 20, obj, ChatColor.RED, null);
 			return;
 		}
-		Score score = obj.getScore(ChatColor.GREEN + "Alliance:");
-		score.setScore(9);
-		Alliance alliance = AllianceManager.getAlliance(player);
-		Score score1 = obj.getScore(ChatColor.GOLD + AllianceManager.getAlliance(player).getName());
-		score1.setScore(8);
-		Score online = obj.getScore(ChatColor.GREEN + "Online:");
-		online.setScore(6);
-		int count = AllianceManager.getMemberCount(alliance);
-		Score space2 = obj.getScore(ChatColor.GOLD.toString());
-		space2.setScore(7);
-		Score score2 = obj.getScore(ChatColor.AQUA + "" + count);
-		score2.setScore(5);
-		Score space3 = obj.getScore(ChatColor.BLUE.toString());
-		space3.setScore(4);
-		Score coins = obj.getScore(ChatColor.GREEN + "Coins:");
-		coins.setScore(3);
-		Score score3 = obj.getScore(ChatColor.AQUA + "" + Coins.getPlayerCoins(player));
-		score3.setScore(2);
-		Score space4 = obj.getScore(ChatColor.DARK_PURPLE.toString());
-		space4.setScore(1);
-		Score wins = obj.getScore(ChatColor.GREEN + "Wins:");
-		wins.setScore(0);
-		Score space5 = obj.getScore(ChatColor.LIGHT_PURPLE.toString());
-		space5.setScore(-1);
-		Score loses = obj.getScore(ChatColor.GREEN + "Loses:");
-		loses.setScore(-2);
 		Alliance alli = AllianceManager.getAlliance(player);
-		Score score5 = obj.getScore(ChatColor.AQUA + "" + alli.getLoses());
-		score5.setScore(-3);
-		Score score4 = obj.getScore(ChatColor.AQUA + "" + alli.getWins());
-		score4.setScore(-1);
-		player.setScoreboard(board);
+		setScore(player, ChatColor.GREEN + "Alliance:", 18, obj, ChatColor.GREEN,ChatColor.translateAlternateColorCodes('&', alli.getName()));
+		setScore(player, ChatColor.GREEN + "Online:", 15, obj, ChatColor.BLUE,ChatColor.AQUA + "" + AllianceManager.getMemberCount(alli));
+		setScore(player, ChatColor.GREEN + "Wins:", 12, obj, ChatColor.YELLOW,ChatColor.AQUA + "" + alli.getWins() + "W");
+		setScore(player, ChatColor.GREEN + "Loses:", 9, obj, ChatColor.DARK_PURPLE,ChatColor.AQUA + "" + alli.getLoses() + "L");
+		setScore(player, ChatColor.GREEN + "Coins:", 6, obj, ChatColor.LIGHT_PURPLE,ChatColor.AQUA + "" + alli.getCoins() + " coins");
+		return;
+	}
+
+	public static void setPlayerScoreBoard(Player player) {
+		if (player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) {
+			obj = board.registerNewObjective("dummy", "test");
+			obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+			obj.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "Player" + ChatColor.GOLD + "  ===");
+		}
+		obj = board.getObjective(DisplaySlot.SIDEBAR);
+		if (scores.containsKey(player)) {
+			for (String str : scores.get(player)) {
+				board.resetScores(str);
+			}
+		}
+		Alliance alli = AllianceManager.getAlliance(player);
+		setScore(player, ChatColor.GREEN + "Alliance:", 15, obj, ChatColor.GREEN,
+				ChatColor.translateAlternateColorCodes('&', alli.getName()));
+		aPlayer aplayer = APlayerManager.getAPlayer(player);
+		setScore(player, ChatColor.GREEN + "Wins:", 12, obj, ChatColor.YELLOW,
+				ChatColor.AQUA + "" + aplayer.getWins() + "W");
+		setScore(player, ChatColor.GREEN + "Loses:", 9, obj, ChatColor.DARK_PURPLE,
+				ChatColor.AQUA + "" + aplayer.getLoses() + "L");
+		setScore(player, ChatColor.GREEN + "Coins:", 6, obj, ChatColor.LIGHT_PURPLE,
+				ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins");
+		return;
+	}
+
+	public static void setScore(Player player, String scorename, int score, Objective obj, ChatColor color,
+			String value) {
+		List<String> currentScores = new ArrayList<>();
+		Score online = obj.getScore(scorename);
+		online.setScore(score);
+		if (value != null) {
+			Score valueS = obj.getScore(value);
+			valueS.setScore(score - 1);
+			Score space = obj.getScore(color.toString());
+			space.setScore(score - 2);
+			currentScores.add(value);
+			currentScores.add(space.toString());
+			scores.put(player, currentScores);
+			return;
+		}
+		Score space = obj.getScore(color.toString());
+		space.setScore(score - 1);
+		currentScores.add(space.toString());
+		currentScores.add(scorename);
+		scores.put(player, currentScores);
 		return;
 	}
 }

@@ -30,8 +30,10 @@ public class Alliance {
 	private int mCoins;
 	private HashMap<UUID, String> mMembers;
 	private String name;
+	private String translatedname;
 	private final AllianceType type;
 	private int exp;
+	private String prefix;
 	
 	private List<Town> towns = new ArrayList<Town>();
 	
@@ -42,7 +44,8 @@ public class Alliance {
 	
 	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type) {
 		mMembers = new HashMap<UUID, String>();
-		this.name = name;
+		this.translatedname = name;
+		this.name = ChatColor.translateAlternateColorCodes('&', name);
 		this.mOwner = owner;
 		this.mWins = wins;
 		this.mLoses = loses;

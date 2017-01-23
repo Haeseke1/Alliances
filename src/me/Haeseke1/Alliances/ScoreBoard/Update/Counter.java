@@ -7,16 +7,22 @@ import org.bukkit.scheduler.BukkitRunnable;
 import me.Haeseke1.Alliances.ScoreBoard.aScoreBoard;
 
 public class Counter extends BukkitRunnable{
-
-	public Counter(){
-		
-	}
+	
+	
+	
 	
 	@Override
 	public void run() {
 		for(Player player: Bukkit.getOnlinePlayers()){
-			aScoreBoard.updateScoreboard(player);
+			
+			
+			
+			
+			aScoreBoard.setAllianceScoreBoard(player);
 		}
+		
+		
+		
 	}
 
 }

@@ -58,8 +58,7 @@ public class ArenaManager {
    * Loads the arena into the config
    */
   public static void loadArena() throws EmptyIntException, EmptyLocationException, EmptyStringException{
-     if((new File(Main.plugin.getDataFolder(),"arenas.yml")).exists()){
-	  if(arenaConfig.getConfigurationSection("Arenas").getKeys(false) != null){
+	  if(arenaConfig.get("Arenas") != null){
 		  for(String name: arenaConfig.getConfigurationSection("Arenas").getKeys(false)){
 			  String path = "Arenas." + name;
 			  arenaConfig.set(path + ".spawns.team1.alliance", "");
@@ -75,7 +74,6 @@ public class ArenaManager {
 		  }
 		  MessageManager.sendRemarkMessage("Loaded the arenas");
 	  }
-     }
      return;
   }
   
@@ -183,7 +181,7 @@ public class ArenaManager {
 	  int spawnCount = arenaConfig.getConfigurationSection("Arenas." + name.toLowerCase() + ".spawns.team" + teamNumber).getKeys(false).size();
 	  if((spawnCount - 1) != (arenaConfig.getInt("Arenas." + name.toLowerCase() + ".size") / 2)){
 	  ConfigManager.setLocationFromConfig(arenaConfig, "Arenas." + name.toLowerCase() + ".spawns.team" + teamNumber + "." + (spawnCount - 1), player.getLocation());
-      MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully added a spawn to team " + teamNumber + ChatColor.GOLD + " #" + (spawnCount - 1));
+      MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully added a spawn to team " + teamNumber + ChatColor.GOLD + " #" + (spawnCount));
 	  return;
 	  }
 	  MessageManager.sendMessage(player, ChatColor.RED + "Team " + teamNumber + " has reached his maximum spawn number");
