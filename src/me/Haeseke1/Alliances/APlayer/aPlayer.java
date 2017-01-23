@@ -5,10 +5,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
+import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Economy.Coins;
+import me.Haeseke1.Alliances.ScoreBoard.aScoreBoardManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class aPlayer{
@@ -16,13 +24,17 @@ public class aPlayer{
 	
 	public static List<aPlayer> online_Players = new ArrayList<aPlayer>();
 
-	int coins;
-	Player player;
-	FileConfiguration file;
-	File f;
+	public int coins;
+	public Player player;
+	public FileConfiguration file;
+	public File f;
 	
-	int wins;
-	int losses;
+	public int wins;
+	public int losses;
+	
+	public Scoreboard scoreboard;
+	public List<String> scores = new ArrayList<String>();
+	public Objective sideBar;
 
 	public aPlayer(Player player, File f, FileConfiguration file) {
 		coins = Coins.getPlayerCoins(player);
@@ -33,6 +45,8 @@ public class aPlayer{
 		this.losses = 0;
 		registerConfig();
 		online_Players.add(this);
+		scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+		player.setScoreboard(scoreboard);
 	}
 	
 	
@@ -59,4 +73,67 @@ public class aPlayer{
     public int getLoses(){
     	return this.losses;
     }
+    
+    
+    
+    
+    
+    
+    
+    public void addScore(String s){
+    	scores.add(s);
+    }
+    
+    public void resetScore(){
+		for (String str : scores) {
+			scoreboard.resetScores(str);
+		}
+		scores.clear();
+    }
+    
+	public void setAllianceScoreBoard() {
+		if (sideBar == null) {
+			sideBar = scoreboard.registerNewObjective("dummy", "test");
+			sideBar.setDisplaySlot(DisplaySlot.SIDEBAR);
+			sideBar.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "Alliance" + ChatColor.GOLD + "  ===");
+		}
+		sideBar.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "Alliance" + ChatColor.GOLD + "  ===");
+		if (!AllianceManager.playerIsInAlli(player)) {
+			aScoreBoardManager.setScore(this, ChatColor.RED + "No Alliance", 20, sideBar, ChatColor.RED, null);
+			return;
+		}
+		Alliance alli = AllianceManager.getAlliance(player);
+		if(!scores.contains("Alliance:")){
+			
+		}
+		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Alliance:", 18, sideBar, ChatColor.GREEN,ChatColor.translateAlternateColorCodes('&', alli.getName()));
+		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Online:", 15, sideBar, ChatColor.BLUE,ChatColor.AQUA + "" + AllianceManager.getMemberCount(alli));
+		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Wins:", 12, sideBar, ChatColor.YELLOW,ChatColor.AQUA + "" + alli.getWins() + "W");
+		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Loses:", 9, sideBar, ChatColor.DARK_PURPLE,ChatColor.AQUA + "" + alli.getLoses() + "L");
+		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Coins:", 6, sideBar, ChatColor.LIGHT_PURPLE,ChatColor.AQUA + "" + alli.getCoins() + " coins");
+		return;
+	}
+
+	public void setPlayerScoreBoard() {
+		if (sideBar == null) {
+			sideBar = scoreboard.registerNewObjective("dummy", "test");
+			sideBar.setDisplaySlot(DisplaySlot.SIDEBAR);
+			sideBar.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "Player" + ChatColor.GOLD + "  ===");
+		}
+		sideBar.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "Player" + ChatColor.GOLD + "  ===");
+		Alliance alli = AllianceManager.getAlliance(player);
+		if(alli != null){
+			aScoreBoardManager.setScore(this, ChatColor.GREEN + "Alliance:", 15, sideBar, ChatColor.GREEN, ChatColor.translateAlternateColorCodes('&', alli.getName()));
+		}
+		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Wins:", 12, sideBar, ChatColor.YELLOW, ChatColor.AQUA + "" + wins + "W");
+		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Loses:", 9, sideBar, ChatColor.DARK_PURPLE, ChatColor.AQUA + "" + losses + "L");
+		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Coins:", 6, sideBar, ChatColor.LIGHT_PURPLE, ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins");
+		return;
+	}
+    
+    
+    
+    
+    
+    
 }

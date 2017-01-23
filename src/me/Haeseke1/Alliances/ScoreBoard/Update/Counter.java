@@ -1,28 +1,42 @@
 package me.Haeseke1.Alliances.ScoreBoard.Update;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
-import me.Haeseke1.Alliances.ScoreBoard.aScoreBoard;
+import me.Haeseke1.Alliances.APlayer.aPlayer;
 
-public class Counter extends BukkitRunnable{
+public class Counter implements Runnable{
 	
 	
-	
+	public static int time = 0;
+	public static boolean player = false;
+	public static boolean alli = true;
 	
 	@Override
 	public void run() {
-		for(Player player: Bukkit.getOnlinePlayers()){
-			
-			
-			
-			
-			aScoreBoard.setAllianceScoreBoard(player);
+		if(time >= 5){
+			if(player){
+				alli = true;
+				player = false;
+				for(aPlayer aplayer: aPlayer.online_Players){
+					aplayer.resetScore();
+				}
+			}else{
+				alli = false;
+				player = true;
+				for(aPlayer aplayer: aPlayer.online_Players){
+					aplayer.resetScore();
+				}
+			}
+			time = 0;
 		}
-		
-		
-		
+		for(aPlayer aplayer: aPlayer.online_Players){
+			if(player){
+				aplayer.setPlayerScoreBoard();
+			}
+			if(alli){
+				aplayer.setAllianceScoreBoard();
+			}
+		}
+		time++;
 	}
 
 }

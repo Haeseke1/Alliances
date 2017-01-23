@@ -15,6 +15,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Haeseke1.Alliances.APlayer.APlayerEvents;
+import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Arena.ArenaEvents;
@@ -49,8 +50,7 @@ import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.Timer;
 import me.Haeseke1.Alliances.Outpost.Commands.Outpost;
-import me.Haeseke1.Alliances.ScoreBoard.aScoreBoard;
-import me.Haeseke1.Alliances.ScoreBoard.Events.Join;
+import me.Haeseke1.Alliances.ScoreBoard.Update.Counter;
 import me.Haeseke1.Alliances.Shop.ShopEvents;
 import me.Haeseke1.Alliances.Shop.ShopManager;
 import me.Haeseke1.Alliances.Shop.Commands.ShopC;
@@ -116,7 +116,7 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 	    TownManager.loadTowns();
-	    aScoreBoard.startUpdater();
+	    APlayerManager.aPlayerStartUp();
 	}
 
 	@Override
@@ -159,10 +159,6 @@ public class Main extends JavaPlugin {
 		 * Arena events
 		 */
 		pm.registerEvents(new ArenaEvents(), this);
-		/*
-		 * Scoreboard 
-		 */
-		pm.registerEvents(new Join(), this);
 	}
 
 	public void registerCommands() {
@@ -188,6 +184,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Mob_Killing_Time(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Particle_Timer(), 25, 25);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new me.Haeseke1.Alliances.Town.Commands.Particle_Timer(), 25, 25);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Counter(), 40l, 40l);
 		java.util.Timer timer = new java.util.Timer();
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);
