@@ -32,5 +32,6 @@ public class APlayerEvents implements Listener{
 	private void playerleave(PlayerQuitEvent event){
 		aPlayer aplayer = APlayerManager.getAPlayer(event.getPlayer());
 		aplayer.saveConfig();
+		aPlayer.online_Players.remove(aplayer);
 	}
 }
