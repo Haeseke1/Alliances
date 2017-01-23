@@ -55,4 +55,8 @@ public class aPlayer{
     public int getWins(){
     	return this.wins;
     }
+    
+    public int getLoses(){
+    	return this.losses;
+    }
 }
