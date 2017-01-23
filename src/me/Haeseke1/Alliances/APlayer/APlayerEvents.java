@@ -23,6 +23,7 @@ public class APlayerEvents implements Listener{
 			f.mkdir();
 		}
 		Player player = event.getPlayer();
+		
 		f = new File(f, player.getUniqueId().toString() + ".yml");
 		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
 		new aPlayer(player, f, file);

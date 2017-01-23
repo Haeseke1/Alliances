@@ -91,6 +91,7 @@ public class aPlayer{
 		scores.clear();
     }
     
+    
 	public void setAllianceScoreBoard() {
 		if (sideBar == null) {
 			sideBar = scoreboard.registerNewObjective("dummy", "test");
@@ -106,10 +107,10 @@ public class aPlayer{
 			return;
 		}
 		Alliance alli = AllianceManager.getAlliance(player);
-		if(!scores.contains(ChatColor.translateAlternateColorCodes('&', alli.getName())) &&
-				!scores.contains(ChatColor.AQUA + "" + AllianceManager.getMemberCount(alli)) &&
-						!scores.contains(ChatColor.AQUA + "" + alli.getWins() + "W") &&
-						!scores.contains(ChatColor.AQUA + "" + alli.getLoses() + "L") &&
+		if(!scores.contains(ChatColor.translateAlternateColorCodes('&', alli.getName())) ||
+				!scores.contains(ChatColor.AQUA + "" + AllianceManager.getMemberCount(alli)) ||
+						!scores.contains(ChatColor.AQUA + "" + alli.getWins() + "W") ||
+						!scores.contains(ChatColor.AQUA + "" + alli.getLoses() + "L") ||
 						!scores.contains(ChatColor.AQUA + "" + alli.getCoins() + " coins")){
 			resetScore();
 			aScoreBoardManager.setScore(this, ChatColor.GREEN + "Alliance:", 18, sideBar, ChatColor.GREEN,ChatColor.translateAlternateColorCodes('&', alli.getName()));
@@ -129,21 +130,31 @@ public class aPlayer{
 		}
 		sideBar.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "Player" + ChatColor.GOLD + "  ===");
 		Alliance alli = AllianceManager.getAlliance(player);
-		if(alli != null){
-			if(!scores.contains(ChatColor.translateAlternateColorCodes('&', alli.getName()))){
-				resetScore();
-				aScoreBoardManager.setScore(this, ChatColor.GREEN + "Alliance:", 15, sideBar, ChatColor.GREEN, ChatColor.translateAlternateColorCodes('&', alli.getName()));
-			}
-		}else{
-			if(!scores.contains(ChatColor.RED + "No Alliance")){
-				resetScore();
-				aScoreBoardManager.setScore(this, ChatColor.GREEN + "Alliance:", 15, sideBar, ChatColor.GREEN, ChatColor.RED + "No Alliance");
-			}
-			
-		}
+	  if(alli == null){
+		if(!scores.contains(ChatColor.AQUA + "" + wins + "W") ||
+		   !scores.contains(ChatColor.AQUA + "" + losses + "L") ||
+		   !scores.contains(ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins") ||
+		   !scores.contains(ChatColor.RED + "No alliance")){
+		resetScore();
+		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Alliance:", 15, sideBar, ChatColor.BLACK, ChatColor.RED + "No alliance");
 		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Wins:", 12, sideBar, ChatColor.YELLOW, ChatColor.AQUA + "" + wins + "W");
 		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Loses:", 9, sideBar, ChatColor.DARK_PURPLE, ChatColor.AQUA + "" + losses + "L");
 		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Coins:", 6, sideBar, ChatColor.LIGHT_PURPLE, ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins");
+		return;
+		}
+	  }else{
+			if(!scores.contains(ChatColor.AQUA + "" + wins + "W") ||
+					   !scores.contains(ChatColor.AQUA + "" + losses + "L") ||
+					   !scores.contains(ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins") ||
+					   !scores.contains(ChatColor.translateAlternateColorCodes('&', alli.getName()))){
+					resetScore();
+					aScoreBoardManager.setScore(this, ChatColor.GREEN + "Alliance:", 15, sideBar, ChatColor.BLACK, ChatColor.RED + "No alliance");
+					aScoreBoardManager.setScore(this, ChatColor.GREEN + "Wins:", 12, sideBar, ChatColor.YELLOW, ChatColor.AQUA + "" + wins + "W");
+					aScoreBoardManager.setScore(this, ChatColor.GREEN + "Loses:", 9, sideBar, ChatColor.DARK_PURPLE, ChatColor.AQUA + "" + losses + "L");
+					aScoreBoardManager.setScore(this, ChatColor.GREEN + "Coins:", 6, sideBar, ChatColor.LIGHT_PURPLE, ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins");
+					return;
+					}		  
+	  }
 		return;
 	}
     
