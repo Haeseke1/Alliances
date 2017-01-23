@@ -10,6 +10,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.Arena.Arena;
 import me.Haeseke1.Alliances.Arena.ArenaManager;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
@@ -219,6 +220,7 @@ public class Alliance {
 			e.printStackTrace();
 		}
 		this.playSound(Sound.NOTE_BASS_DRUM);
+		APlayerManager.getAPlayer(playerInArena).addLose();
 	}
 	
 	public void addWin(){
