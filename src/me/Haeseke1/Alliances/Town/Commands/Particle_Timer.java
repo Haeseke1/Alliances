@@ -47,8 +47,8 @@ public class Particle_Timer implements Runnable{
 							if(mChunk.getX() > chunk.getX() && mChunk.getX() != chunk.getX()){
 								xmin  = false;
 							}
-							if(mChunk.getZ() < chunk.getZ() && mChunk.getZ() != chunk.getZ()){
-								zmax  = false;
+							if(mChunk.getZ() > chunk.getZ() && mChunk.getZ() != chunk.getZ()){
+								zmin  = false;
 							}
 						}
 					}
@@ -56,7 +56,7 @@ public class Particle_Timer implements Runnable{
 						Location loc = mChunk.getBlock(0, 1, 0).getLocation();
 						for(int z = loc.getBlockZ(); z < loc.getBlockZ() + 17; z++){
 							for(int y = 1; y < 128; y = y + 3){
-								ParticleManager.playParticle(EnumParticle.FLAME, new Location(loc.getWorld(),loc.getBlockX(),y,z), 0.1F, 1, player);
+								ParticleManager.playParticle(EnumParticle.FLAME, new Location(loc.getWorld(),loc.getBlockX(),y,z), 0.1F, 1, player, false);
 							}
 						}
 					}
@@ -64,7 +64,7 @@ public class Particle_Timer implements Runnable{
 						Location loc = mChunk.getBlock(0, 1, 0).getLocation();
 						for(int x = loc.getBlockX(); x < loc.getBlockX() + 17; x++){
 							for(int y = 1; y < 128; y = y + 3){
-								ParticleManager.playParticle(EnumParticle.FLAME, new Location(loc.getWorld(),x,y,loc.getBlockZ()), 0.1F, 1, player);
+								ParticleManager.playParticle(EnumParticle.FLAME, new Location(loc.getWorld(),x,y,loc.getBlockZ()), 0.1F, 1, player, false);
 							}
 						}
 					}
@@ -72,7 +72,7 @@ public class Particle_Timer implements Runnable{
 						Location loc = mChunk.getBlock(15, 1, 0).getLocation();
 						for(int z = loc.getBlockZ(); z < loc.getBlockZ() + 17; z++){
 							for(int y = 1; y < 128; y = y + 3){
-								ParticleManager.playParticle(EnumParticle.FLAME, new Location(loc.getWorld(),loc.getBlockX() + 1,y,z), 0.1F, 1, player);
+								ParticleManager.playParticle(EnumParticle.FLAME, new Location(loc.getWorld(),loc.getBlockX() + 1,y,z), 0.1F, 1, player, false);
 							}
 						}
 					}
@@ -80,7 +80,7 @@ public class Particle_Timer implements Runnable{
 						Location loc = mChunk.getBlock(0, 1, 15).getLocation();
 						for(int x = loc.getBlockX(); x < loc.getBlockX() + 17; x++){
 							for(int y = 1; y < 128; y = y + 3){
-								ParticleManager.playParticle(EnumParticle.FLAME, new Location(loc.getWorld(),x,y,loc.getBlockZ() + 1), 0.1F, 1, player);
+								ParticleManager.playParticle(EnumParticle.FLAME, new Location(loc.getWorld(),x,y,loc.getBlockZ() + 1), 0.1F, 1, player, false);
 							}
 						}
 					}

@@ -65,9 +65,17 @@ public class TownC implements CommandExecutor{
 				MessageManager.sendMessage(player, message);
 				return false;
 			}
-			String message = MessageManager.getMessage("Command_Town_Show_Answer");
-			MessageManager.sendMessage(player, message);
-			Particle_Timer.showRegion.add(player);
+
+			if(Particle_Timer.showRegion.contains(player)){
+				String message = MessageManager.getMessage("Command_Town_Show_Answer_Off");
+				MessageManager.sendMessage(player, message);
+				Particle_Timer.showRegion.remove(player);
+			}else{
+				String message = MessageManager.getMessage("Command_Town_Show_Answer_On");
+				MessageManager.sendMessage(player, message);
+				Particle_Timer.showRegion.add(player);
+			}
+
 			return false;
 		}
 		

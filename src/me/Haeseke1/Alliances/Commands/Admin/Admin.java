@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Commands.Alli;
+import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.PlayerManager;
 
@@ -23,6 +24,7 @@ public class Admin {
 			player.sendMessage(MessageManager.infoColorCode + "/... admin setrank <Player> <Name> #Set rank of a player");
 			player.sendMessage(MessageManager.infoColorCode + "/... admin getrewards #Take items your alliance was rewarded!");
 			player.sendMessage(MessageManager.infoColorCode + "/... admin leave #Leave the alliance");
+			player.sendMessage(MessageManager.infoColorCode + "/... admin deposit <Amount> #add money to alliance balance");
 			return;
 		}
 		
@@ -122,6 +124,28 @@ public class Admin {
 			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
 					.replace("%player_name%", player.getName());
 			alli.sendPlayersMessage(message);
+			return;
+		}
+		
+		if(args[1].equalsIgnoreCase("deposit") && args.length > 2){
+			Alliance alli = AllianceManager.getAlliance(player);
+			try{
+				int money = Integer.parseInt(args[2]);
+				if(Coins.removePlayerCoins(player, money)){
+					Coins.addAllianceCoins(alli, money);
+					String message = MessageManager.getMessage("Command_Alliance_Member_Deposit_Answer");
+					message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
+							.replace("%amount%", money + "");
+					MessageManager.sendMessage(player, message);
+				}else{
+					String message = MessageManager.getMessage("Command_Alliance_Member_Deposit_Not_Enough_Money");
+					message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
+							.replace("%amount%", money + "");
+					MessageManager.sendMessage(player, message);
+				}
+			}catch(Exception e){
+				MessageManager.sendMessage(player, wrong_arg);
+			}
 			return;
 		}
 		
