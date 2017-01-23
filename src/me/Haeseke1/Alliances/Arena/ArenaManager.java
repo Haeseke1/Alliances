@@ -133,7 +133,7 @@ public class ArenaManager {
 		  }
 		  if(TeamManager.teamIsFree(1, arenaname)){
 			  arena.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined the arena!",player);
-			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team1.alliance", alliance.getName());
+			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team1.alliance", alliance.getNameWithColorCodes());
 			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
 			  player.teleport(ArenaManager.getLobby(arenaname));
@@ -146,7 +146,7 @@ public class ArenaManager {
 		  }
 		  if(TeamManager.teamIsFree(2, arenaname)){
 			  arena.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined the arena!",player);
-			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team2.alliance", alliance.getName());
+			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team2.alliance", alliance.getNameWithColorCodes());
 			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
 			  player.teleport(ArenaManager.getLobby(arenaname));
