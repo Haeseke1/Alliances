@@ -144,7 +144,7 @@ public class TownManager {
     	}
     }
     
-    public static void loadTowns(){
+    public static void registerTowns(){
     	for(String alliancename: allianceConfig.getConfigurationSection("").getKeys(false)){
     		Alliance al = AllianceManager.getAlliance(alliancename);
     	  if(allianceConfig.getConfigurationSection(alliancename + ".towns") != null){
@@ -161,7 +161,7 @@ public class TownManager {
     	    	}
     	    	Town.towns.add(town);
     	    }
-    	    MessageManager.sendAlertMessage("Towns have been loaded");
+    	    MessageManager.sendAlertMessage("Towns have been registered");
     	  }
     	}
     }

@@ -110,12 +110,6 @@ public class Main extends JavaPlugin {
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
-	    try {
-			ArenaManager.loadArena();
-		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
-			e.printStackTrace();
-		}
-	    TownManager.loadTowns();
 	    APlayerManager.aPlayerStartUp();
 	}
 
@@ -124,7 +118,6 @@ public class Main extends JavaPlugin {
 		Config.saveConfigFile(this);
 		saveAllCustomConfigs();
 		ShopManager.despawnVendors();
-		TownManager.saveTowns();
 		MessageManager.sendAlertMessage("The plugin has been shutted down! *-* The cake wasn't a lie thought *-*");
 	}
 
@@ -204,17 +197,24 @@ public class Main extends JavaPlugin {
 		shopConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "shop.yml"), this);
 		arenaConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "arenas.yml"), this);
 		settingsConfig = ConfigManager.getCustomConfig(new File(getDataFolder(),"settings.yml"), this);
+	    try {
+			ArenaManager.loadArena();
+		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
+			e.printStackTrace();
+		}
 		AllianceManager.registerAlliance();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();
 		ShopManager.registerShops();
 		MessageManager.registerMessages(this);
+	    TownManager.registerTowns();
 	}
 
 	public void saveAllCustomConfigs() {
 		AllianceManager.saveAlliance();
 		OutpostManager.saveOutpost();
 		ShopManager.saveShops();
+		TownManager.saveTowns();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
 			if(configFile.containsKey(entry.getKey())){
 				ConfigManager.saveCustomConfig(configFile.get(entry.getKey()), entry.getValue());
@@ -224,5 +224,4 @@ public class Main extends JavaPlugin {
 			
 		}
 	}
-
 }
