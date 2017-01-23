@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -52,7 +53,7 @@ public class AllianceManager {
 	
 	public static boolean alliExist(String name) {
 		for (Alliance alli : Main.alliances) {
-			if (alli.getName().equalsIgnoreCase(name)) {
+			if (ChatColor.stripColor(alli.getName()).equalsIgnoreCase(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', name)))){
 				return true;
 			}
 		}
@@ -129,7 +130,7 @@ public class AllianceManager {
 	
 	public static Alliance getAlliance(String alli_Name){
 		for (Alliance alli : Main.alliances) {
-			if (alli.getName().equalsIgnoreCase(alli_Name)){
+			if (ChatColor.stripColor(alli.getName()).equalsIgnoreCase(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', alli_Name)))){
 				return alli;
 			}
 		}

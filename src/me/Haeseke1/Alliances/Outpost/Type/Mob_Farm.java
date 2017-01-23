@@ -31,6 +31,7 @@ public class Mob_Farm {
 	public int time_Contested = 0;
 	
 	public String name;
+	public String nameWithColorCodes;
 	
 	public int xmin;
 	public int zmin;
@@ -41,7 +42,8 @@ public class Mob_Farm {
 	public Alliance owner;
 	
 	public Mob_Farm(String name, Location loc1, Location loc2, Alliance owner) {
-		this.name = name;
+		this.nameWithColorCodes = name;
+		this.name = ChatColor.translateAlternateColorCodes('&', name);
 		this.owner = owner;
 		this.world = loc1.getWorld();
 		if(loc1.getBlockX() > loc2.getBlockX()){

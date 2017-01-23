@@ -3,6 +3,7 @@ package me.Haeseke1.Alliances.Town;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
@@ -19,12 +20,14 @@ public class Town {
 	public List<Player> inTown = new ArrayList<Player>();
 	
 	public String name;
+	public String nameWithColorCodes;
 	
 	
 	public Town(String name, Chunk chunk, Alliance alli) {
 		this.chunks.add(chunk);
 		this.owner = alli;
-		this.name = name;
+		this.name = ChatColor.translateAlternateColorCodes('&', name);
+		this.nameWithColorCodes = name;
 		towns.add(this);
 	}
 	
