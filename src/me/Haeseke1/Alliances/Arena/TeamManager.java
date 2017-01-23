@@ -11,6 +11,7 @@ import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class TeamManager {
 
@@ -19,7 +20,7 @@ public class TeamManager {
 	public static String[] teamNumbers = {"1","2"};
 	public static boolean teamExists(Alliance al, String arenaname){
 		for(String number: teamNumbers){
-        if(al.getName().equalsIgnoreCase(arenaConfig.getString("Arenas." + arenaname.toLowerCase() + ".spawns.team" + number + ".alliance"))){
+        if(ChatColor.stripColor(al.getName()).equalsIgnoreCase(arenaConfig.getString("Arenas." + arenaname.toLowerCase() + ".spawns.team" + number + ".alliance"))){
         	return true;
            }
 		}
@@ -28,7 +29,7 @@ public class TeamManager {
 	
 	public static int getTeamNumber(Alliance al, String arenaname){
 		for(String number: teamNumbers){
-        if(al.getName().equalsIgnoreCase(arenaConfig.getString("Arenas." + arenaname.toLowerCase() + ".spawns.team" + number + ".alliance"))){
+        if(ChatColor.stripColor(al.getName()).equalsIgnoreCase(arenaConfig.getString("Arenas." + arenaname.toLowerCase() + ".spawns.team" + number + ".alliance"))){
         	return Integer.parseInt(number);
            }
 		}
