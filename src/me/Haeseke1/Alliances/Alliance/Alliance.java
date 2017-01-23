@@ -31,10 +31,9 @@ public class Alliance {
 	private int mCoins;
 	private HashMap<UUID, String> mMembers;
 	private String name;
-	private String translatedname;
+	private String nameWithColorCodes;
 	private final AllianceType type;
 	private int exp;
-	private String prefix;
 	
 	private List<Town> towns = new ArrayList<Town>();
 	
@@ -45,7 +44,7 @@ public class Alliance {
 	
 	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type) {
 		mMembers = new HashMap<UUID, String>();
-		this.translatedname = name;
+		this.nameWithColorCodes = name;
 		this.name = ChatColor.translateAlternateColorCodes('&', name);
 		this.mOwner = owner;
 		this.mWins = wins;
@@ -216,7 +215,6 @@ public class Alliance {
 			ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
 		   }
 		} catch (IndexOutOfBoundsException | EmptyStringException | EmptyLocationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.playSound(Sound.NOTE_BASS_DRUM);
@@ -241,6 +239,14 @@ public class Alliance {
 		} catch (EmptyIntException e1) {
 			e1.printStackTrace();
 		}
+	}
+
+	public String getNameWithColorCodes() {
+		return nameWithColorCodes;
+	}
+
+	public void setNameWithColorCodes(String nameWithColorCodes) {
+		this.nameWithColorCodes = nameWithColorCodes;
 	}
 	
 }
