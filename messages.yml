@@ -78,10 +78,13 @@ Command_Alliance_Owner_Invited_Answer: "You are invited by the alliance %alli_na
 Command_Alliance_Owner_SetRank_Answer: "You changed the rank for %player_name% to %rank%!"
 Command_Alliance_Owner_SetRank_Changed_Answer: "Your rank is changed to %rank%!"
 
-#Can use %player_name%, %alli_name%
+#Can use %alli_name%, %amount%
 Command_Alliance_Member_Leave_Is_Owner: "You cannot leave a alliance if you are the owner!"
 Command_Alliance_Member_Leave_Answer: "you left %alli_name%!"
 Command_Alliance_Member_Leave_Alli_Broadcast: "%player_name% left the alliance!"
+
+Command_Alliance_Member_Deposit_Answer: "you left %alli_name%!"
+Command_Alliance_Member_Deposit_Not_Enough_Money: "%player_name% left the alliance!"
 
 #Can use no var
 Command_Alliance_Join_And_Create_Already_In_A_Alliance: "You are already in a alliance!"
@@ -138,6 +141,9 @@ Town_Place_Other_Town_Block: "You cannot place the block of %town_Name%"
 
 Command_Town_Create_Town_Already_Exist: "This town already exist"
 Command_Town_Claim_Town_Doesnt_Exist: "This town does not exist"
+
+Command_Town_Show_Answer_On: "Showing regions"
+Command_Town_Show_Answer_Off: "removing regions"
 
 #Can use no variables
 Town_Already_Claimed: "This land is already claimed"

@@ -49,7 +49,6 @@ public class MessageManager {
 	}
 
 	
-	@SuppressWarnings("static-access")
 	public static void registerMessages(Main main){
 		File f = new File(main.getDataFolder(), "messages.yml");
 		FileConfiguration file = YamlConfiguration.loadConfiguration(f);

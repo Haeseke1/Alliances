@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Commands.Alli;
+import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.PlayerManager;
@@ -27,6 +28,7 @@ public class Owner {
 			player.sendMessage(MessageManager.infoColorCode + "/... owner addadmin <Player> #Set rank of a player");
 			player.sendMessage(MessageManager.infoColorCode + "/... owner removeadmin <Player> #Set rank of a player");
 			player.sendMessage(MessageManager.infoColorCode + "/... owner getrewards #Take items your alliance was rewarded!");
+			player.sendMessage(MessageManager.infoColorCode + "/... admin deposit <Amount> #add money to alliance balance");
 			return;
 		}
 		
@@ -82,7 +84,7 @@ public class Owner {
 		}
 		
 		if(args[1].equalsIgnoreCase("addadmin") && args.length > 2){
-			if(!PlayerManager.isPlayerOnline(args[1])){
+			if(!PlayerManager.isPlayerOnline(args[2])){
 				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
 				MessageManager.sendMessage(player, message);
 				return;
@@ -227,6 +229,30 @@ public class Owner {
 				String message = MessageManager.getMessage("Command_Alliance_getrewards_Answer_Not_All");
 				message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName());
 				MessageManager.sendMessage(player, message);
+			}
+			return;
+		}
+		
+		if(args[1].equalsIgnoreCase("deposit") && args.length > 2){
+			Alliance alli = AllianceManager.getAlliance(player);
+			try{
+				int money = Integer.parseInt(args[2]);
+				if(Coins.removePlayerCoins(player, money)){
+					Coins.addAllianceCoins(alli, money);
+					String message = MessageManager.getMessage("Command_Alliance_Member_Deposit_Answer");
+					message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
+							.replace("%amount%", money + "");
+					MessageManager.sendMessage(player, message);
+				}else{
+					String message = MessageManager.getMessage("Command_Alliance_Member_Deposit_Not_Enough_Money");
+					message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
+							.replace("%amount%", money + "");
+					MessageManager.sendMessage(player, message);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				MessageManager.sendInfoMessage("not a number");
+				MessageManager.sendMessage(player, wrong_arg);
 			}
 			return;
 		}

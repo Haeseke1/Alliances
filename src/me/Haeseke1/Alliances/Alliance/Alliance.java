@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 
 import me.Haeseke1.Alliances.Arena.Arena;
 import me.Haeseke1.Alliances.Arena.ArenaManager;
-import me.Haeseke1.Alliances.Arena.TeamManager;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;

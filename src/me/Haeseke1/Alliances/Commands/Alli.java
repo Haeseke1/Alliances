@@ -30,7 +30,6 @@ public class Alli implements CommandExecutor {
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances member #Get a list of commands for a member");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances admin #Get a list of commands for a admin");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances owner #Get a list of commands for a owner");
-			sender.sendMessage(MessageManager.infoColorCode + "/Alliances owner #Get a list of commands for ");
 			return false;
 		}
 		

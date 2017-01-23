@@ -30,4 +30,8 @@ public class ParticleManager {
 		((CraftPlayer)player).getHandle().playerConnection.sendPacket(ppowp);
 	}
 	
+	public static void playParticle(EnumParticle type, Location loc, float distance, int amount, Player player, boolean lagg){
+		PacketPlayOutWorldParticles ppowp = new PacketPlayOutWorldParticles(type, lagg,(float)loc.getX(),(float)(loc.getY()), (float)loc.getZ(),distance,distance,distance,0f,amount);
+		((CraftPlayer)player).getHandle().playerConnection.sendPacket(ppowp);
+	}
 }
