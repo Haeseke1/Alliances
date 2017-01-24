@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.OutpostType;
 import me.Haeseke1.Alliances.Outpost.Commands.Create.outpostCreate;
+import me.Haeseke1.Alliances.Outpost.Commands.Items.Compass;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Outpost implements CommandExecutor {
@@ -20,6 +21,7 @@ public class Outpost implements CommandExecutor {
 			sender.sendMessage(MessageManager.infoColorCode + "/outpost create #Create a new outpost");
 			sender.sendMessage(MessageManager.infoColorCode + "/outpost addreward <Luck> <OutpostType> #Add item in hand to outpost reward");
 			sender.sendMessage(MessageManager.infoColorCode + "/outpost listtype #get a list of different types!");
+			sender.sendMessage(MessageManager.infoColorCode + "/outpost compass #Gives you a tracking compass");
 			return false;
 		}
 		
@@ -66,6 +68,10 @@ public class Outpost implements CommandExecutor {
 			outpostCreate.onCommand(sender, args);
 			return false;
 		}	
+		if(args[0].equalsIgnoreCase("compass")){
+			Compass.onCommand(sender, args);
+			return false;
+		}
 		MessageManager.sendMessage(player, wrong_arg);
 		return false;
 	}
