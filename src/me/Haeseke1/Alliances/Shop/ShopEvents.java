@@ -5,20 +5,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
+import org.bukkit.inventory.ItemStack;
 
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Utils.InventoryManager;
 import net.minecraft.server.v1_8_R2.Material;
 
-import org.bukkit.event.entity.EntityDamageEvent;
-
 public class ShopEvents implements Listener{
 	
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	private void onInventroyClick(InventoryClickEvent event){
 		if(event.getCurrentItem() == null || event.getCurrentItem().getType().equals(Material.AIR)){
@@ -49,8 +50,12 @@ public class ShopEvents implements Listener{
 					SItem sitem = s.shopItems.get(event.getSlot() - 10 + s.placing.get(player));
 					if(sitem.buy && player.getInventory().firstEmpty() != -1){
 						if(Coins.removePlayerCoins(player, sitem.buyV)){
-							player.getInventory().addItem(sitem.item);
+							ItemStack item = new ItemStack(sitem.item.getTypeId(),sitem.item.getAmount(),sitem.item.getDurability());
+							item.getData().setData(sitem.item.getData().getData());
+							item.addEnchantments(sitem.item.getEnchantments());
+							item.setItemMeta(sitem.item.getItemMeta());
 							s.updateInventory(player);
+							player.getInventory().setItem(player.getInventory().firstEmpty(), sitem.item);
 						}
 					}
 				}

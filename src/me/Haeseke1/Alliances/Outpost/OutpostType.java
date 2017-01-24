@@ -8,6 +8,7 @@ public enum OutpostType {
 	
 	
 	public static OutpostType getOutpostType(String s){
+		s = s.replace(" ", "");
 		switch(s){
 		case "blacksmith":
 			return BLACKSMITH;
@@ -23,6 +24,29 @@ public enum OutpostType {
 			return MINE;
 		case "mobfarm":
 			return MOB_FARM;
+		default:
+			break;
+		}
+		return null;
+	}
+	
+	
+	public static String getOutpostType(OutpostType s){
+		switch(s){
+		case BLACKSMITH:
+			return "Blacksmith";
+		case DOCK:
+			return "Dock";
+		case FARM:
+			return "Farm";
+		case GOD:
+			return "God";
+		case MAGIC_TOWER:
+			return "Magic Tower";
+		case MINE:
+			return "Mine";
+		case MOB_FARM:
+			return "Mob Farm";
 		default:
 			break;
 		}

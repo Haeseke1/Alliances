@@ -31,8 +31,8 @@ public class Mob_Killing_Time implements Listener,Runnable{
 					if(event.getEntity().getKiller() != null){
 						Player player = event.getEntity().getKiller();
 						if(!challenge.done.contains(player.getUniqueId())){
-							challenge.points.replace(player.getUniqueId(), challenge.points.get(player.getUniqueId()) + 1);
 							if(challenge.points.containsKey(player.getUniqueId())){
+								challenge.points.replace(player.getUniqueId(), challenge.points.get(player.getUniqueId()) + 1);
 								if(challenge.points.get(player.getUniqueId()) >= challenge.max_Points){
 									Coins.addPlayerCoins(player, challenge.reward);
 									String message = MessageManager.getMessage("Challenges_Get_Reward");

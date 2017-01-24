@@ -14,7 +14,7 @@ public class Outpost implements CommandExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if(args.length == 1){
+		if(args.length == 0){
 			sender.sendMessage(MessageManager.infoColorCode + "===== Outpost =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
 			sender.sendMessage(MessageManager.infoColorCode + "/outpost create #Create a new outpost");
@@ -31,7 +31,7 @@ public class Outpost implements CommandExecutor {
 		Player player = (Player) sender;
 		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
 	 if(player.hasPermission("Alliances.outpost.*")){
-		if(args[0].equalsIgnoreCase("addreward") && args.length > 2){
+		if(args[0].equalsIgnoreCase("addreward") && args.length > 1){
 			try{
 				if(OutpostType.getOutpostType(args[2]) == null){
 					String message = MessageManager.getMessage("Command_Outpost_AddReward_WrongType");
