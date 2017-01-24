@@ -13,9 +13,11 @@ public class Item implements CommandExecutor{
 		if(args.length < 1){
 			sender.sendMessage(MessageManager.infoColorCode + "===== Items =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
-			sender.sendMessage(MessageManager.infoColorCode + "/item compass #Create a new outpost");
+			sender.sendMessage(MessageManager.infoColorCode + "/item compass #Create a new compass outpost");
+			return false;
 		}
 		return false;
+		
 	}
 
 }
