@@ -31,6 +31,7 @@ public class Mount {
     	Horse horse = (Horse) entity;
     	horse.setAdult();
     	horse.setTamed(true);
+    	horse.setPassenger(owner);
 	    switch(this.mountType){
 	    case "diamond":
 	    	this.name = ChatColor.AQUA + this.owner.getName() + "'s mount";
@@ -50,7 +51,6 @@ public class Mount {
 	    	this.name = null;
 	    	break;
 	    }
-	   
 	    this.horse = horse;
 	}
 	
