@@ -90,7 +90,7 @@ public class ArenaEvents implements Listener{
 			  event.setCancelled(true);
 			  return;
 		  }
-		  if(player.getHealth() < event.getDamage()){
+		  if(player.getHealth() < event.getFinalDamage()){
 			  try {
 				  if(ArenaManager.checkSign(arena.getName())){
 					  ArenaManager.updateSign(ArenaManager.getSign(arena.getName()), arena);
