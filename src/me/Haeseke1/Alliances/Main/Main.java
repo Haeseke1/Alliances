@@ -42,6 +42,7 @@ import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
 import me.Haeseke1.Alliances.Economy.Commands.CoinC;
+import me.Haeseke1.Alliances.Economy.Events.BlockCommand;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
@@ -152,6 +153,10 @@ public class Main extends JavaPlugin {
 		 * Arena events
 		 */
 		pm.registerEvents(new ArenaEvents(), this);
+		/*
+		 * Coins events
+		 */
+		pm.registerEvents(new BlockCommand(), this);
 	}
 
 	public void registerCommands() {
@@ -177,8 +182,8 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Mob_Killing_Time(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Particle_Timer(), 25, 25);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new me.Haeseke1.Alliances.Town.Commands.Particle_Timer(), 25, 25);
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Counter(), 40l, 40l);
-		java.util.Timer timer = new java.util.Timer();
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Counter(), 0l, 10l);
+		java.util.Timer timer = new java.util.Timer(); 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);
 		today.set(Calendar.MINUTE, 0);

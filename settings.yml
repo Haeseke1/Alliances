@@ -9,3 +9,10 @@ Arena_lose_alliance_reward_coins: 0
 Arena_lose_alliance_reward_exp: 100
 
 Arena_kill_player_reward: 1
+
+#Forbidden commands:
+Commands:
+ - 'plugin'
+ - 'pl'
+ - 'balance'
+ - '?'

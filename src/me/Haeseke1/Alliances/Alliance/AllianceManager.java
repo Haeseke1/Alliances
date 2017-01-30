@@ -140,8 +140,10 @@ public class AllianceManager {
 		int count = 0;
 		for(UUID uuid: alli.getMembers().keySet()){
 			Player player = Bukkit.getPlayer(uuid);
+			if(player != null){
 			if(player.isOnline()){
 				count ++;
+			}
 			}
 		}
 		return count;
