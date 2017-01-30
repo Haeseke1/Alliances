@@ -1,8 +1,10 @@
 package me.Haeseke1.Alliances.Commands;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,6 +16,8 @@ import me.Haeseke1.Alliances.Commands.Create.mainCreate;
 import me.Haeseke1.Alliances.Commands.Join.mainJoin;
 import me.Haeseke1.Alliances.Commands.Member.Member;
 import me.Haeseke1.Alliances.Commands.Owner.Owner;
+import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
+import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Alli implements CommandExecutor {
@@ -68,6 +72,26 @@ public class Alli implements CommandExecutor {
 		if(args[0].equalsIgnoreCase("Owner")){
 			Owner.onCommand(player,args);
 			return true;
+		}
+		
+		if(args[0].equalsIgnoreCase("reload")){
+			try {
+				Main.createConfigs();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (InvalidConfigTypeException e) {
+				e.printStackTrace();
+			}
+			String message = MessageManager.getMessage("Command_Alliance_Reload_Answer");
+			MessageManager.sendAlertMessage(message);
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("saveconfig")){
+			Main.saveAllCustomConfigs();
+			String message = MessageManager.getMessage("Command_Alliance_Save_Answer");
+			MessageManager.sendAlertMessage(message);
+			return false;
 		}
 		
 		MessageManager.sendMessage(player, wrong_arg);
