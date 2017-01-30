@@ -22,7 +22,7 @@ public class ChatEvent implements Listener{
 			Alliance alli = AllianceManager.getAlliance(player);
 			String rank = alli.getMembers().get(player.getUniqueId());
 			String name = player.getDisplayName();
-			String _format = format.replace("%alli_name%", alli.getName()).replace("%player_name%", name).replace("%alli_rank%", rank);
+			String _format = format.replace("%alli_name%",ChatColor.GRAY + "<" + ChatColor.RESET + alli.getName() + ChatColor.GRAY + ">").replace("%player_name%", name).replace("%alli_rank%", rank);
 			_format = ChatColor.translateAlternateColorCodes('&', _format);
 			event.setFormat( _format + event.getMessage());
 		}else{
