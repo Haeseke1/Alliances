@@ -47,6 +47,7 @@ import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
+import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
 import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.Timer;
@@ -168,6 +169,7 @@ public class Main extends JavaPlugin {
 		getCommand("Challenges").setExecutor(new mainChallenges());
 		getCommand("Town").setExecutor(new TownC());
 		getCommand("Arena").setExecutor(new ArenaCommand());
+		getCommand("Mount").setExecutor(new MountCommand());
 	}
 	
 	public void registerCustomEntitys(){

@@ -20,3 +20,5 @@ commands:
     aliases: [a]
   Town: 
     aliases: [t]
+  Mount:
+    aliases: [mount,m]
