@@ -46,6 +46,9 @@ public class ShopManager {
 	
 
 	public static void registerShops() {
+		for(Shop shop : Shop.shops){
+			shop.despawnVendors();
+		}
 		Shop.shops.clear();
 		FileConfiguration file = Main.shopConfig;
 		for(String s : file.getKeys(false)){
