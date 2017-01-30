@@ -117,7 +117,7 @@ public class ArenaManager {
 		  if(TeamManager.teamExists(alliance, arenaname)){
 		    if(ArenaManager.checkTeamSize(TeamManager.getTeamNumber(alliance, arenaname), arenaname) != (arena.getSize() / 2)){
 			  arena.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined the arena!",player);
-		      ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
+		      ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), ChatColor.stripColor(AllianceManager.getAlliance(player).getName()));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
 			  player.teleport(ArenaManager.getLobby(arenaname));
@@ -134,7 +134,7 @@ public class ArenaManager {
 		  if(TeamManager.teamIsFree(1, arenaname)){
 			  arena.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined the arena!",player);
 			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team1.alliance", ChatColor.stripColor(alliance.getName()));
-			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
+			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(),  ChatColor.stripColor(AllianceManager.getAlliance(player).getName()));
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
 			  player.teleport(ArenaManager.getLobby(arenaname));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena " + ChatColor.GOLD + "[" + arena.getCurrentSize() + "/" + arena.getSize() + "]");
@@ -147,7 +147,7 @@ public class ArenaManager {
 		  if(TeamManager.teamIsFree(2, arenaname)){
 			  arena.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " joined the arena!",player);
 			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team2.alliance", ChatColor.stripColor(alliance.getName()));
-			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), AllianceManager.getAlliance(player));
+			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(),  ChatColor.stripColor(AllianceManager.getAlliance(player).getName()));
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
 			  player.teleport(ArenaManager.getLobby(arenaname));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena " + ChatColor.GOLD + "[" + arena.getCurrentSize() + "/" + arena.getSize() + "]");
@@ -204,8 +204,8 @@ public class ArenaManager {
 	  Arena arena = getArenaByName(arenaName);
 	  int count = 0;
 	  String allianceName = arenaConfig.getString("Arenas." + arenaName + ".spawns.team" + team + ".alliance");
-	  for(Alliance a: arena.getPlayersInArena().values()){
-		  if(a.getName().equalsIgnoreCase(allianceName)){
+	  for(String a: arena.getPlayersInArena().values()){
+		  if(a.equalsIgnoreCase(allianceName)){
 			  count ++;
 		  }
 	  }
@@ -399,9 +399,9 @@ public class ArenaManager {
       return;
   }
   public static boolean teamIsEmpty(Player player, Arena arena){
-	  Alliance al = AllianceManager.getAlliance(player);
+	  String al = ChatColor.stripColor(AllianceManager.getAlliance(player).getName());
 	  for(UUID playerUUID: arena.getPlayersInArena().keySet()){
-		  if(al == arena.getPlayersInArena().get(playerUUID)){
+		  if(al.equalsIgnoreCase(arena.getPlayersInArena().get(playerUUID))){
 			  return false;
 		  }
 	  }

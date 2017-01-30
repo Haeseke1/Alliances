@@ -14,7 +14,7 @@ import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Arena {
 
-	private HashMap<UUID,Alliance> mPlayersInArena;
+	private HashMap<UUID,String> mPlayersInArena;
 	private List<Location> mSpawns;
     private int mSize;
     private int mCountdown;
@@ -34,7 +34,7 @@ public class Arena {
 		setmSpawns(new ArrayList<>());
 	}
 	
-	public HashMap<UUID,Alliance> getPlayersInArena() {
+	public HashMap<UUID,String> getPlayersInArena() {
 		return mPlayersInArena;
 	}
 	
