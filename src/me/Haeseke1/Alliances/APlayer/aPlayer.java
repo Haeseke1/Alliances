@@ -16,7 +16,9 @@ import org.bukkit.scoreboard.Scoreboard;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Economy.Coins;
+import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.ScoreBoard.aScoreBoardManager;
+import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class aPlayer{
@@ -30,7 +32,7 @@ public class aPlayer{
 	public File f;
 	
 	public int wins;
-	public int losses;
+	public int loses;
 	
 	public Scoreboard scoreboard;
 	public List<String> scores = new ArrayList<String>();
@@ -42,7 +44,7 @@ public class aPlayer{
 		this.file = file;
 		this.f = f;
 		this.wins = 0;
-		this.losses = 0;
+		this.loses = 0;
 		registerConfig();
 		online_Players.add(this);
 		scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
@@ -51,12 +53,17 @@ public class aPlayer{
 	
 	
 	public void registerConfig(){
-		
+	  if(!(file.contains("Wins"))){ this.wins = 0; return;}
+	  if(!(file.contains("Loses"))){ this.loses = 0; return;}
+	  this.wins = file.getInt("Wins");
+	  this.loses = file.getInt("Loses");
 	}
 	
 	public void saveConfig(){
 		try {
 			file.save(f);
+			file.set("Wins", this.wins);
+			file.set("Loses", this.loses);
 		} catch (IOException e) {
 			MessageManager.sendAlertMessage("Could not save " + file.getName() + "!");
 		}
@@ -67,7 +74,7 @@ public class aPlayer{
 	}
 	
 	public void addLose(){
-		this.losses = this.losses + 1;
+		this.loses = this.loses + 1;
 	}
 	
     public int getWins(){
@@ -75,7 +82,7 @@ public class aPlayer{
     }
     
     public int getLoses(){
-    	return this.losses;
+    	return this.loses;
     }
 
     public void addScore(String s){
@@ -139,7 +146,7 @@ public class aPlayer{
 		Alliance alli = AllianceManager.getAlliance(player);
 		if (alli == null) {
 			if (!scores.contains(ChatColor.AQUA + "" + wins + "W")
-					|| !scores.contains(ChatColor.AQUA + "" + losses + "L")
+					|| !scores.contains(ChatColor.AQUA + "" + loses + "L")
 					|| !scores.contains(ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins")
 					|| !scores.contains(ChatColor.RED + "No alliance")) {
 				resetScore();
@@ -148,14 +155,14 @@ public class aPlayer{
 				aScoreBoardManager.setScore(this, ChatColor.GREEN + "Wins:", 12, sideBar, ChatColor.YELLOW,
 						ChatColor.AQUA + "" + wins + "W");
 				aScoreBoardManager.setScore(this, ChatColor.GREEN + "Loses:", 9, sideBar, ChatColor.DARK_PURPLE,
-						ChatColor.AQUA + "" + losses + "L");
+						ChatColor.AQUA + "" + loses + "L");
 				aScoreBoardManager.setScore(this, ChatColor.GREEN + "Coins:", 6, sideBar, ChatColor.LIGHT_PURPLE,
 						ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins");
 				return;
 			}
 		} else {
 			if (!scores.contains(ChatColor.AQUA + "" + wins + "W")
-					|| !scores.contains(ChatColor.AQUA + "" + losses + "L")
+					|| !scores.contains(ChatColor.AQUA + "" + loses + "L")
 					|| !scores.contains(ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins")
 					|| !scores.contains(alli.getName())) {
 				resetScore();
@@ -164,7 +171,7 @@ public class aPlayer{
 				aScoreBoardManager.setScore(this, ChatColor.GREEN + "Wins:", 12, sideBar, ChatColor.YELLOW,
 						ChatColor.AQUA + "" + wins + "W");
 				aScoreBoardManager.setScore(this, ChatColor.GREEN + "Loses:", 9, sideBar, ChatColor.DARK_PURPLE,
-						ChatColor.AQUA + "" + losses + "L");
+						ChatColor.AQUA + "" + loses + "L");
 				aScoreBoardManager.setScore(this, ChatColor.GREEN + "Coins:", 6, sideBar, ChatColor.LIGHT_PURPLE,
 						ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins");
 				return;
@@ -172,6 +179,5 @@ public class aPlayer{
 		}  
 		return;
 	}
-    
     
 }
