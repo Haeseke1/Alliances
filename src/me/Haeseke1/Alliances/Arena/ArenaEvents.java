@@ -63,6 +63,7 @@ public class ArenaEvents implements Listener{
 	@EventHandler
 	public void onPlaceInArena(BlockPlaceEvent event) throws EmptyLocationException, EmptyStringException{
 		Player player = event.getPlayer();
+	if(event.getBlock() != null){
 	    Block block = event.getBlock();
 	    Arena arena = ArenaManager.getArenaOfPlayer(player);
 		if(ArenaManager.isInArena(player)){
@@ -77,6 +78,7 @@ public class ArenaEvents implements Listener{
 			event.setCancelled(true);
 			}
 		}
+	  }
 	}	
 	@EventHandler
 	public void onDamage(EntityDamageEvent event) throws EmptyStringException{

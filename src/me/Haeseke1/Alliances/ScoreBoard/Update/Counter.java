@@ -12,7 +12,7 @@ public class Counter implements Runnable{
 	
 	@Override
 	public void run() {
-		if(time >= 5){
+		if(time >= 10){
 			if(player){
 				alli = true;
 				player = false;
