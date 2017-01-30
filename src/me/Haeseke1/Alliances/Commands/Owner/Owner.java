@@ -12,6 +12,7 @@ import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Town.Town;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.PlayerManager;
 
@@ -42,6 +43,9 @@ public class Owner {
 		if(args[1].equalsIgnoreCase("disband")){
 			Alliance alli = AllianceManager.getAlliance(player);
 			String name = alli.getName();
+			for(Town t : alli.getTowns()){
+				Town.towns.remove(t);
+			}
 			Main.alliances.remove(alli);
 			
 			String message = MessageManager.getMessage("Command_Alliance_Owner_Disband_Answer");

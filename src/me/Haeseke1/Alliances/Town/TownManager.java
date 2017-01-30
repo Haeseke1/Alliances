@@ -147,6 +147,7 @@ public class TownManager {
     }
     
     public static void registerTowns(){
+    	Town.towns.clear();
     	for(String alliancename: allianceConfig.getConfigurationSection("").getKeys(false)){
     		Alliance al = AllianceManager.getAlliance(alliancename);
     	  if(allianceConfig.getConfigurationSection(alliancename + ".towns") != null){

@@ -46,6 +46,7 @@ public class ShopManager {
 	
 
 	public static void registerShops() {
+		Shop.shops.clear();
 		FileConfiguration file = Main.shopConfig;
 		for(String s : file.getKeys(false)){
 			List<Location> locations = new ArrayList<Location>();
