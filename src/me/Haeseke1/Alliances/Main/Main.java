@@ -164,7 +164,7 @@ public class Main extends JavaPlugin {
 		getCommand("Coin").setExecutor(new CoinC());
 		getCommand("Shop").setExecutor(new ShopC());
 		getCommand("Outpost").setExecutor(new Outpost());
-		getCommand("Region").setExecutor(new region());
+		getCommand("terrain").setExecutor(new region());
 		getCommand("Challenges").setExecutor(new mainChallenges());
 		getCommand("Town").setExecutor(new TownC());
 		getCommand("Arena").setExecutor(new ArenaCommand());

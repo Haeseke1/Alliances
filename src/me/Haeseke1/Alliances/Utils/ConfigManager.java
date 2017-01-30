@@ -83,8 +83,13 @@ public class ConfigManager {
 			throw new EmptyItemStackException(path);
 		}
 		try{
-			ItemStack i = new ItemStack(config.getInt(path + ".ID"));
-			i.setAmount(config.getInt(path + ".Amount"));
+			ItemStack i = null;
+			if(config.contains(path + ".Data")){
+				i = new ItemStack(config.getInt(path + ".ID"),config.getInt(path + ".Amount"), (short) config.getInt(path + ".Data"));
+			}else{
+				i = new ItemStack(config.getInt(path + ".ID"),config.getInt(path + ".Amount"));
+			}
+			
 			ItemMeta im = i.getItemMeta();
 			if(config.contains(path + ".Displayname")){
 				im.setDisplayName(ChatColor.translateAlternateColorCodes('&', config.getString(path + ".Displayname")));
@@ -93,9 +98,6 @@ public class ConfigManager {
 				im.setLore(config.getStringList(path + ".Lore"));
 			}
 			i.setItemMeta(im);
-			MaterialData md = i.getData();
-			md.setData((byte) config.getInt(path + ".Data"));
-			i.setData(md);
 			if(config.contains(path + ".Enchantments")){
 				for(String ench : config.getStringList(path + ".Enchantments")){
 					i.addUnsafeEnchantment(Enchantment.getById(Integer.parseInt(ench.split(",")[0])), Integer.parseInt(ench.split(",")[1]));
