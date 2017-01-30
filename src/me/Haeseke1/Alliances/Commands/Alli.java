@@ -85,7 +85,7 @@ public class Alli implements CommandExecutor {
 			}
 			Config.registerConfigFile(Main.plugin);
 			String message = MessageManager.getMessage("Command_Alliance_Reload_Answer");
-			MessageManager.sendAlertMessage(message);
+			MessageManager.sendMessage(player, message);
 			return false;
 		}
 		
@@ -93,7 +93,7 @@ public class Alli implements CommandExecutor {
 			Main.saveAllCustomConfigs();
 			Config.saveConfigFile(Main.plugin);
 			String message = MessageManager.getMessage("Command_Alliance_Save_Answer");
-			MessageManager.sendAlertMessage(message);
+			MessageManager.sendMessage(player, message);
 			return false;
 		}
 		

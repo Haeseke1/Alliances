@@ -89,6 +89,10 @@ public class ConfigManager {
 			}else{
 				i = new ItemStack(config.getInt(path + ".ID"),config.getInt(path + ".Amount"));
 			}
+			if(config.contains(path + ".Data")){
+				MaterialData md = i.getData();
+				md.setData((byte) config.getInt(path + ".Data"));
+			}
 			
 			ItemMeta im = i.getItemMeta();
 			if(config.contains(path + ".Displayname")){
