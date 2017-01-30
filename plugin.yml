@@ -12,8 +12,8 @@ commands:
     aliases: [sh]
   Outpost:
     aliases: [outp]
-  Region:
-    aliases: [reg]
+  terrain:
+    aliases: [ter]
   Challenges:
     aliases: [ch,chal]
   Arena:
