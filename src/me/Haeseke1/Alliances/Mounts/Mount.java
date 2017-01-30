@@ -1,6 +1,5 @@
 package me.Haeseke1.Alliances.Mounts;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -51,6 +50,8 @@ public class Mount {
 	    	this.name = null;
 	    	break;
 	    }
+	    horse.setCustomName(this.name);
+	    horse.setCustomNameVisible(true);
 	    this.horse = horse;
 	}
 	
