@@ -17,6 +17,7 @@ import me.Haeseke1.Alliances.Commands.Join.mainJoin;
 import me.Haeseke1.Alliances.Commands.Member.Member;
 import me.Haeseke1.Alliances.Commands.Owner.Owner;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
+import me.Haeseke1.Alliances.Main.Config;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -82,6 +83,7 @@ public class Alli implements CommandExecutor {
 			} catch (InvalidConfigTypeException e) {
 				e.printStackTrace();
 			}
+			Config.registerConfigFile(Main.plugin);
 			String message = MessageManager.getMessage("Command_Alliance_Reload_Answer");
 			MessageManager.sendAlertMessage(message);
 			return false;
@@ -89,6 +91,7 @@ public class Alli implements CommandExecutor {
 		
 		if(args[0].equalsIgnoreCase("saveconfig")){
 			Main.saveAllCustomConfigs();
+			Config.saveConfigFile(Main.plugin);
 			String message = MessageManager.getMessage("Command_Alliance_Save_Answer");
 			MessageManager.sendAlertMessage(message);
 			return false;

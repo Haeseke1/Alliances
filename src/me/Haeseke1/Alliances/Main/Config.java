@@ -90,34 +90,42 @@ public class Config {
 		}
 		
 		try{
+			Blacksmith.rewards.clear();
 			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Blacksmith").getKeys(false)){
 				ItemStack i = ConfigManager.getItemStackFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s);
 				Blacksmith.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s + ".Percentage"));
 			}
+			Dock.rewards.clear();
 			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Dock").getKeys(false)){
 				ItemStack i = ConfigManager.getItemStackFromConfig(Main.config, "Outpost.Rewards.Dock." + s);
 				Dock.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.Dock." + s + ".Percentage"));
 			}
+			Farm.rewards.clear();
 			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Farm").getKeys(false)){
 				ItemStack i = ConfigManager.getItemStackFromConfig(Main.config, "Outpost.Rewards.Farm." + s);
 				Farm.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.Farm." + s + ".Percentage"));
 			}
+			God.rewards.clear();
 			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Blacksmith").getKeys(false)){
 				ItemStack i = ConfigManager.getItemStackFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s);
 				God.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s + ".Percentage"));
 			}
+			Magic_Tower.rewards.clear();
 			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Magic_Tower").getKeys(false)){
 				ItemStack i = ConfigManager.getItemStackFromConfig(Main.config, "Outpost.Rewards.Magic_Tower." + s);
 				Magic_Tower.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.Magic_Tower." + s + ".Percentage"));
 			}
+			Mine.rewards.clear();
 			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Mine").getKeys(false)){
 				ItemStack i = ConfigManager.getItemStackFromConfig(Main.config, "Outpost.Rewards.Mine." + s);
 				Mine.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.Mine." + s + ".Percentage"));
 			}
+			Blacksmith.rewards.clear();
 			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Mob_Farm").getKeys(false)){
 				ItemStack i = ConfigManager.getItemStackFromConfig(Main.config, "Outpost.Rewards.Mob_Farm." + s);
 				Mob_Farm.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.Mob_Farm." + s + ".Percentage"));
 			}
+			Mob_Farm.rewards.clear();
 		}catch(EmptyItemStackException e){
 			e.printStackTrace();
 		} catch (EmptyIntException e) {
