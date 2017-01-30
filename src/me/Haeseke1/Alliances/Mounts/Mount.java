@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Horse.Variant;
 import org.bukkit.inventory.ItemStack;
 
+import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
+
 public class Mount {
 
 	public Player owner;
@@ -50,6 +52,8 @@ public class Mount {
 	    	this.name = null;
 	    	break;
 	    }
+    	horse.setOwner(owner);
+	    horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
 	    horse.setCustomName(this.name);
 	    horse.setCustomNameVisible(true);
 	    this.horse = horse;
@@ -58,10 +62,12 @@ public class Mount {
 	public void removeMount(){
 		this.horse.setHealth(0);
 		this.horse = null;
+		MountCommand.mounts.remove(owner);
 	}
 	
 	public boolean mobIsSpawned(){
 		if(this.horse == null) return false;
 		return true;
 	}
+
 }

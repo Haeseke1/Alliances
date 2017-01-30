@@ -9,13 +9,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
+import me.Haeseke1.Alliances.Arena.ArenaManager;
 import me.Haeseke1.Alliances.Mounts.Mount;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class MountCommand implements CommandExecutor{
 
-	public static HashMap<UUID,Mount> mounts = new HashMap<>();
+	public static HashMap<Player,Mount> mounts = new HashMap<>();
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -24,11 +25,11 @@ public class MountCommand implements CommandExecutor{
 		if(args.length == 0){
 			player.sendMessage(MessageManager.infoColorCode + "===== Mounts =====");
 			player.sendMessage(MessageManager.infoColorCode + "Commands:");
-			player.sendMessage(MessageManager.infoColorCode + "/mount <donkey/horse> #Creates and adds an arena to the game");
+			player.sendMessage(MessageManager.infoColorCode + "/mount <donkey/horse> #Mount on your very own horse or donkey");
 			return false;
 		}
-		if(args.length == 1 && !(args[0].equalsIgnoreCase("leave"))){
-			if(mounts.containsKey(player.getUniqueId())){ MessageManager.sendMessage(player, ChatColor.RED + "You're already on a mount"); return false;}
+		if(args.length == 1 && !(args[0].equalsIgnoreCase("dispawn"))){
+			if(mounts.containsKey(player)){ MessageManager.sendMessage(player, ChatColor.RED + "You already have a mount"); return false;}
 			String type = args[0].toLowerCase();
 			switch(type){
 			case "diamond":
@@ -39,7 +40,7 @@ public class MountCommand implements CommandExecutor{
 				return false;
 				 }
 				mount.spawnMount();
-				mounts.put(player.getUniqueId(), mount);
+				mounts.put(player, mount);
 				MessageManager.sendMessage(player, ChatColor.GREEN + "You equipped a horse");
 				return true;
 				}
@@ -49,11 +50,11 @@ public class MountCommand implements CommandExecutor{
 				if(player.hasPermission("mount.gold")){
 					Mount mount = new Mount(player,type);	
 					if(mount.mobIsSpawned()){
-					MessageManager.sendMessage(player, ChatColor.RED + "You're already on a mount");
+					MessageManager.sendMessage(player, ChatColor.RED + "You already have a mount");
 					return false;
 				     }
 					mount.spawnMount();
-					mounts.put(player.getUniqueId(), mount);
+					mounts.put(player, mount);
 					MessageManager.sendMessage(player, ChatColor.GREEN + "You equipped a horse");
 					return true;
 				}
@@ -63,11 +64,11 @@ public class MountCommand implements CommandExecutor{
 				if(player.hasPermission("mount.donkey")){
 					Mount mount = new Mount(player,type);	
 					if(mount.mobIsSpawned()){
-					MessageManager.sendMessage(player, ChatColor.RED + "You're already on a mount");
+					MessageManager.sendMessage(player, ChatColor.RED + "You already have a mount");
 					return false;
 				  }
 					mount.spawnMount();
-					mounts.put(player.getUniqueId(), mount);
+					mounts.put(player, mount);
 					MessageManager.sendMessage(player, ChatColor.GREEN + "You equipped a donkey");
 					return true;
 				}

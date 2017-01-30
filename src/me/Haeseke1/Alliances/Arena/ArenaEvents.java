@@ -20,6 +20,7 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -251,5 +252,11 @@ public class ArenaEvents implements Listener{
 			return true;
 		}
 		return false;
+	}
+	@EventHandler
+	public void onPreCommand(PlayerCommandPreprocessEvent event){
+		if(ArenaManager.isInArena(event.getPlayer())){
+			event.setCancelled(true);
+		}
 	}
 }

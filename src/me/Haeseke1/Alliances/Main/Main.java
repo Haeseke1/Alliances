@@ -47,7 +47,12 @@ import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
+import me.Haeseke1.Alliances.Mounts.MountsManager;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
+import me.Haeseke1.Alliances.Mounts.Events.Death;
+import me.Haeseke1.Alliances.Mounts.Events.Leave;
+import me.Haeseke1.Alliances.Mounts.Events.RightClickMount;
+import me.Haeseke1.Alliances.Mounts.Scheduler.Updater;
 import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.Timer;
@@ -117,6 +122,7 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		MountsManager.despawnMounts();
 		Config.saveConfigFile(this);
 		saveAllCustomConfigs();
 		ShopManager.despawnVendors();
@@ -158,6 +164,12 @@ public class Main extends JavaPlugin {
 		 * Coins events
 		 */
 		pm.registerEvents(new BlockCommand(), this);
+		/*
+		 * Mounts events
+		 */
+		pm.registerEvents(new Death(), this);
+		pm.registerEvents(new RightClickMount(), this);
+		pm.registerEvents(new Leave(), this);
 	}
 
 	public void registerCommands() {
@@ -185,6 +197,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Particle_Timer(), 25, 25);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new me.Haeseke1.Alliances.Town.Commands.Particle_Timer(), 25, 25);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Counter(), 0l, 10l);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Updater(), 0l, 5l);
 		java.util.Timer timer = new java.util.Timer(); 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);
