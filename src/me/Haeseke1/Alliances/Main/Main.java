@@ -194,14 +194,14 @@ public class Main extends JavaPlugin {
 	/*
 	 * Creates all the needed configs of the code (JSON support not included)
 	 */
-	public void createConfigs() throws IOException, InvalidConfigTypeException {
-		coinsConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "coins.yml"), this);
-		alliancesConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "alliances.yml"), this);
-		outpostConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "outpost.yml"), this);
-		challengeConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "challenges.yml"), this);
-		shopConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "shop.yml"), this);
-		arenaConfig = ConfigManager.getCustomConfig(new File(getDataFolder(), "arenas.yml"), this);
-		settingsConfig = ConfigManager.getCustomConfig(new File(getDataFolder(),"settings.yml"), this);
+	public static void createConfigs() throws IOException, InvalidConfigTypeException {
+		coinsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "coins.yml"), plugin);
+		alliancesConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "alliances.yml"), plugin);
+		outpostConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "outpost.yml"), plugin);
+		challengeConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "challenges.yml"), plugin);
+		shopConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "shop.yml"), plugin);
+		arenaConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "arenas.yml"), plugin);
+		settingsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"settings.yml"), plugin);
 	    try {
 			ArenaManager.loadArena();
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
@@ -211,11 +211,11 @@ public class Main extends JavaPlugin {
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();
 		ShopManager.registerShops();
-		MessageManager.registerMessages(this);
+		MessageManager.registerMessages(plugin);
 	    TownManager.registerTowns();
 	}
 
-	public void saveAllCustomConfigs() {
+	public static void saveAllCustomConfigs() {
 		AllianceManager.saveAlliance();
 		OutpostManager.saveOutpost();
 		ShopManager.saveShops();
@@ -224,7 +224,7 @@ public class Main extends JavaPlugin {
 			if(configFile.containsKey(entry.getKey())){
 				ConfigManager.saveCustomConfig(configFile.get(entry.getKey()), entry.getValue());
 			}else{
-				ConfigManager.saveCustomConfig(new File(getDataFolder(), entry.getKey()), entry.getValue());
+				ConfigManager.saveCustomConfig(new File(plugin.getDataFolder(), entry.getKey()), entry.getValue());
 			}
 			
 		}

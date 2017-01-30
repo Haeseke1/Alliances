@@ -16,8 +16,6 @@ public class Item implements CommandExecutor{
 			sender.sendMessage(MessageManager.infoColorCode + "/item compass #Create a new compass outpost");
 			return false;
 		}
-		return false;
-		
+		return false;	
 	}
-
 }

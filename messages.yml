@@ -50,6 +50,10 @@ Command_Region_Show_Answer_Out: "Disable region"
 Outpost_Place_Block: "You cannot place blocks in a outpost"
 Outpost_Break_Block: "You cannot break blocks in a outpost"
 
+#Can use no var
+Command_Alliance_Reload_Answer: "Reload complete"
+Command_Alliance_Save_Answer: "Save complete"
+
 
 #Can use %alli_name%
 Command_Alliance_Owner_Disband_Answer: "You disbanded your alliance!"

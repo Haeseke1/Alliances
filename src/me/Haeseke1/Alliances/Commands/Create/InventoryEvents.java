@@ -237,16 +237,16 @@ public class InventoryEvents implements Listener{
 				}
 				break;
 			}
-			if(!AllianceManager.createNewAlliance(event.getMessage(), player, chooseName.get(player))){
+			if(!AllianceManager.createNewAlliance(event.getMessage().split(" ")[0], player, chooseName.get(player))){
 				chooseName.remove(player);
 				return;
 			}
 			chooseName.remove(player);
 			String message = MessageManager.getMessage("Command_Alliance_Create_Answer");
-			message = message.replace("%alli_name%", event.getMessage());
+			message = message.replace("%alli_name%", event.getMessage().split(" ")[0]);
 			MessageManager.sendMessage(player, message);
 			message = MessageManager.getMessage("Command_Alliance_Create_Broadcast");
-			message = message.replace("%alli_name%", event.getMessage());
+			message = message.replace("%alli_name%", event.getMessage().split(" ")[0]);
 			MessageManager.sendBroadcast(message);
 		}
 	}
