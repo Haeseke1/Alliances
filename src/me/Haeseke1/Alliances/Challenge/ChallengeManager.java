@@ -15,6 +15,12 @@ import me.Haeseke1.Alliances.Utils.ConfigManager;
 public class ChallengeManager extends TimerTask{
 	
 	public static void registerChallenges(){
+		Challenge.challengeName.clear();
+		Challenge.challengeMax_Points.clear();
+		Challenge.challengeTimer.clear();
+		Challenge.challengeReward.clear();
+		Challenge.challengeEnabled.clear();
+		Challenge.challenges.clear();
 		FileConfiguration file = Main.challengeConfig;
 		for(challengeType type : challengeType.values()){
 			try {

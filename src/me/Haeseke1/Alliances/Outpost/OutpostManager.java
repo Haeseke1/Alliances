@@ -350,6 +350,13 @@ public class OutpostManager {
 	}
 	
 	public static void registerOutpost(){
+		Blacksmith.blacksmiths.clear();
+		Dock.docks.clear();
+		Farm.farms.clear();
+		God.gods.clear();
+		Magic_Tower.magic_towers.clear();
+		Mine.mines.clear();
+		Mob_Farm.mob_farms.clear();
 		FileConfiguration file = Main.outpostConfig;
 		if(file.contains("Blacksmith")){
 			for(String s : file.getConfigurationSection("Blacksmith").getKeys(false)){

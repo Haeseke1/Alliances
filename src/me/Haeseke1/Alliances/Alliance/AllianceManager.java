@@ -82,6 +82,7 @@ public class AllianceManager {
 	}
 	
 	public static void registerAlliance(){
+		Main.alliances.clear();
 		FileConfiguration f = Main.alliancesConfig;
 		for(String s : f.getKeys(false)){
 			AllianceType type = null;

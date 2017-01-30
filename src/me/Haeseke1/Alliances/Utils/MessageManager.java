@@ -50,6 +50,7 @@ public class MessageManager {
 
 	
 	public static void registerMessages(Main main){
+		messages.clear();
 		File f = new File(main.getDataFolder(), "messages.yml");
 		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
 		Reader defConfigStream;
