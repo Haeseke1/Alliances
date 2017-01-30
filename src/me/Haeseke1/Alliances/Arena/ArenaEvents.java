@@ -46,30 +46,11 @@ public class ArenaEvents implements Listener{
 	public void onBreakInArena(BlockBreakEvent event) throws EmptyLocationException, EmptyStringException{
 		Player player = event.getPlayer();
 		Block block = event.getBlock();
-		Arena arena = ArenaManager.getArenaOfPlayer(player);
 		if(ArenaManager.isInArena(player)){
 			event.setCancelled(true);
 			return;
 		}
-		if(blockIsInArena(block.getLocation(),arena.getName())){
-			if(ArenaManager.checkStatus(arena.getName(), "UNDER_MAINTANCE")){
-			return;
-			}else{
-		    MessageManager.sendMessage(player, "You can't edit the arena while it isn't under maintance");
-			event.setCancelled(true);
-			}
-		}
-	}
-	@EventHandler
-	public void onPlaceInArena(BlockPlaceEvent event) throws EmptyLocationException, EmptyStringException{
-		Player player = event.getPlayer();
-	if(event.getBlock() != null){
-	    Block block = event.getBlock();
-	    Arena arena = ArenaManager.getArenaOfPlayer(player);
-		if(ArenaManager.isInArena(player)){
-			event.setCancelled(true);
-			return;
-		}
+	  for(Arena arena: ArenaManager.arenas){
 		if(blockIsInArena(block.getLocation(),arena.getName())){
 			if(ArenaManager.checkStatus(arena.getName(), "UNDER_MAINTANCE")){
 			return;
@@ -79,6 +60,27 @@ public class ArenaEvents implements Listener{
 			}
 		}
 	  }
+	}
+	@EventHandler
+	public void onPlaceInArena(BlockPlaceEvent event) throws EmptyLocationException, EmptyStringException{
+		Player player = event.getPlayer();
+	if(event.getBlock() != null){
+	    Block block = event.getBlock();
+		if(ArenaManager.isInArena(player)){
+			event.setCancelled(true);
+			return;
+		}
+	for(Arena arena: ArenaManager.arenas){
+		if(blockIsInArena(block.getLocation(),arena.getName())){
+			if(ArenaManager.checkStatus(arena.getName(), "UNDER_MAINTANCE")){
+			return;
+			}else{
+		    MessageManager.sendMessage(player, "You can't edit the arena while it isn't under maintance");
+			event.setCancelled(true);
+			}
+		}
+	  }
+	 }
 	}	
 	@EventHandler
 	public void onDamage(EntityDamageEvent event) throws EmptyStringException{
