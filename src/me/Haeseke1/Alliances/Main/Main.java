@@ -47,6 +47,8 @@ import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Events.RightClickSword;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
 import me.Haeseke1.Alliances.Mounts.MountsManager;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
 import me.Haeseke1.Alliances.Mounts.Events.Death;
@@ -57,6 +59,8 @@ import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.Timer;
 import me.Haeseke1.Alliances.Outpost.Commands.Outpost;
+import me.Haeseke1.Alliances.PVE.Events.BlockBreak_Place;
+import me.Haeseke1.Alliances.PVE.Events.PlayerQuit;
 import me.Haeseke1.Alliances.ScoreBoard.Update.Counter;
 import me.Haeseke1.Alliances.Shop.ShopEvents;
 import me.Haeseke1.Alliances.Shop.ShopManager;
@@ -66,8 +70,6 @@ import me.Haeseke1.Alliances.Town.TownManager;
 import me.Haeseke1.Alliances.Town.Commands.TownC;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
-import me.Haeseke1.Alliances.Weapons.Swords.Events.RightClickSword;
-import me.Haeseke1.Alliances.Weapons.Swords.Schedulers.CheckCooldowns;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
 import me.Haeseke1.Alliances.regionSelect.Commands.Particle_Timer;
 import me.Haeseke1.Alliances.regionSelect.Commands.region;
@@ -176,6 +178,8 @@ public class Main extends JavaPlugin {
 		 * Swords events
 		 */
 		pm.registerEvents(new RightClickSword(), this);
+		pm.registerEvents(new PlayerQuit(), this);
+		pm.registerEvents(new BlockBreak_Place(), this);
 	}
 
 	public void registerCommands() {

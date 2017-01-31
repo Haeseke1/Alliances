@@ -1,4 +1,4 @@
-package me.Haeseke1.Alliances.Weapons.Swords.Type;
+package me.Haeseke1.Alliances.Item.Weapons.Swords.Type;
 
 import org.bukkit.potion.PotionEffectType;
 
