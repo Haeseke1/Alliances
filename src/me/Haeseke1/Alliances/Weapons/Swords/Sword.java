@@ -1,11 +1,8 @@
 package me.Haeseke1.Alliances.Weapons.Swords;
 
-import java.lang.reflect.Field;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -78,6 +75,6 @@ public class Sword{
 					if(sound != null){ SoundManager.playSoundToPlayer(sound, player);}
 					cooldowns.put(player, this.cooldown);
 			  }
-		    }
+		 }
 	}
 }

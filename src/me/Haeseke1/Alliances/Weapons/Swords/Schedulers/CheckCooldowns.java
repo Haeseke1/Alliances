@@ -35,8 +35,8 @@ public class CheckCooldowns extends RightClickSword implements Runnable{
 			    		cooldown.remove(player);
 				    	SoundManager.playSoundToPlayer(Sound.NOTE_PLING, player);
 			    	}else{
-			    	cooldown.remove(player);
-			    	cooldown.put(player, this.cooldown - 1);
+			    		cooldown.remove(player);
+			    		cooldown.put(player, this.cooldown - 1);
 			    	}
 			    }
 			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
