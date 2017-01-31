@@ -47,6 +47,7 @@ public class Shop {
 			loc.getChunk().load();
 		}
 		Villager cev = CustomEntityVillager.spawn(loc);
+		cev.setRemoveWhenFarAway(false);
 		cev.setCustomName(ChatColor.translateAlternateColorCodes('&', name));
 		cev.setCustomNameVisible(true);
 		vendors.add(cev);
