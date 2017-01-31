@@ -66,6 +66,8 @@ import me.Haeseke1.Alliances.Town.TownManager;
 import me.Haeseke1.Alliances.Town.Commands.TownC;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import me.Haeseke1.Alliances.Weapons.Swords.Events.RightClickSword;
+import me.Haeseke1.Alliances.Weapons.Swords.Schedulers.CheckCooldowns;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
 import me.Haeseke1.Alliances.regionSelect.Commands.Particle_Timer;
 import me.Haeseke1.Alliances.regionSelect.Commands.region;
@@ -170,6 +172,10 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new Death(), this);
 		pm.registerEvents(new RightClickMount(), this);
 		pm.registerEvents(new Leave(), this);
+		/*
+		 * Swords events
+		 */
+		pm.registerEvents(new RightClickSword(), this);
 	}
 
 	public void registerCommands() {
@@ -196,8 +202,9 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Mob_Killing_Time(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Particle_Timer(), 25, 25);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new me.Haeseke1.Alliances.Town.Commands.Particle_Timer(), 25, 25);
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Counter(), 0l, 10l);
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Updater(), 0l, 5l);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Counter(), 0, 10);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Updater(), 0, 5);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new CheckCooldowns(), 0, 20);
 		java.util.Timer timer = new java.util.Timer(); 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);

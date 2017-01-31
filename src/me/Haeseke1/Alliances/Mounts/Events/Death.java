@@ -26,7 +26,7 @@ public class Death implements Listener{
 	    	if(mount.horse == horse){
 	    	Player player = mount.owner;
 	    	MessageManager.sendMessage(player, ChatColor.RED + "Your mount died");
-	    	SoundManager.playSoundToPlayer(Sound.NOTE_BASS_DRUM, player);
+	    	SoundManager.playSoundToPlayer(Sound.NOTE_SNARE_DRUM, player);
 	    	MountCommand.mounts.remove(player);
 	    	event.getDrops().clear();
 	    	event.getDrops().add(new ItemStack(Material.AIR));
