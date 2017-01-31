@@ -29,7 +29,7 @@ public class RightClickMount implements Listener{
 	
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event){
-		if(event.getClickedInventory() == null){return;}
+		if(event.getInventory() == null){return;}
 		if(event.getWhoClicked() == null){return;}
 		Inventory inv = event.getInventory();
 		if(ChatColor.stripColor(inv.getName()).contains("'s mount")){
