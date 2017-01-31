@@ -25,12 +25,19 @@ public class CheckCooldowns extends RightClickSword implements Runnable{
 			Class<?> SwordClass;
 			try {
 				SwordClass = Class.forName("me.Haeseke1.Alliances.Weapons.Swords.Type." + sword.name, false, this.getClass().getClassLoader());
-		
 			try {
 				@SuppressWarnings("unchecked")
 				HashMap<Player,Integer> cooldown = (HashMap<Player, Integer>) SwordClass.getDeclaredField("cooldown").get(HashMap.class);
 				if(cooldown.containsKey(player)){
 			    	this.cooldown = cooldown.get(player);
+			    	if(sword.effect.equalsIgnoreCase("invisible")){
+			    	  if(cooldown.get(sword.player) == 10){
+			    		  for(Player onlinePlayer: Bukkit.getOnlinePlayers()){
+			    			  onlinePlayer.showPlayer(player);
+			    		  }
+			    	  }
+			    	}
+			    
 			    	if(this.cooldown == 0){
 			    		cooldown.remove(player);
 				    	SoundManager.playSoundToPlayer(Sound.NOTE_PLING, player);

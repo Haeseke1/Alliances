@@ -13,13 +13,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
+import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
 import me.Haeseke1.Alliances.Weapons.Swords.Type.SwordEffects;
 
 public class Sword{
-	
-	public static HashMap<Player,Integer> cooldowns = new HashMap<>();
 	
 	public String name;
 	public Player player;
@@ -63,7 +63,7 @@ public class Sword{
 		return;
 	}
 	
-	public void giveEffect(int duration,int strength,Sound sound) throws ClassNotFoundException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+	public void giveEffect(int duration,int strength,Sound sound, boolean hidePlayer) throws ClassNotFoundException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
 		type = SwordEffects.getEffect(SwordEffects.valueOf(name));
 		if(this.hasSwordName(player.getItemInHand())){
 		  if(this.itemHasEffect(player.getItemInHand(), this.effect)){
@@ -77,6 +77,15 @@ public class Sword{
 					player.addPotionEffect(new PotionEffect(type,duration*20,strength,true));
 					if(sound != null){ SoundManager.playSoundToPlayer(sound, player);}
 					cooldowns.put(player, this.cooldown);
+					if(hidePlayer){
+						for(Player player: Bukkit.getOnlinePlayers()){
+							Alliance al = AllianceManager.getAlliance(this.player);
+							if(al.equals(AllianceManager.getAlliance(player))){
+								continue;
+							}
+							player.hidePlayer(this.player);
+						}
+					}
 			  }
 		    }
 	}
