@@ -19,7 +19,6 @@ public class Settings {
 	public HashMap<Integer,Integer> skeletons = new HashMap<Integer, Integer>();
 	public HashMap<Integer,Integer> spiders = new HashMap<Integer, Integer>();
 	public HashMap<Integer,Integer> creepers = new HashMap<Integer, Integer>();
-	public HashMap<Integer,Integer> witches = new HashMap<Integer, Integer>();
 	public HashMap<Integer,Integer> zombie_pigmans = new HashMap<Integer, Integer>();
 	public HashMap<Integer,Integer> blazes = new HashMap<Integer, Integer>();
 	public HashMap<Integer,Integer> wither_skeletons = new HashMap<Integer, Integer>();
@@ -30,7 +29,7 @@ public class Settings {
 	public int level = 1;
 	
 	public final int MAX_LEVEL = 5;
-	public final int MAX_PLACING = 3;
+	public final int MAX_PLACING = 2;
 	
 	public Settings() {
 		
@@ -212,17 +211,6 @@ public class Settings {
 			item.setItemMeta(im);
 			return item;
 		case 5:
-			item = new ItemStack(Material.MONSTER_EGG, 1, (short) EntityType.WITCH.getTypeId());
-			if(witches.containsKey(level)){
-				item.setAmount(witches.get(level));
-			}else{
-				item.setAmount(0);
-			}
-			im = item.getItemMeta();
-			im.setDisplayName(ChatColor.GOLD + "Witch Lv" + level);
-			item.setItemMeta(im);
-			return item;
-		case 6:
 			item = new ItemStack(Material.MONSTER_EGG, 1, (short) EntityType.PIG_ZOMBIE.getTypeId());
 			if(zombie_pigmans.containsKey(level)){
 				item.setAmount(zombie_pigmans.get(level));
@@ -233,7 +221,7 @@ public class Settings {
 			im.setDisplayName(ChatColor.GOLD + "Zombie Pigmans Lv" + level);
 			item.setItemMeta(im);
 			return item;
-		case 7:
+		case 6:
 			item = new ItemStack(Material.MONSTER_EGG, 1, (short) EntityType.BLAZE.getTypeId());
 			if(blazes.containsKey(level)){
 				item.setAmount(blazes.get(level));
@@ -244,7 +232,7 @@ public class Settings {
 			im.setDisplayName(ChatColor.GOLD + "Blaze Lv" + level);
 			item.setItemMeta(im);
 			return item;
-		case 8:
+		case 7:
 			item = new ItemStack(Material.MONSTER_EGG, 1, (short) EntityType.SKELETON.getTypeId());
 			if(wither_skeletons.containsKey(level)){
 				item.setAmount(wither_skeletons.get(level));
@@ -255,7 +243,7 @@ public class Settings {
 			im.setDisplayName(ChatColor.GOLD + "Wither Skeleton Lv" + level);
 			item.setItemMeta(im);
 			return item;
-		case 9:
+		case 8:
 			item = new ItemStack(Material.MONSTER_EGG, 1, (short) EntityType.ENDERMAN.getTypeId());
 			if(endermans.containsKey(level)){
 				item.setAmount(endermans.get(level));
@@ -266,7 +254,7 @@ public class Settings {
 			im.setDisplayName(ChatColor.GOLD + "Enderman Lv" + level);
 			item.setItemMeta(im);
 			return item;
-		case 10:
+		case 9:
 			item = new ItemStack(Material.MONSTER_EGG, 1, (short) EntityType.WITHER.getTypeId());
 			if(withers.containsKey(level)){
 				item.setAmount(withers.get(level));
@@ -296,9 +284,6 @@ public class Settings {
 			amount += i;
 		}
 		for(int i : creepers.values()){
-			amount += i;
-		}
-		for(int i : witches.values()){
 			amount += i;
 		}
 		for(int i : zombie_pigmans.values()){
