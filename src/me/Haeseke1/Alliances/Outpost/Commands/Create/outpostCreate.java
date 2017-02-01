@@ -18,13 +18,13 @@ public class outpostCreate {
 			return;
 		}
 		Player player = (Player) sender;
-	if(player.hasPermission("Alliances.outpost.*")){
-		if(regionSelect.leftClick.containsKey(player) && regionSelect.rightClick.containsKey(player)){
-			InventoryEvents.createInventory(player);
-		}else{
-			String message = MessageManager.getMessage("Command_Error_Select_Region");
-			MessageManager.sendMessage(player, message);
+		if (player.hasPermission("Alliances.outpost.*")) {
+			if (regionSelect.leftClick.containsKey(player) && regionSelect.rightClick.containsKey(player)) {
+				InventoryEvents.createInventory(player);
+			} else {
+				String message = MessageManager.getMessage("Command_Error_Select_Region");
+				MessageManager.sendMessage(player, message);
+			}
 		}
 	}
-  }
 }

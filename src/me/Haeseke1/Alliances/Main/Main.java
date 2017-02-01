@@ -41,6 +41,56 @@ import me.Haeseke1.Alliances.Chat.ChatEvent;
 import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
 import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
+import me.Haeseke1.Alliances.CustomEntity.Blaze.BlazeLV1;
+import me.Haeseke1.Alliances.CustomEntity.Blaze.BlazeLV2;
+import me.Haeseke1.Alliances.CustomEntity.Blaze.BlazeLV3;
+import me.Haeseke1.Alliances.CustomEntity.Blaze.BlazeLV4;
+import me.Haeseke1.Alliances.CustomEntity.Blaze.BlazeLV5;
+import me.Haeseke1.Alliances.CustomEntity.Creeper.CreeperLV1;
+import me.Haeseke1.Alliances.CustomEntity.Creeper.CreeperLV2;
+import me.Haeseke1.Alliances.CustomEntity.Creeper.CreeperLV3;
+import me.Haeseke1.Alliances.CustomEntity.Creeper.CreeperLV4;
+import me.Haeseke1.Alliances.CustomEntity.Creeper.CreeperLV5;
+import me.Haeseke1.Alliances.CustomEntity.Enderman.EndermanLV1;
+import me.Haeseke1.Alliances.CustomEntity.Enderman.EndermanLV2;
+import me.Haeseke1.Alliances.CustomEntity.Enderman.EndermanLV3;
+import me.Haeseke1.Alliances.CustomEntity.Enderman.EndermanLV4;
+import me.Haeseke1.Alliances.CustomEntity.Enderman.EndermanLV5;
+import me.Haeseke1.Alliances.CustomEntity.Skeleton.SkeletonLV1;
+import me.Haeseke1.Alliances.CustomEntity.Skeleton.SkeletonLV2;
+import me.Haeseke1.Alliances.CustomEntity.Skeleton.SkeletonLV3;
+import me.Haeseke1.Alliances.CustomEntity.Skeleton.SkeletonLV4;
+import me.Haeseke1.Alliances.CustomEntity.Skeleton.SkeletonLV5;
+import me.Haeseke1.Alliances.CustomEntity.Spider.SpiderLV1;
+import me.Haeseke1.Alliances.CustomEntity.Spider.SpiderLV2;
+import me.Haeseke1.Alliances.CustomEntity.Spider.SpiderLV3;
+import me.Haeseke1.Alliances.CustomEntity.Spider.SpiderLV4;
+import me.Haeseke1.Alliances.CustomEntity.Spider.SpiderLV5;
+import me.Haeseke1.Alliances.CustomEntity.Witch.WitchLV1;
+import me.Haeseke1.Alliances.CustomEntity.Witch.WitchLV2;
+import me.Haeseke1.Alliances.CustomEntity.Witch.WitchLV3;
+import me.Haeseke1.Alliances.CustomEntity.Witch.WitchLV4;
+import me.Haeseke1.Alliances.CustomEntity.Witch.WitchLV5;
+import me.Haeseke1.Alliances.CustomEntity.Wither.WitherLV1;
+import me.Haeseke1.Alliances.CustomEntity.Wither.WitherLV2;
+import me.Haeseke1.Alliances.CustomEntity.Wither.WitherLV3;
+import me.Haeseke1.Alliances.CustomEntity.Wither.WitherLV4;
+import me.Haeseke1.Alliances.CustomEntity.Wither.WitherLV5;
+import me.Haeseke1.Alliances.CustomEntity.Wither_Skeleton.Wither_SkeletonLV1;
+import me.Haeseke1.Alliances.CustomEntity.Wither_Skeleton.Wither_SkeletonLV2;
+import me.Haeseke1.Alliances.CustomEntity.Wither_Skeleton.Wither_SkeletonLV3;
+import me.Haeseke1.Alliances.CustomEntity.Wither_Skeleton.Wither_SkeletonLV4;
+import me.Haeseke1.Alliances.CustomEntity.Wither_Skeleton.Wither_SkeletonLV5;
+import me.Haeseke1.Alliances.CustomEntity.Zombie.ZombieLV1;
+import me.Haeseke1.Alliances.CustomEntity.Zombie.ZombieLV2;
+import me.Haeseke1.Alliances.CustomEntity.Zombie.ZombieLV3;
+import me.Haeseke1.Alliances.CustomEntity.Zombie.ZombieLV4;
+import me.Haeseke1.Alliances.CustomEntity.Zombie.ZombieLV5;
+import me.Haeseke1.Alliances.CustomEntity.Zombie_Pigman.Zombie_PigmanLV1;
+import me.Haeseke1.Alliances.CustomEntity.Zombie_Pigman.Zombie_PigmanLV2;
+import me.Haeseke1.Alliances.CustomEntity.Zombie_Pigman.Zombie_PigmanLV3;
+import me.Haeseke1.Alliances.CustomEntity.Zombie_Pigman.Zombie_PigmanLV4;
+import me.Haeseke1.Alliances.CustomEntity.Zombie_Pigman.Zombie_PigmanLV5;
 import me.Haeseke1.Alliances.Economy.Commands.CoinC;
 import me.Haeseke1.Alliances.Economy.Events.BlockCommand;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
@@ -59,8 +109,13 @@ import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.Timer;
 import me.Haeseke1.Alliances.Outpost.Commands.Outpost;
+import me.Haeseke1.Alliances.PVE.PVEManager;
+import me.Haeseke1.Alliances.PVE.Commands.PVEC;
 import me.Haeseke1.Alliances.PVE.Events.BlockBreak_Place;
+import me.Haeseke1.Alliances.PVE.Events.PlayerMove;
 import me.Haeseke1.Alliances.PVE.Events.PlayerQuit;
+import me.Haeseke1.Alliances.PVE.Schedulers.Arena_Scheduler;
+import me.Haeseke1.Alliances.PVE.Schedulers.PVE_Scheduler;
 import me.Haeseke1.Alliances.ScoreBoard.Update.Counter;
 import me.Haeseke1.Alliances.Shop.ShopEvents;
 import me.Haeseke1.Alliances.Shop.ShopManager;
@@ -73,7 +128,16 @@ import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
 import me.Haeseke1.Alliances.regionSelect.Commands.Particle_Timer;
 import me.Haeseke1.Alliances.regionSelect.Commands.region;
+import net.minecraft.server.v1_8_R2.EntityBlaze;
+import net.minecraft.server.v1_8_R2.EntityCreeper;
+import net.minecraft.server.v1_8_R2.EntityEnderman;
+import net.minecraft.server.v1_8_R2.EntityPigZombie;
+import net.minecraft.server.v1_8_R2.EntitySkeleton;
+import net.minecraft.server.v1_8_R2.EntitySpider;
 import net.minecraft.server.v1_8_R2.EntityVillager;
+import net.minecraft.server.v1_8_R2.EntityWitch;
+import net.minecraft.server.v1_8_R2.EntityWither;
+import net.minecraft.server.v1_8_R2.EntityZombie;
 
 public class Main extends JavaPlugin {
 
@@ -93,6 +157,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration messageConfig;
 	public static FileConfiguration arenaConfig;
 	public static FileConfiguration settingsConfig;
+	public static FileConfiguration PVEConfig;
 	
 	
 	public static Main plugin;
@@ -180,6 +245,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new RightClickSword(), this);
 		pm.registerEvents(new PlayerQuit(), this);
 		pm.registerEvents(new BlockBreak_Place(), this);
+		pm.registerEvents(new PlayerMove(), this);
 	}
 
 	public void registerCommands() {
@@ -192,11 +258,72 @@ public class Main extends JavaPlugin {
 		getCommand("Town").setExecutor(new TownC());
 		getCommand("Arena").setExecutor(new ArenaCommand());
 		getCommand("Mount").setExecutor(new MountCommand());
+		getCommand("PVE").setExecutor(new PVEC());
 	}
 	
 	public void registerCustomEntitys(){
 		NMSUtil nmsUtil = new NMSUtil();
 		nmsUtil.registerEntity("Vendor", 120, EntityVillager.class, CustomEntityVillager.class);
+		nmsUtil.registerEntity("Zombie LV1", 54, EntityZombie.class, ZombieLV1.class);
+		nmsUtil.registerEntity("Zombie LV2", 54, EntityZombie.class, ZombieLV2.class);
+		nmsUtil.registerEntity("Zombie LV3", 54, EntityZombie.class, ZombieLV3.class);
+		nmsUtil.registerEntity("Zombie LV4", 54, EntityZombie.class, ZombieLV4.class);
+		nmsUtil.registerEntity("Zombie LV5", 54, EntityZombie.class, ZombieLV5.class);
+		
+		nmsUtil.registerEntity("Skeleton LV1", 51, EntitySkeleton.class, SkeletonLV1.class);
+		nmsUtil.registerEntity("Skeleton LV2", 51, EntitySkeleton.class, SkeletonLV2.class);
+		nmsUtil.registerEntity("Skeleton LV3", 51, EntitySkeleton.class, SkeletonLV3.class);
+		nmsUtil.registerEntity("Skeleton LV4", 51, EntitySkeleton.class, SkeletonLV4.class);
+		nmsUtil.registerEntity("Skeleton LV5", 51, EntitySkeleton.class, SkeletonLV5.class);
+		
+		nmsUtil.registerEntity("Blaze LV1", 61, EntityBlaze.class, BlazeLV1.class);
+		nmsUtil.registerEntity("Blaze LV2", 61, EntityBlaze.class, BlazeLV2.class);
+		nmsUtil.registerEntity("Blaze LV3", 61, EntityBlaze.class, BlazeLV3.class);
+		nmsUtil.registerEntity("Blaze LV4", 61, EntityBlaze.class, BlazeLV4.class);
+		nmsUtil.registerEntity("Blaze LV5", 61, EntityBlaze.class, BlazeLV5.class);
+		
+		nmsUtil.registerEntity("Creeper LV1", 50, EntityCreeper.class, CreeperLV1.class);
+		nmsUtil.registerEntity("Creeper LV2", 50, EntityCreeper.class, CreeperLV2.class);
+		nmsUtil.registerEntity("Creeper LV3", 50, EntityCreeper.class, CreeperLV3.class);
+		nmsUtil.registerEntity("Creeper LV4", 50, EntityCreeper.class, CreeperLV4.class);
+		nmsUtil.registerEntity("Creeper LV5", 50, EntityCreeper.class, CreeperLV5.class);
+		
+		nmsUtil.registerEntity("Enderman LV1", 58, EntityEnderman.class, EndermanLV1.class);
+		nmsUtil.registerEntity("Enderman LV2", 58, EntityEnderman.class, EndermanLV2.class);
+		nmsUtil.registerEntity("Enderman LV3", 58, EntityEnderman.class, EndermanLV3.class);
+		nmsUtil.registerEntity("Enderman LV4", 58, EntityEnderman.class, EndermanLV4.class);
+		nmsUtil.registerEntity("Enderman LV5", 58, EntityEnderman.class, EndermanLV5.class);
+		
+		nmsUtil.registerEntity("Spider LV1", 52, EntitySpider.class, SpiderLV1.class);
+		nmsUtil.registerEntity("Spider LV2", 52, EntitySpider.class, SpiderLV2.class);
+		nmsUtil.registerEntity("Spider LV3", 52, EntitySpider.class, SpiderLV3.class);
+		nmsUtil.registerEntity("Spider LV4", 52, EntitySpider.class, SpiderLV4.class);
+		nmsUtil.registerEntity("Spider LV5", 52, EntitySpider.class, SpiderLV5.class);
+		
+		nmsUtil.registerEntity("Witch LV1", 66, EntityWitch.class, WitchLV1.class);
+		nmsUtil.registerEntity("Witch LV2", 66, EntityWitch.class, WitchLV2.class);
+		nmsUtil.registerEntity("Witch LV3", 66, EntityWitch.class, WitchLV3.class);
+		nmsUtil.registerEntity("Witch LV4", 66, EntityWitch.class, WitchLV4.class);
+		nmsUtil.registerEntity("Witch LV5", 66, EntityWitch.class, WitchLV5.class);
+		
+		nmsUtil.registerEntity("Wither LV1", 64, EntityWither.class, WitherLV1.class);
+		nmsUtil.registerEntity("Wither LV2", 64, EntityWither.class, WitherLV2.class);
+		nmsUtil.registerEntity("Wither LV3", 64, EntityWither.class, WitherLV3.class);
+		nmsUtil.registerEntity("Wither LV4", 64, EntityWither.class, WitherLV4.class);
+		nmsUtil.registerEntity("Wither LV5", 64, EntityWither.class, WitherLV5.class);
+		
+		nmsUtil.registerEntity("Wither_Skeleton LV1", 64, EntitySkeleton.class, Wither_SkeletonLV1.class);
+		nmsUtil.registerEntity("Wither_Skeleton LV2", 64, EntitySkeleton.class, Wither_SkeletonLV2.class);
+		nmsUtil.registerEntity("Wither_Skeleton LV3", 64, EntitySkeleton.class, Wither_SkeletonLV3.class);
+		nmsUtil.registerEntity("Wither_Skeleton LV4", 64, EntitySkeleton.class, Wither_SkeletonLV4.class);
+		nmsUtil.registerEntity("Wither_Skeleton LV5", 64, EntitySkeleton.class, Wither_SkeletonLV5.class);
+		
+		nmsUtil.registerEntity("Zombie_Pigman LV1", 57, EntityPigZombie.class, Zombie_PigmanLV1.class);
+		nmsUtil.registerEntity("Zombie_Pigman LV2", 57, EntityPigZombie.class, Zombie_PigmanLV2.class);
+		nmsUtil.registerEntity("Zombie_Pigman LV3", 57, EntityPigZombie.class, Zombie_PigmanLV3.class);
+		nmsUtil.registerEntity("Zombie_Pigman LV4", 57, EntityPigZombie.class, Zombie_PigmanLV4.class);
+		nmsUtil.registerEntity("Zombie_Pigman LV5", 57, EntityPigZombie.class, Zombie_PigmanLV5.class);
+		
 	}
 	
 	
@@ -209,6 +336,8 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Counter(), 0, 10);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Updater(), 0, 5);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new CheckCooldowns(), 0, 20);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new PVE_Scheduler(), 20, 20);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Arena_Scheduler(), 20, 20);
 		java.util.Timer timer = new java.util.Timer(); 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);
@@ -228,6 +357,7 @@ public class Main extends JavaPlugin {
 		shopConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "shop.yml"), plugin);
 		arenaConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "arenas.yml"), plugin);
 		settingsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"settings.yml"), plugin);
+		PVEConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "PVE.yml"), plugin);
 	    try {
 			ArenaManager.loadArena();
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
@@ -239,6 +369,7 @@ public class Main extends JavaPlugin {
 		ShopManager.registerShops();
 		MessageManager.registerMessages(plugin);
 	    TownManager.registerTowns();
+	    PVEManager.registerPVE();
 	}
 
 	public static void saveAllCustomConfigs() {
@@ -246,6 +377,7 @@ public class Main extends JavaPlugin {
 		OutpostManager.saveOutpost();
 		ShopManager.saveShops();
 		TownManager.saveTowns();
+		PVEManager.savePVE();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
 			if(configFile.containsKey(entry.getKey())){
 				ConfigManager.saveCustomConfig(configFile.get(entry.getKey()), entry.getValue());

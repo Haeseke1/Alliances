@@ -1,21 +1,21 @@
-package me.Haeseke1.Alliances.CustomEntity;
+package me.Haeseke1.Alliances.CustomEntity.Wither_Skeleton;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
-import org.bukkit.entity.Villager;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import net.minecraft.server.v1_8_R2.EntityVillager;
+import net.minecraft.server.v1_8_R2.EntityWitch;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
-import net.minecraft.server.v1_8_R2.Items;
 import net.minecraft.server.v1_8_R2.World;
 
-public class CustomEntityVillager extends EntityVillager{
+public class Wither_SkeletonLV4 extends EntityWitch{
 
 	
-	public CustomEntityVillager(World world){
+	public Wither_SkeletonLV4(World world){
 		super(world);
 	}
 
@@ -32,24 +32,18 @@ public class CustomEntityVillager extends EntityVillager{
 	
 	
 	protected Item getLoot(){
-		return Items.DIAMOND;
+		return null;
 	}
 	
-	public static Villager spawn(Location location){
+	public static Skeleton spawn(Location location){
 		World mcWorld = (World) ((CraftWorld) location.getWorld()).getHandle();
-		final CustomEntityVillager customEntity = new CustomEntityVillager(mcWorld);
+		final Wither_SkeletonLV4 customEntity = new Wither_SkeletonLV4(mcWorld);
 		customEntity.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
 		((CraftLivingEntity) customEntity.getBukkitEntity()).setRemoveWhenFarAway(false);
 		mcWorld.addEntity(customEntity, SpawnReason.CUSTOM);
-		return (Villager) customEntity.getBukkitEntity();
+		Skeleton sk = (Skeleton) customEntity.getBukkitEntity();
+		sk.setSkeletonType(SkeletonType.WITHER);
+		return sk;
 	}
-	
-	@Override
-	protected void dropDeathLoot(boolean flag, int i) {
-		super.dropDeathLoot(false, i);
-	}
-	
-	
-	
 
 }

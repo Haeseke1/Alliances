@@ -161,6 +161,10 @@ Town_Cannot_Affort_Town: "Your alliance does not have enough coins! You need %pa
 Town_Cannot_Affort_Claim: "Your alliance does not have enough coins! You need %payment% coins!"
 
 
-
-
+#can use no vars
+Commands_PVE_CreateMain_Answer: "Succesfully created PVE"
+Commands_PVE_CreateMain_Already_Exist: "PVE already exist"
+Commands_PVE_Not_Exist: "PVE doesn't exist, create it first!"
+Commands_PVE_Arena_Exist: "This arena already exist!"
+Commands_PVE_CreateArena_Answer: "Added arena!"
 

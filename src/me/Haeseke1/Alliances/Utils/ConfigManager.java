@@ -70,11 +70,33 @@ public class ConfigManager {
 		}
 	}
 	
+	public static Location getLocationWithYaw_PitchFromConfig(FileConfiguration config, String path) throws EmptyLocationException {
+		if (config.getStringList(path) == null) {
+			throw new EmptyLocationException(path);
+		}
+		try{
+			Location loc = new Location(Bukkit.getWorld(config.getString(path + ".World")), config.getDouble(path + ".X"), config.getDouble(path + ".Y"), config.getDouble(path + ".Z"), (float) config.getDouble(path + ".Yaw"), (float) config.getDouble(path + ".Pitch"));
+			return loc;
+		}catch(Exception e){
+			MessageManager.sendAlertMessage("Location can't be fetched from " + path);
+			return null;
+		}
+	}
+	
 	public static void setLocationFromConfig(FileConfiguration config, String path, Location loc) {
 		config.set(path + ".World", loc.getWorld().getName());
 		config.set(path + ".X", loc.getX());
 		config.set(path + ".Y", loc.getY());
 		config.set(path + ".Z", loc.getZ());
+	}
+	
+	public static void setLocationWithYaw_PitchFromConfig(FileConfiguration config, String path, Location loc) {
+		config.set(path + ".World", loc.getWorld().getName());
+		config.set(path + ".X", loc.getX());
+		config.set(path + ".Y", loc.getY());
+		config.set(path + ".Z", loc.getZ());
+		config.set(path + ".Yaw", loc.getYaw());
+		config.set(path + ".Pitch", loc.getPitch());
 	}
 	
 	@SuppressWarnings("deprecation")

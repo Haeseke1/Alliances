@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 
 public class Arena {
 	
@@ -21,8 +22,16 @@ public class Arena {
 	public boolean playing = false;
 	public ArenaStatus as = ArenaStatus.MAINTENANCE;
 	
+	public String name;
 	
-	public Arena(Location loc1, Location loc2) {
+	public int countDown = 10;
+	public boolean startCountdown = false;
+	
+	public Group group;
+	
+	
+	public Arena(String name, Location loc1, Location loc2) {
+		this.name = name;
 		world = loc1.getWorld();
 		if(loc1.getBlockX() > loc2.getBlockX()){
 			xmin = loc2.getBlockX();
@@ -38,9 +47,11 @@ public class Arena {
 			zmin = loc1.getBlockZ();
 			zmax = loc2.getBlockZ();
 		}
+		PVE.main.arenas.add(this);
 	}
 	
-	public Arena(World world, int xmin, int xmax, int zmin, int zmax, List<Location> playerSpawns, List<Location> mobSpawns) {
+	public Arena(String name, World world, int xmin, int xmax, int zmin, int zmax, List<Location> playerSpawns, List<Location> mobSpawns) {
+		this.name = name;
 		this.world = world;
 		this.xmin = xmin;
 		this.xmax = xmax;
@@ -49,6 +60,7 @@ public class Arena {
 		this.mobSpawns = mobSpawns;
 		this.playerSpawns = playerSpawns;
 		checkStatus();
+		PVE.main.arenas.add(this);
 	}
 	
 	
@@ -59,9 +71,23 @@ public class Arena {
 		}
 	}
 	
+	public void startArena(Group group){
+		playing = true;
+		int i = 0;
+		for(Player player : group.members){
+			player.teleport(playerSpawns.get(i));
+			i++;
+		}
+		startCountdown = true;
+	}
 	
 	
+	public void stopArena(){
+		
+	}
 	
-	
+	public void fight(){
+		
+	}
 	
 }

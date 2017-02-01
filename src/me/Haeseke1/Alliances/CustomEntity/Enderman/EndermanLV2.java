@@ -1,21 +1,20 @@
-package me.Haeseke1.Alliances.CustomEntity;
+package me.Haeseke1.Alliances.CustomEntity.Enderman;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
-import org.bukkit.entity.Villager;
+import org.bukkit.entity.Enderman;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import net.minecraft.server.v1_8_R2.EntityVillager;
+import net.minecraft.server.v1_8_R2.EntityEnderman;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
-import net.minecraft.server.v1_8_R2.Items;
 import net.minecraft.server.v1_8_R2.World;
 
-public class CustomEntityVillager extends EntityVillager{
+public class EndermanLV2 extends EntityEnderman{
 
 	
-	public CustomEntityVillager(World world){
+	public EndermanLV2(World world){
 		super(world);
 	}
 
@@ -32,24 +31,16 @@ public class CustomEntityVillager extends EntityVillager{
 	
 	
 	protected Item getLoot(){
-		return Items.DIAMOND;
+		return null;
 	}
 	
-	public static Villager spawn(Location location){
+	public static Enderman spawn(Location location){
 		World mcWorld = (World) ((CraftWorld) location.getWorld()).getHandle();
-		final CustomEntityVillager customEntity = new CustomEntityVillager(mcWorld);
+		final EndermanLV2 customEntity = new EndermanLV2(mcWorld);
 		customEntity.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
 		((CraftLivingEntity) customEntity.getBukkitEntity()).setRemoveWhenFarAway(false);
 		mcWorld.addEntity(customEntity, SpawnReason.CUSTOM);
-		return (Villager) customEntity.getBukkitEntity();
+		return (Enderman) customEntity.getBukkitEntity();
 	}
-	
-	@Override
-	protected void dropDeathLoot(boolean flag, int i) {
-		super.dropDeathLoot(false, i);
-	}
-	
-	
-	
 
 }

@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Group {
 	
@@ -37,6 +40,21 @@ public class Group {
 		}
 	}
 	
-	
-	
+	public void sendPlayersMessage(String message, Player exception) {
+		if (exception != null) {
+			for (Player player : members) {
+				if (player != exception) {
+					MessageManager.sendMessage(player, message);
+				}
+			}
+			return;
+		}
+	}
+
+	public void sendPlayersMessage(String message) {
+		for (Player player : members) {
+			MessageManager.sendMessage(player, message);
+		}
+	}
+
 }

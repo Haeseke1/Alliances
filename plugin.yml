@@ -22,3 +22,4 @@ commands:
     aliases: [t]
   Mount:
     aliases: [mount,m]
+  PVE:

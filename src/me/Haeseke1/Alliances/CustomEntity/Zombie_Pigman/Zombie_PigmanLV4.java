@@ -1,21 +1,20 @@
-package me.Haeseke1.Alliances.CustomEntity;
+package me.Haeseke1.Alliances.CustomEntity.Zombie_Pigman;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
-import org.bukkit.entity.Villager;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import net.minecraft.server.v1_8_R2.EntityVillager;
+import net.minecraft.server.v1_8_R2.EntityPigZombie;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
-import net.minecraft.server.v1_8_R2.Items;
 import net.minecraft.server.v1_8_R2.World;
 
-public class CustomEntityVillager extends EntityVillager{
+public class Zombie_PigmanLV4 extends EntityPigZombie{
 
 	
-	public CustomEntityVillager(World world){
+	public Zombie_PigmanLV4(World world){
 		super(world);
 	}
 
@@ -32,24 +31,16 @@ public class CustomEntityVillager extends EntityVillager{
 	
 	
 	protected Item getLoot(){
-		return Items.DIAMOND;
+		return null;
 	}
 	
-	public static Villager spawn(Location location){
+	public static PigZombie spawn(Location location){
 		World mcWorld = (World) ((CraftWorld) location.getWorld()).getHandle();
-		final CustomEntityVillager customEntity = new CustomEntityVillager(mcWorld);
+		final Zombie_PigmanLV4 customEntity = new Zombie_PigmanLV4(mcWorld);
 		customEntity.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
 		((CraftLivingEntity) customEntity.getBukkitEntity()).setRemoveWhenFarAway(false);
 		mcWorld.addEntity(customEntity, SpawnReason.CUSTOM);
-		return (Villager) customEntity.getBukkitEntity();
+		return (PigZombie) customEntity.getBukkitEntity();
 	}
-	
-	@Override
-	protected void dropDeathLoot(boolean flag, int i) {
-		super.dropDeathLoot(false, i);
-	}
-	
-	
-	
 
 }

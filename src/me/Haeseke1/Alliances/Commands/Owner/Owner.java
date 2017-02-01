@@ -198,7 +198,7 @@ public class Owner {
 		}
 		
 		if(args[1].equalsIgnoreCase("setrank") && args.length > 3){
-			if(!PlayerManager.isPlayerOnline(args[1])){
+			if(!PlayerManager.isPlayerOnline(args[2])){
 				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
 				MessageManager.sendMessage(player, message);
 				return;

@@ -17,6 +17,8 @@ import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.PVE.Group;
+import me.Haeseke1.Alliances.PVE.GroupManager;
 import me.Haeseke1.Alliances.Town.Town;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -41,6 +43,11 @@ public class Alliance {
 	private List<UUID> admins = new ArrayList<UUID>();
 	
 	private List<ItemStack> outpostRewards = new ArrayList<ItemStack>();
+	
+	public boolean PVE = false;
+	public int PVE_amount = 0;
+	
+	public List<Player> PVE_players = new ArrayList<Player>();
 	
 	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type) {
 		mMembers = new HashMap<UUID, String>();
@@ -248,6 +255,26 @@ public class Alliance {
 
 	public void setNameWithColorCodes(String nameWithColorCodes) {
 		this.nameWithColorCodes = nameWithColorCodes;
+	}
+	
+	public void addPVE_Player(Player player){
+		PVE_players.add(player);
+		if(PVE_players.size() == PVE_amount){
+			new Group(PVE_players, PVE_players.get(0));
+			PVE = false;
+			PVE_players = new ArrayList<Player>();
+		}
+	}
+	
+	public boolean removePVE_Player(Player player){
+		if(PVE_players.contains(player)){
+			PVE_players.remove(player);
+			if(PVE_players.isEmpty()){
+				PVE = false;
+			}
+			return true;
+		}
+		return false;
 	}
 	
 }
