@@ -104,13 +104,6 @@ import me.Haeseke1.Alliances.Outpost.OutpostEvents;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Outpost.Timer;
 import me.Haeseke1.Alliances.Outpost.Commands.Outpost;
-import me.Haeseke1.Alliances.PVE.PVEManager;
-import me.Haeseke1.Alliances.PVE.Commands.PVEC;
-import me.Haeseke1.Alliances.PVE.Events.BlockBreak_Place;
-import me.Haeseke1.Alliances.PVE.Events.PlayerMove;
-import me.Haeseke1.Alliances.PVE.Events.PlayerQuit;
-import me.Haeseke1.Alliances.PVE.Schedulers.Arena_Scheduler;
-import me.Haeseke1.Alliances.PVE.Schedulers.PVE_Scheduler;
 import me.Haeseke1.Alliances.ScoreBoard.Update.Counter;
 import me.Haeseke1.Alliances.Shop.ShopEvents;
 import me.Haeseke1.Alliances.Shop.ShopManager;
@@ -239,9 +232,6 @@ public class Main extends JavaPlugin {
 		 * Swords events
 		 */
 		pm.registerEvents(new RightClickSword(), this);
-		pm.registerEvents(new PlayerQuit(), this);
-		pm.registerEvents(new BlockBreak_Place(), this);
-		pm.registerEvents(new PlayerMove(), this);
 		/*
 		 * Teleport request events
 		 */
@@ -258,7 +248,6 @@ public class Main extends JavaPlugin {
 		getCommand("Town").setExecutor(new TownC());
 		getCommand("Arena").setExecutor(new ArenaCommand());
 		getCommand("Mount").setExecutor(new MountCommand());
-		getCommand("PVE").setExecutor(new PVEC());
 	}
 	
 	public void registerCustomEntitys(){
@@ -330,8 +319,6 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Counter(), 0, 10);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Updater(), 0, 5);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new CheckCooldowns(), 0, 20);
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new PVE_Scheduler(), 20, 20);
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Arena_Scheduler(), 20, 20);
 		java.util.Timer timer = new java.util.Timer(); 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);
@@ -363,7 +350,6 @@ public class Main extends JavaPlugin {
 		ShopManager.registerShops();
 		MessageManager.registerMessages(plugin);
 	    TownManager.registerTowns();
-	    PVEManager.registerPVE();
 	}
 
 	public static void saveAllCustomConfigs() {
@@ -371,7 +357,6 @@ public class Main extends JavaPlugin {
 		OutpostManager.saveOutpost();
 		ShopManager.saveShops();
 		TownManager.saveTowns();
-		PVEManager.savePVE();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
 			if(configFile.containsKey(entry.getKey())){
 				ConfigManager.saveCustomConfig(configFile.get(entry.getKey()), entry.getValue());

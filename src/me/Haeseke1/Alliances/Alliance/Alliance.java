@@ -17,8 +17,6 @@ import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Main.Main;
-import me.Haeseke1.Alliances.PVE.Group;
-import me.Haeseke1.Alliances.PVE.GroupManager;
 import me.Haeseke1.Alliances.Town.Town;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -260,7 +258,7 @@ public class Alliance {
 	public void addPVE_Player(Player player){
 		PVE_players.add(player);
 		if(PVE_players.size() == PVE_amount){
-			new Group(PVE_players, PVE_players.get(0));
+			//new Group(PVE_players, PVE_players.get(0));
 			PVE = false;
 			PVE_players = new ArrayList<Player>();
 		}

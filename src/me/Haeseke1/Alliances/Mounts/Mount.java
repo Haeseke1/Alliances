@@ -9,12 +9,7 @@ import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Horse.Variant;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-
 import me.Haeseke1.Alliances.Arena.ArenaManager;
-import me.Haeseke1.Alliances.CustomEntity.Horse.Elite;
-import me.Haeseke1.Alliances.CustomEntity.Horse.Prince;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -36,38 +31,51 @@ public class Mount {
 	  if(ArenaManager.isInArena(owner)){ MessageManager.sendMessage(owner, "&cYou can't mount here"); return;}
 		World world = owner.getWorld();
 		Entity entity = world.spawnEntity(owner.getLocation(), type);
-    	horse.setAdult();
-    	horse.setTamed(true);
-    	horse.setPassenger(owner);
 	    switch(this.mountType){
 	    case "elite":
 	    	this.name = ChatColor.AQUA + this.owner.getName() + "'s mount";
-	    	Horse elite = Elite.spawn(owner.getLocation());
+	    	Horse elite = (Horse) this.owner.getWorld().spawnEntity(this.owner.getLocation(), EntityType.HORSE);
+	    	elite.setAdult();
+	    	elite.setTamed(true);
+	    	elite.setPassenger(owner);
 	    	elite.getInventory().setArmor(new ItemStack(Material.DIAMOND_BARDING));
 	    	elite.setVariant(Variant.HORSE);
+	    	elite.setOwner(owner);
+		    elite.getInventory().setSaddle(new ItemStack(Material.SADDLE));
+		    elite.setCustomName(this.name);
+		    elite.setCustomNameVisible(true);
+		    this.horse = elite;
 	    	break;
 	    case "prince":
-	    	Horse prince = Prince.spawn(owner.getLocation());
+	    	Horse prince = (Horse) this.owner.getWorld().spawnEntity(this.owner.getLocation(), EntityType.HORSE);
+	    	prince.setAdult();
+	    	prince.setTamed(true);
+	    	prince.setPassenger(owner);
 	    	this.name = ChatColor.GOLD + this.owner.getName() + "'s mount";
 	    	prince.getInventory().setArmor(new ItemStack(Material.GOLD_BARDING));
 	    	prince.setVariant(Variant.HORSE);
+	    	prince.setOwner(owner);
+		    prince.getInventory().setSaddle(new ItemStack(Material.SADDLE));
+		    prince.setCustomName(this.name);
+		    prince.setCustomNameVisible(true);
+		    this.horse = prince;
 	    	break;
 	    case "donkey":
-	    	Horse horse = Elite.spawn(owner.getLocation());
+	    	Horse horse = (Horse) this.owner.getWorld().spawnEntity(this.owner.getLocation(), EntityType.HORSE);
 	    	this.name = ChatColor.GRAY + this.owner.getName() + "'s mount";
 	    	horse.getInventory().setArmor(new ItemStack(Material.CHEST));
 	    	horse.setVariant(Variant.DONKEY);
 	    	horse.setCarryingChest(true);
+	    	horse.setOwner(owner);
+		    horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
+		    horse.setCustomName(this.name);
+		    horse.setCustomNameVisible(true);
+		    this.horse = horse;
 	    	break;
 	    default:
 	    	this.name = null;
 	    	break;
 	    }
-    	horse.setOwner(owner);
-	    horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
-	    horse.setCustomName(this.name);
-	    horse.setCustomNameVisible(true);
-	    this.horse = horse;
 	}
 	
 	public void removeMount(){
