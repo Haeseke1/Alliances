@@ -10,6 +10,7 @@ import org.bukkit.FireworkEffect.Type;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -78,7 +79,7 @@ public class WinnerCountdown extends BukkitRunnable{
          }else{
          	for(UUID playerUUID: mArena.getPlayersInArena().keySet()){
          	  Player player = Bukkit.getPlayer(playerUUID);
-			  player.teleport(ArenaManager.pastLocations.get(playerUUID));
+			  player.teleport(ArenaManager.pastLocations.get(playerUUID),TeleportCause.ENDER_PEARL);
 			  try {
 				ArenaManager.setStatus(mArena.getName(), "PLAYABLE", null);
 			} catch (EmptyLocationException e) {

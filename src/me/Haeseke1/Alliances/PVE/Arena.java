@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 public class Arena {
 	
@@ -80,7 +81,7 @@ public class Arena {
 		busy = true;
 		int i = 0;
 		for(Player player : group.members){
-			player.teleport(playerSpawns.get(i));
+			player.teleport(playerSpawns.get(i),TeleportCause.ENDER_PEARL);
 			i++;
 		}
 		this.group = group;
