@@ -120,6 +120,7 @@ import me.Haeseke1.Alliances.ScoreBoard.Update.Counter;
 import me.Haeseke1.Alliances.Shop.ShopEvents;
 import me.Haeseke1.Alliances.Shop.ShopManager;
 import me.Haeseke1.Alliances.Shop.Commands.ShopC;
+import me.Haeseke1.Alliances.Teleport.Events.checkTPACommand;
 import me.Haeseke1.Alliances.Town.TownEvents;
 import me.Haeseke1.Alliances.Town.TownManager;
 import me.Haeseke1.Alliances.Town.Commands.TownC;
@@ -246,6 +247,10 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new PlayerQuit(), this);
 		pm.registerEvents(new BlockBreak_Place(), this);
 		pm.registerEvents(new PlayerMove(), this);
+		/*
+		 * Teleport request events
+		 */
+		pm.registerEvents(new checkTPACommand(), this);
 	}
 
 	public void registerCommands() {

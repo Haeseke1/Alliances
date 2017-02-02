@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -85,7 +86,7 @@ public class Arena {
 	public void teleportToPast(){
 		for(UUID playerUUID: mPlayersInArena.keySet()){
 			Player player = Bukkit.getPlayer(playerUUID);
-			player.teleport(ArenaManager.pastLocations.get(playerUUID));
+			player.teleport(ArenaManager.pastLocations.get(playerUUID),TeleportCause.ENDER_PEARL);
 		}
 	}
 

@@ -23,18 +23,12 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Main.Main;
-import me.Haeseke1.Alliances.Outpost.Type.Blacksmith;
-import me.Haeseke1.Alliances.Outpost.Type.Dock;
-import me.Haeseke1.Alliances.Outpost.Type.Farm;
-import me.Haeseke1.Alliances.Outpost.Type.God;
-import me.Haeseke1.Alliances.Outpost.Type.Magic_Tower;
-import me.Haeseke1.Alliances.Outpost.Type.Mine;
-import me.Haeseke1.Alliances.Outpost.Type.Mob_Farm;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
@@ -207,7 +201,7 @@ public class ArenaEvents implements Listener{
     	if(ArenaManager.isInArena(player)){
     	  Arena arena = ArenaManager.getArenaOfPlayer(player);
     	   if(ArenaManager.checkStatus(arena.getName(), "COUNTING")){
-    		   player.teleport(ArenaManager.pastLocations.get(player.getUniqueId()));
+    		   player.teleport(ArenaManager.pastLocations.get(player.getUniqueId()),TeleportCause.ENDER_PEARL);
     		   ArenaManager.pastLocations.remove(player.getUniqueId());
     		   arena.getPlayersInArena().remove(player.getUniqueId());
     		   arena.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.RED + " left! So we stopped the game");
@@ -256,6 +250,12 @@ public class ArenaEvents implements Listener{
 	@EventHandler
 	public void onPreCommand(PlayerCommandPreprocessEvent event){
 		if(ArenaManager.isInArena(event.getPlayer())){
+			if(event.getMessage().split(" ")[0].equalsIgnoreCase("/a")
+			 || event.getMessage().split(" ")[0].equalsIgnoreCase("/arena")){
+              event.setCancelled(false);
+              return;
+			}
+			MessageManager.sendMessage(event.getPlayer(), "&cYou can only use arena commands while you're competing in a fight");
 			event.setCancelled(true);
 		}
 	}

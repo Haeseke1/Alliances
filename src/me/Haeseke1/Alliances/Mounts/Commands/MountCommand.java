@@ -25,14 +25,14 @@ public class MountCommand implements CommandExecutor{
 		if(args.length == 0){
 			player.sendMessage(MessageManager.infoColorCode + "===== Mounts =====");
 			player.sendMessage(MessageManager.infoColorCode + "Commands:");
-			player.sendMessage(MessageManager.infoColorCode + "/mount <donkey/horse> #Mount on your very own horse or donkey");
+			player.sendMessage(MessageManager.infoColorCode + "/mount <donkey/prince/elite> #Mount on your very own horse or donkey");
 			return false;
 		}
 		if(args.length == 1 && !(args[0].equalsIgnoreCase("dispawn"))){
 			if(mounts.containsKey(player)){ MessageManager.sendMessage(player, ChatColor.RED + "You already have a mount"); return false;}
 			String type = args[0].toLowerCase();
 			switch(type){
-			case "diamond":
+			case "elite":
 				if(player.hasPermission("mount.diamond")){
 				Mount mount = new Mount(player,type);	
 				if(mount.mobIsSpawned()){
@@ -46,7 +46,7 @@ public class MountCommand implements CommandExecutor{
 				}
 				MessageManager.sendMessage(player, ChatColor.RED + "You don't have permissions to execute this command");
 				break;
-			case "gold":
+			case "prince":
 				if(player.hasPermission("mount.gold")){
 					Mount mount = new Mount(player,type);	
 					if(mount.mobIsSpawned()){

@@ -15,6 +15,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
@@ -120,7 +121,7 @@ public class ArenaManager {
 		      ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(), ChatColor.stripColor(AllianceManager.getAlliance(player).getName()));
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena");
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
-			  player.teleport(ArenaManager.getLobby(arenaname));
+			  player.teleport(ArenaManager.getLobby(arenaname),TeleportCause.ENDER_PEARL);
 			  startArena(arenaname.toLowerCase());
 			  if(checkSign(arenaname)){
 			  ArenaManager.updateSign(ArenaManager.getSign(arenaname), arena);
@@ -136,7 +137,7 @@ public class ArenaManager {
 			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team1.alliance", ChatColor.stripColor(alliance.getName()));
 			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(),  ChatColor.stripColor(AllianceManager.getAlliance(player).getName()));
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
-			  player.teleport(ArenaManager.getLobby(arenaname));
+			  player.teleport(ArenaManager.getLobby(arenaname),TeleportCause.ENDER_PEARL);
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena " + ChatColor.GOLD + "[" + arena.getCurrentSize() + "/" + arena.getSize() + "]");
 			  startArena(arenaname.toLowerCase());
 			  if(checkSign(arenaname)){
@@ -149,7 +150,7 @@ public class ArenaManager {
 			  arenaConfig.set("Arenas." + arenaname.toLowerCase() + ".spawns.team2.alliance", ChatColor.stripColor(alliance.getName()));
 			  ArenaManager.getArenaByName(arenaname).getPlayersInArena().put(player.getUniqueId(),  ChatColor.stripColor(AllianceManager.getAlliance(player).getName()));
 			  pastLocations.put(player.getUniqueId(), player.getLocation());
-			  player.teleport(ArenaManager.getLobby(arenaname));
+			  player.teleport(ArenaManager.getLobby(arenaname),TeleportCause.ENDER_PEARL);
 			  MessageManager.sendMessage(player, ChatColor.GREEN + "You've successfully joined an arena " + ChatColor.GOLD + "[" + arena.getCurrentSize() + "/" + arena.getSize() + "]");
 			  startArena(arenaname.toLowerCase());
 			  if(checkSign(arenaname)){
@@ -363,11 +364,11 @@ public class ArenaManager {
 		 int count1 = 0;
 		 int count2 = 0;
 		 if(TeamManager.getTeamNumber(al, arenaname) == 1){
-			 player.teleport(ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".spawns.team1." + count1));
+			 player.teleport(ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".spawns.team1." + count1),TeleportCause.ENDER_PEARL);
 			 count1 ++;
 		 }
 		 if(TeamManager.getTeamNumber(al, arenaname) == 2){
-			 player.teleport(ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".spawns.team2." + count2));
+			 player.teleport(ConfigManager.getLocationFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".spawns.team2." + count2),TeleportCause.ENDER_PEARL);
 			 count2 ++;
 		 }
 		 player.setGameMode(GameMode.SURVIVAL);
@@ -387,7 +388,7 @@ public class ArenaManager {
   public static void kickOnDeath(Player player){
 	  Alliance al = AllianceManager.getAlliance(player);
 	  Arena arena = ArenaManager.getArenaOfPlayer(player);
-	  player.teleport(pastLocations.get(player.getUniqueId()));
+	  player.teleport(pastLocations.get(player.getUniqueId()),TeleportCause.ENDER_PEARL);
 	  arena.getPlayersInArena().remove(player.getUniqueId());
 	  pastLocations.remove(player.getUniqueId());
 	  player.setHealth(player.getMaxHealth());
