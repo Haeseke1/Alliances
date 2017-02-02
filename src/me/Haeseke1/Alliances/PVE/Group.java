@@ -38,9 +38,6 @@ public class Group {
 		PVE.main.removeQueue(this);
 		for(Player player : members){
 			player.teleport(memberLocations.get(player),TeleportCause.ENDER_PEARL);
-			player.setGameMode(GameMode.SURVIVAL);
-			player.setFlying(false);
-			player.setAllowFlight(false);
 		}
 	}
 	
