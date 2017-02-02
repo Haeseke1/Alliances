@@ -11,14 +11,19 @@ import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import net.minecraft.server.v1_8_R2.Entity;
+import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityLiving;
 import net.minecraft.server.v1_8_R2.EntitySkeleton;
+import net.minecraft.server.v1_8_R2.EntityVillager;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.ItemStack;
 import net.minecraft.server.v1_8_R2.Items;
 import net.minecraft.server.v1_8_R2.MobEffect;
 import net.minecraft.server.v1_8_R2.MobEffectList;
+import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R2.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R2.World;
 
@@ -40,6 +45,8 @@ public class Wither_SkeletonLV5 extends EntitySkeleton{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 	}
 	
 	protected void initAttributes(){

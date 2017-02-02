@@ -205,6 +205,20 @@ public class PVEC implements CommandExecutor{
 			return false;
 		}
 		
+		if(args[0].equalsIgnoreCase("ready")){
+			if(!GroupManager.hasGroup(player)){
+				player.sendMessage(ChatColor.RED + "You are not in a group!");
+				return false;
+			}
+			Group group = GroupManager.getGroup(player);
+			if(!group.owner.equals(player)){
+				player.sendMessage(ChatColor.RED + "You are not owner of this group!");
+				return false;
+			}
+			PVE.main.addQueue(group);
+			return false;
+		}
+		
 		MessageManager.sendMessage(player, wrong_arg);
 		return false;
 	}

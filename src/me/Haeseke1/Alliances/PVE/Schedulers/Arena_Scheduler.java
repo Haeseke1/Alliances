@@ -1,6 +1,7 @@
 package me.Haeseke1.Alliances.PVE.Schedulers;
 
 import me.Haeseke1.Alliances.PVE.Arena;
+import me.Haeseke1.Alliances.PVE.Mob_Manager;
 import me.Haeseke1.Alliances.PVE.PVE;
 import net.md_5.bungee.api.ChatColor;
 
@@ -22,6 +23,7 @@ public class Arena_Scheduler implements Runnable{
 				arena.countDown -= 1;
 			}
 		}
+		Mob_Manager.control_Mobs();
 	}
 	
 	

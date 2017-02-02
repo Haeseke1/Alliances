@@ -9,11 +9,20 @@ import org.bukkit.craftbukkit.v1_8_R2.util.UnsafeList;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
+import net.minecraft.server.v1_8_R2.EntityHuman;
+import net.minecraft.server.v1_8_R2.EntityVillager;
 import net.minecraft.server.v1_8_R2.EntityZombie;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.ItemStack;
 import net.minecraft.server.v1_8_R2.Items;
+import net.minecraft.server.v1_8_R2.PathfinderGoalFloat;
+import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R2.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_8_R2.PathfinderGoalMoveThroughVillage;
+import net.minecraft.server.v1_8_R2.PathfinderGoalMoveTowardsRestriction;
+import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_8_R2.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R2.World;
 
@@ -35,6 +44,9 @@ public class ZombieLV5 extends EntityZombie{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, 1.0D, false));
+        this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 	}
 
 	

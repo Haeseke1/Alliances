@@ -12,10 +12,17 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import net.minecraft.server.v1_8_R2.Enchantment;
 import net.minecraft.server.v1_8_R2.EnchantmentManager;
 import net.minecraft.server.v1_8_R2.EntityArrow;
+import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityLiving;
 import net.minecraft.server.v1_8_R2.EntitySkeleton;
+import net.minecraft.server.v1_8_R2.EntityVillager;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
+import net.minecraft.server.v1_8_R2.ItemStack;
+import net.minecraft.server.v1_8_R2.Items;
+import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R2.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R2.World;
 
@@ -37,8 +44,21 @@ public class SkeletonLV5 extends EntitySkeleton{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 	}
 
+	@Override
+	protected float bC() {
+		this.setEquipment(0, new ItemStack(Items.BOW));
+		this.setEquipment(1, new ItemStack(Items.DIAMOND_BOOTS));
+		this.setEquipment(2, new ItemStack(Items.DIAMOND_LEGGINGS));
+		this.setEquipment(3, new ItemStack(Items.DIAMOND_CHESTPLATE));
+		this.setEquipment(4, new ItemStack(Items.DIAMOND_HELMET));
+		return super.bC();
+	}
+	
+	
     public void a(EntityLiving entityliving, float f) {
     	for(int a = 0; a < 6; a++){
         	EntityArrow entityarrow = new EntityArrow(this.world, this, entityliving, 1.6F, (float) (14 - this.world.getDifficulty().a() * 4));

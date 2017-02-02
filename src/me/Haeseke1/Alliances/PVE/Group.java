@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -38,6 +37,9 @@ public class Group {
 		PVE.main.removeQueue(this);
 		for(Player player : members){
 			player.teleport(memberLocations.get(player));
+			player.setGameMode(GameMode.SURVIVAL);
+			player.setFlying(false);
+			player.setAllowFlight(false);
 		}
 	}
 	

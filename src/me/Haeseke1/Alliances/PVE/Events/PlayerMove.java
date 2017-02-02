@@ -15,7 +15,7 @@ public class PlayerMove implements Listener{
 			return;
 		}
 		for(Arena arena : PVE.main.arenas){
-			if(arena.playing && arena.startCountdown){	
+			if(arena.busy && arena.startCountdown){	
 				if(arena.group.members.contains(event.getPlayer())){
 					event.setCancelled(true);
 				}

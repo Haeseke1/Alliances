@@ -16,7 +16,7 @@ public class PVE_Scheduler implements Runnable{
 			return;
 		}
 		for(Arena arena : pve.arenas){
-			if(arena.as.equals(ArenaStatus.READY) && !arena.playing){
+			if(arena.as.equals(ArenaStatus.READY) && !arena.busy){
 				arena.startArena(pve.queue.get(0));
 				pve.queue.remove(0);
 				return;

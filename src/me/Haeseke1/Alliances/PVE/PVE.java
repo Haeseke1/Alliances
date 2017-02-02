@@ -24,10 +24,12 @@ public class PVE {
 	}
 	
 	public void addQueue(Group group){
-		if(group.settings.mobCount() >= 5 + 5 * group.members.size() && group.settings.mobCount() <= 20 + 5 * group.members.size()){
+		if(group.settings.mobCount() >= 5 + 5 * (group.members.size() - 1) && group.settings.mobCount() <= 20 + 5 * (group.members.size() - 1)){
 			queue.add(group);
+			group.sendPlayersMessage(ChatColor.GOLD + "You are in the queue!");	
+			return;
 		}
-		group.sendPlayersMessage(ChatColor.RED + "Your total enemy's must be between " + 5 + 5 * group.members.size() + " and " + 20 + 5 * group.members.size());
+		group.sendPlayersMessage(ChatColor.RED + "Your total enemy's must be between " + (5 + 5 * (group.members.size() - 1)) + " and " + (20 + 5 * (group.members.size() - 1)));
 	}
 	
 	public boolean removeQueue(Group group){

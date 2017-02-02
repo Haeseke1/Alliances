@@ -271,35 +271,140 @@ public class Settings {
 		return null;
 	}
 	
+	public void changeMobCount(int i, int change){
+		switch(i){
+		case 1:
+			if(zombies.containsKey(level)){
+				if(zombies.get(level) + change >= 0 && zombies.get(level) + change <= 64){
+					zombies.replace(level, zombies.get(level) + change);
+				}
+			}else{
+				if(change >= 0){
+					zombies.put(level, change);
+				}
+			}
+			break;
+		case 2:
+			if(skeletons.containsKey(level)){
+				if(skeletons.get(level) + change >= 0 && skeletons.get(level) + change <= 64){
+					skeletons.replace(level, skeletons.get(level) + change);
+				}
+			}else{
+				if(change >= 0){
+					skeletons.put(level, change);
+				}
+			}
+			break;
+		case 3:
+			if(spiders.containsKey(level)){
+				if(spiders.get(level) + change >= 0 && spiders.get(level) + change <= 64){
+					spiders.replace(level, spiders.get(level) + change);
+				}
+			}else{
+				if(change >= 0){
+					spiders.put(level, change);
+				}
+			}
+			break;
+		case 4:
+			if(creepers.containsKey(level)){
+				if(creepers.get(level) + change >= 0 && creepers.get(level) + change <= 64){
+					creepers.replace(level, creepers.get(level) + change);
+				}
+			}else{
+				if(change >= 0){
+					creepers.put(level, change);
+				}
+			}
+			break;
+		case 5:
+			if(zombie_pigmans.containsKey(level)){
+				if(zombie_pigmans.get(level) + change >= 0 && zombie_pigmans.get(level) + change <= 64){
+					zombie_pigmans.replace(level, zombie_pigmans.get(level) + change);
+				}
+			}else{
+				if(change >= 0){
+					zombie_pigmans.put(level, change);
+				}
+			}
+			break;
+		case 6:
+			if(blazes.containsKey(level)){
+				if(blazes.get(level) + change >= 0 && blazes.get(level) + change <= 64){
+					blazes.replace(level, blazes.get(level) + change);
+				}
+			}else{
+				if(change >= 0){
+					blazes.put(level, change);
+				}
+			}
+			break;
+		case 7:
+			if(wither_skeletons.containsKey(level)){
+				if(wither_skeletons.get(level) + change >= 0 && wither_skeletons.get(level) + change <= 64){
+					wither_skeletons.replace(level, wither_skeletons.get(level) + change);
+				}
+			}else{
+				if(change >= 0){
+					wither_skeletons.put(level, change);
+				}
+			}
+			break;
+		case 8:
+			if(endermans.containsKey(level)){
+				if(endermans.get(level) + change >= 0 && endermans.get(level) + change <= 64){
+					endermans.replace(level, endermans.get(level) + change);
+				}
+			}else{
+				if(change >= 0){
+					endermans.put(level, change);
+				}
+			}
+			break;
+		case 9:
+			if(withers.containsKey(level)){
+				if(withers.get(level) + change >= 0 && withers.get(level) + change <= 64){
+					withers.replace(level, withers.get(level) + change);
+				}
+			}else{
+				if(change >= 0){
+					withers.put(level, change);
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
 	
 	public int mobCount(){
 		int amount = 0;
 		for(int i : zombies.values()){
-			amount += i;
+			amount = amount + i;
 		}
 		for(int i : skeletons.values()){
-			amount += i;
+			amount = amount + i;
 		}
 		for(int i : spiders.values()){
-			amount += i;
+			amount = amount + i;
 		}
 		for(int i : creepers.values()){
-			amount += i;
+			amount = amount + i;
 		}
 		for(int i : zombie_pigmans.values()){
-			amount += i;
+			amount = amount + i;
 		}
 		for(int i : blazes.values()){
-			amount += i;
+			amount = amount + i;
 		}
 		for(int i : wither_skeletons.values()){
-			amount += i;
+			amount = amount + i;
 		}
 		for(int i : endermans.values()){
-			amount += i;
+			amount = amount + i;
 		}
 		for(int i : withers.values()){
-			amount += i;
+			amount = amount + i;
 		}
 		return amount;
 	}

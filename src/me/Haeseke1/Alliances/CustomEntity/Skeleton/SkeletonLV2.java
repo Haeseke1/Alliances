@@ -13,10 +13,15 @@ import org.bukkit.event.entity.EntityCombustEvent;
 import net.minecraft.server.v1_8_R2.Enchantment;
 import net.minecraft.server.v1_8_R2.EnchantmentManager;
 import net.minecraft.server.v1_8_R2.EntityArrow;
+import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityLiving;
 import net.minecraft.server.v1_8_R2.EntitySkeleton;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
+import net.minecraft.server.v1_8_R2.ItemStack;
+import net.minecraft.server.v1_8_R2.Items;
+import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R2.World;
 
@@ -38,8 +43,19 @@ public class SkeletonLV2 extends EntitySkeleton{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 	}
 	
+	@Override
+	protected float bC() {
+		this.setEquipment(0, new ItemStack(Items.BOW));
+		this.setEquipment(1, new ItemStack(Items.LEATHER_BOOTS));
+		this.setEquipment(2, new ItemStack(Items.LEATHER_LEGGINGS));
+		this.setEquipment(3, new ItemStack(Items.LEATHER_CHESTPLATE));
+		this.setEquipment(4, new ItemStack(Items.LEATHER_HELMET));
+		return super.bC();
+	}
 	
     public void a(EntityLiving entityliving, float f) {
     	for(int a = 0; a < 2; a++){

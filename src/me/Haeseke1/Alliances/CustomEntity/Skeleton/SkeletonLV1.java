@@ -9,8 +9,13 @@ import org.bukkit.craftbukkit.v1_8_R2.util.UnsafeList;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
+import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntitySkeleton;
 import net.minecraft.server.v1_8_R2.Item;
+import net.minecraft.server.v1_8_R2.ItemStack;
+import net.minecraft.server.v1_8_R2.Items;
+import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R2.World;
 
@@ -32,6 +37,8 @@ public class SkeletonLV1 extends EntitySkeleton{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 	}
 	
 	
@@ -39,6 +46,11 @@ public class SkeletonLV1 extends EntitySkeleton{
 		super.initAttributes();
 	}
 	
+	@Override
+	protected float bC() {
+		this.setEquipment(0, new ItemStack(Items.BOW));
+		return super.bC();
+	}
 	
 	@Override
 	protected void dropDeathLoot(boolean flag, int i) {

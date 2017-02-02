@@ -17,11 +17,20 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import me.Haeseke1.Alliances.CustomEntity.Zombie.ZombieLV3;
 import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_8_R2.DamageSource;
+import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityPigZombie;
+import net.minecraft.server.v1_8_R2.EntityVillager;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.ItemStack;
 import net.minecraft.server.v1_8_R2.Items;
+import net.minecraft.server.v1_8_R2.PathfinderGoalFloat;
+import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R2.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_8_R2.PathfinderGoalMoveThroughVillage;
+import net.minecraft.server.v1_8_R2.PathfinderGoalMoveTowardsRestriction;
+import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_8_R2.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R2.World;
 
@@ -44,6 +53,9 @@ public class Zombie_PigmanLV4 extends EntityPigZombie{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, 1.0D, false));
+        this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 	}
 	
 	protected void initAttributes(){
@@ -67,7 +79,7 @@ public class Zombie_PigmanLV4 extends EntityPigZombie{
 		if(r.nextInt(20) == 0){	
 			for(int i = 0; i < 5; i++){
 				Zombie zombie = ZombieLV3.spawn(new Location((org.bukkit.World) this.world.getWorld(),this.locX,this.locY,this.locZ), ChatColor.RED + "Minion");
-				zombie.setTarget((LivingEntity) damagesource.getEntity());
+				zombie.setTarget((LivingEntity) damagesource.getEntity().getBukkitEntity());
 				minions.add(zombie);
 			}
 		}

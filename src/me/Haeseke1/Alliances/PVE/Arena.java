@@ -2,12 +2,16 @@ package me.Haeseke1.Alliances.PVE;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 public class Arena {
+	
+	public List<LivingEntity> alive = new ArrayList<LivingEntity>();
 	
 	
 	public List<Location> mobSpawns = new ArrayList<Location>();
@@ -19,7 +23,7 @@ public class Arena {
 	public int zmax;
 	public World world;
 	
-	public boolean playing = false;
+	public boolean busy = false;
 	public ArenaStatus as = ArenaStatus.MAINTENANCE;
 	
 	public String name;
@@ -29,6 +33,7 @@ public class Arena {
 	
 	public Group group;
 	
+	public boolean playing = false;
 	
 	public Arena(String name, Location loc1, Location loc2) {
 		this.name = name;
@@ -72,22 +77,78 @@ public class Arena {
 	}
 	
 	public void startArena(Group group){
-		playing = true;
+		busy = true;
 		int i = 0;
 		for(Player player : group.members){
 			player.teleport(playerSpawns.get(i));
 			i++;
 		}
+		this.group = group;
 		startCountdown = true;
 	}
 	
 	
-	public void stopArena(){
-		
+	public void stopArena(boolean playerWon){
+		if(!playerWon){
+			for(LivingEntity le : alive){
+				le.remove();
+			}
+			alive = new ArrayList<>();
+		}
+		group.disband();
+		playing = false;
+		busy = false;
 	}
 	
 	public void fight(){
-		
+		playing = true;
+		Settings set = group.settings;
+		int loc = 0;
+		for(Entry<Integer, Integer> entry : set.zombies.entrySet()){
+			for(int i = 0; i < entry.getValue();i++){
+				alive.add(Mob_Manager.spawnZombie(entry.getKey(), mobSpawns.get(loc)));
+			}
+		}
+		for(Entry<Integer, Integer> entry : set.blazes.entrySet()){
+			for(int i = 0; i < entry.getValue();i++){
+				alive.add(Mob_Manager.spawnBlaze(entry.getKey(), mobSpawns.get(loc)));
+			}
+		}
+		for(Entry<Integer, Integer> entry : set.creepers.entrySet()){
+			for(int i = 0; i < entry.getValue();i++){
+				alive.add(Mob_Manager.spawnCreeper(entry.getKey(), mobSpawns.get(loc)));
+			}
+		}
+		for(Entry<Integer, Integer> entry : set.endermans.entrySet()){
+			for(int i = 0; i < entry.getValue();i++){
+				alive.add(Mob_Manager.spawnEnderman(entry.getKey(), mobSpawns.get(loc)));
+			}
+		}
+		for(Entry<Integer, Integer> entry : set.skeletons.entrySet()){
+			for(int i = 0; i < entry.getValue();i++){
+				alive.add(Mob_Manager.spawnSkeleton(entry.getKey(), mobSpawns.get(loc)));
+			}
+		}
+		for(Entry<Integer, Integer> entry : set.spiders.entrySet()){
+			for(int i = 0; i < entry.getValue();i++){
+				alive.add(Mob_Manager.spawnSpider(entry.getKey(), mobSpawns.get(loc)));
+			}
+		}
+		for(Entry<Integer, Integer> entry : set.wither_skeletons.entrySet()){
+			for(int i = 0; i < entry.getValue();i++){
+				alive.add(Mob_Manager.spawnWither_Skeleton(entry.getKey(), mobSpawns.get(loc)));
+			}
+		}
+		for(Entry<Integer, Integer> entry : set.withers.entrySet()){
+			for(int i = 0; i < entry.getValue();i++){
+				alive.add(Mob_Manager.spawnWither(entry.getKey(), mobSpawns.get(loc)));
+			}
+		}
+		for(Entry<Integer, Integer> entry : set.zombie_pigmans.entrySet()){
+			for(int i = 0; i < entry.getValue();i++){
+				alive.add(Mob_Manager.spawnZombie_Pigman(entry.getKey(), mobSpawns.get(loc)));
+			}
+		}
 	}
 	
 }

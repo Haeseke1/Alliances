@@ -1,8 +1,11 @@
 package me.Haeseke1.Alliances.CustomEntity.Blaze;
 
+import java.lang.reflect.Field;
+
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_8_R2.util.UnsafeList;
 import org.bukkit.entity.Blaze;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
@@ -15,6 +18,9 @@ import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.MathHelper;
 import net.minecraft.server.v1_8_R2.PathfinderGoal;
+import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R2.World;
 
 public class BlazeLV4 extends EntityBlaze{
@@ -22,6 +28,22 @@ public class BlazeLV4 extends EntityBlaze{
 	
 	public BlazeLV4(World world){
 		super(world);
+		try {
+			Field bField = PathfinderGoalSelector.class.getDeclaredField("b");
+			bField.setAccessible(true);
+			Field cField = PathfinderGoalSelector.class.getDeclaredField("c");
+			cField.setAccessible(true);
+
+			bField.set(goalSelector, new UnsafeList<PathfinderGoalSelector>());
+			bField.set(targetSelector, new UnsafeList<PathfinderGoalSelector>());
+			cField.set(goalSelector, new UnsafeList<PathfinderGoalSelector>());
+			cField.set(targetSelector, new UnsafeList<PathfinderGoalSelector>());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
+        this.goalSelector.a(4, new BlazeLV1.PathfinderGoalCustomBlazeFireball(this));
 	}
 
 	

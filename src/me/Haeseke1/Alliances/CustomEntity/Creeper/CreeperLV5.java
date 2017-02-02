@@ -1,8 +1,11 @@
 package me.Haeseke1.Alliances.CustomEntity.Creeper;
 
+import java.lang.reflect.Field;
+
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_8_R2.util.UnsafeList;
 import org.bukkit.entity.Creeper;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
@@ -17,6 +20,11 @@ import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.MathHelper;
 import net.minecraft.server.v1_8_R2.PathfinderGoal;
+import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R2.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
+import net.minecraft.server.v1_8_R2.PathfinderGoalSwell;
 import net.minecraft.server.v1_8_R2.World;
 
 public class CreeperLV5 extends EntityCreeper{
@@ -26,6 +34,23 @@ public class CreeperLV5 extends EntityCreeper{
 	
 	public CreeperLV5(World world){
 		super(world);
+		try {
+			Field bField = PathfinderGoalSelector.class.getDeclaredField("b");
+			bField.setAccessible(true);
+			Field cField = PathfinderGoalSelector.class.getDeclaredField("c");
+			cField.setAccessible(true);
+
+			bField.set(goalSelector, new UnsafeList<PathfinderGoalSelector>());
+			bField.set(targetSelector, new UnsafeList<PathfinderGoalSelector>());
+			cField.set(goalSelector, new UnsafeList<PathfinderGoalSelector>());
+			cField.set(targetSelector, new UnsafeList<PathfinderGoalSelector>());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
+        this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, 1.0D, false));
+        this.goalSelector.a(2, new PathfinderGoalSwell(this));
 	}
 
     @Override
@@ -63,9 +88,8 @@ public class CreeperLV5 extends EntityCreeper{
 	}
     
     private void explode(){
-        boolean flag = this.world.getGameRules().getBoolean("mobGriefing");
         float f = 14F;
-        this.world.createExplosion(this, this.locX, this.locY, this.locZ, f, false, flag);
+        this.world.createExplosion(this, this.locX, this.locY, this.locZ, f, false, false);
         fuseTicks = 0;
     }
 	

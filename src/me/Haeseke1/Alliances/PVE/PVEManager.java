@@ -42,11 +42,15 @@ public class PVEManager {
 				int zmax = ConfigManager.getIntFromConfig(file, "PVE.Arenas." + s + ".Zmax");
 				List<Location> PlayerSpawns = new ArrayList<>();
 				List<Location> MobSpawns = new ArrayList<>();
-				for(String loc : file.getConfigurationSection("PVE.Arenas." + s + ".PlayerSpawns").getKeys(false)){
-					PlayerSpawns.add(ConfigManager.getLocationWithYaw_PitchFromConfig(file, "PVE.Arenas." + s + ".PlayerSpawns." + loc));
+				if(file.contains("PVE.Arenas." + s + ".PlayerSpawns")){
+					for(String loc : file.getConfigurationSection("PVE.Arenas." + s + ".PlayerSpawns").getKeys(false)){
+						PlayerSpawns.add(ConfigManager.getLocationWithYaw_PitchFromConfig(file, "PVE.Arenas." + s + ".PlayerSpawns." + loc));
+					}
 				}
-				for(String loc : file.getConfigurationSection("PVE.Arenas." + s + ".MobSpawns").getKeys(false)){
-					MobSpawns.add(ConfigManager.getLocationWithYaw_PitchFromConfig(file, "PVE.Arenas." + s + ".MobSpawns." + loc));
+				if(file.contains("PVE.Arenas." + s + ".MobSpawns")){
+					for(String loc : file.getConfigurationSection("PVE.Arenas." + s + ".MobSpawns").getKeys(false)){
+						MobSpawns.add(ConfigManager.getLocationWithYaw_PitchFromConfig(file, "PVE.Arenas." + s + ".MobSpawns." + loc));
+					}
 				}
 				new Arena(name, world, xmin, xmax, zmin, zmax, PlayerSpawns, MobSpawns);
 			} catch (EmptyIntException | EmptyStringException | EmptyLocationException e1) {
