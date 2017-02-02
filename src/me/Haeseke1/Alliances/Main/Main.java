@@ -66,11 +66,6 @@ import me.Haeseke1.Alliances.CustomEntity.Spider.SpiderLV2;
 import me.Haeseke1.Alliances.CustomEntity.Spider.SpiderLV3;
 import me.Haeseke1.Alliances.CustomEntity.Spider.SpiderLV4;
 import me.Haeseke1.Alliances.CustomEntity.Spider.SpiderLV5;
-import me.Haeseke1.Alliances.CustomEntity.Witch.WitchLV1;
-import me.Haeseke1.Alliances.CustomEntity.Witch.WitchLV2;
-import me.Haeseke1.Alliances.CustomEntity.Witch.WitchLV3;
-import me.Haeseke1.Alliances.CustomEntity.Witch.WitchLV4;
-import me.Haeseke1.Alliances.CustomEntity.Witch.WitchLV5;
 import me.Haeseke1.Alliances.CustomEntity.Wither.WitherLV1;
 import me.Haeseke1.Alliances.CustomEntity.Wither.WitherLV2;
 import me.Haeseke1.Alliances.CustomEntity.Wither.WitherLV3;
@@ -304,12 +299,6 @@ public class Main extends JavaPlugin {
 		nmsUtil.registerEntity("Spider LV3", 52, EntitySpider.class, SpiderLV3.class);
 		nmsUtil.registerEntity("Spider LV4", 52, EntitySpider.class, SpiderLV4.class);
 		nmsUtil.registerEntity("Spider LV5", 52, EntitySpider.class, SpiderLV5.class);
-		
-		nmsUtil.registerEntity("Witch LV1", 66, EntityWitch.class, WitchLV1.class);
-		nmsUtil.registerEntity("Witch LV2", 66, EntityWitch.class, WitchLV2.class);
-		nmsUtil.registerEntity("Witch LV3", 66, EntityWitch.class, WitchLV3.class);
-		nmsUtil.registerEntity("Witch LV4", 66, EntityWitch.class, WitchLV4.class);
-		nmsUtil.registerEntity("Witch LV5", 66, EntityWitch.class, WitchLV5.class);
 		
 		nmsUtil.registerEntity("Wither LV1", 64, EntityWither.class, WitherLV1.class);
 		nmsUtil.registerEntity("Wither LV2", 64, EntityWither.class, WitherLV2.class);

@@ -7,7 +7,6 @@ import org.bukkit.entity.Blaze;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import net.minecraft.server.v1_8_R2.EntityBlaze;
-import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.World;
 
@@ -18,29 +17,33 @@ public class BlazeLV1 extends EntityBlaze{
 		super(world);
 	}
 
-	@Override
-	public void g(double x, double y, double z) {
-	      return;
-	}
 	
 	protected void initAttributes(){
 		super.initAttributes();
-		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(20D);
-		this.getAttributeInstance(GenericAttributes.d).setValue(0D);
 	}
 	
 	
+	@Override
+	protected void dropDeathLoot(boolean flag, int i) {
+		return;
+	}
+	
+	@Override
 	protected Item getLoot(){
 		return null;
 	}
 	
-	public static Blaze spawn(Location location){
+	
+	public static Blaze spawn(Location location, String name){
 		World mcWorld = (World) ((CraftWorld) location.getWorld()).getHandle();
 		final BlazeLV1 customEntity = new BlazeLV1(mcWorld);
 		customEntity.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
 		((CraftLivingEntity) customEntity.getBukkitEntity()).setRemoveWhenFarAway(false);
 		mcWorld.addEntity(customEntity, SpawnReason.CUSTOM);
-		return (Blaze) customEntity.getBukkitEntity();
+		Blaze blaze = (Blaze) customEntity.getBukkitEntity();
+		blaze.setCustomName(name);
+		blaze.setCustomNameVisible(true);
+		return blaze;
 	}
-
+	
 }
