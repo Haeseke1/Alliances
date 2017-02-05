@@ -25,17 +25,15 @@ public class Member {
 		}
 		
 		if(!AllianceManager.playerIsInAlli(player)){
-			String message = MessageManager.getMessage("Command_Error_Not_In_A_Alliance");
-			MessageManager.sendMessage(player, message);
+			MessageManager.sendMessage(player, "&cYou aren't in an alliance");
 			return;
 		}
 		
-		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		MessageManager.sendMessage(player, "&cWrong argument do: /alli");
 		
 		if(args[1].equalsIgnoreCase("leave")){
 			if(AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId())){
-				String message = MessageManager.getMessage("Command_Alliance_Member_Leave_Is_Owner");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&cYou can't leave an alliance when you're the owner");
 				return;
 			}
 			Alliance alli = AllianceManager.getAlliance(player);
@@ -46,14 +44,8 @@ public class Member {
 				admins.remove(player.getUniqueId());
 				alli.setAdmins(admins);
 			}
-			String message = MessageManager.getMessage("Command_Alliance_Member_Leave_Answer");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", player.getName());
-			MessageManager.sendMessage(player, message);
-			message = MessageManager.getMessage("Command_Alliance_Member_Leave_Alli_Broadcast");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", player.getName());
-			alli.sendPlayersMessage(message);
+			MessageManager.sendMessage(player, "&cYou've left the alliance");
+			alli.sendPlayersMessage("&6" + player.getName() + "&c left the alliance");
 			return;
 		}
 		
@@ -63,24 +55,16 @@ public class Member {
 				int money = Integer.parseInt(args[2]);
 				if(Coins.removePlayerCoins(player, money)){
 					Coins.addAllianceCoins(alli, money);
-					String message = MessageManager.getMessage("Command_Alliance_Member_Deposit_Answer");
-					message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-							.replace("%amount%", money + "");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player, "&2You supported your alliance with &6" + money + "&2 coins!");
 				}else{
-					String message = MessageManager.getMessage("Command_Alliance_Member_Deposit_Not_Enough_Money");
-					message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-							.replace("%amount%", money + "");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player, "&cYou don't have enough money");
 				}
 			}catch(Exception e){
-				MessageManager.sendMessage(player, wrong_arg);
+				MessageManager.sendMessage(player, "&cWrong argument do: /alli");
 			}
 			return;
 		}
-		
-		
-		MessageManager.sendMessage(player, wrong_arg);
+		MessageManager.sendMessage(player, "&cWrong argument do: /alli");
 	}
 
 }

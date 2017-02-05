@@ -54,99 +54,81 @@ public class InventoryEvents implements Listener{
 				case MONSTER_EGG:
 					if(Coins.getPlayerCoins(player) >= Caith_Sith.cost){
 						chooseName.put(player, AllianceType.CAIT_SITH);
-						String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&2Type your alliance in the chat to continue");
 					}else{
-						String message = MessageManager.getMessage("Command_Alliance_Create_Not_Enough_Coins");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					}
 					player.closeInventory();
 					break;
 				case DIRT:
 					if(Coins.getPlayerCoins(player) >= Gnome.cost){
 						chooseName.put(player, AllianceType.GNOME);
-						String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&2Type your alliance in the chat to continue");
 					}else{
-						String message = MessageManager.getMessage("Command_Alliance_Create_Not_Enough_Coins");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					}
 					player.closeInventory();
 					break;
 				case EYE_OF_ENDER:
 					if(Coins.getPlayerCoins(player) >= Imp.cost){
 						chooseName.put(player, AllianceType.IMP);
-						String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&2Type your alliance in the chat to continue");
 					}else{
-						String message = MessageManager.getMessage("Command_Alliance_Create_Not_Enough_Coins");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					}
 					player.closeInventory();
 					break;
 				case REDSTONE_TORCH_ON:
 					if(Coins.getPlayerCoins(player) >= Leprechaun.cost){
 						chooseName.put(player, AllianceType.LEPRECHAUN);
-						String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&2Type your alliance in the chat to continue");
 					}else{
-						String message = MessageManager.getMessage("Command_Alliance_Create_Not_Enough_Coins");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					}
 					player.closeInventory();
 					break;
 				case BLAZE_ROD:
 					if(Coins.getPlayerCoins(player) >= Pooka.cost){
 						chooseName.put(player, AllianceType.POOKA);
-						String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&2Type your alliance in the chat to continue");
 					}else{
-						String message = MessageManager.getMessage("Command_Alliance_Create_Not_Enough_Coins");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					}
 					player.closeInventory();
 					break;
 				case FIREBALL:
 					if(Coins.getPlayerCoins(player) >= Salamander.cost){
 						chooseName.put(player, AllianceType.SALAMANDER);
-						String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&2Type your alliance in the chat to continue");
 					}else{
-						String message = MessageManager.getMessage("Command_Alliance_Create_Not_Enough_Coins");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					}
 					player.closeInventory();
 					break;
 				case DIAMOND_BLOCK:
 					if(Coins.getPlayerCoins(player) >= Spriggan.cost){
 						chooseName.put(player, AllianceType.SPRIGGAN);
-						String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&2Type your alliance in the chat to continue");
 					}else{
-						String message = MessageManager.getMessage("Command_Alliance_Create_Not_Enough_Coins");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					}
 					player.closeInventory();
 					break;
 				case FEATHER:
 					if(Coins.getPlayerCoins(player) >= Sylph.cost){
 						chooseName.put(player, AllianceType.SYLPH);
-						String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&2Type your alliance in the chat to continue");
 					}else{
-						String message = MessageManager.getMessage("Command_Alliance_Create_Not_Enough_Coins");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					}
 					player.closeInventory();
 					break;
 				case GOLDEN_APPLE:
 					if(Coins.getPlayerCoins(player) >= Undine.cost){
 						chooseName.put(player, AllianceType.UNDINE);
-						String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&2Type your alliance in the chat to continue");
 					}else{
-						String message = MessageManager.getMessage("Command_Alliance_Create_Not_Enough_Coins");
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					}
 					player.closeInventory();
 					break;
@@ -166,72 +148,63 @@ public class InventoryEvents implements Listener{
 			switch(chooseName.get(event.getPlayer())){
 			case CAIT_SITH:
 				if(Coins.getPlayerCoins(player) < Caith_Sith.cost){
-					String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case GNOME:
 				if(Coins.getPlayerCoins(player) < Gnome.cost){
-					String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case IMP:
 				if(Coins.getPlayerCoins(player) < Imp.cost){
-					String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case LEPRECHAUN:
 				if(Coins.getPlayerCoins(player) < Leprechaun.cost){
-					String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case POOKA:
 				if(Coins.getPlayerCoins(player) < Pooka.cost){
-					String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case SALAMANDER:
 				if(Coins.getPlayerCoins(player) < Salamander.cost){
-					String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case SPRIGGAN:
 				if(Coins.getPlayerCoins(player) < Spriggan.cost){
-					String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case SYLPH:
 				if(Coins.getPlayerCoins(player) < Sylph.cost){
-					String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case UNDINE:
 				if(Coins.getPlayerCoins(player) < Undine.cost){
-					String message = MessageManager.getMessage("Command_Alliance_Create_Type_Name");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
@@ -242,12 +215,8 @@ public class InventoryEvents implements Listener{
 				return;
 			}
 			chooseName.remove(player);
-			String message = MessageManager.getMessage("Command_Alliance_Create_Answer");
-			message = message.replace("%alli_name%", event.getMessage().split(" ")[0]);
-			MessageManager.sendMessage(player, message);
-			message = MessageManager.getMessage("Command_Alliance_Create_Broadcast");
-			message = message.replace("%alli_name%", event.getMessage().split(" ")[0]);
-			MessageManager.sendBroadcast(message);
+			MessageManager.sendMessage(player,"&2You've successfully created an alliance");
+			MessageManager.sendBroadcast(event.getMessage().split(" ")[0] + "&2 joined the war");
 		}
 	}
 	

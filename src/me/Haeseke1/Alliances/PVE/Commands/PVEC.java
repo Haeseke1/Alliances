@@ -38,42 +38,42 @@ public class PVEC implements CommandExecutor{
 		}
 		
 		if (!(sender instanceof Player)) {
-			String message = MessageManager.getMessage("Command_Error_Not_A_User");
+			String message = "This command needs to be executed by a player";
 			MessageManager.sendAlertMessage(message);
 			return false;
 		}
 		Player player = (Player) sender;
-		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		String wrong_arg = "&cWrong argument do: /pve";
 		
 		if(args[0].equalsIgnoreCase("createmain")){
 			if(PVE.main != null){
-				String message = MessageManager.getMessage("Commands_PVE_CreateMain_Already_Exist");
+				String message = "&cThere's already a main lobby";
 				MessageManager.sendMessage(player, message);
 				return false;
 			}
 			new PVE(player.getLocation());
-			String message = MessageManager.getMessage("Commands_PVE_CreateMain_Answer");
+			String message = "&2You've successfully created a main lobby!";
 			MessageManager.sendMessage(player, message);
 			return false;
 		}
 		
 		if(args[0].equalsIgnoreCase("createarena") && args.length > 1){
 			if(PVE.main == null){
-				String message = MessageManager.getMessage("Commands_PVE_Not_Exist");
+				String message = "&cThis PVE doesn't exists";
 				MessageManager.sendMessage(player, message);
 				return false;
 			}
 			if(PVE.main.arenaAlreadyExist(args[1])){
-				String message = MessageManager.getMessage("Commands_PVE_Arena_Exist");
+				String message = "&cThis arena does already exists";
 				MessageManager.sendMessage(player, message);
 				return false;
 			}
 			if (regionSelect.leftClick.containsKey(player) && regionSelect.rightClick.containsKey(player)) {
 				new Arena(args[1], regionSelect.leftClick.get(player), regionSelect.rightClick.get(player));
-				String message = MessageManager.getMessage("Commands_PVE_CreateArena_Answer");
+				String message = "&2You've successfully created an PVE arena!";
 				MessageManager.sendMessage(player, message);
 			} else {
-				String message = MessageManager.getMessage("Command_Error_Select_Region");
+				String message = "&cYou need to select an arena first";
 				MessageManager.sendMessage(player, message);
 				return false;
 			}
@@ -81,7 +81,7 @@ public class PVEC implements CommandExecutor{
 		
 		if(args[0].equalsIgnoreCase("addplayerspawn") && args.length > 1){
 			if(PVE.main == null){
-				String message = MessageManager.getMessage("Commands_PVE_Not_Exist");
+				String message = "&cThis PVE arena doesn't exists";
 				MessageManager.sendMessage(player, message);
 				return false;
 			}
@@ -104,7 +104,7 @@ public class PVEC implements CommandExecutor{
 		
 		if(args[0].equalsIgnoreCase("addmobspawn") && args.length > 1){
 			if(PVE.main == null){
-				String message = MessageManager.getMessage("Commands_PVE_Not_Exist");
+				String message = "&cThis PVE arena doesn't exists";
 				MessageManager.sendMessage(player, message);
 				return false;
 			}

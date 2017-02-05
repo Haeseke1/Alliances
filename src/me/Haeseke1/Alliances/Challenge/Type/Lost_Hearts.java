@@ -25,10 +25,7 @@ public class Lost_Hearts implements Listener{
 						challenge.points.replace(player.getUniqueId(), challenge.points.get(player.getUniqueId()) + event.getDamage());
 						if(challenge.points.get(player.getUniqueId()) >= challenge.max_Points){
 							Coins.addPlayerCoins(player, challenge.reward);
-							String message = MessageManager.getMessage("Challenges_Get_Reward");
-							message = message.replace("%challenge_name", challenge.name)
-									.replace("%reward_coin%", "" + challenge.reward);
-							MessageManager.sendMessage(player, message);
+							MessageManager.sendMessage(player, "&6You've completed the &l" + challenge.name + "&6 challenge (&c+" + challenge.reward + "&6coins)");
 							challenge.done.add(player.getUniqueId());
 							return;
 						}

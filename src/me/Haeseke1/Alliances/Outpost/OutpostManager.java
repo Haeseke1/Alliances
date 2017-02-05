@@ -65,7 +65,7 @@ public class OutpostManager {
 		for(Farm f : Farm.farms){
 			if(f.owner != null){
 				f.owner.addReward(chooseReward(Farm.rewards));
-				String message = MessageManager.getMessage("Outpost_Reward");
+				String message = "&2You've received some rewards from &6%outpost_name%";
 				message = message.replace("%outpost_name%", f.name);
 				f.owner.sendPlayersMessage(message);
 				Exp.addAllianceEXP(f.owner, Reward_Exp);
@@ -75,7 +75,7 @@ public class OutpostManager {
 			if(b.owner != null){
 				b.owner.addReward(chooseReward(Blacksmith.rewards));
 				Exp.addAllianceEXP(b.owner, Reward_Exp);
-				String message = MessageManager.getMessage("Outpost_Reward");
+				String message = "&2You've received some rewards from &6%outpost_name%";
 				message = message.replace("%outpost_name%", b.name);
 				b.owner.sendPlayersMessage(message);
 			}
@@ -84,7 +84,7 @@ public class OutpostManager {
 			if(d.owner != null){
 				d.owner.addReward(chooseReward(Dock.rewards));
 				Exp.addAllianceEXP(d.owner, Reward_Exp);
-				String message = MessageManager.getMessage("Outpost_Reward");
+				String message = "&2You've received some rewards from &6%outpost_name%";
 				message = message.replace("%outpost_name%", d.name);
 				d.owner.sendPlayersMessage(message);
 			}
@@ -93,7 +93,7 @@ public class OutpostManager {
 			if(g.owner != null){
 				g.owner.addReward(chooseReward(God.rewards));
 				Exp.addAllianceEXP(g.owner, Reward_Exp);
-				String message = MessageManager.getMessage("Outpost_Reward");
+				String message = "&2You've received some rewards from &6%outpost_name%";
 				message = message.replace("%outpost_name%", g.name);
 				g.owner.sendPlayersMessage(message);
 			}
@@ -102,7 +102,7 @@ public class OutpostManager {
 			if(mt.owner != null){
 				mt.owner.addReward(chooseReward(Magic_Tower.rewards));
 				Exp.addAllianceEXP(mt.owner, Reward_Exp);
-				String message = MessageManager.getMessage("Outpost_Reward");
+				String message = "&2You've received some rewards from &6%outpost_name%";
 				message = message.replace("%outpost_name%", mt.name);
 				mt.owner.sendPlayersMessage(message);
 			}
@@ -111,7 +111,7 @@ public class OutpostManager {
 			if(m.owner != null){
 				m.owner.addReward(chooseReward(Mine.rewards));
 				Exp.addAllianceEXP(m.owner, Reward_Exp);
-				String message = MessageManager.getMessage("Outpost_Reward");
+				String message = "&2You've received some rewards from &6%outpost_name%";
 				message = message.replace("%outpost_name%", m.name);
 				m.owner.sendPlayersMessage(message);
 			}
@@ -120,7 +120,7 @@ public class OutpostManager {
 			if(mf.owner != null){
 				mf.owner.addReward(chooseReward(Mob_Farm.rewards));
 				Exp.addAllianceEXP(mf.owner, Reward_Exp);
-				String message = MessageManager.getMessage("Outpost_Reward");
+				String message = "&2You've received some rewards from &6%outpost_name%";
 				message = message.replace("%outpost_name%", mf.name);
 				mf.owner.sendPlayersMessage(message);
 			}

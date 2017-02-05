@@ -39,15 +39,15 @@ public class Alli implements CommandExecutor {
 		}
 		
 		if(!(sender instanceof Player)){
-			String message = MessageManager.getMessage("Command_Error_Not_A_User");
-			MessageManager.sendAlertMessage(message);
+			MessageManager.sendAlertMessage("This message can only be executed by ingame players");
 			return false;
 		}
 		
 
 		Player player = (Player) sender;
 		
-		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		MessageManager.sendMessage(player, "&cWrong argument do: /alli");
+		
 		
 		if(args[0].equalsIgnoreCase("create")){
 			mainCreate.onCommand(player, args);
@@ -84,20 +84,18 @@ public class Alli implements CommandExecutor {
 				e.printStackTrace();
 			}
 			Config.registerConfigFile(Main.plugin);
-			String message = MessageManager.getMessage("Command_Alliance_Reload_Answer");
-			MessageManager.sendMessage(player, message);
+			MessageManager.sendMessage(player, "&2Config reloaded!");
 			return false;
 		}
 		
 		if(args[0].equalsIgnoreCase("saveconfig")){
 			Main.saveAllCustomConfigs();
 			Config.saveConfigFile(Main.plugin);
-			String message = MessageManager.getMessage("Command_Alliance_Save_Answer");
-			MessageManager.sendMessage(player, message);
+			MessageManager.sendMessage(player, "&2Config saved!");
 			return false;
 		}
 		
-		MessageManager.sendMessage(player, wrong_arg);
+		MessageManager.sendMessage(player, "&cWrong argument do: /alli");
 		return false;
 	}
 

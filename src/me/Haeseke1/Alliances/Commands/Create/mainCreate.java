@@ -14,8 +14,7 @@ public class mainCreate {
 		if(!AllianceManager.playerIsInAlli(player)){
 			InventoryEvents.createInventory(player);
 		}else{
-			String message = MessageManager.getMessage("Command_Alliance_Join_And_Create_Already_In_A_Alliance");
-			MessageManager.sendMessage(player, message);
+			MessageManager.sendMessage(player, "&cYou're already in an alliance");
 		}
 	}
 

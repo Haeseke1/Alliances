@@ -46,7 +46,7 @@ public class InventoryEvents implements Listener{
 			event.setCancelled(true);
 			if(event.getCurrentItem() != null){
 				Player player = (Player) event.getWhoClicked();
-				String message = MessageManager.getMessage("Command_Outpost_ChooseName");
+				String message = "&2Type an outpost name in the chat";
 				switch(event.getCurrentItem().getType()){
 				case DIAMOND_SWORD:
 					chooseName.put(player, OutpostType.BLACKSMITH);
@@ -96,7 +96,7 @@ public class InventoryEvents implements Listener{
 			event.setCancelled(true);
 			Player player = event.getPlayer();
 			if(!OutpostManager.checkLocation(regionSelect.leftClick.get(player), regionSelect.rightClick.get(player))){
-				String message = MessageManager.getMessage("Command_Outpost_Creating_On_Existing_outpost");
+				String message = "&cThis outpost does already exists";
 				MessageManager.sendMessage(player, message);
 				return;
 			}
@@ -124,7 +124,7 @@ public class InventoryEvents implements Listener{
 				break;
 			}
 			chooseName.remove(event.getPlayer());
-			String message = MessageManager.getMessage("Command_Outpost_Create_Answer");
+			String message = "&2You've successfully created an outpost";
 			MessageManager.sendMessage(player, message);
 		}
 	}

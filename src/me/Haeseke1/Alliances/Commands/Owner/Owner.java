@@ -34,11 +34,10 @@ public class Owner {
 		}
 		
 		if(!AllianceManager.playerIsInAlli(player) || !AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId())){
-			String message = MessageManager.getMessage("Command_Error_Not_A_Owner");
-			MessageManager.sendMessage(player, message);
+			MessageManager.sendMessage(player, "&cYou aren't an owner of an alliance");
 			return;
 		}
-		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		MessageManager.sendMessage(player, "&cWrong argument do: /alli");
 		
 		if(args[1].equalsIgnoreCase("disband")){
 			Alliance alli = AllianceManager.getAlliance(player);
@@ -48,135 +47,84 @@ public class Owner {
 			}
 			Main.alliances.remove(alli);
 			
-			String message = MessageManager.getMessage("Command_Alliance_Owner_Disband_Answer");
-			message = message.replace("%alli_name%", name);
-			MessageManager.sendMessage(player, message);
-			message = MessageManager.getMessage("Command_Alliance_Owner_Disband_Broadcast");
-			message = message.replace("%alli_name%", name);
-			MessageManager.sendBroadcast(message);
+			MessageManager.sendMessage(player, "&cYou've disbanded your alliance");
+			MessageManager.sendBroadcast(name + "&c left the alliance battle");
 			return;
 		}
 		
 		if(args[1].equalsIgnoreCase("change") && args.length > 2){
 			if(!PlayerManager.isPlayerOnline(args[1])){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&" + args[1] + " isn't online");
 				return;
 			}
 			Player nowner = PlayerManager.getPlayer(args[2]);
 			if(!AllianceManager.getAlliance(player).getMembers().containsKey(nowner.getUniqueId())){
-				String message = MessageManager.getMessage("Command_Error_Not_In_Your_Alliance");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&cYou aren't in an alliance");
 				return;
 			}
 			
 			AllianceManager.getAlliance(player).setOwner(nowner.getUniqueId());
-			
-			String message = MessageManager.getMessage("Command_Alliance_Owner_Change_Owner_Answer");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", nowner.getName());
-			MessageManager.sendMessage(player, message);
-			message = MessageManager.getMessage("Command_Alliance_Owner_Change_Owner_Changed_Answer");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", nowner.getName());
-			MessageManager.sendMessage(nowner, message);
-			message = MessageManager.getMessage("Command_Alliance_Owner_Change_Owner_Alli_Broadcast");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", nowner.getName());
-			AllianceManager.getAlliance(player).sendPlayersMessage(message);
+			AllianceManager.getAlliance(player).sendPlayersMessage("&2The alliance owner gave the membership to &6" + nowner.getName());
 			return;
 		}
 		
 		if(args[1].equalsIgnoreCase("addadmin") && args.length > 2){
 			if(!PlayerManager.isPlayerOnline(args[2])){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&" + args[2] + " isn't online");
 				return;
 			}
 			Player nadmin = PlayerManager.getPlayer(args[2]);
 			if(!AllianceManager.getAlliance(player).getMembers().containsKey(nadmin.getUniqueId())){
-				String message = MessageManager.getMessage("Command_Error_Not_In_Your_Alliance");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&" + args[2] + " isn't a member of your alliance");
 				return;
 			}
 			
 			AllianceManager.getAlliance(player).addAdmins(nadmin.getUniqueId());
 			
-			String message = MessageManager.getMessage("Command_Alliance_Owner_Add_Admin_Answer");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", nadmin.getName());
-			MessageManager.sendMessage(player, message);
-			message = MessageManager.getMessage("Command_Alliance_Owner_Add_Admin_Changed_Answer");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", nadmin.getName());
-			MessageManager.sendMessage(nadmin, message);
-			message = MessageManager.getMessage("Command_Alliance_Owner_Add_Admin_Alli_Broadcast");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", nadmin.getName());
-			AllianceManager.getAlliance(player).sendPlayersMessage(message);
+			MessageManager.sendMessage(player, "&2You gave &6" + nadmin.getName() + " &2the admin rank!");
+			MessageManager.sendMessage(nadmin, "&2You've become an admin of your alliance");
+			AllianceManager.getAlliance(player).sendPlayersMessage("&6" + nadmin.getName() + "&2 is now an admin of your alliance");
 			return;
 		}
 		
 		if(args[1].equalsIgnoreCase("removeadmin") && args.length > 2){
 			if(!PlayerManager.isPlayerOnline(args[1])){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&" + args[1] + " isn't online");
 				return;
 			}
 			Player nadmin = PlayerManager.getPlayer(args[2]);
 			if(!AllianceManager.getAlliance(player).getMembers().containsKey(nadmin.getUniqueId())){
-				String message = MessageManager.getMessage("Command_Error_Not_In_Your_Alliance");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&" + args[2] + " isn't a member of your alliance");
 				return;
 			}
 			if(!AllianceManager.getAlliance(player).getAdmins().contains(nadmin.getUniqueId())){
-				String message = MessageManager.getMessage("Command_Alliance_Owner_Remove_Admin_Not_Admin");
-				message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-						.replace("%player_name%", nadmin.getName());
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&6" + args[2] + " isn't an admin");
 				return;
 			}
 			
 			List<UUID> admins = AllianceManager.getAlliance(player).getAdmins();
 			admins.remove(nadmin.getUniqueId());
 			AllianceManager.getAlliance(player).setAdmins(admins);
-			
-			String message = MessageManager.getMessage("Command_Alliance_Owner_Remove_Admin_Answer");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", nadmin.getName());
-			MessageManager.sendMessage(player, message);
-			message = MessageManager.getMessage("Command_Alliance_Owner_Remove_Admin_Changed_Answer");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", nadmin.getName());
-			MessageManager.sendMessage(nadmin, message);
-			message = MessageManager.getMessage("Command_Alliance_Owner_Remove_Admin_Alli_Broadcast");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", nadmin.getName());
-			AllianceManager.getAlliance(player).sendPlayersMessage(message);
+			MessageManager.sendMessage(player, "&2You've removed the admin rank from &6" + nadmin.getName());
+			MessageManager.sendMessage(nadmin, "&2The owner removed the admin rank from you");
+			AllianceManager.getAlliance(player).sendPlayersMessage("&2You've removed the admin rank from &6" + nadmin.getName());
 			return;
 		}
 		
 		if(args[1].equalsIgnoreCase("invite") && args.length > 2){
 			if(!PlayerManager.isPlayerOnline(args[2])){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&" + args[1] + " isn't online");
 				return;
 			}
 			Player pinvite = PlayerManager.getPlayer(args[2]);
 			if(AllianceManager.getAlliance(player).getMembers().containsKey(pinvite.getUniqueId())){
-				String message = MessageManager.getMessage("Command_Alliance_Owner_Invite_Already_In_Alliance");
-				message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-						.replace("%player_name%", pinvite.getName());
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&6" + args[2] + "&c is already a member of an alliance");
 				return;
 			}
 			if(Alli.invited.containsKey(pinvite)){
 				List<Alliance> allis = Alli.invited.get(pinvite);
 				if(allis.contains(AllianceManager.getAlliance(player))){
-					String message = MessageManager.getMessage("Command_Alliance_Owner_Invite_Already_Invited_To_Alliance");
-					message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-							.replace("%player_name%", pinvite.getName());
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player, "&6" + args[2] + "&c is already invited to your alliance");
 					return;
 				}
 				allis.add(AllianceManager.getAlliance(player));
@@ -186,53 +134,34 @@ public class Owner {
 				allis.add(AllianceManager.getAlliance(player));
 				Alli.invited.put(pinvite, allis);
 			}
-			String message = MessageManager.getMessage("Command_Alliance_Owner_Invite_Answer");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", pinvite.getName());
-			MessageManager.sendMessage(player, message);
-			message = MessageManager.getMessage("Command_Alliance_Owner_Invited_Answer");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", pinvite.getName());
-			MessageManager.sendMessage(pinvite, message);
+			MessageManager.sendMessage(pinvite, "&2You received an invite from an alliance");
+			MessageManager.sendMessage(player, "&2You've sent a invite to &6" + args[2]);
 			return;
 		}
 		
 		if(args[1].equalsIgnoreCase("setrank") && args.length > 3){
 			if(!PlayerManager.isPlayerOnline(args[2])){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&" + args[1] + " isn't online");
 				return;
 			}
 			Player cplayer = PlayerManager.getPlayer(args[2]);
 			if(!AllianceManager.getAlliance(player).getMembers().containsKey(cplayer.getUniqueId())){
-				String message = MessageManager.getMessage("Command_Error_Not_In_Your_Alliance");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&" + args[2] + " isn't a member of your alliance");
 				return;
 			}
 			HashMap<UUID,String> members = AllianceManager.getAlliance(player).getMembers();
 			members.replace(cplayer.getUniqueId(), args[3]);
-			AllianceManager.getAlliance(player).setMembers(members);
-			String message = MessageManager.getMessage("Command_Alliance_Owner_SetRank_Answer");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", cplayer.getName());
-			MessageManager.sendMessage(player, message);
-			message = MessageManager.getMessage("Command_Alliance_Owner_SetRank_Changed_Answer");
-			message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-					.replace("%player_name%", cplayer.getName());
-			MessageManager.sendMessage(cplayer, message);
+			MessageManager.sendMessage(player, "&2You've set the rank of &6" + cplayer.getName() + "&2 to &6" + args[3]);
+			MessageManager.sendMessage(cplayer, "&2A staff member changed your rank to &6" + args[3]);
 			return;
 		}
 		
 		if(args[1].equalsIgnoreCase("getrewards")){
 			Alliance alli = AllianceManager.getAlliance(player);
 			if(alli.claimReward(player)){
-				String message = MessageManager.getMessage("Command_Alliance_getrewards_Answer_All");
-				message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName());
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&2Your alliance retrieved the rewards");
 			}else{
-				String message = MessageManager.getMessage("Command_Alliance_getrewards_Answer_Not_All");
-				message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName());
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&cTheir aren't any pending rewards");
 			}
 			return;
 		}
@@ -243,24 +172,17 @@ public class Owner {
 				int money = Integer.parseInt(args[2]);
 				if(Coins.removePlayerCoins(player, money)){
 					Coins.addAllianceCoins(alli, money);
-					String message = MessageManager.getMessage("Command_Alliance_Member_Deposit_Answer");
-					message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-							.replace("%amount%", money + "");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player, "&2You supported your alliance with &6" + money + "&2 coins!");
 				}else{
-					String message = MessageManager.getMessage("Command_Alliance_Member_Deposit_Not_Enough_Money");
-					message = message.replace("%alli_name%", AllianceManager.getAlliance(player).getName())
-							.replace("%amount%", money + "");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player, "&cYou don't have enough money");
 				}
 			}catch(Exception e){
 				e.printStackTrace();
 				MessageManager.sendInfoMessage("not a number");
-				MessageManager.sendMessage(player, wrong_arg);
+				MessageManager.sendMessage(player, "&cWrong argument do: /alli");
 			}
 			return;
 		}
-		
-		MessageManager.sendMessage(player, wrong_arg);
+		MessageManager.sendMessage(player, "&cWrong argument do: /alli");
 	}
 }

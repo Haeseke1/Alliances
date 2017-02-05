@@ -78,11 +78,4 @@ public class MessageManager {
 		}
 	}
 	
-	
-	public static String getMessage(String s){
-		if(messages.containsKey(s.toLowerCase())){
-			return messages.get(s.toLowerCase());
-		}
-		return null;
-	}
 }

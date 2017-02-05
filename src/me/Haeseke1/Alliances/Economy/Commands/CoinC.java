@@ -39,20 +39,18 @@ public class CoinC implements CommandExecutor{
 				}
 				return true;
 			}
-			String message = MessageManager.getMessage("Command_Error_Not_A_User");
-			MessageManager.sendAlertMessage(message);
+			MessageManager.sendAlertMessage("&6" + args[1] + "&c isn't online");
 			return false;
 		}
 		Player player = (Player) sender;
 		
-		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		MessageManager.sendMessage(player, "&cWrong argument do: /coins");
 		
 		
 		if (args[0].equalsIgnoreCase("balance")) {
 			if (args.length > 1) {
 				if(!PlayerManager.isPlayerOnline(args[1])){
-					String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendAlertMessage("&6" + args[1] + "&c isn't online");
 					return false;
 				}
 				MessageManager.sendMessage(player, "&6" + sender.getName() + "&8 has " + Coins.getPlayerCoins(sender.getName()) + " &8coins");
@@ -65,110 +63,71 @@ public class CoinC implements CommandExecutor{
 	if(player.hasPermission("Alliances.coins.*")){
 		if (args[0].equalsIgnoreCase("add")) {
 			if (args.length < 3) {
-				MessageManager.sendMessage(player, wrong_arg);
+				MessageManager.sendMessage(player, "&cWrong argument do: /coins");
 				return false;
 			}
 			if(!PlayerManager.isPlayerOnline(args[1])){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendAlertMessage("&6" + args[1] + "&c isn't online");
 				return false;
 			}
 			try {
 				Coins.addPlayerCoins(args[1], Integer.parseInt(args[2]));
 			} catch (Exception e) {
-				MessageManager.sendMessage(player, wrong_arg);
+				MessageManager.sendMessage(player, "&cWrong argument do: /coins");
 				return false;
 			}
-			String message = MessageManager.getMessage("Command_Coin_Add_Answer");
-			message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-			.replace("%coin%", "" + Integer.parseInt(args[2]))
-			.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
-			.replace("%sender_name%", "" + sender.getName())
-			.replace("%target_name%", "" + args[1]);
-			MessageManager.sendMessage(player, message);
+			MessageManager.sendMessage(player, "&2Successfully added &6" + args[2] + " &2coins to &6" + PlayerManager.getPlayer(args[1]).getName() + "&2's bank account");
 			if(PlayerManager.isPlayerOnline(args[1])){
-				message = MessageManager.getMessage("Command_Coin_Get_Answer");
-				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-				.replace("%coin%", "" + Integer.parseInt(args[2]))
-				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
-				.replace("%sender_name%", "" + sender.getName())
-				.replace("%target_name%", "" + args[1]);
-				MessageManager.sendMessage(PlayerManager.getPlayer(args[1]), message);
+				MessageManager.sendMessage(Bukkit.getPlayer(args[1]), "&2You've received &6" + args[2] + " &2coins");
 			}
 			return false;
 		}
 		
 		if (args[0].equalsIgnoreCase("set")) {
 			if (args.length < 3) {
-				MessageManager.sendMessage((Player) sender, wrong_arg);
+				MessageManager.sendMessage(player, "&cWrong argument do: /coins");
 				return false;
 			}
 			if(!PlayerManager.isPlayerOnline(args[1])){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendAlertMessage("&6" + args[1] + "&c isn't online");
 				return false;
 			}
 			try {
 				Coins.setPlayerCoins(args[1], Integer.parseInt(args[2]));
 			} catch (Exception e) {
-				MessageManager.sendMessage((Player) sender, wrong_arg);
+				MessageManager.sendMessage(player, "&cWrong argument do: /coins");
 				return false;
 			}
-			String message = MessageManager.getMessage("Command_Coin_Set_Answer");
-			message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-			.replace("%coin%", "" + Integer.parseInt(args[2]))
-			.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
-			.replace("%sender_name%", "" + sender.getName())
-			.replace("%target_name%", "" + args[1]);
-			MessageManager.sendMessage(player, message);
+			MessageManager.sendAlertMessage("&2Successfully setted &6" + Bukkit.getPlayer(args[1]).getName() + "&2's bank account to &6" + args[2] + "&2 coins");
 			return false;
 		}
 		
 		if (args[0].equalsIgnoreCase("pay")) {
 			if (args.length < 3) {
-				MessageManager.sendMessage((Player) sender, wrong_arg);
+				MessageManager.sendMessage(player, "&cWrong argument do: /coins");
 				return false;
 			}
 			if(!PlayerManager.isPlayerOnline(args[1])){
-				String message = MessageManager.getMessage("Command_Error_Not_A_Online_Player");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player,"&6" + args[1] + "&c isn't online");
 				return false;
 			}
 			try {
 				if (!Coins.removePlayerCoins(player, Integer.parseInt(args[2]))) {
-					String message = MessageManager.getMessage("Command_Coin_Pay_Not_Enough_Coins");
-					message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-					.replace("%coin%", "" + Integer.parseInt(args[2]))
-					.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
-					.replace("%sender_name%", "" + sender.getName())
-					.replace("%target_name%", "" + args[1]);
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player,"&cThis player doesn't have enough coins!");
 					return false;
 				}
 				Coins.addPlayerCoins(args[1], Integer.parseInt(args[2]));
-				String message = MessageManager.getMessage("Command_Coin_Pay_Answer");
-				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-				.replace("%coin%", "" + Integer.parseInt(args[2]))
-				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
-				.replace("%sender_name%", "" + sender.getName())
-				.replace("%target_name%", "" + args[1]);
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendAlertMessage("&2You've paid &6" + args[1]);
 				if(PlayerManager.isPlayerOnline(args[1])){
-					message = MessageManager.getMessage("Command_Coin_Get_Answer");
-					message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-					.replace("%coin%", "" + Integer.parseInt(args[2]))
-					.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
-					.replace("%sender_name%", "" + sender.getName())
-					.replace("%target_name%", "" + args[1]);
-					MessageManager.sendMessage(PlayerManager.getPlayer(args[1]), message);
+					MessageManager.sendMessage(Bukkit.getPlayer(args[1]),"&cThis player doesn't have enough coins!");
 				}
 				return false;
 			} catch (Exception e) {
-				MessageManager.sendMessage((Player) sender, wrong_arg);
+				MessageManager.sendMessage(player, "&cWrong argument do: /coins");
 				return false;
 			}
 		}
-		MessageManager.sendMessage((Player) sender, wrong_arg);
+		MessageManager.sendMessage(player, "&cWrong argument do: /coins");
 		return false;
 	 }
 	return false;

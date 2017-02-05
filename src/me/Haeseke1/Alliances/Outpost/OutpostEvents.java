@@ -18,7 +18,7 @@ public class OutpostEvents implements Listener{
 	private void onBlockBreak(BlockBreakEvent event){
 		if(OutpostManager.checkLocation(event.getBlock().getLocation())){
 			event.setCancelled(true);
-			String message = MessageManager.getMessage("Outpost_Break_Block");
+			String message = "You can't break blocks from outposts";
 			MessageManager.sendAlertMessage(message);
 		}
 	}
@@ -27,7 +27,7 @@ public class OutpostEvents implements Listener{
 	private void onBlockPlace(BlockPlaceEvent event){
 		if(OutpostManager.checkLocation(event.getBlock().getLocation())){
 			event.setCancelled(true);
-			String message = MessageManager.getMessage("Outpost_Place_Block");
+			String message = "You can't place blocks from outposts";
 			MessageManager.sendAlertMessage(message);
 		}
 	}

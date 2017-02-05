@@ -21,18 +21,17 @@ public class mainChallenges implements CommandExecutor {
 		}
 		
 		if(!(sender instanceof Player)){
-			String message = MessageManager.getMessage("Command_Error_Not_A_User");
-			MessageManager.sendAlertMessage(message);
+			MessageManager.sendAlertMessage("&cThis command is only available for ingame players");
 			return false;
 		}
 		Player player = (Player) sender;
-		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		MessageManager.sendMessage(player,"&cWrong argument: do /challenges to see all the commands");
 		
 		if(args[0].equalsIgnoreCase("player")){
 			InventoryEvents.createInventory(player);
 			return false;
 		}
-		MessageManager.sendMessage(player, wrong_arg);
+		MessageManager.sendMessage(player,"&cWrong argument: do /challenges to see all the commands");
 		return false;
 	}
 	
