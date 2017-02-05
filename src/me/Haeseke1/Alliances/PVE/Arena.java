@@ -102,7 +102,6 @@ public class Arena {
 	
 	
 	public void stopArena(boolean playerWon){
-		Bukkit.broadcastMessage("GG");
 		if(!playerWon){
 			for(LivingEntity le : alive){
 				le.remove();

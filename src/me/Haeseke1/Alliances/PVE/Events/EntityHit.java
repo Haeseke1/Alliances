@@ -40,7 +40,6 @@ public class EntityHit implements Listener {
 						player.setFlying(true);
 						player.setAllowFlight(true);
 						arena.playerAlive.remove(player);
-						Bukkit.broadcastMessage(arena.playerAlive.size() + " ");
 						if(arena.playerAlive.isEmpty()){
 							arena.stopArena(false);
 						}

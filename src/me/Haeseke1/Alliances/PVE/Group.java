@@ -40,9 +40,7 @@ public class Group {
 	
 	
 	public void disband(){
-		Bukkit.broadcastMessage("GG");
 		for(Player player : members){
-			Bukkit.broadcastMessage("GG");
 			aPlayer aplayer = APlayerManager.getAPlayer(player);
 			aplayer.is_in_pve_lobby = false;
 			aplayer.is_in_pve_arena = false;
@@ -50,7 +48,6 @@ public class Group {
 			player.setGameMode(GameMode.SURVIVAL);
 			player.teleport(memberLocations.get(player),TeleportCause.ENDER_PEARL);
 		}
-		Bukkit.broadcastMessage("GG");
 		groups.remove(this);
 		PVE.main.removeQueue(this);
 	}
