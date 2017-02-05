@@ -25,7 +25,7 @@ public class TownEvents implements Listener {
 			if(town.chunks.contains(event.getBlock().getLocation().getChunk())){
 				if(!town.owner.getMembers().containsKey(event.getPlayer().getUniqueId())){
 					event.setCancelled(true);
-					String message = MessageManager.getMessage("Town_Break_Other_Town_Block");
+					String message = "&cYou can't break town blocks";
 					message = message.replace("%town_name%", town.name);
 					MessageManager.sendMessage(event.getPlayer(), message);
 				}
@@ -39,7 +39,7 @@ public class TownEvents implements Listener {
 			if(town.chunks.contains(event.getBlock().getLocation().getChunk())){
 				if(!town.owner.getMembers().containsKey(event.getPlayer().getUniqueId())){
 					event.setCancelled(true);
-					String message = MessageManager.getMessage("Town_Place_Other_Town_Block");
+					String message = "&cYou can't place town blocks";
 					message = message.replace("%town_name%", town.name);
 					MessageManager.sendMessage(event.getPlayer(), message);
 				}
@@ -68,14 +68,14 @@ public class TownEvents implements Listener {
 			if(town.chunks.contains(event.getTo().getChunk())){
 				if(!town.inTown.contains(event.getPlayer())){
 					town.inTown.add(event.getPlayer());
-					String message = MessageManager.getMessage("Town_Entering_A_Town");
+					String message = "&2You entered &6%town_name%";
 					message = message.replace("%town_name%", town.name);
 					MessageManager.sendMessage(event.getPlayer(), message);
 				}
 			}else{
 				if(town.inTown.contains(event.getPlayer())){
 					town.inTown.remove(event.getPlayer());
-					String message = MessageManager.getMessage("Town_Leaving_A_Town");
+					String message = "&cYou entered &6%town_name%";
 					message = message.replace("%town_name%", town.name);
 					MessageManager.sendMessage(event.getPlayer(), message);
 				}

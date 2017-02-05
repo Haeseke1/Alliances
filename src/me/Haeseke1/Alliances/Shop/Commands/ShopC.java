@@ -28,23 +28,23 @@ public class ShopC implements CommandExecutor {
 		}
 
 		if (!(sender instanceof Player)) {
-			String message = MessageManager.getMessage("Command_Error_Not_A_User");
+			String message = "This command needs to be executed by a player";
 			MessageManager.sendAlertMessage(message);
 			return false;
 		}
 		Player player = (Player) sender;
 
-		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		String wrong_arg = "&cWrong argument do: /shop";
 		if (player.hasPermission("Alliances.shop.*")) {
 			if (args[0].equalsIgnoreCase("create") && args.length >= 2) {
 				if (ShopManager.shopExist(args[1])) {
-					String message = MessageManager.getMessage("Command_Shop_Create_Already_Exist");
+					String message = "&6%shopname%&6&c does already exists";
 					message = message.replace("%shop_name%", args[1]);
 					MessageManager.sendMessage((Player) sender, message);
 					return false;
 				}
 				new Shop(args[1], new ArrayList<SItem>(), new ArrayList<Location>());
-				String message = MessageManager.getMessage("Command_Shop_Create_Answer");
+				String message = "&2You've successfully created a shop: &6%shopname%";
 				message = message.replace("%shop_name%", args[1]);
 				MessageManager.sendMessage((Player) sender, message);
 				return false;
@@ -70,7 +70,7 @@ public class ShopC implements CommandExecutor {
 				}
 				SItem sitem = new SItem(player.getItemInHand(), buy, sell, buyV, sellV);
 				s.addSItem(sitem);
-				String message = MessageManager.getMessage("Command_Shop_AddItem_Answer");
+				String message = "&2You've added an item to &6%shopname%";
 				message = message.replace("%shop_name%", args[1]);
 				MessageManager.sendMessage((Player) sender, message);
 				return false;
@@ -84,7 +84,7 @@ public class ShopC implements CommandExecutor {
 					return false;
 				}
 				s.addVendor(player.getLocation());
-				String message = MessageManager.getMessage("Command_Shop_AddLocation_Answer");
+				String message = "&2You've added an location for &6%shopname%";
 				message = message.replace("%shop_name%", args[1]);
 				MessageManager.sendMessage((Player) sender, message);
 				return false;

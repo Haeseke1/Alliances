@@ -13,8 +13,7 @@ public class mainJoin {
 	
 	public static void onCommand(Player player, String[] args) {
 		if(AllianceManager.playerIsInAlli(player)){
-			String message = MessageManager.getMessage("Command_Alliance_Join_And_Create_Already_In_A_Alliance");
-			MessageManager.sendMessage(player, message);
+			MessageManager.sendMessage(player, "&cYou're already a member of an alliance");
 			return;
 		}
 		if(!Alli.invited.containsKey(player)){

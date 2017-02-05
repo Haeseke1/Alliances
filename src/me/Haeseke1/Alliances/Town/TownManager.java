@@ -29,25 +29,25 @@ public class TownManager {
 	
 	public static void createTown(Player player, Alliance alli, Chunk chunk, String name){
 		if(alli.getCoins() < Town_Create_Payment){
-			String message = MessageManager.getMessage("Town_Cannot_Affort_Town");
+			String message = "&cYou don't have enough money";
 			message = message.replace("%payment%", "" +  Town_Create_Payment);
 			MessageManager.sendMessage(player, message);
 			return;
 		}
 		if(!alli.getOwner().equals(player.getUniqueId())){
-			String message = MessageManager.getMessage("Town_Already_Exist");
+			String message = "&6%town_name% &cdoes already exists";
 			message = message.replace("%town_name%", name);
 			MessageManager.sendMessage(player, message);
 			return;
 		}
 		if(Exp.getLevel(alli.getExp()) < 3 || alli.getTowns().size() > 0){
-			String message = MessageManager.getMessage("Town_Cannot_Create_Town");
+			String message = "&6%town_name% &cyou can't create a town";
 			message = message.replace("%town_name%", name);
 			MessageManager.sendMessage(player, message);
 			return;
 		}
 		if(isClaimed(chunk)){
-			String message = MessageManager.getMessage("Town_Already_Claimed");
+			String message = "&cThis town is already claimed";
 			message = message.replace("%town_name%", name);
 			MessageManager.sendMessage(player, message);
 			return;
@@ -58,23 +58,23 @@ public class TownManager {
 	
 	public static boolean claimLand(Player player, Town town){
 		if(town.owner.getCoins() < Town_Claim_Payment){
-			String message = MessageManager.getMessage("Town_Cannot_Affort_Claim");
+			String message = "&cYou don't have enough money";
 			message = message.replace("%payment%", "" +  Town_Claim_Payment);
 			MessageManager.sendMessage(player, message);
 			return false;
 		}
 		if(TownManager.isClaimed(player.getLocation().getChunk())){
-			String message = MessageManager.getMessage("Town_Already_Claimed");
+			String message = "&cThis town is already claimed";
 			MessageManager.sendMessage(player, message);
 			return false;
 		}
 		if(!TownManager.isNextTo(player.getLocation().getChunk(), town)){
-			String message = MessageManager.getMessage("Town_Not_Connected");
+			String message = "&cThis claim isn't connected to the other ones";
 			MessageManager.sendMessage(player, message);
 			return false;
 		}
 		if(town.chunks.size() >= Claim_Limit){
-			String message = MessageManager.getMessage("Town_Reached_Claim_Limit");
+			String message = "&cThis town reached the claim limit";
 			MessageManager.sendMessage(player, message);
 			return false;
 		}

@@ -13,8 +13,7 @@ public class outpostCreate {
 	
 	public static void onCommand(CommandSender sender, String[] args) {
 		if(!(sender instanceof Player)){
-			String message = MessageManager.getMessage("Command_Error_Not_A_User");
-			MessageManager.sendAlertMessage(message);
+			MessageManager.sendAlertMessage("This command needs to be executed by a player");
 			return;
 		}
 		Player player = (Player) sender;
@@ -22,7 +21,7 @@ public class outpostCreate {
 			if (regionSelect.leftClick.containsKey(player) && regionSelect.rightClick.containsKey(player)) {
 				InventoryEvents.createInventory(player);
 			} else {
-				String message = MessageManager.getMessage("Command_Error_Select_Region");
+				String message = "&cYou need to select a region first";
 				MessageManager.sendMessage(player, message);
 			}
 		}

@@ -18,8 +18,7 @@ public class ArenaCommand implements CommandExecutor{
 
 	public boolean onCommand(CommandSender sender,Command cmd, String label,String[] args){
 		if (!(sender instanceof Player)) {
-			String message = MessageManager.getMessage("Command_Error_Not_A_User");
-			MessageManager.sendAlertMessage(message);
+			MessageManager.sendAlertMessage("&cWrong argument: do /arena to see all the commands");
 			return false;
 		}
 		  Player player = (Player) sender;

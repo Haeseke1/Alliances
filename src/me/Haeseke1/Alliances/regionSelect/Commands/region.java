@@ -30,23 +30,23 @@ public class region implements CommandExecutor {
 		}
 		
 		if(!(sender instanceof Player)){
-			String message = MessageManager.getMessage("Command_Error_Not_A_User");
+			String message = "This command needs to be executed by a player";
 			MessageManager.sendAlertMessage(message);
 			return false;
 		}
 		Player player = (Player) sender;
-		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		String wrong_arg = "&cWrong argument do: /region/";
 		
 		if(args[0].equalsIgnoreCase("tool")){
 			player.getInventory().addItem(regionSelect.createItem());
-			String message = MessageManager.getMessage("Command_Region_Tool_Answer");
+			String message = "&2You've received a region wand";
 			MessageManager.sendMessage(player, message);
 			return false;
 		}
 		
 		if(args[0].equalsIgnoreCase("pos1")){
 			regionSelect.leftClick.put(player, player.getLocation());
-			String message = MessageManager.getMessage("Command_Region_Pos1_Answer");
+			String message = "&2Set pos1 (&6%x%&2,&6%y%&2,&6%z%&2)";
 			message = message.replace("%x%", "" + player.getLocation().getBlockX())
 					.replace("%y%", "" + player.getLocation().getBlockY())
 					.replace("%z%", "" + player.getLocation().getBlockZ())
@@ -57,7 +57,7 @@ public class region implements CommandExecutor {
 		
 		if(args[0].equalsIgnoreCase("pos2")){
 			regionSelect.rightClick.put(player, player.getLocation());
-			String message = MessageManager.getMessage("Command_Region_Pos2_Answer");
+			String message = "&2Set pos2 (&6%x%&2,&6%y%&2,&6%z%&2)";
 			message = message.replace("%x%", "" + player.getLocation().getBlockX())
 					.replace("%y%", "" + player.getLocation().getBlockY())
 					.replace("%z%", "" + player.getLocation().getBlockZ())
@@ -69,17 +69,17 @@ public class region implements CommandExecutor {
 		if(args[0].equalsIgnoreCase("show")){
 			if(regionSelect.hasRegion(player)){
 				if(Particle_Timer.showRegion.contains(player)){
-					String message = MessageManager.getMessage("Command_Region_Show_Answer_Out");
+					String message = "&2Turned off the region visuals";
 					MessageManager.sendMessage(player, message);
 					Particle_Timer.showRegion.remove(player);
 				}else{
-					String message = MessageManager.getMessage("Command_Region_Show_Answer_In");
+					String message = "&2Turned on the region visuals";
 					MessageManager.sendMessage(player, message);
 					Particle_Timer.showRegion.add(player);
 				}
 				return false;
 			}else{
-				String message = MessageManager.getMessage("Command_Error_Select_Region");
+				String message = "&cYou need to select a region first";
 				MessageManager.sendMessage(player, message);
 				return false;
 			}

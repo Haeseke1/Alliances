@@ -108,7 +108,7 @@ public class God {
 		if(contest){
 			if(time_Contested == 5){
 				if(taking_over != null){
-					String message = MessageManager.getMessage("Outpost_Contested");
+					String message = "&bThis outpost is now contested!";
 					message = message.replace("%outpost_name%", name);
 					taking_over.sendPlayersMessage(message);
 					if(owner != null){
@@ -121,12 +121,12 @@ public class God {
 			return;
 		}
 		if(!isTakingOver && taking_over != null){
-			String message = MessageManager.getMessage("Outpost_Not_Taking_Over_Anymore");
+			String message = "&lThis outpost is now neutral";
 			message = message.replace("%outpost_name%", name);
 			taking_over.sendPlayersMessage(message);
 			taking_over = null;
 			if(owner != null){
-				message = MessageManager.getMessage("Outpost_Safe");
+				message = "&lThis outpost is now safe";
 				message = message.replace("%outpost_name%", name);
 				owner.sendPlayersMessage(message);
 			}
@@ -139,62 +139,42 @@ public class God {
 			int n4 = Timer.take_overTime;
 
 			if(time_taking_over == 0){
-				String message = MessageManager.getMessage("Outpost_Taking_Over_0");
-				message = message.replace("%outpost_name%", name)
-						.replace("%taking_over_name%", taking_over.getName());
+				String message = "&6" + name + "&c is under attack by an alliance! (&60%&c)";
 				MessageManager.sendBroadcast(message);
 				if(owner != null){
-					message = MessageManager.getMessage("Outpost_Losing");
-					message = message.replace("%outpost_name%", name)
-							.replace("%taking_over_name%", taking_over.getName());
+					message = "&cYou're losing an outpost!";
 					owner.sendPlayersMessage(message); 
 				}
 			}
 			if(time_taking_over == n1){
-				String message = MessageManager.getMessage("Outpost_Taking_Over_25");
-				message = message.replace("%outpost_name%", name)
-						.replace("%taking_over_name%", taking_over.getName());
+				String message = "&6" + name + "&c is under attack by an alliance! (&625%&c)";
 				MessageManager.sendBroadcast(message);
 				if(owner != null){
-					message = MessageManager.getMessage("Outpost_Losing");
-					message = message.replace("%outpost_name%", name)
-							.replace("%taking_over_name%", taking_over.getName());
+					message = "&cYou're losing an outpost!";
 					owner.sendPlayersMessage(message);  
 				}
 			}
 			if(time_taking_over == n2){
-				String message = MessageManager.getMessage("Outpost_Taking_Over_50");
-				message = message.replace("%outpost_name%", name)
-						.replace("%taking_over_name%", taking_over.getName());
+				String message = "&6" + name + "&c is under attack by an alliance! (&650%&c)";
 				MessageManager.sendBroadcast(message);
 				if(owner != null){
-					message = MessageManager.getMessage("Outpost_Losing");
-					message = message.replace("%outpost_name%", name)
-							.replace("%taking_over_name%", taking_over.getName());
+					message = "&cYou're losing an outpost!";
 					owner.sendPlayersMessage(message); 
 				}
 			}
 			if(time_taking_over == n3){
-				String message = MessageManager.getMessage("Outpost_Taking_Over_75");
-				message = message.replace("%outpost_name%", name)
-						.replace("%taking_over_name%", taking_over.getName());
+				String message = "&6" + name + "&c is under attack by an alliance! (&675%&c)";
 				MessageManager.sendBroadcast(message);
 				if(owner != null){
-					message = MessageManager.getMessage("Outpost_Losing");
-					message = message.replace("%outpost_name%", name)
-							.replace("%taking_over_name%", taking_over.getName());
+					message = "&cYou're losing an outpost!";
 					owner.sendPlayersMessage(message); 
 				}
 			}
 			if(time_taking_over == n4){
-				String message = MessageManager.getMessage("Outpost_Taking_Over_100");
-				message = message.replace("%outpost_name%", name)
-						.replace("%taking_over_name%", taking_over.getName());
+				String message = "&6" + name + "&c is under attack by an alliance! (&6100%&c)";
 				MessageManager.sendBroadcast(message);
 				if(owner != null){
-					message = MessageManager.getMessage("Outpost_Losing");
-					message = message.replace("%outpost_name%", name)
-							.replace("%taking_over_name%", taking_over.getName());
+					message = "&cYou're losing an outpost!";
 					owner.sendPlayersMessage(message);  
 				}
 				owner = taking_over;

@@ -47,13 +47,9 @@ public class InventoryEvents implements Listener{
 					if(AllianceManager.alliExist(event.getCurrentItem().getItemMeta().getDisplayName())){
 						Alliance alli = AllianceManager.getAlliance(event.getCurrentItem().getItemMeta().getDisplayName());
 						alli.addMember(player.getUniqueId());
-						String message = MessageManager.getMessage("Command_Alliance_Join_Answer");
-						message = message.replace("%alli_name%", alli.getName());
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player, "&2You've succesfully joined the alliance");
 					}else{
-						String message = MessageManager.getMessage("Command_Alliance_Join_Not_Exist");
-						message = message.replace("%alli_name%", event.getCurrentItem().getItemMeta().getDisplayName());
-						MessageManager.sendMessage(player, message);
+						MessageManager.sendMessage(player, "&cThis alliance doesn't exists");
 					}
 				}
 				player.closeInventory();

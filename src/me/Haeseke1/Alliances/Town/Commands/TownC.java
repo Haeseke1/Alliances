@@ -24,7 +24,7 @@ public class TownC implements CommandExecutor{
 		}
 		
 		if(!(sender instanceof Player)){
-			String message = MessageManager.getMessage("Command_Error_Not_A_User");
+			String message = "This command needs to be executed by a player";
 			MessageManager.sendAlertMessage(message);
 			return false;
 		}
@@ -32,11 +32,11 @@ public class TownC implements CommandExecutor{
 
 		Player player = (Player) sender;
 		
-		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		String wrong_arg = "Wrong argument do: /town";
 		
 		if(args[0].equalsIgnoreCase("create") && args.length > 1){
 			if(TownManager.isTown(args[1])){
-				String message = MessageManager.getMessage("Town_Already_Exist");
+				String message = "&6%town_name%&c does already exists";
 				message = message.replace("%town_name%", args[1]);
 				MessageManager.sendMessage(player, message);
 				return false;
@@ -48,7 +48,7 @@ public class TownC implements CommandExecutor{
 		
 		if(args[0].equalsIgnoreCase("claim") && args.length > 1){
 			if(!TownManager.isTown(args[1])){
-				String message = MessageManager.getMessage("Command_Town_Claim_Town_Doesnt_Exist");
+				String message = "&c";
 				message = message.replace("%town_name%", args[1]);
 				MessageManager.sendMessage(player, message);
 				return false;
@@ -60,17 +60,17 @@ public class TownC implements CommandExecutor{
 		
 		if(args[0].equalsIgnoreCase("show")){
 			if(!AllianceManager.playerIsInAlli(player)){
-				String message = MessageManager.getMessage("Command_Error_Not_In_A_Alliance");
+				String message = "&cYou aren't in an alliance";
 				MessageManager.sendMessage(player, message);
 				return false;
 			}
 
 			if(Particle_Timer.showRegion.contains(player)){
-				String message = MessageManager.getMessage("Command_Town_Show_Answer_Off");
+				String message = "&cTurned off town visuals";
 				MessageManager.sendMessage(player, message);
 				Particle_Timer.showRegion.remove(player);
 			}else{
-				String message = MessageManager.getMessage("Command_Town_Show_Answer_On");
+				String message = "&cTurned on town visuals";
 				MessageManager.sendMessage(player, message);
 				Particle_Timer.showRegion.add(player);
 			}

@@ -24,26 +24,23 @@ public class Outpost implements CommandExecutor {
 		}
 		
 		if(!(sender instanceof Player)){
-			String message = MessageManager.getMessage("Command_Error_Not_A_User");
-			MessageManager.sendAlertMessage(message);
+			MessageManager.sendAlertMessage("This command needs to be executed by a player");
 			return false;
 		}
 		Player player = (Player) sender;
-		String wrong_arg = MessageManager.getMessage("Command_Error_Wrong_Arguments");
+		MessageManager.sendMessage(player, "&cWrong argument do: /outpost");
 	 if(player.hasPermission("Alliances.outpost.*")){
 		if(args[0].equalsIgnoreCase("addreward") && args.length > 1){
 			try{
 				if(OutpostType.getOutpostType(args[2]) == null){
-					String message = MessageManager.getMessage("Command_Outpost_AddReward_WrongType");
-					MessageManager.sendMessage(player, message);
+					MessageManager.sendMessage(player, "&cThis outposttype doesn't exists");
 					return false;
 				}
 				OutpostManager.addReward(player.getItemInHand(), Integer.parseInt(args[1]), OutpostType.getOutpostType(args[2]));
-				String message = MessageManager.getMessage("Command_Outpost_AddReward_Answer");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&2You've added a reward to the outpost");
 				return false;
 			}catch(Exception e){
-				MessageManager.sendMessage(player, wrong_arg);
+				MessageManager.sendMessage(player, "&cWrong argument do: /outpost");
 			}
 			return false;
 		}
@@ -66,7 +63,7 @@ public class Outpost implements CommandExecutor {
 			outpostCreate.onCommand(sender, args);
 			return false;
 		}
-		MessageManager.sendMessage(player, wrong_arg);
+		MessageManager.sendMessage(player, "&cWrong argument do: /outpost");
 		return false;
 	}
 	return false;

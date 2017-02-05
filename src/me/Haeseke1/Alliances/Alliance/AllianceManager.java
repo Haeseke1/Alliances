@@ -22,12 +22,12 @@ public class AllianceManager {
 
 	public static boolean createNewAlliance(String name, Player owner, AllianceType type) {
 		if (playerIsInAlli(owner)) {
-			String message = MessageManager.getMessage("Command_Alliance_Join_And_Create_Already_In_A_Alliance");
+			String message = "&cYou're already in an alliance";
 			MessageManager.sendMessage(owner, message);
 			return false;
 		}
 		if(alliExist(name)){
-			String message = MessageManager.getMessage("Command_Alliance_Create_Already_Exist");
+			String message = "&6%alli_name%&c does already exists";
 			message = message.replace("%alli_name%", name);
 			MessageManager.sendMessage(owner, message);
 			return false;

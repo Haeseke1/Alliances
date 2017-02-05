@@ -38,7 +38,7 @@ public class regionSelect implements Listener{
 			if(event.getAction().equals(Action.LEFT_CLICK_BLOCK)){
 				Location loc = event.getClickedBlock().getLocation();
 				leftClick.put(event.getPlayer(), loc);
-				String message = MessageManager.getMessage("Command_Region_Pos1_Answer");
+				String message = "&2Set pos1 (&6%x%&2,&6%y%&2,&6%z%&2)";
 				message = message.replace("%x%", "" + player.getLocation().getBlockX())
 						.replace("%y%", "" + player.getLocation().getBlockY())
 						.replace("%z%", "" + player.getLocation().getBlockZ())
@@ -49,7 +49,7 @@ public class regionSelect implements Listener{
 			if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
 				Location loc = event.getClickedBlock().getLocation();
 				rightClick.put(event.getPlayer(), loc);
-				String message = MessageManager.getMessage("Command_Region_Pos2_Answer");
+				String message = "&2Set pos2 (&6%x%&2,&6%y%&2,&6%z%&2)";
 				message = message.replace("%x%", "" + player.getLocation().getBlockX())
 						.replace("%y%", "" + player.getLocation().getBlockY())
 						.replace("%z%", "" + player.getLocation().getBlockZ())
