@@ -47,6 +47,7 @@ public class Wither_SkeletonLV5 extends EntitySkeleton{
 		}
         this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
         this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
+        this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityHuman.class, 1.2D, false));
 	}
 	
 	protected void initAttributes(){

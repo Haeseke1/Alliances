@@ -6,13 +6,14 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_8_R2.util.UnsafeList;
-import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Wither;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
+import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityWither;
-import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
+import net.minecraft.server.v1_8_R2.PathfinderGoalArrowAttack;
+import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R2.World;
 
@@ -34,6 +35,8 @@ public class WitherLV1 extends EntityWither{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		this.goalSelector.a(2, new PathfinderGoalArrowAttack(this, 1.0D, 40, 20.0F));
+		this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 	}
 	
 	

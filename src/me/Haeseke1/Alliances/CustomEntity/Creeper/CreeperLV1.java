@@ -66,16 +66,19 @@ public class CreeperLV1 extends EntityCreeper{
 	
 	
     protected void b(float f) {
-    	Bukkit.broadcastMessage("get called pls");
         this.fuseTicks = (int) ((float) this.fuseTicks + f * 1.5F);
         if (this.fuseTicks > this.maxFuseTicks - 5) {
             this.fuseTicks = this.maxFuseTicks - 5;
         }
     }
+    
+    @Override
+    public void die(){
+    	this.dead = false;
+    }
 	
     @Override
     public void t_() {
-    	Bukkit.broadcastMessage("You will get the t later");
         if (this.isAlive()) {
             if (this.cn()) {
                 this.a(1);
@@ -97,20 +100,18 @@ public class CreeperLV1 extends EntityCreeper{
                 explode();
             }
         }
+        super.t_();
     }
     
     
 	public boolean damageEntity(DamageSource damagesource, float f) {
-		Bukkit.broadcastMessage("Hello damage");
 		if(damagesource.isExplosion()){
-			Bukkit.broadcastMessage("RIP damage");
 			return false;
 		}
 		return super.damageEntity(damagesource, f);
 	}
     
     private void explode(){
-    	Bukkit.broadcastMessage("Own explosion");
         float f = 1.0F;
         this.world.createExplosion(this, this.locX, this.locY, this.locZ, f, false, false);
         fuseTicks = 0;

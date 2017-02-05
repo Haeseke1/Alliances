@@ -2,12 +2,16 @@ package me.Haeseke1.Alliances.CustomEntity.Skeleton;
 
 import java.lang.reflect.Field;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_8_R2.util.UnsafeList;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+
+import me.Haeseke1.Alliances.Main.Main;
+
 import org.bukkit.event.entity.EntityCombustEvent;
 
 import net.minecraft.server.v1_8_R2.Enchantment;
@@ -20,6 +24,7 @@ import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.ItemStack;
 import net.minecraft.server.v1_8_R2.Items;
+import net.minecraft.server.v1_8_R2.PathfinderGoalArrowAttack;
 import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
@@ -45,6 +50,7 @@ public class SkeletonLV2 extends EntitySkeleton{
 		}
         this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
         this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
+        this.goalSelector.a(4, new PathfinderGoalArrowAttack(this, 1.0D, 20, 60, 15.0F));
 	}
 	
 	@Override
@@ -57,9 +63,10 @@ public class SkeletonLV2 extends EntitySkeleton{
 		return super.bC();
 	}
 	
+	@Override
     public void a(EntityLiving entityliving, float f) {
     	for(int a = 0; a < 2; a++){
-        	EntityArrow entityarrow = new EntityArrow(this.world, this, entityliving, 1.6F, (float) (14 - this.world.getDifficulty().a() * 4));
+    		EntityArrow entityarrow = new EntityArrow(this.world, this, entityliving, 1.6F, (float) (14 - this.world.getDifficulty().a() * 4));
             int i = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_DAMAGE.id, this.bA());
             int j = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK.id, this.bA());
 
@@ -71,6 +78,31 @@ public class SkeletonLV2 extends EntitySkeleton{
             if (j > 0) {
                 entityarrow.setKnockbackStrength(j);
             }
+
+            if (EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_FIRE.id, this.bA()) > 0 || this.getSkeletonType() == 1) {
+                // CraftBukkit start - call EntityCombustEvent
+                EntityCombustEvent event = new EntityCombustEvent(entityarrow.getBukkitEntity(), 100);
+                this.world.getServer().getPluginManager().callEvent(event);
+
+                if (!event.isCancelled()) {
+                    entityarrow.setOnFire(event.getDuration());
+                }
+                // CraftBukkit end
+            }
+
+            // CraftBukkit start
+            org.bukkit.event.entity.EntityShootBowEvent event = org.bukkit.craftbukkit.v1_8_R2.event.CraftEventFactory.callEntityShootBowEvent(this, this.bA(), entityarrow, 0.8F);
+            if (event.isCancelled()) {
+                event.getProjectile().remove();
+                return;
+            }
+
+            if (event.getProjectile() == entityarrow.getBukkitEntity()) {
+                world.addEntity(entityarrow);
+            }
+            // CraftBukkit end
+
+            this.makeSound("random.bow", 1.0F, 1.0F / (this.bc().nextFloat() * 0.4F + 0.8F));
     	}
     }
 	

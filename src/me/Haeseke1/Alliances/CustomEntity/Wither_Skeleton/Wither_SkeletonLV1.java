@@ -2,19 +2,21 @@ package me.Haeseke1.Alliances.CustomEntity.Wither_Skeleton;
 
 import java.lang.reflect.Field;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_8_R2.util.UnsafeList;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.inventory.EntityEquipment;
 
 import net.minecraft.server.v1_8_R2.Entity;
 import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityLiving;
 import net.minecraft.server.v1_8_R2.EntitySkeleton;
-import net.minecraft.server.v1_8_R2.EntityVillager;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.ItemStack;
 import net.minecraft.server.v1_8_R2.Items;
@@ -46,6 +48,7 @@ public class Wither_SkeletonLV1 extends EntitySkeleton{
 		}
         this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
         this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
+        this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityHuman.class, 1.2D, false));
 	}
 	
 	protected void initAttributes(){
@@ -87,6 +90,12 @@ public class Wither_SkeletonLV1 extends EntitySkeleton{
 		mcWorld.addEntity(customEntity, SpawnReason.CUSTOM);
 		Skeleton sk = (Skeleton) customEntity.getBukkitEntity();
 		sk.setSkeletonType(SkeletonType.WITHER);
+		EntityEquipment ee = sk.getEquipment();
+		ee.setBoots(new org.bukkit.inventory.ItemStack(Material.DIAMOND_BOOTS));
+		ee.setLeggings(new org.bukkit.inventory.ItemStack(Material.DIAMOND_LEGGINGS));
+		ee.setHelmet(new org.bukkit.inventory.ItemStack(Material.DIAMOND_HELMET));
+		ee.setChestplate(new org.bukkit.inventory.ItemStack(Material.DIAMOND_CHESTPLATE));
+		ee.setItemInHand(new org.bukkit.inventory.ItemStack(Material.DIAMOND_SWORD));
 		sk.setCustomNameVisible(true);
 		sk.setCustomName(name);
 		return sk;

@@ -54,6 +54,11 @@ public class CreeperLV5 extends EntityCreeper{
 	}
 
     @Override
+    public void die(){
+    	this.dead = false;
+    }
+	
+    @Override
     public void t_() {
         if (this.isAlive()) {
             if (this.cn()) {
@@ -76,7 +81,6 @@ public class CreeperLV5 extends EntityCreeper{
                 explode();
             }
         }
-
         super.t_();
     }
     

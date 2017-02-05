@@ -43,7 +43,7 @@ public class BlazeLV4 extends EntityBlaze{
 		}
 		this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
         this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
-        this.goalSelector.a(4, new BlazeLV1.PathfinderGoalCustomBlazeFireball(this));
+        this.goalSelector.a(4, new BlazeLV4.PathfinderGoalCustomBlazeFireball(this));
 	}
 
 	
@@ -96,66 +96,29 @@ public class BlazeLV4 extends EntityBlaze{
 
             return entityliving != null && entityliving.isAlive();
         }
-
-        public void c() {
-            this.b = 0;
-        }
-
-        public void d() {
-            this.a.a(false);
-        }
+        
 
         public void e() {
-            --this.c;
-            EntityLiving entityliving = this.a.getGoalTarget();
-            double d0 = this.a.h(entityliving);
-
-            if (d0 < 4.0D) {
-                if (this.c <= 0) {
-                    this.c = 20;
-                    this.a.r(entityliving);
-                }
-
-                this.a.getControllerMove().a(entityliving.locX, entityliving.locY, entityliving.locZ, 1.0D);
-            } else if (d0 < 256.0D) {
+        	b++;
+        	if(b == 20){
+        		b = 0;
+            	EntityLiving entityliving = this.a.getGoalTarget();
+            	double d0 = this.a.h(entityliving);
                 double d1 = entityliving.locX - this.a.locX;
                 double d2 = entityliving.getBoundingBox().b + (double) (entityliving.length / 2.0F) - (this.a.locY + (double) (this.a.length / 2.0F));
                 double d3 = entityliving.locZ - this.a.locZ;
+                float f = MathHelper.c(MathHelper.sqrt(d0)) * 0.5F;
 
-                if (this.c <= 0) {
-                    ++this.b;
-                    if (this.b == 1) {
-                        this.c = 60;
-                        this.a.a(true);
-                    } else if (this.b <= 4) {
-                        this.c = 6;
-                    } else {
-                        this.c = 100;
-                        this.b = 0;
-                        this.a.a(false);
-                    }
+                this.a.world.a((EntityHuman) null, 1009, new BlockPosition((int) this.a.locX, (int) this.a.locY, (int) this.a.locZ), 0);
 
-                    if (this.b > 1) {
-                        float f = MathHelper.c(MathHelper.sqrt(d0)) * 0.5F;
+                for (int i = 0; i < 3; ++i) {
+                    EntitySmallFireball entitysmallfireball = new EntitySmallFireball(this.a.world, this.a, d1 + this.a.bc().nextGaussian() * (double) f, d2, d3 + this.a.bc().nextGaussian() * (double) f);
 
-                        this.a.world.a((EntityHuman) null, 1009, new BlockPosition((int) this.a.locX, (int) this.a.locY, (int) this.a.locZ), 0);
-
-                        for (int i = 0; i < 8; ++i) {
-                            EntitySmallFireball entitysmallfireball = new EntitySmallFireball(this.a.world, this.a, d1 + this.a.bc().nextGaussian() * (double) f, d2, d3 + this.a.bc().nextGaussian() * (double) f);
-
-                            entitysmallfireball.locY = this.a.locY + (double) (this.a.length / 2.0F) + 0.5D;
-                            this.a.world.addEntity(entitysmallfireball);
-                        }
-                    }
+                    entitysmallfireball.locY = this.a.locY + (double) (this.a.length / 2.0F) + 0.5D;
+                    this.a.world.addEntity(entitysmallfireball);
                 }
-
-                this.a.getControllerLook().a(entityliving, 10.0F, 10.0F);
-            } else {
-                this.a.getNavigation().n();
-                this.a.getControllerMove().a(entityliving.locX, entityliving.locY, entityliving.locZ, 1.0D);
-            }
-
-            super.e();
+                super.e();
+        	}
         }
     }
 }
