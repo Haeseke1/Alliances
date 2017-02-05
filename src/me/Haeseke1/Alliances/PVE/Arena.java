@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
@@ -91,19 +92,24 @@ public class Arena {
 			player.teleport(playerSpawns.get(i),TeleportCause.ENDER_PEARL);
 			i++;
 		}
-		this.playerAlive = group.members;
+		this.playerAlive = new ArrayList<Player>();
+		for(Player player : group.members){
+			this.playerAlive.add(player);
+		}
 		this.group = group;
 		startCountdown = true;
 	}
 	
 	
 	public void stopArena(boolean playerWon){
+		Bukkit.broadcastMessage("GG");
 		if(!playerWon){
 			for(LivingEntity le : alive){
 				le.remove();
 			}
 			alive = new ArrayList<>();
 		}
+		Bukkit.broadcastMessage("GG");
 		group.disband();
 		playing = false;
 		busy = false;

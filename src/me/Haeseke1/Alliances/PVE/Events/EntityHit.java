@@ -1,5 +1,6 @@
 package me.Haeseke1.Alliances.PVE.Events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -32,12 +33,14 @@ public class EntityHit implements Listener {
 						return;
 					}
 					if(event.getFinalDamage() >= player.getHealth()){
+						event.setCancelled(true);
 						player.setGameMode(GameMode.SPECTATOR);
 						player.sendMessage(ChatColor.RED + "You died");
 						player.setHealth(player.getMaxHealth());
-						player.setFlying(false);
-						player.setAllowFlight(false);
+						player.setFlying(true);
+						player.setAllowFlight(true);
 						arena.playerAlive.remove(player);
+						Bukkit.broadcastMessage(arena.playerAlive.size() + " ");
 						if(arena.playerAlive.isEmpty()){
 							arena.stopArena(false);
 						}

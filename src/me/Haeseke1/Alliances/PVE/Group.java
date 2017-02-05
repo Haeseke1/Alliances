@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -39,16 +40,19 @@ public class Group {
 	
 	
 	public void disband(){
-		groups.remove(this);
-		PVE.main.removeQueue(this);
-		
+		Bukkit.broadcastMessage("GG");
 		for(Player player : members){
+			Bukkit.broadcastMessage("GG");
 			aPlayer aplayer = APlayerManager.getAPlayer(player);
 			aplayer.is_in_pve_lobby = false;
 			aplayer.is_in_pve_arena = false;
 			aplayer.firstRun = true;
+			player.setGameMode(GameMode.SURVIVAL);
 			player.teleport(memberLocations.get(player),TeleportCause.ENDER_PEARL);
 		}
+		Bukkit.broadcastMessage("GG");
+		groups.remove(this);
+		PVE.main.removeQueue(this);
 	}
 	
 	public void sendPlayersMessage(String message, Player exception) {
