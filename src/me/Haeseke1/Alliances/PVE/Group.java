@@ -9,6 +9,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
+import me.Haeseke1.Alliances.APlayer.APlayerManager;
+import me.Haeseke1.Alliances.APlayer.aPlayer;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Group {
@@ -26,6 +28,9 @@ public class Group {
 		this.owner = owner;
 		this.settings = new Settings();
 		for(Player player : members){
+			aPlayer aplayer = APlayerManager.getAPlayer(player);
+			aplayer.is_in_pve_lobby = true;
+			aplayer.firstRun = true;
 			memberLocations.put(player, player.getLocation());
 			player.teleport(PVE.main.lobby,TeleportCause.ENDER_PEARL);
 		}
@@ -36,7 +41,12 @@ public class Group {
 	public void disband(){
 		groups.remove(this);
 		PVE.main.removeQueue(this);
+		
 		for(Player player : members){
+			aPlayer aplayer = APlayerManager.getAPlayer(player);
+			aplayer.is_in_pve_lobby = false;
+			aplayer.is_in_pve_arena = false;
+			aplayer.firstRun = true;
 			player.teleport(memberLocations.get(player),TeleportCause.ENDER_PEARL);
 		}
 	}

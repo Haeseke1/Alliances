@@ -10,10 +10,13 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
+import me.Haeseke1.Alliances.APlayer.APlayerManager;
+import me.Haeseke1.Alliances.APlayer.aPlayer;
+
 public class Arena {
 	
 	public List<LivingEntity> alive = new ArrayList<LivingEntity>();
-	
+	public List<Player> playerAlive = new ArrayList<Player>();
 	
 	public List<Location> mobSpawns = new ArrayList<Location>();
 	public List<Location> playerSpawns = new ArrayList<Location>();
@@ -81,9 +84,14 @@ public class Arena {
 		busy = true;
 		int i = 0;
 		for(Player player : group.members){
+			aPlayer aplayer = APlayerManager.getAPlayer(player);
+			aplayer.is_in_pve_lobby = false;
+			aplayer.is_in_pve_arena = true;
+			aplayer.firstRun = true;
 			player.teleport(playerSpawns.get(i),TeleportCause.ENDER_PEARL);
 			i++;
 		}
+		this.playerAlive = group.members;
 		this.group = group;
 		startCountdown = true;
 	}

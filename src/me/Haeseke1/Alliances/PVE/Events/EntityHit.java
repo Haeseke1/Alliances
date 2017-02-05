@@ -27,23 +27,23 @@ public class EntityHit implements Listener {
 			}
 			for(Arena arena : PVE.main.arenas){
 				if(arena.group != null && arena.group.members.contains(player)){
+					if(!arena.playerAlive.contains(player)){
+						event.setCancelled(true);
+						return;
+					}
 					if(event.getFinalDamage() >= player.getHealth()){
 						player.setGameMode(GameMode.SPECTATOR);
 						player.sendMessage(ChatColor.RED + "You died");
 						player.setHealth(player.getMaxHealth());
 						player.setFlying(false);
 						player.setAllowFlight(false);
-						for(Player gp : arena.group.members){
-							if(!gp.getGameMode().equals(GameMode.SPECTATOR)){
-								return;
-							}
+						arena.playerAlive.remove(player);
+						if(arena.playerAlive.isEmpty()){
+							arena.stopArena(false);
 						}
-						arena.stopArena(false);
 					}
 				}
 			}
-
-			return;
 		}
 	}
 	

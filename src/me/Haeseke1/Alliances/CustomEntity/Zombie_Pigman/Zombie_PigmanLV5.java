@@ -76,11 +76,14 @@ public class Zombie_PigmanLV5 extends EntityPigZombie{
 			}
 		}
 		Random r = new Random();
+		if(damagesource.getEntity() == null && !(damagesource.getEntity() instanceof EntityHuman)){
+			return true;
+		}
 		if(r.nextInt(20) == 0){	
 			for(int i = 0; i < 5; i++){
 				Zombie zombie = ZombieLV4.spawn(new Location((org.bukkit.World) this.world.getWorld(),this.locX,this.locY,this.locZ), ChatColor.RED + "Minion");
 				zombie.setTarget((LivingEntity) damagesource.getEntity().getBukkitEntity());
-				minions.add(zombie);		
+				minions.add(zombie);
 			}
 		}
 		return true;

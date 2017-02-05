@@ -75,6 +75,9 @@ public class Zombie_PigmanLV4 extends EntityPigZombie{
 				}
 			}
 		}
+		if(damagesource.getEntity() == null && !(damagesource.getEntity() instanceof EntityHuman)){
+			return true;
+		}
 		Random r = new Random();
 		if(r.nextInt(20) == 0){	
 			for(int i = 0; i < 5; i++){
