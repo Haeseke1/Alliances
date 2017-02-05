@@ -19,8 +19,10 @@ public class RightClickSword implements Listener{
 	    Player player = event.getPlayer();
 	    if(player.getItemInHand() == null){return;}
 		if(event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK){return;}
-        Sword sword = new Sword("Night Blade", player, 120, "INVISIBLE");
-	    sword.giveEffect(10, 1,Sound.ENDERDRAGON_WINGS,true);
+        Sword night_blade = new Sword("Night Blade", player, 120, "INVISIBLE");
+	    night_blade.giveEffect(10, 1,Sound.ENDERDRAGON_WINGS,true);
+	    Sword warrior_sword = new Sword("Warrior Sword",player,60,"REGENERATION");
+	    warrior_sword.giveEffect(10, 2, Sound.LEVEL_UP, false);
 	}
 	
 }

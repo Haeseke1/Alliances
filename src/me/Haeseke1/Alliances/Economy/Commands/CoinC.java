@@ -55,21 +55,9 @@ public class CoinC implements CommandExecutor{
 					MessageManager.sendMessage(player, message);
 					return false;
 				}
-				String message = MessageManager.getMessage("Command_Coin_Balance_Other_Answer");
-				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-				.replace("%coin%", "")
-				.replace("%target_coin%", "" + Coins.getPlayerCoins(args[1]))
-				.replace("%sender_name%", "" + sender.getName())
-				.replace("%target_name%", "" + args[1]);
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&6" + sender.getName() + "&8 has " + Coins.getPlayerCoins(sender.getName()) + " &8coins");
 			} else {
-				String message = MessageManager.getMessage("command_coin_balance_answer");
-				message = message.replace("%sender_coin%", "" + Coins.getPlayerCoins(sender.getName()))
-				.replace("%coin%", "")
-				.replace("%target_coin%", "")
-				.replace("%sender_name%", "" + sender.getName())
-				.replace("%target_name%", "");
-				MessageManager.sendMessage(player, message);
+				MessageManager.sendMessage(player, "&8You've &6" + Coins.getPlayerCoins(player) + "&8 coins");
 			}
 			return false;
 		}
