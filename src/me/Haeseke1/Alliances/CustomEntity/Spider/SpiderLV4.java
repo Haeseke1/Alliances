@@ -42,7 +42,8 @@ public class SpiderLV4 extends EntitySpider{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, 1.0D, false));
+		this.goalSelector.a(3, new PathfinderGoalLeapAtTarget(this, 0.4F));
+        this.goalSelector.a(4, new SpiderLV5.PathfinderGoalSpiderMeleeAttack(this, EntityHuman.class));
         this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
         this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 	}
@@ -84,4 +85,25 @@ public class SpiderLV4 extends EntitySpider{
 		return spider;
 	}
 
+	static class PathfinderGoalSpiderMeleeAttack extends PathfinderGoalMeleeAttack {
+
+        public PathfinderGoalSpiderMeleeAttack(EntitySpider entityspider, Class<? extends Entity> oclass) {
+            super(entityspider, oclass, 1.0D, true);
+        }
+
+        public boolean b() {
+            float f = this.b.c(1.0F);
+
+            if (f >= 0.5F && this.b.bc().nextInt(100) == 0) {
+                this.b.setGoalTarget((EntityLiving) null);
+                return false;
+            } else {
+                return super.b();
+            }
+        }
+
+        protected double a(EntityLiving entityliving) {
+            return (double) (4.0F + entityliving.width);
+        }
+    }
 }

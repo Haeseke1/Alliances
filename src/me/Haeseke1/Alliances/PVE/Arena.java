@@ -108,46 +108,91 @@ public class Arena {
 		for(Entry<Integer, Integer> entry : set.zombies.entrySet()){
 			for(int i = 0; i < entry.getValue();i++){
 				alive.add(Mob_Manager.spawnZombie(entry.getKey(), mobSpawns.get(loc)));
+				if(loc == mobSpawns.size() - 1){
+					loc = 0;
+				}else{
+					loc++;
+				}
 			}
 		}
 		for(Entry<Integer, Integer> entry : set.blazes.entrySet()){
 			for(int i = 0; i < entry.getValue();i++){
 				alive.add(Mob_Manager.spawnBlaze(entry.getKey(), mobSpawns.get(loc)));
+				if(loc == mobSpawns.size() - 1){
+					loc = 0;
+				}else{
+					loc++;
+				}
 			}
 		}
 		for(Entry<Integer, Integer> entry : set.creepers.entrySet()){
 			for(int i = 0; i < entry.getValue();i++){
 				alive.add(Mob_Manager.spawnCreeper(entry.getKey(), mobSpawns.get(loc)));
+				if(loc == mobSpawns.size() - 1){
+					loc = 0;
+				}else{
+					loc++;
+				}
 			}
 		}
 		for(Entry<Integer, Integer> entry : set.endermans.entrySet()){
 			for(int i = 0; i < entry.getValue();i++){
 				alive.add(Mob_Manager.spawnEnderman(entry.getKey(), mobSpawns.get(loc)));
+				if(loc == mobSpawns.size() - 1){
+					loc = 0;
+				}else{
+					loc++;
+				}
 			}
 		}
 		for(Entry<Integer, Integer> entry : set.skeletons.entrySet()){
 			for(int i = 0; i < entry.getValue();i++){
 				alive.add(Mob_Manager.spawnSkeleton(entry.getKey(), mobSpawns.get(loc)));
+				if(loc == mobSpawns.size() - 1){
+					loc = 0;
+				}else{
+					loc++;
+				}
 			}
 		}
 		for(Entry<Integer, Integer> entry : set.spiders.entrySet()){
 			for(int i = 0; i < entry.getValue();i++){
 				alive.add(Mob_Manager.spawnSpider(entry.getKey(), mobSpawns.get(loc)));
+				if(loc == mobSpawns.size() - 1){
+					loc = 0;
+				}else{
+					loc++;
+				}
 			}
 		}
 		for(Entry<Integer, Integer> entry : set.wither_skeletons.entrySet()){
 			for(int i = 0; i < entry.getValue();i++){
 				alive.add(Mob_Manager.spawnWither_Skeleton(entry.getKey(), mobSpawns.get(loc)));
+				if(loc == mobSpawns.size() - 1){
+					loc = 0;
+				}else{
+					loc++;
+				}
 			}
 		}
 		for(Entry<Integer, Integer> entry : set.withers.entrySet()){
 			for(int i = 0; i < entry.getValue();i++){
 				alive.add(Mob_Manager.spawnWither(entry.getKey(), mobSpawns.get(loc)));
+				if(loc == mobSpawns.size() - 1){
+					loc = 0;
+				}else{
+					loc++;
+				}
 			}
 		}
 		for(Entry<Integer, Integer> entry : set.zombie_pigmans.entrySet()){
 			for(int i = 0; i < entry.getValue();i++){
 				alive.add(Mob_Manager.spawnZombie_Pigman(entry.getKey(), mobSpawns.get(loc)));
+				if(loc == mobSpawns.size() - 1){
+					loc = 0;
+				}else{
+					loc++;
+				}
 			}
 		}
 	}
