@@ -29,6 +29,16 @@ public class Counter implements Runnable{
 			time = 0;
 		}
 		for(aPlayer aplayer: aPlayer.online_Players){
+			if(aplayer.is_in_pve_lobby){
+				if(aplayer.firstRun){
+					aplayer.resetScore();
+					aplayer.setPlayerPVELobbyScoreboard();
+					return;
+				}else{
+					aplayer.updatePlayerPVELobbyScoreboard();
+					return;
+				}
+			}
 			if(player){
 				aplayer.setPlayerScoreBoard();
 			}
