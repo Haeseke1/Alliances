@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
@@ -37,7 +38,11 @@ public class aPlayer{
 	public Scoreboard scoreboard;
 	public List<String> scores = new ArrayList<String>();
 	public Objective sideBar;
+	public Team team;
 
+	public boolean is_in_pve_lobby = false;
+	public boolean is_in_pve_arena = false;
+	
 	public aPlayer(Player player, File f, FileConfiguration file) {
 		coins = Coins.getPlayerCoins(player);
 		this.player = player;
@@ -84,6 +89,14 @@ public class aPlayer{
     public int getLoses(){
     	return this.loses;
     }
+    
+    public void onPVEArenaJoin(){
+    	this.is_in_pve_arena = true;
+    }
+    
+    public void onPVELobbyJoin(){
+    	this.is_in_pve_lobby = true;
+    }
 
     public void addScore(String s){
     	scores.add(s);
@@ -104,6 +117,7 @@ public class aPlayer{
 			sideBar.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "Alliance"
 					+ ChatColor.GOLD + "  ===");
 		}
+	
 		sideBar.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "Alliance"
 				+ ChatColor.GOLD + "  ===");
 		if (!AllianceManager.playerIsInAlli(player)) {
@@ -180,4 +194,10 @@ public class aPlayer{
 		return;
 	}
     
+	public void setPlayerPVELobbyScoreboard(){
+		if(team == null){
+			team = scoreboard.registerNewTeam("&6     === PVE ===     ");
+		}
+	}
+	
 }
