@@ -109,6 +109,7 @@ import me.Haeseke1.Alliances.PVE.Commands.PVEC;
 import me.Haeseke1.Alliances.PVE.Events.BlockBreak_Place;
 import me.Haeseke1.Alliances.PVE.Events.EntityHit;
 import me.Haeseke1.Alliances.PVE.Events.PlayerClickInventory;
+import me.Haeseke1.Alliances.PVE.Events.PlayerCommand;
 import me.Haeseke1.Alliances.PVE.Events.PlayerMove;
 import me.Haeseke1.Alliances.PVE.Events.PlayerQuit;
 import me.Haeseke1.Alliances.PVE.Schedulers.Arena_Scheduler;
@@ -246,6 +247,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new PlayerMove(), this);
 		pm.registerEvents(new EntityHit(), this);
 		pm.registerEvents(new PlayerClickInventory(), this);
+		pm.registerEvents(new PlayerCommand(), this);
 	}
 
 	public void registerCommands() {

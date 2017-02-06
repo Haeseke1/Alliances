@@ -24,6 +24,7 @@ import me.Haeseke1.Alliances.PVE.Arena;
 import me.Haeseke1.Alliances.PVE.ArenaManager;
 import me.Haeseke1.Alliances.PVE.Group;
 import me.Haeseke1.Alliances.PVE.GroupManager;
+import me.Haeseke1.Alliances.PVE.PVE;
 import me.Haeseke1.Alliances.ScoreBoard.aScoreBoardManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -275,8 +276,9 @@ public class aPlayer{
 			return;
 		}
 		Group group = GroupManager.getGroup(player);
-		aScoreBoardManager.setScore(this, ChatColor.GOLD + "Coins:", 36, sideBar, ChatColor.AQUA + "", ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins");
-		aScoreBoardManager.setScore(this, ChatColor.GOLD + "Score:", 33, sideBar, ChatColor.BLACK + "", ChatColor.AQUA + "WIP");
+		aScoreBoardManager.setScore(this, ChatColor.GOLD + "Coins: " + ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins", 36, sideBar,"", null);
+		aScoreBoardManager.setScore(this, ChatColor.GOLD + "Score: " + ChatColor.AQUA + "WIP", 33, sideBar, ChatColor.AQUA + "", null);
+		aScoreBoardManager.setScore(this, ChatColor.GOLD + "Groups in the queue: " + PVE.main.queue.size(), 30, sideBar, ChatColor.BLACK + " ", null);
 		
 		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Coins on win: " + group.settings.getCoinReward(), 30, sideBar, ChatColor.BLACK + " ", null);
 		

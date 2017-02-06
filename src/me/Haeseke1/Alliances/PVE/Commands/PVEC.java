@@ -127,17 +127,21 @@ public class PVEC implements CommandExecutor{
 					MessageManager.sendMessage(player, ChatColor.RED + "Number must be between 1 and 4!");
 					return false;
 				}
+				if(AllianceManager.getAlliance(player) == null){
+					MessageManager.sendMessage(player, ChatColor.RED + "You need to be in a alliance to fight in a group!");
+					return false;
+				}
+				Alliance alli = AllianceManager.getAlliance(player);
+				if(alli.PVE && alli.PVE_players.contains(player)){
+					MessageManager.sendMessage(player, ChatColor.RED + "You are already in a PVE group with your alliance!");
+					return false;
+				}
 				if(amount == 1){
 					List<Player> players = new ArrayList<Player>();
 					players.add(player);
 					new Group(players, player);
 					return false;
 				}
-				if(AllianceManager.getAlliance(player) == null){
-					MessageManager.sendMessage(player, ChatColor.RED + "You need to be in a alliance to fight in a group!");
-					return false;
-				}
-				Alliance alli = AllianceManager.getAlliance(player);
 				if(alli.PVE){
 					MessageManager.sendMessage(player, ChatColor.RED + "Only 1 group can be made in a alliance!");
 					return false;
