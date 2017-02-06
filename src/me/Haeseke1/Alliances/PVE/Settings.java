@@ -25,6 +25,60 @@ public class Settings {
 	public HashMap<Integer,Integer> endermans = new HashMap<Integer, Integer>();
 	public HashMap<Integer,Integer> withers = new HashMap<Integer, Integer>();
 	
+	public final int ZombieLV1 = 2;
+	public final int ZombieLV2 = 5;
+	public final int ZombieLV3 = 10;
+	public final int ZombieLV4 = 20;
+	public final int ZombieLV5 = 35;
+	
+	public final int BlazeLV1 = 5;
+	public final int BlazeLV2 = 10;
+	public final int BlazeLV3 = 20;
+	public final int BlazeLV4 = 30;
+	public final int BlazeLV5 = 50;
+	
+	public final int SkeletonLV1 = 3;
+	public final int SkeletonLV2 = 7;
+	public final int SkeletonLV3 = 12;
+	public final int SkeletonLV4 = 18;
+	public final int SkeletonLV5 = 32;
+	
+	public final int SpiderLV1 = 3;
+	public final int SpiderLV2 = 7;
+	public final int SpiderLV3 = 12;
+	public final int SpiderLV4 = 18;
+	public final int SpiderLV5 = 32;
+	
+	public final int CreeperLV1 = 7;
+	public final int CreeperLV2 = 14;
+	public final int CreeperLV3 = 25;
+	public final int CreeperLV4 = 35;
+	public final int CreeperLV5 = 50;
+	
+	public final int Zombie_PigmanLV1 = 5;
+	public final int Zombie_PigmanLV2 = 10;
+	public final int Zombie_PigmanLV3 = 20;
+	public final int Zombie_PigmanLV4 = 35;
+	public final int Zombie_PigmanLV5 = 50;
+	
+	public final int Wither_SkeletonsLV1 = 3;
+	public final int Wither_SkeletonsLV2 = 6;
+	public final int Wither_SkeletonsLV3 = 11;
+	public final int Wither_SkeletonsLV4 = 21;
+	public final int Wither_SkeletonsLV5 = 36;
+	
+	public final int EndermanLV1 = 3;
+	public final int EndermanLV2 = 6;
+	public final int EndermanLV3 = 11;
+	public final int EndermanLV4 = 21;
+	public final int EndermanLV5 = 36;
+	
+	public final int WitherLV1 = 20;
+	public final int WitherLV2 = 30;
+	public final int WitherLV3 = 50;
+	public final int WitherLV4 = 75;
+	public final int WitherLV5 = 100;
+	
 	public int placing = 0;
 	public int level = 1;
 	
@@ -410,7 +464,153 @@ public class Settings {
 	}
 	
 	
-	
+	public int getCoinReward(){
+		int amount = 0;
+		if(zombies.containsKey(1)){
+			amount += zombies.get(1) * ZombieLV1;
+		}
+		if(zombies.containsKey(2)){
+			amount += zombies.get(2) * ZombieLV2;
+		}
+		if(zombies.containsKey(3)){
+			amount += zombies.get(3) * ZombieLV3;
+		}
+		if(zombies.containsKey(4)){
+			amount += zombies.get(4) * ZombieLV4;
+		}
+		if(zombies.containsKey(5)){
+			amount += zombies.get(5) * ZombieLV5;
+		}
+		
+		if (skeletons.containsKey(1)) {
+			amount += skeletons.get(1) * SkeletonLV1;
+		}
+		if (skeletons.containsKey(2)) {
+			amount += skeletons.get(2) * SkeletonLV2;
+		}
+		if (skeletons.containsKey(3)) {
+			amount += skeletons.get(3) * SkeletonLV3;
+		}
+		if (skeletons.containsKey(4)) {
+			amount += skeletons.get(4) * SkeletonLV4;
+		}
+		if (skeletons.containsKey(5)) {
+			amount += skeletons.get(5) * SkeletonLV5;
+		}
+		
+		if (spiders.containsKey(1)) {
+			amount += spiders.get(1) * SpiderLV1;
+		}
+		if (spiders.containsKey(2)) {
+			amount += spiders.get(2) * SpiderLV2;
+		}
+		if (spiders.containsKey(3)) {
+			amount += spiders.get(3) * SpiderLV3;
+		}
+		if (spiders.containsKey(4)) {
+			amount += spiders.get(4) * SpiderLV4;
+		}
+		if (spiders.containsKey(5)) {
+			amount += spiders.get(5) * SpiderLV5;
+		}
+		
+		if (creepers.containsKey(1)) {
+			amount += creepers.get(1) * CreeperLV1;
+		}
+		if (creepers.containsKey(2)) {
+			amount += creepers.get(2) * CreeperLV2;
+		}
+		if (creepers.containsKey(3)) {
+			amount += creepers.get(3) * CreeperLV3;
+		}
+		if (creepers.containsKey(4)) {
+			amount += creepers.get(4) * CreeperLV4;
+		}
+		if (creepers.containsKey(5)) {
+			amount += creepers.get(5) * CreeperLV5;
+		}
+		
+		if (zombie_pigmans.containsKey(1)) {
+			amount += zombie_pigmans.get(1) * Zombie_PigmanLV1;
+		}
+		if (zombie_pigmans.containsKey(2)) {
+			amount += zombie_pigmans.get(2) * Zombie_PigmanLV2;
+		}
+		if (zombie_pigmans.containsKey(3)) {
+			amount += zombie_pigmans.get(3) * Zombie_PigmanLV3;
+		}
+		if (zombie_pigmans.containsKey(4)) {
+			amount += zombie_pigmans.get(4) * Zombie_PigmanLV4;
+		}
+		if (zombie_pigmans.containsKey(5)) {
+			amount += zombie_pigmans.get(5) * Zombie_PigmanLV5;
+		}
+		
+		if (blazes.containsKey(1)) {
+			amount += blazes.get(1) * BlazeLV1;
+		}
+		if (blazes.containsKey(2)) {
+			amount += blazes.get(2) * BlazeLV2;
+		}
+		if (blazes.containsKey(3)) {
+			amount += blazes.get(3) * BlazeLV3;
+		}
+		if (blazes.containsKey(4)) {
+			amount += blazes.get(4) * BlazeLV4;
+		}
+		if (blazes.containsKey(5)) {
+			amount += blazes.get(5) * BlazeLV5;
+		}
+		
+		if (wither_skeletons.containsKey(1)) {
+			amount += wither_skeletons.get(1) * Wither_SkeletonsLV1;
+		}
+		if (wither_skeletons.containsKey(2)) {
+			amount += wither_skeletons.get(2) * Wither_SkeletonsLV2;
+		}
+		if (wither_skeletons.containsKey(3)) {
+			amount += wither_skeletons.get(3) * Wither_SkeletonsLV3;
+		}
+		if (wither_skeletons.containsKey(4)) {
+			amount += wither_skeletons.get(4) * Wither_SkeletonsLV4;
+		}
+		if (wither_skeletons.containsKey(5)) {
+			amount += wither_skeletons.get(5) * Wither_SkeletonsLV5;
+		}
+		
+		if (endermans.containsKey(1)) {
+			amount += endermans.get(1) * EndermanLV1;
+		}
+		if (endermans.containsKey(2)) {
+			amount += endermans.get(2) * EndermanLV2;
+		}
+		if (endermans.containsKey(3)) {
+			amount += endermans.get(3) * EndermanLV3;
+		}
+		if (endermans.containsKey(4)) {
+			amount += endermans.get(4) * EndermanLV4;
+		}
+		if (endermans.containsKey(5)) {
+			amount += endermans.get(5) * EndermanLV5;
+		}
+		
+		if (withers.containsKey(1)) {
+			amount += withers.get(1) * WitherLV1;
+		}
+		if (withers.containsKey(2)) {
+			amount += withers.get(2) * WitherLV2;
+		}
+		if (withers.containsKey(3)) {
+			amount += withers.get(3) * WitherLV3;
+		}
+		if (withers.containsKey(4)) {
+			amount += withers.get(4) * WitherLV4;
+		}
+		if (withers.containsKey(5)) {
+			amount += withers.get(5) * WitherLV5;
+		}
+		return amount;
+	}
 	
 	
 }

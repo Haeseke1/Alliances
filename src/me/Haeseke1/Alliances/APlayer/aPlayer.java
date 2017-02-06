@@ -271,16 +271,17 @@ public class aPlayer{
 			sideBar.setDisplaySlot(DisplaySlot.SIDEBAR);
 		}
 		sideBar.setDisplayName(ChatColor.GOLD + "===  " + ChatColor.GOLD + "" + ChatColor.BOLD + "PVE Lobby" + ChatColor.GOLD + "  ===");
-		aScoreBoardManager.setScore(this, ChatColor.GOLD + "Coins:", 36, sideBar, ChatColor.AQUA + "", ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins");
-		aScoreBoardManager.setScore(this, ChatColor.GOLD + "Score:", 33, sideBar, ChatColor.BLACK + "", ChatColor.AQUA + "WIP");
-		
-		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Coins on win: WIP", 30, sideBar, ChatColor.BLACK + " ", null);
-		
-		aScoreBoardManager.setScore(this, ChatColor.RED + "Coins on lose: WIP", 27, sideBar, ChatColor.BLACK + " ", null);
 		if(!GroupManager.hasGroup(player)){
 			return;
 		}
 		Group group = GroupManager.getGroup(player);
+		aScoreBoardManager.setScore(this, ChatColor.GOLD + "Coins:", 36, sideBar, ChatColor.AQUA + "", ChatColor.AQUA + "" + Coins.getPlayerCoins(player) + " coins");
+		aScoreBoardManager.setScore(this, ChatColor.GOLD + "Score:", 33, sideBar, ChatColor.BLACK + "", ChatColor.AQUA + "WIP");
+		
+		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Coins on win: " + group.settings.getCoinReward(), 30, sideBar, ChatColor.BLACK + " ", null);
+		
+		aScoreBoardManager.setScore(this, ChatColor.RED + "Coins on lose: " + group.settings.getCoinReward() * 3, 27, sideBar, ChatColor.BLACK + " ", null);
+		
 		for(Entry<Integer, Integer> zombie : group.settings.zombies.entrySet()){
 			if(zombie.getValue() != 0){
 				aScoreBoardManager.setScore(this, ChatColor.DARK_GREEN + "Zombie LV" + zombie.getKey() + ": " + zombie.getValue(), 24, sideBar, ChatColor.AQUA + "", null);

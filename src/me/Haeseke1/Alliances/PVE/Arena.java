@@ -108,8 +108,7 @@ public class Arena {
 			}
 			alive = new ArrayList<>();
 		}
-		Bukkit.broadcastMessage("GG");
-		group.disband();
+		group.disband(false);
 		playing = false;
 		busy = false;
 	}
