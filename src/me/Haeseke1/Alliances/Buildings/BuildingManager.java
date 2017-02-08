@@ -1,11 +1,14 @@
 package me.Haeseke1.Alliances.Buildings;
 
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import me.Haeseke1.Alliances.Buildings.Type.Storage.Storage;
 import me.Haeseke1.Alliances.Buildings.Type.Storage.StorageManager;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
@@ -17,7 +20,7 @@ public class BuildingManager {
 
 	
 	public static boolean isMainBlock(Location loc){
-		for(Building building : Building.buildings){
+		for(Building building : Building.Allbuildings){
 			if(building.mainBlock.getBlock().equals(loc.getBlock())){
 				return true;
 			}
@@ -26,7 +29,7 @@ public class BuildingManager {
 	}
 	
 	public static Building getBuilding(Location loc){
-		for(Building building : Building.buildings){
+		for(Building building : Building.Allbuildings){
 			if(building.mainBlock.getBlock().equals(loc.getBlock())){
 				return building;
 			}
@@ -35,25 +38,54 @@ public class BuildingManager {
 	}
 	
 	
+	public static boolean hasBuilding(Chunk chunk){
+		for(Building b : Building.Allbuildings){
+			if(b.chunk.equals(chunk)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static Building getBuilding(Chunk chunk){
+		for(Building b : Building.Allbuildings){
+			if(b.chunk.equals(chunk)){
+				return b;
+			}
+		}
+		return null;
+	}
+	
+	
+	
 	public static void registerBuildings(){
+		Building.Allbuildings = new ArrayList<Building>();
+		Building.buildings = new ArrayList<Building>();
+		Storage.storages = new ArrayList<Storage>();
+		
 		StorageManager.registerStorage();
 		
 		FileConfiguration file = Main.BuildingConfig;
+		if(!file.contains("Buildings")){
+			return;
+		}
 		for(String key : file.getConfigurationSection("Buildings").getKeys(false)){
 			Location loc = null;
-			int y = 0;
+			int ymin = 0;
+			int ymax = 0;
 			Chunk chunk = null;
 			String type = null;
 			try {
 				loc = ConfigManager.getLocationFromConfig(file, "Buildings." + key + ".mainBlock");
-				y = ConfigManager.getIntFromConfig(file, "Buildings." + key + ".y");
+				ymin = ConfigManager.getIntFromConfig(file, "Buildings." + key + ".ymin");
+				ymax = ConfigManager.getIntFromConfig(file, "Buildings." + key + ".ymax");
 				String world = ConfigManager.getStringFromConfig(file, "Buildings." + key + ".chunk.world");
 				type = ConfigManager.getStringFromConfig(file, "Buildings." + key + ".type");
 				chunk = Bukkit.getWorld(world).getChunkAt(ConfigManager.getIntFromConfig(file, "Buildings." + key + ".chunk.x"), ConfigManager.getIntFromConfig(file, "Buildings." + key + ".chunk.z"));
 			} catch (EmptyLocationException | EmptyIntException | EmptyStringException e) {
 				e.printStackTrace();
 			}
-			new Building(loc, chunk, y, BuildingType.getType(type));
+			new Building(loc, chunk, ymin,ymax, BuildingType.getType(type), false);
 		}
 	}
 	
@@ -65,11 +97,12 @@ public class BuildingManager {
 		file.set("Buildings", null);
 		for(Building b : Building.buildings){
 			ConfigManager.setLocationFromConfig(file, "Buildings." + i + ".mainBlock", b.mainBlock);
-			file.set("Buildings." + i + ".y", b.y);
+			file.set("Buildings." + i + ".ymin", b.ymin);
+			file.set("Buildings." + i + ".ymax", b.ymax);
 			file.set("Buildings." + i + ".chunk.world", b.chunk.getWorld().getName());
 			file.set("Buildings." + i + ".chunk.x", b.chunk.getX());
 			file.set("Buildings." + i + ".chunk.z", b.chunk.getZ());
-			file.set("Buildings." + i + ".type", b.type);
+			file.set("Buildings." + i + ".type", b.type.toString());
 			i++;
 		}
 	}

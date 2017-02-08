@@ -21,6 +21,7 @@ import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Arena.ArenaEvents;
 import me.Haeseke1.Alliances.Arena.ArenaManager;
 import me.Haeseke1.Alliances.Arena.Commands.ArenaCommand;
+import me.Haeseke1.Alliances.Buildings.BuildingListener;
 import me.Haeseke1.Alliances.Buildings.BuildingManager;
 import me.Haeseke1.Alliances.Buildings.Builder.BlockPlace;
 import me.Haeseke1.Alliances.Buildings.Builder.BuilderManager;
@@ -260,6 +261,7 @@ public class Main extends JavaPlugin {
 		
 		pm.registerEvents(new BlockPlace(), this);
 		pm.registerEvents(new StorageListener(), this);
+		pm.registerEvents(new BuildingListener(), this);
 	}
 
 	public void registerCommands() {
@@ -374,12 +376,12 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 		AllianceManager.registerAlliance();
+	    TownManager.registerTowns();
 		BuildingManager.registerBuildings();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();
 		ShopManager.registerShops();
 		MessageManager.registerMessages(plugin);
-	    TownManager.registerTowns();
 	    PVEManager.registerPVE();
 	    BuilderManager.registerBuilders();
 	}

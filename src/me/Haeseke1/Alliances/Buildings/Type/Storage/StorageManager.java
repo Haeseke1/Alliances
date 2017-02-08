@@ -11,6 +11,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.sun.org.apache.xml.internal.security.keys.storage.StorageResolverSpi;
+
 import me.Haeseke1.Alliances.Buildings.Building;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyItemStackException;
@@ -24,7 +26,7 @@ public class StorageManager {
 	
 	
 	public static Storage createStorage(Building b){
-		Storage s = new Storage(b.mainBlock, b.chunk, b.y);
+		Storage s = new Storage(b.mainBlock, b.chunk, b.ymin, b.ymax);
 		Storage.buildings.remove(b);
 		return s;
 	}
@@ -85,23 +87,30 @@ public class StorageManager {
 	
 	public static void registerStorage(){
 		FileConfiguration file = Main.BuildingConfig;
+		if(!file.contains("Storages")){
+			return;
+		}
 		for(String key : file.getConfigurationSection("Storages").getKeys(false)){
 			Location loc = null;
-			int y = 0;
+			int ymin = 0;
+			int ymax = 0;
 			HashMap<ItemStack, Integer> items = new HashMap<>();
 			Chunk chunk = null;
 			try {
 				loc = ConfigManager.getLocationFromConfig(file, "Storages." + key + ".mainBlock");
-				y = ConfigManager.getIntFromConfig(file, "Storages." + key + ".y");
-				for(String key2 : file.getConfigurationSection("Storages." + key + ".items").getKeys(false)){
-					items.put(ConfigManager.getItemStackFromConfig(file, "Storages." + key + ".items." + key2), ConfigManager.getIntFromConfig(file, "Storages." + key + ".items." + key2 + ".ramount"));
+				ymin = ConfigManager.getIntFromConfig(file, "Storages." + key + ".ymin");
+				ymax = ConfigManager.getIntFromConfig(file, "Storages." + key + ".ymax");
+				if(file.contains("Storages." + key + ".items")){
+					for(String key2 : file.getConfigurationSection("Storages." + key + ".items").getKeys(false)){
+						items.put(ConfigManager.getItemStackFromConfig(file, "Storages." + key + ".items." + key2), ConfigManager.getIntFromConfig(file, "Storages." + key + ".items." + key2 + ".ramount"));
+					}
 				}
 				String world = ConfigManager.getStringFromConfig(file, "Storages." + key + ".chunk.world");
 				chunk = Bukkit.getWorld(world).getChunkAt(ConfigManager.getIntFromConfig(file, "Storages." + key + ".chunk.x"), ConfigManager.getIntFromConfig(file, "Storages." + key + ".chunk.z"));
 			} catch (EmptyLocationException | EmptyIntException | EmptyItemStackException | EmptyStringException e) {
 				e.printStackTrace();
 			}
-			new Storage(loc, chunk, y, items);
+			new Storage(loc, chunk, ymin, ymax, items);
 		}
 	}
 	
@@ -117,7 +126,8 @@ public class StorageManager {
 				file.set("Storages." + i + ".items." + y + ".ramount", s.items.get(item));
 				y++;
 			}
-			file.set("Storages." + i + ".y", s.y);
+			file.set("Storages." + i + ".ymin", s.ymin);
+			file.set("Storages." + i + ".ymax", s.ymax);
 			file.set("Storages." + i + ".chunk.world", s.chunk.getWorld().getName());
 			file.set("Storages." + i + ".chunk.x", s.chunk.getX());
 			file.set("Storages." + i + ".chunk.z", s.chunk.getZ());

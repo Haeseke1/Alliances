@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
+import me.Haeseke1.Alliances.Buildings.Building;
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exp.Exp;
 import me.Haeseke1.Alliances.Main.Main;
@@ -85,11 +86,40 @@ public class TownManager {
 	
 	public static boolean isClaimed(Chunk chunk){
 		for(Town town : Town.towns){
-			if(town.chunks.contains(chunk)){
+			if(town.hasChunk(chunk)){
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	public static boolean hasBuilding(Building b){
+		for(Town town : Town.towns){
+			if(town.hasBuilding(b)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	public static Town getTown(Building b){
+		for(Town town : Town.towns){
+			if(town.hasBuilding(b)){
+				return town;
+			}
+		}
+		return null;
+	}
+	
+	public static Town getTown(Chunk chunk){
+		for(Town town : Town.towns){
+			if(town.hasChunk(chunk)){
+				return town;
+			}
+		}
+		return null;
+		
 	}
 	
 	public static boolean isNextTo(Chunk chunk, Town town){

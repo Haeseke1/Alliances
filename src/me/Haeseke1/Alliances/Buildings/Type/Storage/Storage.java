@@ -23,19 +23,45 @@ public class Storage extends Building{
 	public static List<Storage> storages = new ArrayList<Storage>();
 	
 	public HashMap<ItemStack,Integer> items = new HashMap<ItemStack,Integer>();
+	public int level = 1;
 	
 	public HashMap<Player,Integer> openInventory = new HashMap<Player,Integer>();
 	
-	public Storage(Location mainBlock, Chunk chunk, int y) {
-		super(mainBlock, chunk, y, BuildingType.STORAGE);
+	public Storage(Location mainBlock, Chunk chunk, int ymin, int ymax) {
+		super(mainBlock, chunk, ymin, ymax, BuildingType.STORAGE, true);
 		storages.add(this);
 	}
 	
-	public Storage(Location mainBlock, Chunk chunk, int y, HashMap<ItemStack,Integer> items) {
-		super(mainBlock, chunk, y, BuildingType.STORAGE);
+	public Storage(Location mainBlock, Chunk chunk,int ymin, int ymax, HashMap<ItemStack,Integer> items) {
+		super(mainBlock, chunk, ymin, ymax, BuildingType.STORAGE, true);
 		this.items = items;
 		storages.add(this);
 	}
+	
+	public int itemCount(){
+		int tAmount = 0;
+		for(int amount : items.values()){
+			tAmount += amount;
+		}
+		return tAmount;
+	}
+	
+	public boolean canAddItem(){
+		if(level == 0){
+			return true;
+		}
+		if(level == 1 && itemCount() < 2500){
+			return true;
+		}
+		if(level == 2 && itemCount() < 7500){
+			return true;
+		}
+		if(level == 3 && itemCount() < 15000){
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public void up(Player player){
 		if(openInventory.get(player) > 0){

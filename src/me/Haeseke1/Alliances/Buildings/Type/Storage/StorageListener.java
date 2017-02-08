@@ -17,6 +17,10 @@ import me.Haeseke1.Alliances.Buildings.Building;
 import me.Haeseke1.Alliances.Buildings.BuildingManager;
 import me.Haeseke1.Alliances.Buildings.BuildingType;
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Town.Town;
+import me.Haeseke1.Alliances.Town.TownManager;
+import me.Haeseke1.Alliances.Utils.MessageManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class StorageListener implements Listener {
 	
@@ -36,6 +40,16 @@ public class StorageListener implements Listener {
 		if(!b.type.equals(BuildingType.STORAGE)){
 			return;
 		}
+		if(!TownManager.hasBuilding(b)){
+			MessageManager.sendMessage(event.getPlayer(), ChatColor.RED + "This building is not claimed, build a town here to claim it!");
+			return;
+		}
+		Town t = TownManager.getTown(b);
+		if(!t.owner.getMembers().containsKey(event.getPlayer().getUniqueId())){
+			MessageManager.sendMessage(event.getPlayer(), ChatColor.RED + "This town is not from your alliance!");
+			return;
+		}
+		
 		if(b instanceof Storage){
 			Storage s = (Storage) b;
 			s.openStorage(event.getPlayer());
@@ -75,6 +89,11 @@ public class StorageListener implements Listener {
 		final int slot = event.getRawSlot();
 		if(slot == 17 || slot == 26 || slot == 35 || slot == 44){
 			if(event.isLeftClick()){
+				if(!s.canAddItem()){
+					event.setCancelled(true);
+					MessageManager.sendMessage(player, ChatColor.RED + "The storage is full, upgrade it!");
+					return;
+				}
 				Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
 					
 					@Override
@@ -89,6 +108,11 @@ public class StorageListener implements Listener {
 				return;
 			}
 			if(event.isRightClick()){
+				if(!s.canAddItem()){
+					event.setCancelled(true);
+					MessageManager.sendMessage(player, ChatColor.RED + "The storage is full, upgrade it!");
+					return;
+				}
 				Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
 					
 					@Override
@@ -119,13 +143,15 @@ public class StorageListener implements Listener {
 		}
 		if(slot > 53){
 			if(event.isShiftClick()){
-				Bukkit.broadcastMessage("test");
 				if(event.getCurrentItem() == null || event.getCurrentItem().getType().equals(Material.AIR)){
-					Bukkit.broadcastMessage("away");
 					event.setCancelled(true);
 					return;
 				}
-				Bukkit.broadcastMessage("adding");
+				if(!s.canAddItem()){
+					event.setCancelled(true);
+					MessageManager.sendMessage(player, ChatColor.RED + "The storage is full, upgrade it!");
+					return;
+				}
 				event.setCancelled(true);
 				ItemStack item = new ItemStack(event.getCurrentItem());
 				storage.addItem(item);
@@ -139,6 +165,11 @@ public class StorageListener implements Listener {
 				if(!event.getCursor().getType().equals(Material.AIR)){
 					if(event.getCurrentItem() == null || event.getCurrentItem().getType().equals(Material.AIR)){
 						if(event.isLeftClick()){
+							if(!s.canAddItem()){
+								event.setCancelled(true);
+								MessageManager.sendMessage(player, ChatColor.RED + "The storage is full, upgrade it!");
+								return;
+							}
 							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
 								
 								@Override
@@ -153,6 +184,11 @@ public class StorageListener implements Listener {
 							return;
 						}
 						if(event.isRightClick()){
+							if(!s.canAddItem()){
+								event.setCancelled(true);
+								MessageManager.sendMessage(player, ChatColor.RED + "The storage is full, upgrade it!");
+								return;
+							}
 							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
 								
 								@Override

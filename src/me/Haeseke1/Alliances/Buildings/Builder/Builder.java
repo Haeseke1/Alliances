@@ -39,7 +39,7 @@ public class Builder {
 		builders.add(this);
 	}
 	
-	public void construct(Chunk chunk, int height){
+	public Building construct(Chunk chunk, int height){
 		int i = 1;
 		for(int y = height; y <= height + this.height; y++){
 			for(int x = 0; x < 16; x++){
@@ -63,7 +63,7 @@ public class Builder {
 			}
 		}
 		Location loc = chunk.getBlock(mainBlock.getBlockX(), mainBlock.getBlockY() + height, mainBlock.getBlockZ()).getLocation();
-		new Building(loc,chunk,height,type);
+		return new Building(loc,chunk,height, height + this.height,type, false);
 	}
 	
 	
