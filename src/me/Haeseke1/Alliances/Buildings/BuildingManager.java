@@ -14,6 +14,7 @@ import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Town.Town;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 
 public class BuildingManager {
@@ -87,6 +88,17 @@ public class BuildingManager {
 			}
 			new Building(loc, chunk, ymin,ymax, BuildingType.getType(type), false);
 		}
+		Town.unclaimable.clear();
+		for(String key : file.getConfigurationSection("Unclaimable").getKeys(false)){
+			String world = null;
+			try {
+				world = ConfigManager.getStringFromConfig(file, "Unclaimable." + key + ".world");
+				Town.unclaimable.add(Bukkit.getWorld(world).getChunkAt(ConfigManager.getIntFromConfig(file, "Unclaimable." + key + ".x"), ConfigManager.getIntFromConfig(file, "Unclaimable." + key + ".z")));
+			} catch (EmptyStringException | EmptyIntException e) {
+				e.printStackTrace();
+			}
+			
+		}
 	}
 	
 	public static void saveBuildings(){
@@ -105,6 +117,15 @@ public class BuildingManager {
 			file.set("Buildings." + i + ".type", b.type.toString());
 			i++;
 		}
+		file.set("Unclaimable", null);
+		i = 0;
+		for(Chunk chunk : Town.unclaimable){
+			file.set("Unclaimable." + i + "." + i +".world", chunk.getWorld().getName());
+			file.set("Unclaimable." + i + "." + i +".x", chunk.getX());
+			file.set("Unclaimable." + i + "." + i +".z", chunk.getZ());
+			i++;
+		}
+		
 	}
 	
 	

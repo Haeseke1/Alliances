@@ -11,7 +11,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.sun.org.apache.xml.internal.security.keys.storage.StorageResolverSpi;
 
 import me.Haeseke1.Alliances.Buildings.Building;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;

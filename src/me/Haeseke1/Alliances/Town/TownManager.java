@@ -29,6 +29,10 @@ public class TownManager {
 
 	
 	public static void createTown(Player player, Alliance alli, Chunk chunk, String name){
+		if(isUnclaimable(player.getLocation().getChunk())){
+			MessageManager.sendMessage(player, ChatColor.RED + "This land is unclaimable!");
+			return;
+		}
 		if(alli.getCoins() < Town_Create_Payment){
 			String message = "&cYou don't have enough money";
 			message = message.replace("%payment%", "" +  Town_Create_Payment);
@@ -53,11 +57,16 @@ public class TownManager {
 			MessageManager.sendMessage(player, message);
 			return;
 		}
+		MessageManager.sendMessage(player, ChatColor.GREEN + "You created town " + name);
 		Coins.removeAllianceCoins(player, Town_Create_Payment);
 		alli.addTown(new Town(name, chunk, alli));
 	}
 	
 	public static boolean claimLand(Player player, Town town){
+		if(isUnclaimable(player.getLocation().getChunk())){
+			MessageManager.sendMessage(player, ChatColor.RED + "This land is unclaimable!");
+			return false;
+		}
 		if(town.owner.getCoins() < Town_Claim_Payment){
 			String message = "&cYou don't have enough money";
 			message = message.replace("%payment%", "" +  Town_Claim_Payment);
@@ -81,6 +90,7 @@ public class TownManager {
 		}
 		Coins.removeAllianceCoins(player, Town_Claim_Payment);
 		town.addChunck(player.getLocation().getChunk());
+		MessageManager.sendMessage(player, ChatColor.GREEN + "You claimed land for your town " + town.name);
 		return true;
 	}
 	
@@ -89,6 +99,13 @@ public class TownManager {
 			if(town.hasChunk(chunk)){
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	public static boolean isUnclaimable(Chunk chunk){
+		if(Town.unclaimable.contains(chunk)){
+			return true;
 		}
 		return false;
 	}

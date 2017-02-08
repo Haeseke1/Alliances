@@ -9,6 +9,7 @@ import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Town.Town;
 import me.Haeseke1.Alliances.Town.TownManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class TownC implements CommandExecutor{
 
@@ -19,6 +20,7 @@ public class TownC implements CommandExecutor{
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
 			sender.sendMessage(MessageManager.infoColorCode + "/town create <Name> #Create a new town");
 			sender.sendMessage(MessageManager.infoColorCode + "/town claim <Name> #Claim more land for your town");
+			sender.sendMessage(MessageManager.infoColorCode + "/town unclaimable #Make a chunk unclaimable");
 			sender.sendMessage(MessageManager.infoColorCode + "/town show #Show your land");
 			return false;
 		}
@@ -55,6 +57,16 @@ public class TownC implements CommandExecutor{
 			}
 			Town town = TownManager.getTown(args[1]);
 			TownManager.claimLand(player, town);
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("unclaimable")){
+			if(Town.unclaimable.contains(player.getLocation().getChunk())){
+				MessageManager.sendMessage(player, ChatColor.RED + "This is already unclaimable!");
+				return false;
+			}
+			Town.unclaimable.add(player.getLocation().getChunk());
+			MessageManager.sendMessage(player, ChatColor.GREEN + "This land is now unclaimable!");
 			return false;
 		}
 		

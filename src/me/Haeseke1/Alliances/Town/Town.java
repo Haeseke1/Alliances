@@ -15,6 +15,8 @@ public class Town {
 	
 	public static List<Town> towns = new ArrayList<Town>();
 	
+	public static List<Chunk> unclaimable = new ArrayList<Chunk>();
+	
 	public List<Building> buildings = new ArrayList<Building>();
 	
 	public List<Chunk> chunks = new ArrayList<Chunk>();
