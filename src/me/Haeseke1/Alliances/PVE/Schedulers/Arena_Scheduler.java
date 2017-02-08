@@ -18,6 +18,8 @@ public class Arena_Scheduler implements Runnable{
 					arena.countDown = 10;
 					arena.startCountdown = false;
 					arena.fight();
+					arena.group.sendPlayersMessage(ChatColor.GOLD + "Fight!");
+					continue;
 				}
 				arena.group.sendPlayersMessage(ChatColor.AQUA + "The fight will start in " + ChatColor.GOLD + arena.countDown + ChatColor.AQUA + " seconds");
 				arena.countDown -= 1;

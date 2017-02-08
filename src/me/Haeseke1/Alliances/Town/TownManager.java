@@ -146,24 +146,28 @@ public class TownManager {
     	}
     }
     
-    public static void registerTowns(){
-    	Town.towns.clear();
-    	for(String alliancename: allianceConfig.getConfigurationSection("").getKeys(false)){
-    		Alliance al = AllianceManager.getAlliance(alliancename);
-    	  if(allianceConfig.getConfigurationSection(alliancename + ".towns") != null){
-    	    for(String townName: allianceConfig.getConfigurationSection(alliancename + ".towns").getKeys(false)){
-    	    	List<Chunk> chunkList = new ArrayList<Chunk>();
-    	    	for(String chunk: allianceConfig.getConfigurationSection(alliancename + ".towns." + townName + ".chunks").getKeys(false)){
-    	    		int chunkNumber = Integer.parseInt(chunk);
-    	    		int x = allianceConfig.getInt(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".x");
-    	    		int z = allianceConfig.getInt(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".z");
-    	    		String world = allianceConfig.getString(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".world");
-    	    		chunkList.add(Bukkit.getWorld(world).getChunkAt(x, z));
-    	    	}
-    	    	new Town(townName,chunkList,al);
-    	    }
-    	    MessageManager.sendAlertMessage("Towns have been registered");
-    	  }
-    	}
-    }
+	public static void registerTowns() {
+		Town.towns.clear();
+		for (String alliancename : allianceConfig.getConfigurationSection("").getKeys(false)) {
+			Alliance al = AllianceManager.getAlliance(alliancename);
+			if (allianceConfig.getConfigurationSection(alliancename + ".towns") != null) {
+				for (String townName : allianceConfig.getConfigurationSection(alliancename + ".towns").getKeys(false)) {
+					List<Chunk> chunkList = new ArrayList<Chunk>();
+					for (String chunk : allianceConfig
+							.getConfigurationSection(alliancename + ".towns." + townName + ".chunks").getKeys(false)) {
+						int chunkNumber = Integer.parseInt(chunk);
+						int x = allianceConfig
+								.getInt(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".x");
+						int z = allianceConfig
+								.getInt(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".z");
+						String world = allianceConfig
+								.getString(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".world");
+						chunkList.add(Bukkit.getWorld(world).getChunkAt(x, z));
+					}
+					new Town(townName, chunkList, al);
+				}
+				MessageManager.sendAlertMessage("Towns have been registered");
+			}
+		}
+	}
 }

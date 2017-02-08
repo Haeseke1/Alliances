@@ -23,3 +23,5 @@ commands:
   Mount:
     aliases: [mount,m]
   PVE:
+  Building:
+    aliases: [b,build]

@@ -59,6 +59,15 @@ public class PVEManager {
 		}
 	}
 
+	public static void  disablePVE(){
+		for(Arena arena : PVE.main.arenas){
+			arena.forceStopArena();
+		}
+		for(Group group : Group.groups){
+			group.disband();
+		}
+	}
+	
 	public static void savePVE() {
 		FileConfiguration file = Main.PVEConfig;
 		if(PVE.main == null){

@@ -21,6 +21,12 @@ import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Arena.ArenaEvents;
 import me.Haeseke1.Alliances.Arena.ArenaManager;
 import me.Haeseke1.Alliances.Arena.Commands.ArenaCommand;
+import me.Haeseke1.Alliances.Buildings.BuildingManager;
+import me.Haeseke1.Alliances.Buildings.Builder.BlockPlace;
+import me.Haeseke1.Alliances.Buildings.Builder.BuilderManager;
+import me.Haeseke1.Alliances.Buildings.Commands.BuildingC;
+import me.Haeseke1.Alliances.Buildings.Type.Storage.Storage;
+import me.Haeseke1.Alliances.Buildings.Type.Storage.StorageListener;
 import me.Haeseke1.Alliances.Challenge.ChallengeManager;
 import me.Haeseke1.Alliances.Challenge.Commands.mainChallenges;
 import me.Haeseke1.Alliances.Challenge.Type.Block_Breaking;
@@ -157,6 +163,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration arenaConfig;
 	public static FileConfiguration settingsConfig;
 	public static FileConfiguration PVEConfig;
+	public static FileConfiguration BuildingConfig;
 	
 	
 	public static Main plugin;
@@ -190,6 +197,7 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		PVEManager.disablePVE();
 		MountsManager.despawnMounts();
 		Config.saveConfigFile(this);
 		saveAllCustomConfigs();
@@ -248,6 +256,10 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new EntityHit(), this);
 		pm.registerEvents(new PlayerClickInventory(), this);
 		pm.registerEvents(new PlayerCommand(), this);
+		
+		
+		pm.registerEvents(new BlockPlace(), this);
+		pm.registerEvents(new StorageListener(), this);
 	}
 
 	public void registerCommands() {
@@ -261,6 +273,7 @@ public class Main extends JavaPlugin {
 		getCommand("Arena").setExecutor(new ArenaCommand());
 		getCommand("Mount").setExecutor(new MountCommand());
 		getCommand("PVE").setExecutor(new PVEC());
+		getCommand("building").setExecutor(new BuildingC());
 	}
 	
 	public void registerCustomEntitys(){
@@ -354,18 +367,21 @@ public class Main extends JavaPlugin {
 		arenaConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "arenas.yml"), plugin);
 		settingsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"settings.yml"), plugin);
 		PVEConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "PVE.yml"), plugin);
+		BuildingConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "buildings.yml"), plugin);
 	    try {
 			ArenaManager.loadArena();
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
 			e.printStackTrace();
 		}
 		AllianceManager.registerAlliance();
+		BuildingManager.registerBuildings();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();
 		ShopManager.registerShops();
 		MessageManager.registerMessages(plugin);
 	    TownManager.registerTowns();
 	    PVEManager.registerPVE();
+	    BuilderManager.registerBuilders();
 	}
 
 	public static void saveAllCustomConfigs() {
@@ -374,6 +390,8 @@ public class Main extends JavaPlugin {
 		ShopManager.saveShops();
 		TownManager.saveTowns();
 		PVEManager.savePVE();
+		BuildingManager.saveBuildings();
+		BuilderManager.saveBuilders();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
 			if(configFile.containsKey(entry.getKey())){
 				ConfigManager.saveCustomConfig(configFile.get(entry.getKey()), entry.getValue());

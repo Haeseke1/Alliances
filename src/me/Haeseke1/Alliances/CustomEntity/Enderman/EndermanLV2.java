@@ -47,8 +47,11 @@ public class EndermanLV2 extends EntityEnderman{
 	
 	protected void initAttributes(){
 		super.initAttributes();
-		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(20D);
-		this.getAttributeInstance(GenericAttributes.d).setValue(0D);
+		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(70D);
+		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
+		this.getAttributeInstance(GenericAttributes.c).setValue(0);
+		this.getAttributeInstance(GenericAttributes.d).setValue(0.40);
+		this.getAttributeInstance(GenericAttributes.e).setValue(7D);
 	}
 	
 	

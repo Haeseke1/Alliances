@@ -107,7 +107,6 @@ public class WitherLV3 extends EntityWither{
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(1000D);
 		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 		this.getAttributeInstance(GenericAttributes.c).setValue(100);
-		this.getAttributeInstance(GenericAttributes.d).setValue(0.7);
 		this.getAttributeInstance(GenericAttributes.e).setValue(8D);
 	}
 	

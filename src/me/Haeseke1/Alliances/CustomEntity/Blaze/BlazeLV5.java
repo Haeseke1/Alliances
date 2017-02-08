@@ -52,7 +52,6 @@ public class BlazeLV5 extends EntityBlaze{
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(300D);
 		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 		this.getAttributeInstance(GenericAttributes.c).setValue(100);
-		this.getAttributeInstance(GenericAttributes.d).setValue(1);
 		this.getAttributeInstance(GenericAttributes.e).setValue(8D);
 	}
 	

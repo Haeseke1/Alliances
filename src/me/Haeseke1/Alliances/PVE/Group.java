@@ -14,6 +14,7 @@ import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.APlayer.aPlayer;
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class Group {
 	
@@ -40,18 +41,7 @@ public class Group {
 	}
 	
 	
-	public void disband(boolean win){
-		if(ArenaManager.hasArena(this)){
-			if(win){
-				for(Player player : members){
-					Coins.addPlayerCoins(player, settings.getCoinReward() / members.size());
-				}
-			}else{
-				for(Player player : members){
-					Coins.removePlayerCoins(player, settings.getCoinReward() / members.size());
-				}
-			}
-		}
+	public void disband(){
 		for(Player player : members){
 			aPlayer aplayer = APlayerManager.getAPlayer(player);
 			aplayer.is_in_pve_lobby = false;
@@ -68,7 +58,7 @@ public class Group {
 		if (exception != null) {
 			for (Player player : members) {
 				if (player != exception) {
-					MessageManager.sendMessage(player, message);
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 				}
 			}
 			return;
@@ -77,7 +67,7 @@ public class Group {
 
 	public void sendPlayersMessage(String message) {
 		for (Player player : members) {
-			MessageManager.sendMessage(player, message);
+			player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 		}
 	}
 

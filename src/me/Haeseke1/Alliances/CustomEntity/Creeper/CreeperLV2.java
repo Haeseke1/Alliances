@@ -96,7 +96,7 @@ public class CreeperLV2 extends EntityCreeper{
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(50D);
 		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 		this.getAttributeInstance(GenericAttributes.c).setValue(0);
-		this.getAttributeInstance(GenericAttributes.d).setValue(0.50);
+		this.getAttributeInstance(GenericAttributes.d).setValue(0.22);
 		this.getAttributeInstance(GenericAttributes.e).setValue(8D);
 	}
 	

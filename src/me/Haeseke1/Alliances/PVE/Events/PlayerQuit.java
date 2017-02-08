@@ -19,7 +19,7 @@ public class PlayerQuit implements Listener {
 			if(ArenaManager.hasArena(group)){
 				ArenaManager.getArena(group).stopArena(false);
 			}else{
-				GroupManager.getGroup(player).disband(false);
+				GroupManager.getGroup(player).disband();
 			}
 		}
 	}

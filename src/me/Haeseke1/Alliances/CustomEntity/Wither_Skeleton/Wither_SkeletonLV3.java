@@ -57,7 +57,7 @@ public class Wither_SkeletonLV3 extends EntitySkeleton{
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(60D);
 		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 		this.getAttributeInstance(GenericAttributes.c).setValue(100);
-		this.getAttributeInstance(GenericAttributes.d).setValue(0.8);
+		this.getAttributeInstance(GenericAttributes.d).setValue(0.5);
 		this.getAttributeInstance(GenericAttributes.e).setValue(9D);
 	}
 	

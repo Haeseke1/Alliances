@@ -13,11 +13,16 @@ public class ArenaManager {
 	
 	public static boolean hasArena(Group group){
 		for(Arena arena : PVE.main.arenas){
+			if(arena.group == null){
+				continue;
+			}
 			if(arena.group.equals(group)){
 				return true;
 			}
 		}
 		return false;
 	}
+	
+	
 	
 }

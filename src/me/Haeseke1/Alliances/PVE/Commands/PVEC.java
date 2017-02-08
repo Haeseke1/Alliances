@@ -178,7 +178,7 @@ public class PVEC implements CommandExecutor{
 		
 		if(args[0].equalsIgnoreCase("leave")){
 			if(GroupManager.hasGroup(player)){
-				GroupManager.getGroup(player).disband(false);
+				GroupManager.getGroup(player).disband();
 				player.sendMessage(ChatColor.YELLOW + "You left the group!");
 				return false;
 			}

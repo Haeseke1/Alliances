@@ -55,7 +55,7 @@ public class ZombieLV3 extends EntityZombie{
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(60D);
 		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 		this.getAttributeInstance(GenericAttributes.c).setValue(100);
-		this.getAttributeInstance(GenericAttributes.d).setValue(0.5);
+		this.getAttributeInstance(GenericAttributes.d).setValue(0.3);
 		this.getAttributeInstance(GenericAttributes.e).setValue(10D);
 	}
 	

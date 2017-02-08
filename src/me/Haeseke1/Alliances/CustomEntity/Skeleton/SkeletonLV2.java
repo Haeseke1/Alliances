@@ -113,7 +113,7 @@ public class SkeletonLV2 extends EntitySkeleton{
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(35D);
 		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 		this.getAttributeInstance(GenericAttributes.c).setValue(100);
-		this.getAttributeInstance(GenericAttributes.d).setValue(0.35);
+		this.getAttributeInstance(GenericAttributes.d).setValue(0.30);
 		this.getAttributeInstance(GenericAttributes.e).setValue(5D);
 	}
 	

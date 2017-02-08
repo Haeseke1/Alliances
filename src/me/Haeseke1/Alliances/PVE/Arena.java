@@ -13,6 +13,8 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.APlayer.aPlayer;
+import me.Haeseke1.Alliances.Economy.Coins;
+import net.md_5.bungee.api.ChatColor;
 
 public class Arena {
 	
@@ -100,17 +102,46 @@ public class Arena {
 		startCountdown = true;
 	}
 	
-	
-	public void stopArena(boolean playerWon){
-		if(!playerWon){
-			for(LivingEntity le : alive){
-				le.remove();
-			}
-			alive = new ArrayList<>();
+	public void forceStopArena(){
+		for(LivingEntity le : alive){
+			le.remove();
 		}
-		group.disband(false);
+		alive = new ArrayList<>();
+		if(group != null){
+			group.disband();
+			group = null;
+		}
 		playing = false;
 		busy = false;
+		playerAlive = new ArrayList<Player>();
+	}
+	
+	
+	public void stopArena(boolean playerWon){
+		for(LivingEntity le : alive){
+			le.remove();
+		}
+		alive = new ArrayList<>();
+		if(playerWon){
+			for(Player player : group.members){
+				Coins.addPlayerCoins(player, group.settings.getCoinReward() / group.members.size());
+			}
+			group.sendPlayersMessage(ChatColor.GREEN + "Your group survived! " + ChatColor.GOLD + "(+" + (int) (group.settings.getCoinReward() / group.members.size()) + " coins)");
+		}else{
+			for(Player player : group.members){
+				if(Coins.removePlayerCoins(player, (group.settings.getCoinReward() * 3) / group.members.size())){
+					group.sendPlayersMessage(ChatColor.RED + "Your group lost! " + ChatColor.GOLD + "(-" + (int) ((group.settings.getCoinReward() * 3) / group.members.size()) + " coins)");
+				}else{
+					Coins.removePlayerCoins(player, Coins.getPlayerCoins(player));
+					group.sendPlayersMessage(ChatColor.RED + "Your group lost! " + ChatColor.GOLD + "(-" + Coins.getPlayerCoins(player) + " coins)");
+				}	
+			}
+		}
+		group.disband();
+		group = null;
+		playing = false;
+		busy = false;
+		playerAlive = new ArrayList<Player>();		
 	}
 	
 	public void fight(){

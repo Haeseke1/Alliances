@@ -55,7 +55,7 @@ public class Zombie_PigmanLV2 extends EntityPigZombie{
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(40D);
 		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 		this.getAttributeInstance(GenericAttributes.c).setValue(0);
-		this.getAttributeInstance(GenericAttributes.d).setValue(0.55);
+		this.getAttributeInstance(GenericAttributes.d).setValue(0.40);
 		this.getAttributeInstance(GenericAttributes.e).setValue(8D);
 	}
 	

@@ -57,7 +57,7 @@ public class SpiderLV5 extends EntitySpider{
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(80D);
 		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 		this.getAttributeInstance(GenericAttributes.c).setValue(100);
-		this.getAttributeInstance(GenericAttributes.d).setValue(2.5);
+		this.getAttributeInstance(GenericAttributes.d).setValue(0.5);
 		this.getAttributeInstance(GenericAttributes.e).setValue(20D);
 	}
 	

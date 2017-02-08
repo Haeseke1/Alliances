@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
@@ -14,11 +15,14 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
+import me.Haeseke1.Alliances.CustomEntity.Zombie.ZombieLV2;
 import me.Haeseke1.Alliances.CustomEntity.Zombie.ZombieLV4;
+import me.Haeseke1.Alliances.Main.Main;
 import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_8_R2.DamageSource;
 import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityPigZombie;
+import net.minecraft.server.v1_8_R2.EntityPlayer;
 import net.minecraft.server.v1_8_R2.EntityVillager;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
@@ -63,11 +67,13 @@ public class Zombie_PigmanLV5 extends EntityPigZombie{
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(100D);
 		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 		this.getAttributeInstance(GenericAttributes.c).setValue(100);
-		this.getAttributeInstance(GenericAttributes.d).setValue(0.65);
+		this.getAttributeInstance(GenericAttributes.d).setValue(0.5);
 		this.getAttributeInstance(GenericAttributes.e).setValue(20D);
 	}
 	
+	@Override
 	public boolean damageEntity(DamageSource damagesource, float f) {
+		Bukkit.broadcastMessage("starting");
 		if(!minions.isEmpty()){
 			for(Zombie zombie : minions){
 				if(!zombie.isDead()){
@@ -75,18 +81,32 @@ public class Zombie_PigmanLV5 extends EntityPigZombie{
 				}
 			}
 		}
-		Random r = new Random();
 		if(damagesource.getEntity() == null && !(damagesource.getEntity() instanceof EntityHuman)){
 			return true;
 		}
-		if(r.nextInt(20) == 0){	
-			for(int i = 0; i < 5; i++){
-				Zombie zombie = ZombieLV4.spawn(new Location((org.bukkit.World) this.world.getWorld(),this.locX,this.locY,this.locZ), ChatColor.RED + "Minion");
-				zombie.setTarget((LivingEntity) damagesource.getEntity().getBukkitEntity());
-				minions.add(zombie);
+		if(damagesource.getEntity() instanceof EntityPlayer){
+			Random r = new Random();
+			if(r.nextInt(20) == 0){	
+				for(int i = 0; i < 5; i++){
+					Zombie zombie = ZombieLV4.spawn(new Location((org.bukkit.World) this.world.getWorld(),this.locX,this.locY,this.locZ), ChatColor.RED + "Minion");
+					EntityPlayer eh = (EntityPlayer) damagesource.getEntity();
+					zombie.setTarget(eh.getBukkitEntity());
+					minions.add(zombie);
+					Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable(){
+
+						@Override
+						public void run() {
+							for(Zombie zombie : minions){
+								zombie.remove();
+							}
+							minions.clear();
+						}
+						
+					}, 100);
+				}
 			}
 		}
-		return true;
+		return super.damageEntity(damagesource, f);
 	}
 	
 	@Override
