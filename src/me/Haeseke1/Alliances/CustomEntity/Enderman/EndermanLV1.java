@@ -8,10 +8,8 @@ import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_8_R2.util.UnsafeList;
 import org.bukkit.entity.Enderman;
-import org.bukkit.entity.Skeleton;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import me.Haeseke1.Alliances.CustomEntity.Skeleton.SkeletonLV1;
 import net.minecraft.server.v1_8_R2.DamageSource;
 import net.minecraft.server.v1_8_R2.EntityEnderman;
 import net.minecraft.server.v1_8_R2.EntityHuman;

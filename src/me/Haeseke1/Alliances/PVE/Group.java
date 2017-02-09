@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -12,8 +11,6 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.APlayer.aPlayer;
-import me.Haeseke1.Alliances.Economy.Coins;
-import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class Group {

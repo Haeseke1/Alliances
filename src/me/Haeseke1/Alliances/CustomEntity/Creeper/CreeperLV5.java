@@ -9,17 +9,11 @@ import org.bukkit.craftbukkit.v1_8_R2.util.UnsafeList;
 import org.bukkit.entity.Creeper;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import net.minecraft.server.v1_8_R2.BlockPosition;
 import net.minecraft.server.v1_8_R2.DamageSource;
-import net.minecraft.server.v1_8_R2.EntityBlaze;
 import net.minecraft.server.v1_8_R2.EntityCreeper;
 import net.minecraft.server.v1_8_R2.EntityHuman;
-import net.minecraft.server.v1_8_R2.EntityLiving;
-import net.minecraft.server.v1_8_R2.EntitySmallFireball;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
-import net.minecraft.server.v1_8_R2.MathHelper;
-import net.minecraft.server.v1_8_R2.PathfinderGoal;
 import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R2.PathfinderGoalMeleeAttack;
 import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;

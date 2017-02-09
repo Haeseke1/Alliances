@@ -10,7 +10,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
-import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Arena {

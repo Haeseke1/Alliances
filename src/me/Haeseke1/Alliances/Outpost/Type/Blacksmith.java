@@ -90,7 +90,7 @@ public class Blacksmith {
 		for(Player player : inOutpost){
 			if(AllianceManager.playerIsInAlli(player)){
 				if(taking_over != null){
-					if(AllianceManager.getAlliance(player).getMembers().containsKey(player.getUniqueId()) && !AllianceManager.getAlliance(player).equals(taking_over)){
+					if(!AllianceManager.getAlliance(player).equals(taking_over)){
 						contest = true;
 					}
 					if(AllianceManager.getAlliance(player).equals(taking_over)){
@@ -107,7 +107,7 @@ public class Blacksmith {
 				contest = true;
 			}
 		}
-		if(contest){
+		if(contest && isTakingOver){
 			if(time_Contested == 5){
 				if(taking_over != null){
 					String message = "&bThis outpost is now contested!";

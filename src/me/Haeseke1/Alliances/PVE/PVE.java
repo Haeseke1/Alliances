@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.bukkit.Location;
 
-import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class PVE {

@@ -13,6 +13,7 @@ import me.Haeseke1.Alliances.Utils.PlayerManager;
 
 public class CoinC implements CommandExecutor{
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length == 0) {
@@ -30,7 +31,6 @@ public class CoinC implements CommandExecutor{
 		if (!(sender instanceof Player)) {
 			if(args[0].equalsIgnoreCase("add") && args.length >= 3){
 				try{
-				@SuppressWarnings("deprecation")
 				OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
 				int amount = Integer.parseInt(args[2]);
 				Coins.addPlayerCoins(player.getUniqueId(), amount);

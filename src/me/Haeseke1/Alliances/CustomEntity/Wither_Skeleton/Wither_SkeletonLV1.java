@@ -2,7 +2,6 @@ package me.Haeseke1.Alliances.CustomEntity.Wither_Skeleton;
 
 import java.lang.reflect.Field;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;

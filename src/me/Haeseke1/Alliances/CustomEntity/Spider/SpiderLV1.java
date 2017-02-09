@@ -11,12 +11,10 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import net.minecraft.server.v1_8_R2.Entity;
 import net.minecraft.server.v1_8_R2.EntityHuman;
-import net.minecraft.server.v1_8_R2.EntityInsentient;
 import net.minecraft.server.v1_8_R2.EntityLiving;
 import net.minecraft.server.v1_8_R2.EntitySpider;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
-import net.minecraft.server.v1_8_R2.PathfinderGoal;
 import net.minecraft.server.v1_8_R2.PathfinderGoalLeapAtTarget;
 import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R2.PathfinderGoalMeleeAttack;

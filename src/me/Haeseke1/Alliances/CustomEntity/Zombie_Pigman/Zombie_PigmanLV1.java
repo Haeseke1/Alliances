@@ -11,16 +11,11 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityPigZombie;
-import net.minecraft.server.v1_8_R2.EntityVillager;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
-import net.minecraft.server.v1_8_R2.PathfinderGoalFloat;
 import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R2.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_8_R2.PathfinderGoalMoveThroughVillage;
-import net.minecraft.server.v1_8_R2.PathfinderGoalMoveTowardsRestriction;
 import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_8_R2.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R2.World;
 

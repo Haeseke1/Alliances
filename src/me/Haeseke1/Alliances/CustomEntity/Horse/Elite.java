@@ -6,7 +6,6 @@ import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
 import org.bukkit.entity.Horse;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import me.Haeseke1.Alliances.CustomEntity.Enderman.EndermanLV3;
 import net.minecraft.server.v1_8_R2.EntityHorse;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.World;

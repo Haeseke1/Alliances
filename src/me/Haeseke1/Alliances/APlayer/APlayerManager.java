@@ -8,7 +8,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Main.Main;
-import me.Haeseke1.Alliances.Utils.ConfigManager;
 
 public class APlayerManager {
 

@@ -14,7 +14,6 @@ import net.minecraft.server.v1_8_R2.Entity;
 import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityLiving;
 import net.minecraft.server.v1_8_R2.EntitySkeleton;
-import net.minecraft.server.v1_8_R2.EntityVillager;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.ItemStack;

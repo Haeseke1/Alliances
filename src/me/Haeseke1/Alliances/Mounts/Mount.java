@@ -6,9 +6,10 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.Horse.Variant;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
 import me.Haeseke1.Alliances.Arena.ArenaManager;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -27,6 +28,7 @@ public class Mount {
 		this.mountType = mountType;
 	}
 	
+	@SuppressWarnings("unused")
 	public void spawnMount(){
 	  if(ArenaManager.isInArena(owner)){ MessageManager.sendMessage(owner, "&cYou can't mount here"); return;}
 		World world = owner.getWorld();

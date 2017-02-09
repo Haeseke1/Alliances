@@ -2,7 +2,6 @@ package me.Haeseke1.Alliances.Arena;
 
 
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;

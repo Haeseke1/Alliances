@@ -2,7 +2,6 @@ package me.Haeseke1.Alliances.CustomEntity.Spider;
 
 import java.lang.reflect.Field;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
@@ -12,7 +11,6 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import net.minecraft.server.v1_8_R2.Entity;
 import net.minecraft.server.v1_8_R2.EntityHuman;
-import net.minecraft.server.v1_8_R2.EntityInsentient;
 import net.minecraft.server.v1_8_R2.EntityLiving;
 import net.minecraft.server.v1_8_R2.EntitySpider;
 import net.minecraft.server.v1_8_R2.GenericAttributes;

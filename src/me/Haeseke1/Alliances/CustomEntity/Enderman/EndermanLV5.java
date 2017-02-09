@@ -1,7 +1,6 @@
 package me.Haeseke1.Alliances.CustomEntity.Enderman;
 
 import java.lang.reflect.Field;
-import java.util.Random;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;

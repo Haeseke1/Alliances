@@ -81,7 +81,6 @@ public class BlazeLV1 extends EntityBlaze{
 
         private EntityBlaze a;
         private int b;
-        private int c;
 
         public PathfinderGoalCustomBlazeFireball(EntityBlaze entityblaze) {
             this.a = entityblaze;

@@ -1,6 +1,5 @@
 package me.Haeseke1.Alliances.PVE.Events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

@@ -11,7 +11,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
-import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.PVE.Arena;
 import me.Haeseke1.Alliances.PVE.GroupManager;
 import me.Haeseke1.Alliances.PVE.PVE;

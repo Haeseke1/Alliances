@@ -25,7 +25,6 @@ import me.Haeseke1.Alliances.Outpost.Type.Magic_Tower;
 import me.Haeseke1.Alliances.Outpost.Type.Mine;
 import me.Haeseke1.Alliances.Outpost.Type.Mob_Farm;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
-import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class OutpostManager {
 	

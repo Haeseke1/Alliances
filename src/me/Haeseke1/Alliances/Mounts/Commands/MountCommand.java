@@ -1,15 +1,12 @@
 package me.Haeseke1.Alliances.Mounts.Commands;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-import me.Haeseke1.Alliances.Arena.ArenaManager;
 import me.Haeseke1.Alliances.Mounts.Mount;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
