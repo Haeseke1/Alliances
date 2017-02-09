@@ -32,7 +32,6 @@ public class Admin {
 			MessageManager.sendMessage(player, "&cYou're not the admin in your alliance");
 			return;
 		}
-		String wrong_arg = "&cWrong argument do: /alli to see all the commands";
 		
 		if(args[1].equalsIgnoreCase("invite") && args.length > 2){
 			if(!PlayerManager.isPlayerOnline(args[2])){
@@ -109,11 +108,11 @@ public class Admin {
 					MessageManager.sendMessage(player, "&cYou don't have enough money");
 				}
 			}catch(Exception e){
-				MessageManager.sendMessage(player, wrong_arg);
+				MessageManager.sendMessage(player, "&cWrong argument do: /alli to see all the commands");
 			}
 			return;
 		}
 		
-		MessageManager.sendMessage(player, wrong_arg);
+		MessageManager.sendMessage(player, "&cWrong argument do: /alli to see all the commands");
 	}
 }

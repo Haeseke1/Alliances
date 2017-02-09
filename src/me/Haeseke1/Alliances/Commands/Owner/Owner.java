@@ -37,7 +37,6 @@ public class Owner {
 			MessageManager.sendMessage(player, "&cYou aren't an owner of an alliance");
 			return;
 		}
-		MessageManager.sendMessage(player, "&cWrong argument do: /alli");
 		
 		if(args[1].equalsIgnoreCase("disband")){
 			Alliance alli = AllianceManager.getAlliance(player);

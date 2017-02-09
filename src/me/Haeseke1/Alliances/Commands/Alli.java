@@ -45,7 +45,6 @@ public class Alli implements CommandExecutor {
 
 		Player player = (Player) sender;
 		
-		MessageManager.sendMessage(player, "&cWrong argument do: /alli");
 		
 		
 		if(args[0].equalsIgnoreCase("create")){

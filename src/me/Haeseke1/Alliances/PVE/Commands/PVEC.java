@@ -179,7 +179,7 @@ public class PVEC implements CommandExecutor{
 		if(args[0].equalsIgnoreCase("leave")){
 			if(GroupManager.hasGroup(player)){
 				GroupManager.getGroup(player).disband();
-				player.sendMessage(ChatColor.YELLOW + "You left the group!");
+				MessageManager.sendMessage(player, ChatColor.YELLOW + "You left the group!");
 				return false;
 			}
 			if(AllianceManager.getAlliance(player) == null){
@@ -197,12 +197,12 @@ public class PVEC implements CommandExecutor{
 		
 		if(args[0].equalsIgnoreCase("settings")){
 			if(!GroupManager.hasGroup(player)){
-				player.sendMessage(ChatColor.RED + "You are not in a group!");
+				MessageManager.sendMessage(player, ChatColor.RED + "You are not in a group!");
 				return false;
 			}
 			Group group = GroupManager.getGroup(player);
 			if(!group.owner.equals(player)){
-				player.sendMessage(ChatColor.RED + "You are not owner of this group!");
+				MessageManager.sendMessage(player, ChatColor.RED + "You are not the owner of this group!");
 				return false;
 			}
 			group.settings.createGUI(player);
@@ -211,12 +211,12 @@ public class PVEC implements CommandExecutor{
 		
 		if(args[0].equalsIgnoreCase("ready")){
 			if(!GroupManager.hasGroup(player)){
-				player.sendMessage(ChatColor.RED + "You are not in a group!");
+				MessageManager.sendMessage(player, ChatColor.RED + "You are not in a group!");
 				return false;
 			}
 			Group group = GroupManager.getGroup(player);
 			if(!group.owner.equals(player)){
-				player.sendMessage(ChatColor.RED + "You are not owner of this group!");
+				MessageManager.sendMessage(player, ChatColor.RED + "You are not the owner of this group!");
 				return false;
 			}
 			PVE.main.addQueue(group);

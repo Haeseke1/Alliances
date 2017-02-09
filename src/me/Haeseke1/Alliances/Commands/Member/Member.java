@@ -29,7 +29,6 @@ public class Member {
 			return;
 		}
 		
-		MessageManager.sendMessage(player, "&cWrong argument do: /alli");
 		
 		if(args[1].equalsIgnoreCase("leave")){
 			if(AllianceManager.getAlliance(player).getOwner().equals(player.getUniqueId())){
