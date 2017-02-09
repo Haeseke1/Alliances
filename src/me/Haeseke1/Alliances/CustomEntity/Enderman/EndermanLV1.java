@@ -16,6 +16,7 @@ import net.minecraft.server.v1_8_R2.DamageSource;
 import net.minecraft.server.v1_8_R2.EntityEnderman;
 import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityLiving;
+import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R2.PathfinderGoalMeleeAttack;
@@ -49,6 +50,7 @@ public class EndermanLV1 extends EntityEnderman{
 	
 	protected void initAttributes(){
 		super.initAttributes();
+		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 	}
 	
 	protected boolean k(double d0, double d1, double d2) {

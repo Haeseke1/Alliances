@@ -93,12 +93,14 @@ public class StorageManager {
 			Location loc = null;
 			int ymin = 0;
 			int ymax = 0;
+			int level = 0;
 			HashMap<ItemStack, Integer> items = new HashMap<>();
 			Chunk chunk = null;
 			try {
 				loc = ConfigManager.getLocationFromConfig(file, "Storages." + key + ".mainBlock");
 				ymin = ConfigManager.getIntFromConfig(file, "Storages." + key + ".ymin");
 				ymax = ConfigManager.getIntFromConfig(file, "Storages." + key + ".ymax");
+				level = ConfigManager.getIntFromConfig(file, "Storages." + key + ".level");
 				if(file.contains("Storages." + key + ".items")){
 					for(String key2 : file.getConfigurationSection("Storages." + key + ".items").getKeys(false)){
 						items.put(ConfigManager.getItemStackFromConfig(file, "Storages." + key + ".items." + key2), ConfigManager.getIntFromConfig(file, "Storages." + key + ".items." + key2 + ".ramount"));
@@ -109,7 +111,7 @@ public class StorageManager {
 			} catch (EmptyLocationException | EmptyIntException | EmptyItemStackException | EmptyStringException e) {
 				e.printStackTrace();
 			}
-			new Storage(loc, chunk, ymin, ymax, items);
+			new Storage(loc, chunk, ymin, ymax, items, level);
 		}
 	}
 	
@@ -130,6 +132,7 @@ public class StorageManager {
 			file.set("Storages." + i + ".chunk.world", s.chunk.getWorld().getName());
 			file.set("Storages." + i + ".chunk.x", s.chunk.getX());
 			file.set("Storages." + i + ".chunk.z", s.chunk.getZ());
+			file.set("Storages." + i + ".level", s.level);
 			i++;
 		}
 	}

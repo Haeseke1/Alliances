@@ -14,6 +14,7 @@ import net.minecraft.server.v1_8_R2.EntityBlaze;
 import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityLiving;
 import net.minecraft.server.v1_8_R2.EntitySmallFireball;
+import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.MathHelper;
 import net.minecraft.server.v1_8_R2.PathfinderGoal;
@@ -49,6 +50,7 @@ public class BlazeLV1 extends EntityBlaze{
 	
 	protected void initAttributes(){
 		super.initAttributes();
+		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 	}
 	
 	

@@ -75,7 +75,7 @@ public class TownEvents implements Listener {
 			}else{
 				if(town.inTown.contains(event.getPlayer())){
 					town.inTown.remove(event.getPlayer());
-					String message = "&cYou entered &6%town_name%";
+					String message = "&cYou left &6%town_name%";
 					message = message.replace("%town_name%", town.name);
 					MessageManager.sendMessage(event.getPlayer(), message);
 				}

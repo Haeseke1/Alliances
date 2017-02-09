@@ -92,8 +92,8 @@ public class BuildingManager {
 		for(String key : file.getConfigurationSection("Unclaimable").getKeys(false)){
 			String world = null;
 			try {
-				world = ConfigManager.getStringFromConfig(file, "Unclaimable." + key + ".world");
-				Town.unclaimable.add(Bukkit.getWorld(world).getChunkAt(ConfigManager.getIntFromConfig(file, "Unclaimable." + key + ".x"), ConfigManager.getIntFromConfig(file, "Unclaimable." + key + ".z")));
+				world = ConfigManager.getStringFromConfig(file, "Unclaimable." + key + "." + key +  ".world");
+				Town.unclaimable.add(Bukkit.getWorld(world).getChunkAt(ConfigManager.getIntFromConfig(file, "Unclaimable." + key + ".x"), ConfigManager.getIntFromConfig(file, "Unclaimable." + key + "." + key +  ".z")));
 			} catch (EmptyStringException | EmptyIntException e) {
 				e.printStackTrace();
 			}
@@ -120,9 +120,9 @@ public class BuildingManager {
 		file.set("Unclaimable", null);
 		i = 0;
 		for(Chunk chunk : Town.unclaimable){
-			file.set("Unclaimable." + i + "." + i +".world", chunk.getWorld().getName());
-			file.set("Unclaimable." + i + "." + i +".x", chunk.getX());
-			file.set("Unclaimable." + i + "." + i +".z", chunk.getZ());
+			file.set("Unclaimable." + i + ".world", chunk.getWorld().getName());
+			file.set("Unclaimable." + i + ".x", chunk.getX());
+			file.set("Unclaimable." + i + ".z", chunk.getZ());
 			i++;
 		}
 		

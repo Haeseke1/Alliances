@@ -14,6 +14,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import net.minecraft.server.v1_8_R2.DamageSource;
 import net.minecraft.server.v1_8_R2.EntityCreeper;
 import net.minecraft.server.v1_8_R2.EntityHuman;
+import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R2.PathfinderGoalMeleeAttack;
@@ -48,9 +49,9 @@ public class CreeperLV1 extends EntityCreeper{
         this.goalSelector.a(2, new PathfinderGoalSwell(this));
 	}
 	
-	
 	protected void initAttributes(){
 		super.initAttributes();
+		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 	}
 	
 	

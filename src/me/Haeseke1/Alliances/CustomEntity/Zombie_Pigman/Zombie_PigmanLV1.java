@@ -12,6 +12,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityPigZombie;
 import net.minecraft.server.v1_8_R2.EntityVillager;
+import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.PathfinderGoalFloat;
 import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
@@ -46,9 +47,9 @@ public class Zombie_PigmanLV1 extends EntityPigZombie{
         this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 	}
 
-	
 	protected void initAttributes(){
 		super.initAttributes();
+		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 	}
 	
 	@Override

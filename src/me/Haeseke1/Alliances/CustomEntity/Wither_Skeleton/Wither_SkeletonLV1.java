@@ -17,6 +17,7 @@ import net.minecraft.server.v1_8_R2.Entity;
 import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityLiving;
 import net.minecraft.server.v1_8_R2.EntitySkeleton;
+import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.ItemStack;
 import net.minecraft.server.v1_8_R2.Items;
@@ -53,6 +54,7 @@ public class Wither_SkeletonLV1 extends EntitySkeleton{
 	
 	protected void initAttributes(){
 		super.initAttributes();
+		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 	}
 	
 	@Override

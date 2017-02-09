@@ -51,8 +51,8 @@ public class SpiderLV1 extends EntitySpider{
 	
 	protected void initAttributes(){
 		super.initAttributes();
+		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 	}
-	
 	
 	@Override
 	protected void dropDeathLoot(boolean flag, int i) {

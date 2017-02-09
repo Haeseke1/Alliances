@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -57,6 +58,11 @@ public class BuildingListener implements Listener {
         }
     }
 	
-	
+	@EventHandler
+	public void manipulate(PlayerArmorStandManipulateEvent e) {
+		if (!e.getRightClicked().isVisible()) {
+			e.setCancelled(true);
+		}
+	}
 
 }

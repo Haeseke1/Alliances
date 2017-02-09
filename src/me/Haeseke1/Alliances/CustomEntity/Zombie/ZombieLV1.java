@@ -12,6 +12,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityVillager;
 import net.minecraft.server.v1_8_R2.EntityZombie;
+import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.PathfinderGoalFloat;
 import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
@@ -48,8 +49,8 @@ public class ZombieLV1 extends EntityZombie{
 	
 	protected void initAttributes(){
 		super.initAttributes();
+		this.getAttributeInstance(GenericAttributes.b).setValue(100000);
 	}
-	
 	
 	@Override
 	protected void dropDeathLoot(boolean flag, int i) {

@@ -8,6 +8,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -29,13 +32,43 @@ public class Storage extends Building{
 	
 	public Storage(Location mainBlock, Chunk chunk, int ymin, int ymax) {
 		super(mainBlock, chunk, ymin, ymax, BuildingType.STORAGE, true);
+		Location loc = new Location(mainBlock.getWorld(), mainBlock.getX() + 0.5, mainBlock.getY(), mainBlock.getZ() + 0.5);
+		removeArmorStand(loc);
+		ArmorStand as = (ArmorStand) mainBlock.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND); //Spawn the ArmorStand
+		as.setGravity(false);
+		as.setCanPickupItems(false);
+		as.setCustomName(ChatColor.GOLD + "Storage LV1");
+		as.setCustomNameVisible(true);
+		as.setVisible(false);
 		storages.add(this);
 	}
 	
-	public Storage(Location mainBlock, Chunk chunk,int ymin, int ymax, HashMap<ItemStack,Integer> items) {
+	public Storage(Location mainBlock, Chunk chunk,int ymin, int ymax, HashMap<ItemStack,Integer> items, int level) {
 		super(mainBlock, chunk, ymin, ymax, BuildingType.STORAGE, true);
+		this.level = level;
+		Location loc = new Location(mainBlock.getWorld(), mainBlock.getX() + 0.5, mainBlock.getY(), mainBlock.getZ() + 0.5);
+		removeArmorStand(loc);
+		ArmorStand as = (ArmorStand) mainBlock.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND); //Spawn the ArmorStand
+		as.setGravity(false);
+		as.setCanPickupItems(false);
+		if(level == 0){
+			as.setCustomName(ChatColor.GOLD + "Storage LV\u221E");
+		}else{
+			as.setCustomName(ChatColor.GOLD + "Storage LV" + level);
+		}
+		as.setCustomNameVisible(true);
+		as.setVisible(false);
 		this.items = items;
 		storages.add(this);
+		
+	}
+	
+	public void removeArmorStand(Location loc){
+		for(Entity e : loc.getWorld().getNearbyEntities(loc, 5, 5, 5)){
+			if(e instanceof ArmorStand && !((ArmorStand) e).isVisible()){
+				e.remove();
+			}
+		}
 	}
 	
 	public int itemCount(){
