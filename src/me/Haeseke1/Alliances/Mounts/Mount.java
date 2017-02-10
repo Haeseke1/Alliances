@@ -67,6 +67,7 @@ public class Mount {
 	    	horse.getInventory().setArmor(new ItemStack(Material.CHEST));
 	    	horse.setVariant(Variant.DONKEY);
 	    	horse.setCarryingChest(true);
+	    	horse.setPassenger(owner);
 	    	horse.setOwner(owner);
 		    horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
 		    horse.setCustomName(this.name);
