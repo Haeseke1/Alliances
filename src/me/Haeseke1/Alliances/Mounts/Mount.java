@@ -32,7 +32,6 @@ public class Mount {
 	public void spawnMount(){
 	  if(ArenaManager.isInArena(owner)){ MessageManager.sendMessage(owner, "&cYou can't mount here"); return;}
 		World world = owner.getWorld();
-		Entity entity = world.spawnEntity(owner.getLocation(), type);
 	    switch(this.mountType){
 	    case "elite":
 	    	this.name = ChatColor.AQUA + this.owner.getName() + "'s mount";
@@ -68,6 +67,7 @@ public class Mount {
 	    	horse.getInventory().setArmor(new ItemStack(Material.CHEST));
 	    	horse.setVariant(Variant.DONKEY);
 	    	horse.setCarryingChest(true);
+	    	horse.setPassenger(owner);
 	    	horse.setOwner(owner);
 		    horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
 		    horse.setCustomName(this.name);
