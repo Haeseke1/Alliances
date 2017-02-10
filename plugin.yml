@@ -25,3 +25,5 @@ commands:
   PVE:
   Building:
     aliases: [b,build]
+  Items:
+    aliases: [it,i,item]

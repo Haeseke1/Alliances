@@ -49,6 +49,11 @@ public class StorageListener implements Listener {
 			MessageManager.sendMessage(event.getPlayer(), ChatColor.RED + "This town is not from your alliance!");
 			return;
 		}
+		if(event.hasItem() && event.getItem().getType().equals(Material.INK_SACK) && 
+				event.getItem().getDurability() == (short) 15 && event.getItem().getItemMeta().hasDisplayName() && 
+				event.getItem().getItemMeta().getDisplayName().contains(ChatColor.GOLD + "Storage")){
+			return;
+		}
 		
 		if(b instanceof Storage){
 			Storage s = (Storage) b;

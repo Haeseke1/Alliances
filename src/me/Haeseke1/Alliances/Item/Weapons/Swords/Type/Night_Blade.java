@@ -11,5 +11,6 @@ public class Night_Blade extends Sword{
 	public Night_Blade(String name, Player player, int cooldown, String effect) {
 		super(name, player, cooldown, effect);
 	}
-
+	
+	
 }

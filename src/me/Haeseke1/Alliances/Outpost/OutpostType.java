@@ -9,7 +9,7 @@ public enum OutpostType {
 	
 	public static OutpostType getOutpostType(String s){
 		s = s.replace(" ", "");
-		switch(s){
+		switch(s.toLowerCase()){
 		case "blacksmith":
 			return BLACKSMITH;
 		case "dock":

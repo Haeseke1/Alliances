@@ -3,8 +3,14 @@ package me.Haeseke1.Alliances.Item.Commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
+import me.Haeseke1.Alliances.Item.Outpost_Compass;
+import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import me.Haeseke1.Alliances.Utils.PlayerManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class Item implements CommandExecutor{
 
@@ -13,9 +19,74 @@ public class Item implements CommandExecutor{
 		if(args.length == 0 && sender.hasPermission("Alliances.items.*")){
 			sender.sendMessage(MessageManager.infoColorCode + "===== Items =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
-			sender.sendMessage(MessageManager.infoColorCode + "/item compass #Create a new compass outpost");
+			sender.sendMessage(MessageManager.infoColorCode + "/item compass [playername] #Create a new compass outpost");
+			sender.sendMessage(MessageManager.infoColorCode + "/item storageupgrade <Tier> [playername] #Create a new compass outpost");
 			return false;
 		}
-		return false;	
+		
+		if (!(sender instanceof Player)) {
+			String message = "This command needs to be executed by a player";
+			MessageManager.sendAlertMessage(message);
+			return false;
+		}
+		Player player = (Player) sender;
+		
+		if(!player.hasPermission("Alliances.items.*")){
+			MessageManager.sendMessage(player, "&cWrong argument do: /pve");
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("compass")){
+			if(args.length > 1){
+				if(!PlayerManager.isPlayerOnline(args[1])){
+					MessageManager.sendMessage(player, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[1]);
+				getter.getInventory().addItem(Outpost_Compass.getItem(getter));
+				MessageManager.sendMessage(player, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + "Outpost Compass" + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + "Outpost Compass" + ChatColor.GREEN + "!");
+				return false;
+			}
+			player.getInventory().addItem(Outpost_Compass.getItem(player));
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + "Outpost Compass" + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("storageupgrade") && args.length > 1){
+			int tier = 0;
+			switch(args[1].toLowerCase()){
+			case "2":
+				tier = 2;
+				break;
+			case "3":
+				tier = 3;
+				break;
+			case "inf":
+				tier = 0;
+				break;
+			default:
+				MessageManager.sendMessage(player, "&cThis tier does not exist!");
+				return false;
+			}
+			if(args.length > 2){
+				if(!PlayerManager.isPlayerOnline(args[2])){
+					MessageManager.sendMessage(player, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[2]);
+				ItemStack item = Storage_Level.getItem(tier);
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(player, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			ItemStack item = Storage_Level.getItem(tier);
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		return false;
 	}
 }

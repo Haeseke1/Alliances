@@ -98,6 +98,9 @@ import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
+import me.Haeseke1.Alliances.Item.Outpost_Compass;
+import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
+import me.Haeseke1.Alliances.Item.Commands.Item;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Events.RightClickSword;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
 import me.Haeseke1.Alliances.Mounts.MountsManager;
@@ -261,6 +264,9 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new StorageListener(), this);
 		pm.registerEvents(new BuildingListener(), this);
 		pm.registerEvents(new checkTPACommand(), this);
+		
+		pm.registerEvents(new Outpost_Compass(), this);
+		pm.registerEvents(new Storage_Level(), this);
 	}
 
 	public void registerCommands() {
@@ -275,6 +281,7 @@ public class Main extends JavaPlugin {
 		getCommand("Mount").setExecutor(new MountCommand());
 		getCommand("PVE").setExecutor(new PVEC());
 		getCommand("building").setExecutor(new BuildingC());
+		getCommand("items").setExecutor(new Item());
 	}
 	
 	public void registerCustomEntitys(){

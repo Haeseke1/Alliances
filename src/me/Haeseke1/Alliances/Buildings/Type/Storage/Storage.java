@@ -32,20 +32,21 @@ public class Storage extends Building{
 	
 	public Storage(Location mainBlock, Chunk chunk, int ymin, int ymax) {
 		super(mainBlock, chunk, ymin, ymax, BuildingType.STORAGE, true);
-		Location loc = new Location(mainBlock.getWorld(), mainBlock.getX() + 0.5, mainBlock.getY(), mainBlock.getZ() + 0.5);
-		removeArmorStand(loc);
-		ArmorStand as = (ArmorStand) mainBlock.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND); //Spawn the ArmorStand
-		as.setGravity(false);
-		as.setCanPickupItems(false);
-		as.setCustomName(ChatColor.GOLD + "Storage LV1");
-		as.setCustomNameVisible(true);
-		as.setVisible(false);
+		setHolo();
 		storages.add(this);
 	}
 	
 	public Storage(Location mainBlock, Chunk chunk,int ymin, int ymax, HashMap<ItemStack,Integer> items, int level) {
 		super(mainBlock, chunk, ymin, ymax, BuildingType.STORAGE, true);
 		this.level = level;
+		setHolo();
+		this.items = items;
+		storages.add(this);
+		
+	}
+	
+	
+	public void setHolo(){
 		Location loc = new Location(mainBlock.getWorld(), mainBlock.getX() + 0.5, mainBlock.getY(), mainBlock.getZ() + 0.5);
 		removeArmorStand(loc);
 		ArmorStand as = (ArmorStand) mainBlock.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
@@ -58,9 +59,19 @@ public class Storage extends Building{
 		}
 		as.setCustomNameVisible(true);
 		as.setVisible(false);
-		this.items = items;
-		storages.add(this);
-		
+	}
+	
+	public void level_up(int level){
+		this.level = level;
+		setHolo();
+
+	}
+	
+	public boolean canLevel_Up(int level){
+		if(this.level == level - 1 || (level == 0 && this.level != 0)){
+			return true;
+		}
+		return false;
 	}
 	
 	public void removeArmorStand(Location loc){

@@ -17,7 +17,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
 
 import me.Haeseke1.Alliances.Exceptions.EmptyBooleanException;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
@@ -111,11 +110,6 @@ public class ConfigManager {
 			}else{
 				i = new ItemStack(config.getInt(path + ".ID"),config.getInt(path + ".Amount"));
 			}
-			if(config.contains(path + ".Data")){
-				MaterialData md = i.getData();
-				md.setData((byte) config.getInt(path + ".Data"));
-			}
-			
 			ItemMeta im = i.getItemMeta();
 			if(config.contains(path + ".Displayname")){
 				im.setDisplayName(ChatColor.translateAlternateColorCodes('&', config.getString(path + ".Displayname")));
@@ -148,7 +142,7 @@ public class ConfigManager {
 				config.set(path + ".Lore", item.getItemMeta().getLore());
 			}
 		}
-		config.set(path + ".Data", item.getData().getData());
+		config.set(path + ".Data", item.getDurability());
 		List<String> list = new ArrayList<String>();
 		for(Entry<Enchantment,Integer> ench : item.getEnchantments().entrySet()){
 			list.add(ench.getKey().getId() + "," + ench.getValue());
