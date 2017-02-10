@@ -26,10 +26,12 @@ public class PVEC implements CommandExecutor{
 		if (args.length == 0) {
 			sender.sendMessage(MessageManager.infoColorCode + "===== PVE =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
-			sender.sendMessage(MessageManager.infoColorCode + "/pve createmain #Create lobby and set spawn point at your location");
-			sender.sendMessage(MessageManager.infoColorCode + "/pve createarena <Name> #creates a new arena");
-			sender.sendMessage(MessageManager.infoColorCode + "/pve addplayerspawn <Name> #add playerspawn to arena");
-			sender.sendMessage(MessageManager.infoColorCode + "/pve addmobspawn <Name> #add mobspawn to arena");
+			if(sender.hasPermission("Alliances.pve.*")){
+				sender.sendMessage(MessageManager.infoColorCode + "/pve createmain #Create lobby and set spawn point at your location");
+				sender.sendMessage(MessageManager.infoColorCode + "/pve createarena <Name> #creates a new arena");
+				sender.sendMessage(MessageManager.infoColorCode + "/pve addplayerspawn <Name> #add playerspawn to arena");
+				sender.sendMessage(MessageManager.infoColorCode + "/pve addmobspawn <Name> #add mobspawn to arena");
+			}
 			sender.sendMessage(MessageManager.infoColorCode + "/pve join <amount> #create new group for pve with given amount of players");
 			sender.sendMessage(MessageManager.infoColorCode + "/pve join #join your alliance for a PVE groug");
 			sender.sendMessage(MessageManager.infoColorCode + "/pve settings #change settings for your next battle");
@@ -45,16 +47,82 @@ public class PVEC implements CommandExecutor{
 		Player player = (Player) sender;
 		String wrong_arg = "&cWrong argument do: /pve";
 		
-		if(args[0].equalsIgnoreCase("createmain")){
-			if(PVE.main != null){
-				String message = "&cThere's already a main lobby";
+		if(sender.hasPermission("Alliances.pve.*")){
+			
+			if(args[0].equalsIgnoreCase("createmain")){
+				if(PVE.main != null){
+					String message = "&cThere's already a main lobby";
+					MessageManager.sendMessage(player, message);
+					return false;
+				}
+				new PVE(player.getLocation());
+				String message = "&2You've successfully created a main lobby!";
 				MessageManager.sendMessage(player, message);
 				return false;
 			}
-			new PVE(player.getLocation());
-			String message = "&2You've successfully created a main lobby!";
-			MessageManager.sendMessage(player, message);
-			return false;
+			
+			if(args[0].equalsIgnoreCase("createarena") && args.length > 1){
+				if(PVE.main == null){
+					String message = "&cThis PVE doesn't exists";
+					MessageManager.sendMessage(player, message);
+					return false;
+				}
+				if(PVE.main.arenaAlreadyExist(args[1])){
+					String message = "&cThis arena does already exists";
+					MessageManager.sendMessage(player, message);
+					return false;
+				}
+				if (regionSelect.leftClick.containsKey(player) && regionSelect.rightClick.containsKey(player)) {
+					new Arena(args[1], regionSelect.leftClick.get(player), regionSelect.rightClick.get(player));
+					String message = "&2You've successfully created an PVE arena!";
+					MessageManager.sendMessage(player, message);
+				} else {
+					String message = "&cYou need to select an arena first";
+					MessageManager.sendMessage(player, message);
+					return false;
+				}
+			}
+			
+			if(args[0].equalsIgnoreCase("addplayerspawn") && args.length > 1){
+				if(PVE.main == null){
+					String message = "&cThis PVE arena doesn't exists";
+					MessageManager.sendMessage(player, message);
+					return false;
+				}
+				if(!PVE.main.arenaAlreadyExist(args[1])){
+					MessageManager.sendMessage(player, ChatColor.RED + "This arena does not exist!");
+					return false;
+				}
+				Arena arena = PVE.main.getArena(args[1]);
+				if(arena.playerSpawns.size() >= 4){
+					MessageManager.sendMessage(player, ChatColor.RED + "You can't add more then 4 spawns!");
+					return false;
+				}else{
+					List<Location> locs = arena.playerSpawns;
+					locs.add(player.getLocation());
+					arena.playerSpawns = locs;
+					MessageManager.sendMessage(player, ChatColor.GREEN + "Added a new spawn!");
+					return false;
+				}
+			}
+			
+			if(args[0].equalsIgnoreCase("addmobspawn") && args.length > 1){
+				if(PVE.main == null){
+					String message = "&cThis PVE arena doesn't exists";
+					MessageManager.sendMessage(player, message);
+					return false;
+				}
+				if(!PVE.main.arenaAlreadyExist(args[1])){
+					MessageManager.sendMessage(player, ChatColor.RED + "This arena does not exist!");
+					return false;
+				}
+				Arena arena = PVE.main.getArena(args[1]);
+				List<Location> locs = arena.mobSpawns;
+				locs.add(player.getLocation());
+				arena.mobSpawns = locs;
+				MessageManager.sendMessage(player, ChatColor.GREEN + "Added a new spawn!");
+				return false;
+			}
 		}
 		
 		if(args[0].equalsIgnoreCase("createarena") && args.length > 1){

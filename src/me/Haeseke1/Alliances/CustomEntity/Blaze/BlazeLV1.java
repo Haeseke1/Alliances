@@ -19,6 +19,7 @@ import net.minecraft.server.v1_8_R2.Item;
 import net.minecraft.server.v1_8_R2.MathHelper;
 import net.minecraft.server.v1_8_R2.PathfinderGoal;
 import net.minecraft.server.v1_8_R2.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R2.PathfinderGoalMeleeAttack;
 import net.minecraft.server.v1_8_R2.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R2.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R2.World;
@@ -38,6 +39,7 @@ public class BlazeLV1 extends EntityBlaze{
 			bField.set(targetSelector, new UnsafeList<PathfinderGoalSelector>());
 			cField.set(goalSelector, new UnsafeList<PathfinderGoalSelector>());
 			cField.set(targetSelector, new UnsafeList<PathfinderGoalSelector>());
+			this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, 1.0D, false));
 			this.goalSelector.a(4, new BlazeLV1.PathfinderGoalCustomBlazeFireball(this));
 			this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 	        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));

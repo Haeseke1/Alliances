@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -29,7 +30,7 @@ public class APlayerEvents implements Listener{
 		new aPlayer(player, f, file);
 	}
 	
-	@EventHandler
+	@EventHandler(priority= EventPriority.LOW) 
 	private void playerleave(PlayerQuitEvent event){
 		aPlayer aplayer = APlayerManager.getAPlayer(event.getPlayer());
 		aplayer.saveConfig();

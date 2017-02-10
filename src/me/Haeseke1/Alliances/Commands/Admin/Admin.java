@@ -75,7 +75,7 @@ public class Admin {
 			members.replace(cplayer.getUniqueId(), args[3]);
 			AllianceManager.getAlliance(player).setMembers(members);
 			MessageManager.sendMessage(player, "&2You've set the rank of &6" + cplayer.getName() + "&2 to &6" + args[3]);
-			MessageManager.sendMessage(cplayer, "&2A staff member changed your rank to &6" + args[3]);
+			MessageManager.sendMessage(cplayer, "&2A admin of your alliance changed your rank to &6" + args[3]);
 			return;
 		}
 		

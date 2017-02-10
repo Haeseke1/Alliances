@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.APlayer.aPlayer;
+import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class Group {
@@ -41,11 +42,14 @@ public class Group {
 	public void disband(){
 		for(Player player : members){
 			aPlayer aplayer = APlayerManager.getAPlayer(player);
-			aplayer.is_in_pve_lobby = false;
-			aplayer.is_in_pve_arena = false;
-			aplayer.firstRun = true;
+			if(aplayer != null){
+				aplayer.is_in_pve_lobby = false;
+				aplayer.is_in_pve_arena = false;
+				aplayer.firstRun = true;
+			}
 			player.setGameMode(GameMode.SURVIVAL);
 			player.teleport(memberLocations.get(player),TeleportCause.ENDER_PEARL);
+			MessageManager.sendMessage(player, "&eThe group is disbanded!");
 		}
 		groups.remove(this);
 		PVE.main.removeQueue(this);

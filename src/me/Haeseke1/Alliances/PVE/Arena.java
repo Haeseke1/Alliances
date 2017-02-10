@@ -129,13 +129,15 @@ public class Arena {
 		}else{
 			for(Player player : group.members){
 				if(Coins.removePlayerCoins(player, (group.settings.getCoinReward() * 3) / group.members.size())){
-					group.sendPlayersMessage(ChatColor.RED + "Your group lost! " + ChatColor.GOLD + "(-" + (int) ((group.settings.getCoinReward() * 3) / group.members.size()) + " coins)");
+					player.sendMessage(ChatColor.RED + "Your group lost! " + ChatColor.GOLD + "(-" + (int) ((group.settings.getCoinReward() * 3) / group.members.size()) + " coins)");
 				}else{
+					player.sendMessage(ChatColor.RED + "Your group lost! " + ChatColor.GOLD + "(-" + Coins.getPlayerCoins(player) + " coins)");
 					Coins.removePlayerCoins(player, Coins.getPlayerCoins(player));
-					group.sendPlayersMessage(ChatColor.RED + "Your group lost! " + ChatColor.GOLD + "(-" + Coins.getPlayerCoins(player) + " coins)");
 				}	
 			}
 		}
+		countDown = 10;
+		startCountdown = false;
 		group.disband();
 		group = null;
 		playing = false;

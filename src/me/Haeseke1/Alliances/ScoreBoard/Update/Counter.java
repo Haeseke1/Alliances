@@ -33,20 +33,20 @@ public class Counter implements Runnable{
 				if(aplayer.firstRun){
 					aplayer.resetScore();
 					aplayer.setPlayerPVELobbyScoreboard();
-					return;
+					continue;
 				}else{
 					aplayer.updatePlayerPVELobbyScoreboard();
-					return;
+					continue;
 				}
 			}
 			if(aplayer.is_in_pve_arena){
 				if(aplayer.firstRun){
 					aplayer.resetScore();
 					aplayer.setPlayerPVEArenaScoreboard();
-					return;
+					continue;
 				}else{
 					aplayer.updatePlayerPVEArenaScoreboard();
-					return;
+					continue;
 				}
 			}
 			if(player){

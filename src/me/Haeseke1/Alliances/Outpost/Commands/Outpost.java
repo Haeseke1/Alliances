@@ -14,7 +14,7 @@ public class Outpost implements CommandExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if(args.length == 0){
+		if(args.length == 0 && sender.hasPermission("Alliances.outpost.*")){
 			sender.sendMessage(MessageManager.infoColorCode + "===== Outpost =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
 			sender.sendMessage(MessageManager.infoColorCode + "/outpost create #Create a new outpost");

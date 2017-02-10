@@ -29,7 +29,7 @@ public class Owner {
 			player.sendMessage(MessageManager.infoColorCode + "/... owner addadmin <Player> #Set rank of a player");
 			player.sendMessage(MessageManager.infoColorCode + "/... owner removeadmin <Player> #Set rank of a player");
 			player.sendMessage(MessageManager.infoColorCode + "/... owner getrewards #Take items your alliance was rewarded!");
-			player.sendMessage(MessageManager.infoColorCode + "/... admin deposit <Amount> #add money to alliance balance");
+			player.sendMessage(MessageManager.infoColorCode + "/... owner deposit <Amount> #add money to alliance balance");
 			return;
 		}
 		
@@ -151,7 +151,7 @@ public class Owner {
 			HashMap<UUID,String> members = AllianceManager.getAlliance(player).getMembers();
 			members.replace(cplayer.getUniqueId(), args[3]);
 			MessageManager.sendMessage(player, "&2You've set the rank of &6" + cplayer.getName() + "&2 to &6" + args[3]);
-			MessageManager.sendMessage(cplayer, "&2A staff member changed your rank to &6" + args[3]);
+			MessageManager.sendMessage(cplayer, "&2A admin of your alliance changed your rank to &6" + args[3]);
 			return;
 		}
 		

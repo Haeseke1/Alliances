@@ -8,6 +8,7 @@ public class PlayerManager {
 	
 	
 	public static boolean isPlayerOnline(String name){
+		name.replace(" ", "");
 		for(Player player : Bukkit.getOnlinePlayers()){
 			if(player.getName().equalsIgnoreCase(name)){
 				return true;

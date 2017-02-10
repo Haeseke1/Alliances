@@ -20,8 +20,10 @@ public class TownC implements CommandExecutor{
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
 			sender.sendMessage(MessageManager.infoColorCode + "/town create <Name> #Create a new town");
 			sender.sendMessage(MessageManager.infoColorCode + "/town claim <Name> #Claim more land for your town");
-			sender.sendMessage(MessageManager.infoColorCode + "/town unclaimable #Make a chunk unclaimable");
 			sender.sendMessage(MessageManager.infoColorCode + "/town show #Show your land");
+			if (sender.hasPermission("Alliances.town.*")) {
+				sender.sendMessage(MessageManager.infoColorCode + "/town unclaimable #Make a chunk unclaimable");
+			}
 			return false;
 		}
 		
@@ -59,17 +61,17 @@ public class TownC implements CommandExecutor{
 			TownManager.claimLand(player, town);
 			return false;
 		}
-		
-		if(args[0].equalsIgnoreCase("unclaimable")){
-			if(Town.unclaimable.contains(player.getLocation().getChunk())){
-				MessageManager.sendMessage(player, ChatColor.RED + "This is already unclaimable!");
+		if (player.hasPermission("Alliances.town.*")) {
+			if(args[0].equalsIgnoreCase("unclaimable")){
+				if(Town.unclaimable.contains(player.getLocation().getChunk())){
+					MessageManager.sendMessage(player, ChatColor.RED + "This is already unclaimable!");
+					return false;
+				}
+				Town.unclaimable.add(player.getLocation().getChunk());
+				MessageManager.sendMessage(player, ChatColor.GREEN + "This land is now unclaimable!");
 				return false;
 			}
-			Town.unclaimable.add(player.getLocation().getChunk());
-			MessageManager.sendMessage(player, ChatColor.GREEN + "This land is now unclaimable!");
-			return false;
 		}
-		
 		if(args[0].equalsIgnoreCase("show")){
 			if(!AllianceManager.playerIsInAlli(player)){
 				String message = "&cYou aren't in an alliance";

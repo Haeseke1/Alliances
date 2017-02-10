@@ -25,7 +25,6 @@ public class mainChallenges implements CommandExecutor {
 			return false;
 		}
 		Player player = (Player) sender;
-		MessageManager.sendMessage(player,"&cWrong argument: do /challenges to see all the commands");
 		
 		if(args[0].equalsIgnoreCase("player")){
 			InventoryEvents.createInventory(player);

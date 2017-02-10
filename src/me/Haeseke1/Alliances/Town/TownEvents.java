@@ -6,9 +6,11 @@ import java.util.List;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -33,6 +35,20 @@ public class TownEvents implements Listener {
 		}
 	}
 
+	@EventHandler
+	private void onplayerInteract(PlayerInteractEvent event){
+		if(!event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && !event.getAction().equals(Action.LEFT_CLICK_BLOCK)){
+			return;
+		}
+		for(Town town : Town.towns){
+			if(town.chunks.contains(event.getClickedBlock().getLocation().getChunk())){
+				if(!town.owner.getMembers().containsKey(event.getPlayer().getUniqueId())){
+					event.setCancelled(true);
+				}
+			}
+		}
+	}
+	
 	@EventHandler
 	private void onBlockPlace(BlockPlaceEvent event){
 		for(Town town : Town.towns){

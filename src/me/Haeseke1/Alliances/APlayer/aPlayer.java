@@ -209,9 +209,9 @@ public class aPlayer{
 		aScoreBoardManager.setScore(this, ChatColor.GOLD + "Players alive: " + arena.playerAlive.size(), 24, sideBar, " ", null);
 		for(Player player : arena.playerAlive){
 			if(player.getHealth() <= player.getMaxHealth() / 4){
-				aScoreBoardManager.setScore(this, ChatColor.RED + player.getName() + ChatColor.GRAY + " (" + player.getHealth() + "/" + player.getMaxHealth() + ")", 22, sideBar, " ", null);
+				aScoreBoardManager.setScore(this, ChatColor.RED + player.getName() + ChatColor.GRAY + " (" + (int)player.getHealth() + "/" + (int)player.getMaxHealth() + ")", 22, sideBar, " ", null);
 			}else{
-				aScoreBoardManager.setScore(this, ChatColor.GREEN + player.getName() + ChatColor.GRAY + " (" + player.getHealth() + "/" + player.getMaxHealth() + ")", 22, sideBar, " ", null);
+				aScoreBoardManager.setScore(this, ChatColor.GREEN + player.getName() + ChatColor.GRAY + " (" + (int)player.getHealth() + "/" + (int)player.getMaxHealth() + ")", 22, sideBar, " ", null);
 			}
 		}
 		
@@ -246,9 +246,9 @@ public class aPlayer{
 		aScoreBoardManager.updateScore(this, ChatColor.GOLD + "Players alive: " + arena.playerAlive.size(), 24, sideBar, " ", null);
 		for(Player player : arena.playerAlive){
 			if(player.getHealth() <= player.getMaxHealth() / 4){
-				aScoreBoardManager.updateScore(this, ChatColor.RED + player.getName() + ChatColor.GRAY + " (" + player.getHealth() + "/" + player.getMaxHealth() + ")", 22, sideBar, " ", null);
+				aScoreBoardManager.updateScore(this, ChatColor.RED + player.getName() + ChatColor.GRAY + " (" + (int)player.getHealth() + "/" + (int)player.getMaxHealth() + ")", 22, sideBar, " ", null);
 			}else{
-				aScoreBoardManager.updateScore(this, ChatColor.GREEN + player.getName() + ChatColor.GRAY + " (" + player.getHealth() + "/" + player.getMaxHealth() + ")", 22, sideBar, " ", null);
+				aScoreBoardManager.updateScore(this, ChatColor.GREEN + player.getName() + ChatColor.GRAY + " (" + (int)player.getHealth() + "/" + (int)player.getMaxHealth() + ")", 22, sideBar, " ", null);
 			}
 		}
 		
