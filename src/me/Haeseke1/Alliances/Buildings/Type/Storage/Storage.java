@@ -48,7 +48,7 @@ public class Storage extends Building{
 		this.level = level;
 		Location loc = new Location(mainBlock.getWorld(), mainBlock.getX() + 0.5, mainBlock.getY(), mainBlock.getZ() + 0.5);
 		removeArmorStand(loc);
-		ArmorStand as = (ArmorStand) mainBlock.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND); //Spawn the ArmorStand
+		ArmorStand as = (ArmorStand) mainBlock.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
 		as.setGravity(false);
 		as.setCanPickupItems(false);
 		if(level == 0){
