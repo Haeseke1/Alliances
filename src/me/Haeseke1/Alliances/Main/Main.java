@@ -101,8 +101,14 @@ import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Item.Outpost_Compass;
 import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
 import me.Haeseke1.Alliances.Item.Commands.Item;
+import me.Haeseke1.Alliances.Item.Totems.HealingTotem;
+import me.Haeseke1.Alliances.Item.Totems.Events.DamageTotem;
+import me.Haeseke1.Alliances.Item.Totems.Scheduler.Checker;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Events.RightClickSword;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Commands.Wand;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Events.RightClickWand;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler.ManaRegen;
 import me.Haeseke1.Alliances.Mounts.MountsManager;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
 import me.Haeseke1.Alliances.Mounts.Events.Death;
@@ -199,11 +205,13 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+	    HealingTotem.removeAllTotems();
 		PVEManager.disablePVE();
 		MountsManager.despawnMounts();
 		Config.saveConfigFile(this);
 		saveAllCustomConfigs();
 		ShopManager.despawnVendors();
+		APlayerManager.aPlayerSave();
 		MessageManager.sendAlertMessage("The plugin has been shutted down! *-* The cake wasn't a lie thought *-*");
 	}
 
@@ -267,6 +275,10 @@ public class Main extends JavaPlugin {
 		
 		pm.registerEvents(new Outpost_Compass(), this);
 		pm.registerEvents(new Storage_Level(), this);
+		
+		pm.registerEvents(new RightClickWand(), this);
+		
+		pm.registerEvents(new DamageTotem(), this);
 	}
 
 	public void registerCommands() {
@@ -282,6 +294,7 @@ public class Main extends JavaPlugin {
 		getCommand("PVE").setExecutor(new PVEC());
 		getCommand("building").setExecutor(new BuildingC());
 		getCommand("items").setExecutor(new Item());
+		getCommand("wand").setExecutor(new Wand());
 	}
 	
 	public void registerCustomEntitys(){
@@ -355,6 +368,8 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new CheckCooldowns(), 0, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new PVE_Scheduler(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Arena_Scheduler(), 20, 20);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ManaRegen(), 0L, 100);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Checker(), 0L, 1L);
 		java.util.Timer timer = new java.util.Timer(); 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);

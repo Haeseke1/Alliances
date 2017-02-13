@@ -9,24 +9,32 @@ import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.craftbukkit.v1_8_R2.entity.CraftPlayer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Economy.Coins;
+import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.PVE.Arena;
 import me.Haeseke1.Alliances.PVE.ArenaManager;
 import me.Haeseke1.Alliances.PVE.Group;
 import me.Haeseke1.Alliances.PVE.GroupManager;
 import me.Haeseke1.Alliances.PVE.PVE;
 import me.Haeseke1.Alliances.ScoreBoard.aScoreBoardManager;
+import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import me.Haeseke1.Alliances.Utils.SoundManager;
+import net.minecraft.server.v1_8_R2.PacketPlayOutNamedEntitySpawn;
 
 public class aPlayer{
 	
@@ -38,17 +46,23 @@ public class aPlayer{
 	public FileConfiguration file;
 	public File f;
 	
-	public int wins;
-	public int loses;
+	public int wins = 0;
+	public int loses = 0;
 	
 	public Scoreboard scoreboard;
 	public List<String> scores = new ArrayList<String>();
 	public Objective sideBar;
+	public Objective belowName;
 	public Team team;
 
 	public boolean is_in_pve_lobby = false;
 	public boolean is_in_pve_arena = false;
 	public boolean firstRun = true;
+	
+	public final int MAX_MANA = 20;
+	public double mana = 20;
+	public double manaregen = 1.0;
+	public String manaString;
 	
 	public aPlayer(Player player, File f, FileConfiguration file) {
 		coins = Coins.getPlayerCoins(player);
@@ -65,10 +79,12 @@ public class aPlayer{
 	
 	
 	public void registerConfig(){
-	  if(!(file.contains("Wins"))){ this.wins = 0; return;}
-	  if(!(file.contains("Loses"))){ this.loses = 0; return;}
+	  if(!(file.contains("Wins"))){ return;}
+	  if(!(file.contains("Loses"))){  return;}
+	  if(!(file.contains("Mana_regen"))){ return;}
 	  this.wins = file.getInt("Wins");
 	  this.loses = file.getInt("Loses");
+	  this.manaregen = file.getDouble("Mana_regen");
 	}
 	
 	public void saveConfig(){
@@ -76,9 +92,13 @@ public class aPlayer{
 			file.save(f);
 			file.set("Wins", this.wins);
 			file.set("Loses", this.loses);
+			file.set("Mana_regen", this.manaregen);
 		} catch (IOException e) {
 			MessageManager.sendAlertMessage("Could not save " + file.getName() + "!");
 		}
+		File file = new File(Main.plugin.getDataFolder(),player.getUniqueId() + ".yml");
+ 	    ConfigManager.saveCustomConfig(file,YamlConfiguration.loadConfiguration(file));
+ 	    Bukkit.broadcastMessage("saved");
 	}
 	
 	public void addWin(){
@@ -394,5 +414,63 @@ public class aPlayer{
 			}
 		}
 		return;
+	}
+	
+	public void addMana(double mana){
+		if(this.mana == 20) return;
+		this.mana = this.mana + mana;
+		if(this.mana > this.MAX_MANA){
+		this.mana = 20;
+		}
+ 	    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9&l+" + mana + " MANA"));
+		SoundManager.playSoundToPlayer(Sound.WOOD_CLICK, player);
+	}
+	
+	public boolean removeMana(double mana){
+		if(this.mana < 0){
+        MessageManager.sendMessage(this.player, "&cYou don't have enough mana");
+        return false;
+		}
+		this.mana = this.mana - mana;
+		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&l-" + mana + " MANA"));
+	    SoundManager.playSoundToPlayer(Sound.NOTE_BASS, player);
+		return true;
+	}
+	
+	public void showMana(){
+		int manatoint = (int) this.mana;
+		String brachetleft = "&8[";
+		String brachetright = "&8]";
+		String mana = "";
+		for(int a = 0; a < manatoint;a++){
+			mana = mana + "&9|";
+		}
+		for(int a = 0; a < 20 - manatoint; a++){
+			mana = mana + "&8|";
+		}
+		mana = brachetleft + mana + brachetright;
+		player.sendMessage(ChatColor.translateAlternateColorCodes('&', mana));
+	}
+	
+	public String getManaStatus(){
+		int manatoint = (int) this.mana;
+		String brachetleft = "&8[";
+		String brachetright = "&8]";
+		String mana = "";
+		for(int a = 0; a < manatoint;a++){
+			mana = mana + "&9|";
+		}
+		for(int a = 0; a < 20 - manatoint; a++){
+			mana = mana + "&8|";
+		}
+		mana = ChatColor.translateAlternateColorCodes('&', brachetleft + mana + brachetright);
+		return mana;
+	}
+	
+	public void updateManaStatus(){	
+		for(Player player: Bukkit.getOnlinePlayers()){
+			player.setDisplayName( "lol");
+
+		}
 	}
 }

@@ -25,8 +25,7 @@ public class MountCommand implements CommandExecutor{
 		if (args.length == 0) {
 			player.sendMessage(MessageManager.infoColorCode + "===== Mounts =====");
 			player.sendMessage(MessageManager.infoColorCode + "Commands:");
-			player.sendMessage(MessageManager.infoColorCode
-					+ "/mount <donkey/prince/elite> #Mount on your very own horse or donkey");
+			player.sendMessage(MessageManager.infoColorCode	+ "/mount <donkey/prince/elite> #Mount on your very own horse or donkey");
 			return false;
 		}
 		if (args.length == 1) {

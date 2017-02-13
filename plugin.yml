@@ -27,3 +27,5 @@ commands:
     aliases: [b,build]
   Items:
     aliases: [it,i,item]
+  Wand:
+    aliases: [w,wand]

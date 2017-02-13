@@ -55,6 +55,7 @@ public class Counter implements Runnable{
 			if(alli){
 				aplayer.setAllianceScoreBoard();
 			}
+			aplayer.updateManaStatus();
 		}
 		time++;
 	}
