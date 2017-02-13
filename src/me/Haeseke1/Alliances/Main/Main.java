@@ -102,8 +102,10 @@ import me.Haeseke1.Alliances.Item.Outpost_Compass;
 import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
 import me.Haeseke1.Alliances.Item.Commands.Item;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Night_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Warrior_Sword;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Wither_Blade;
 import me.Haeseke1.Alliances.Mounts.MountsManager;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
 import me.Haeseke1.Alliances.Mounts.Events.Death;
@@ -254,6 +256,8 @@ public class Main extends JavaPlugin {
 		 */
 		pm.registerEvents(new Warrior_Sword(), this);
 		pm.registerEvents(new Night_Blade(), this);
+		pm.registerEvents(new Wither_Blade(), this);
+		pm.registerEvents(new Fatal_Blade(), this);
 		pm.registerEvents(new PlayerQuit(), this);
 		pm.registerEvents(new BlockBreak_Place(), this);
 		pm.registerEvents(new PlayerMove(), this);

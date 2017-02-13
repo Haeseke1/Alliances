@@ -17,12 +17,13 @@ public class Sword{
 	public String name;
 	public Player player;
 	public int cooldown;
-	public PotionEffectType type;
 	public UUID playerUUID;
 	
 	public Sword(String name, Player player, int cooldown) {
 		this.player = player;
 		this.cooldown = cooldown;
+		this.playerUUID = player.getUniqueId();
+		this.name = name;
 		SwordManager.putSword(playerUUID, this);
 	}
 	

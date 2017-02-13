@@ -88,15 +88,19 @@ public class BuildingManager {
 			}
 		}
 		Town.unclaimable.clear();
-		for(String key : file.getConfigurationSection("Unclaimable").getKeys(false)){
-			String world = null;
-			try {
-				world = ConfigManager.getStringFromConfig(file, "Unclaimable." + key +  ".world");
-				Town.unclaimable.add(Bukkit.getWorld(world).getChunkAt(ConfigManager.getIntFromConfig(file, "Unclaimable." + key + ".x"), ConfigManager.getIntFromConfig(file, "Unclaimable." + key +  ".z")));
-			} catch (EmptyStringException | EmptyIntException e) {
-				e.printStackTrace();
+		if(file.contains("Unclaimable")){
+			for (String key : file.getConfigurationSection("Unclaimable").getKeys(false)) {
+				String world = null;
+				try {
+					world = ConfigManager.getStringFromConfig(file, "Unclaimable." + key + ".world");
+					Town.unclaimable.add(Bukkit.getWorld(world).getChunkAt(
+							ConfigManager.getIntFromConfig(file, "Unclaimable." + key + ".x"),
+							ConfigManager.getIntFromConfig(file, "Unclaimable." + key + ".z")));
+				} catch (EmptyStringException | EmptyIntException e) {
+					e.printStackTrace();
+				}
+
 			}
-			
 		}
 	}
 	

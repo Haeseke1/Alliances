@@ -1,14 +1,20 @@
 package me.Haeseke1.Alliances.Item.Weapons.Swords.Type;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -32,7 +38,17 @@ public class Night_Blade extends Sword implements Listener{
 		
 	}
 
-
+	public static ItemStack getItem(){
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		ItemMeta im = item.getItemMeta();
+		im.setDisplayName(ChatColor.LIGHT_PURPLE + "Night Blade");
+		List<String> lore = new ArrayList<String>();
+		lore.add(ChatColor.DARK_GREEN + "Right click to become one with the night!");
+		lore.add(ChatColor.RED + "120 SECONDS COOLDOWN");
+		im.setLore(lore);
+		item.setItemMeta(im);
+		return item;
+	}
 
 	@EventHandler
 	public void onRightClick(PlayerInteractEvent event){
@@ -54,7 +70,7 @@ public class Night_Blade extends Sword implements Listener{
 			Night_Blade night_blade = new Night_Blade(player, 120);
 			night_blade.giveEffect(Sound.ENDERDRAGON_WINGS);
 		}else{
-			MessageManager.sendMessage(player, "&cThis ability is cooling down (&6" + SwordManager.getSword(player.getUniqueId(), name).cooldown + "&cs left)"); 
+			MessageManager.sendMessage(player, "&cThis ability is cooling down (&6" + SwordManager.getSword(player.getUniqueId(), "Night Blade").cooldown + "&cs left)"); 
 		}
 	}
 	

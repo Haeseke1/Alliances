@@ -14,7 +14,7 @@ public class SwordManager {
 		if(Sword.cooldowns.containsKey(player)){
 			List<Sword> swords = Sword.cooldowns.get(player);
 			for(Sword sword : swords){
-				if(sword.name.equalsIgnoreCase(name.replace(" ", "_"))){
+				if(sword.name.equalsIgnoreCase(name)){
 					return true;
 				}
 			}
@@ -26,7 +26,7 @@ public class SwordManager {
 		if(Sword.cooldowns.containsKey(player)){
 			List<Sword> swords = Sword.cooldowns.get(player);
 			for(Sword sword : swords){
-				if(sword.name.equalsIgnoreCase(name.replace(" ", "_"))){
+				if(sword.name.equalsIgnoreCase(name)){
 					return sword;
 				}
 			}

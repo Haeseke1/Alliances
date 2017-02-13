@@ -1,5 +1,7 @@
 package me.Haeseke1.Alliances.Item.Weapons.Swords.Type;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -9,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Sword;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.SwordManager;
@@ -24,6 +28,18 @@ public class Warrior_Sword extends Sword implements Listener{
 	public Warrior_Sword() {
 		
 	}
+	
+	public static ItemStack getItem(){
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		ItemMeta im = item.getItemMeta();
+		im.setDisplayName(ChatColor.RED + "Warrior Sword");
+		List<String> lore = new ArrayList<String>();
+		lore.add(ChatColor.DARK_GREEN + "Gives you a chance on hit to heal half a hearth!");
+		im.setLore(lore);
+		item.setItemMeta(im);
+		return item;
+	}
+	
 	
 	@EventHandler
 	public static void onRightClick(EntityDamageByEntityEvent event){
