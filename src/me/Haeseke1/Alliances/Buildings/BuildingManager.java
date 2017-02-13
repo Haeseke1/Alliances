@@ -67,33 +67,32 @@ public class BuildingManager {
 		StorageManager.registerStorage();
 		
 		FileConfiguration file = Main.BuildingConfig;
-		if(!file.contains("Buildings")){
-			return;
-		}
-		for(String key : file.getConfigurationSection("Buildings").getKeys(false)){
-			Location loc = null;
-			int ymin = 0;
-			int ymax = 0;
-			Chunk chunk = null;
-			String type = null;
-			try {
-				loc = ConfigManager.getLocationFromConfig(file, "Buildings." + key + ".mainBlock");
-				ymin = ConfigManager.getIntFromConfig(file, "Buildings." + key + ".ymin");
-				ymax = ConfigManager.getIntFromConfig(file, "Buildings." + key + ".ymax");
-				String world = ConfigManager.getStringFromConfig(file, "Buildings." + key + ".chunk.world");
-				type = ConfigManager.getStringFromConfig(file, "Buildings." + key + ".type");
-				chunk = Bukkit.getWorld(world).getChunkAt(ConfigManager.getIntFromConfig(file, "Buildings." + key + ".chunk.x"), ConfigManager.getIntFromConfig(file, "Buildings." + key + ".chunk.z"));
-			} catch (EmptyLocationException | EmptyIntException | EmptyStringException e) {
-				e.printStackTrace();
+		if(file.contains("Buildings")){
+			for(String key : file.getConfigurationSection("Buildings").getKeys(false)){
+				Location loc = null;
+				int ymin = 0;
+				int ymax = 0;
+				Chunk chunk = null;
+				String type = null;
+				try {
+					loc = ConfigManager.getLocationFromConfig(file, "Buildings." + key + ".mainBlock");
+					ymin = ConfigManager.getIntFromConfig(file, "Buildings." + key + ".ymin");
+					ymax = ConfigManager.getIntFromConfig(file, "Buildings." + key + ".ymax");
+					String world = ConfigManager.getStringFromConfig(file, "Buildings." + key + ".chunk.world");
+					type = ConfigManager.getStringFromConfig(file, "Buildings." + key + ".type");
+					chunk = Bukkit.getWorld(world).getChunkAt(ConfigManager.getIntFromConfig(file, "Buildings." + key + ".chunk.x"), ConfigManager.getIntFromConfig(file, "Buildings." + key + ".chunk.z"));
+				} catch (EmptyLocationException | EmptyIntException | EmptyStringException e) {
+					e.printStackTrace();
+				}
+				new Building(loc, chunk, ymin,ymax, BuildingType.getType(type), false);
 			}
-			new Building(loc, chunk, ymin,ymax, BuildingType.getType(type), false);
 		}
 		Town.unclaimable.clear();
 		for(String key : file.getConfigurationSection("Unclaimable").getKeys(false)){
 			String world = null;
 			try {
-				world = ConfigManager.getStringFromConfig(file, "Unclaimable." + key + "." + key +  ".world");
-				Town.unclaimable.add(Bukkit.getWorld(world).getChunkAt(ConfigManager.getIntFromConfig(file, "Unclaimable." + key + ".x"), ConfigManager.getIntFromConfig(file, "Unclaimable." + key + "." + key +  ".z")));
+				world = ConfigManager.getStringFromConfig(file, "Unclaimable." + key +  ".world");
+				Town.unclaimable.add(Bukkit.getWorld(world).getChunkAt(ConfigManager.getIntFromConfig(file, "Unclaimable." + key + ".x"), ConfigManager.getIntFromConfig(file, "Unclaimable." + key +  ".z")));
 			} catch (EmptyStringException | EmptyIntException e) {
 				e.printStackTrace();
 			}

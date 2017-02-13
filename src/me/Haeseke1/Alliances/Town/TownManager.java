@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -108,6 +109,38 @@ public class TownManager {
 			return true;
 		}
 		return false;
+	}
+	
+	public static int addUnclaimable(Location loc1, Location loc2){
+		int xmin = 0;
+		int zmin = 0;
+		int xmax = 0;
+		int zmax = 0;
+		if(loc1.getBlockX() > loc2.getBlockX()){
+			xmin = loc2.getBlockX();
+			xmax = loc1.getBlockX();
+		}else{
+			xmin = loc1.getBlockX();
+			xmax = loc2.getBlockX();
+		}
+		if(loc1.getBlockZ() > loc2.getBlockZ()){
+			zmin = loc2.getBlockZ();
+			zmax = loc1.getBlockZ();
+		}else{
+			zmin = loc1.getBlockZ();
+			zmax = loc2.getBlockZ();
+		}
+		int amount = 0;
+		for(int x = xmin; x < xmax; x++){
+			for(int z = zmin; z < zmax; z++){
+				Chunk chunk = loc1.getWorld().getChunkAt(new Location(loc1.getWorld(), x, loc1.getY(), z));
+				if(!isUnclaimable(chunk)){
+					Town.unclaimable.add(chunk);
+					amount ++;
+				}
+			}
+		}
+		return amount;
 	}
 	
 	public static boolean hasBuilding(Building b){

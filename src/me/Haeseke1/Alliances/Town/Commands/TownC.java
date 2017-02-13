@@ -9,6 +9,7 @@ import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Town.Town;
 import me.Haeseke1.Alliances.Town.TownManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import me.Haeseke1.Alliances.regionSelect.regionSelect;
 import net.md_5.bungee.api.ChatColor;
 
 public class TownC implements CommandExecutor{
@@ -63,6 +64,11 @@ public class TownC implements CommandExecutor{
 		}
 		if (player.hasPermission("Alliances.town.*")) {
 			if(args[0].equalsIgnoreCase("unclaimable")){
+				if(regionSelect.hasRegion(player)){
+					int i = TownManager.addUnclaimable(regionSelect.leftClick.get(player), regionSelect.rightClick.get(player));
+					MessageManager.sendMessage(player, ChatColor.GREEN + "Added " + i + " chunks to unclaimable!");
+					return false;
+				}
 				if(Town.unclaimable.contains(player.getLocation().getChunk())){
 					MessageManager.sendMessage(player, ChatColor.RED + "This is already unclaimable!");
 					return false;
@@ -72,6 +78,8 @@ public class TownC implements CommandExecutor{
 				return false;
 			}
 		}
+		
+		
 		if(args[0].equalsIgnoreCase("show")){
 			if(!AllianceManager.playerIsInAlli(player)){
 				String message = "&cYou aren't in an alliance";
