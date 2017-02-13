@@ -13,6 +13,9 @@ public class CheckCooldowns implements Runnable{
 	@Override
 	public void run() {
 		for(Entry<UUID,List<Sword>> entry : Sword.cooldowns.entrySet()){
+			if(entry.getValue() == null || entry.getValue().isEmpty()){
+				continue;
+			}
 			for(Sword sword : entry.getValue()){
 				sword.cooldown(entry.getKey());
 			}

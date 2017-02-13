@@ -4,19 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import me.Haeseke1.Alliances.Alliance.Alliance;
-import me.Haeseke1.Alliances.Alliance.AllianceManager;
-import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.SwordEffects;
-import me.Haeseke1.Alliances.Utils.MessageManager;
-import me.Haeseke1.Alliances.Utils.SoundManager;
 
 public class Sword{
 	
@@ -25,15 +17,18 @@ public class Sword{
 	public String name;
 	public Player player;
 	public int cooldown;
-	public String effect;
-	public PotionEffectType type;
-	public UUID playerUuid;
+	public UUID playerUUID;
 	
-	public Sword(String name, Player player, int cooldown,String effect) {
-		this.name = name.replace(" ", "_");
+	public Sword(String name, Player player, int cooldown) {
 		this.player = player;
 		this.cooldown = cooldown;
-		this.effect = effect;
+		this.playerUUID = player.getUniqueId();
+		this.name = name;
+		SwordManager.putSword(playerUUID, this);
+	}
+	
+	public Sword(){
+		
 	}
 
 	public boolean itemHasEffect(ItemStack item, String effect){
@@ -65,30 +60,6 @@ public class Sword{
 		return;
 	}
 	
-	public void giveEffect(int duration,int strength,Sound sound, boolean hidePlayer) throws ClassNotFoundException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
-		type = SwordEffects.getEffect(SwordEffects.valueOf(name));
-		if(this.hasSwordName(player.getItemInHand())){
-			if(this.itemHasEffect(player.getItemInHand(), this.effect)){
-			    if(SwordManager.hasSword(player.getUniqueId(), name)){
-			    	MessageManager.sendMessage(player, "&cThis ability is cooling down (&6" + SwordManager.getSword(player.getUniqueId(), name).cooldown + "&cs left)"); 
-			    	return;
-			    	}
-					playerRemoveEffect(type);
-					player.addPotionEffect(new PotionEffect(type,duration*20,strength,true));
-					if(sound != null){ SoundManager.playSoundToPlayer(sound, player);}
-					SwordManager.putSword(player.getUniqueId(), this);
-					if(hidePlayer){
-						for(Player player: Bukkit.getOnlinePlayers()){
-							Alliance al = AllianceManager.getAlliance(this.player);
-							if(al.equals(AllianceManager.getAlliance(player))){
-								continue;
-							}
-							player.hidePlayer(this.player);
-						}
-					}
-			  }
-		 }
-	}
 	
 	
 	public void cooldown(UUID uuid){

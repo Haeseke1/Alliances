@@ -101,14 +101,24 @@ import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Item.Outpost_Compass;
 import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
 import me.Haeseke1.Alliances.Item.Commands.Item;
+<<<<<<< HEAD
 import me.Haeseke1.Alliances.Item.Totems.HealingTotem;
 import me.Haeseke1.Alliances.Item.Totems.Events.DamageTotem;
 import me.Haeseke1.Alliances.Item.Totems.Scheduler.Checker;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Events.RightClickSword;
+=======
+>>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
+<<<<<<< HEAD
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Commands.Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Events.RightClickWand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler.ManaRegen;
+=======
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Night_Blade;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Warrior_Sword;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Wither_Blade;
+>>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 import me.Haeseke1.Alliances.Mounts.MountsManager;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
 import me.Haeseke1.Alliances.Mounts.Events.Death;
@@ -172,8 +182,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration settingsConfig;
 	public static FileConfiguration PVEConfig;
 	public static FileConfiguration BuildingConfig;
-	
-	
+
 	public static Main plugin;
 
 	@SuppressWarnings("static-access")
@@ -189,7 +198,8 @@ public class Main extends JavaPlugin {
 			return;
 		} catch (InvalidConfigTypeException icte) {
 			icte.printStackTrace();
-			MessageManager.sendAlertMessage("There was a problem in the code. Ask a dev for more information or download an earlier version of this plugin");
+			MessageManager.sendAlertMessage(
+					"There was a problem in the code. Ask a dev for more information or download an earlier version of this plugin");
 			return;
 		}
 		Config.registerConfigFile(this);
@@ -200,7 +210,7 @@ public class Main extends JavaPlugin {
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
-	    APlayerManager.aPlayerStartUp();
+		APlayerManager.aPlayerStartUp();
 	}
 
 	@Override
@@ -227,7 +237,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new TownEvents(), this);
 		pm.registerEvents(new APlayerEvents(), this);
 		/*
-		 * Challenges 
+		 * Challenges
 		 */
 		pm.registerEvents(new Block_Breaking(), this);
 		pm.registerEvents(new Block_Placing(), this);
@@ -259,20 +269,22 @@ public class Main extends JavaPlugin {
 		/*
 		 * Swords events
 		 */
-		pm.registerEvents(new RightClickSword(), this);
+		pm.registerEvents(new Warrior_Sword(), this);
+		pm.registerEvents(new Night_Blade(), this);
+		pm.registerEvents(new Wither_Blade(), this);
+		pm.registerEvents(new Fatal_Blade(), this);
 		pm.registerEvents(new PlayerQuit(), this);
 		pm.registerEvents(new BlockBreak_Place(), this);
 		pm.registerEvents(new PlayerMove(), this);
 		pm.registerEvents(new EntityHit(), this);
 		pm.registerEvents(new PlayerClickInventory(), this);
 		pm.registerEvents(new PlayerCommand(), this);
-		
-		
+
 		pm.registerEvents(new BlockPlace(), this);
 		pm.registerEvents(new StorageListener(), this);
 		pm.registerEvents(new BuildingListener(), this);
 		pm.registerEvents(new checkTPACommand(), this);
-		
+
 		pm.registerEvents(new Outpost_Compass(), this);
 		pm.registerEvents(new Storage_Level(), this);
 		
@@ -296,8 +308,8 @@ public class Main extends JavaPlugin {
 		getCommand("items").setExecutor(new Item());
 		getCommand("wand").setExecutor(new Wand());
 	}
-	
-	public void registerCustomEntitys(){
+
+	public void registerCustomEntitys() {
 		NMSUtil nmsUtil = new NMSUtil();
 		nmsUtil.registerEntity("Vendor", 120, EntityVillager.class, CustomEntityVillager.class);
 		nmsUtil.registerEntity("Zombie LV1", 54, EntityZombie.class, ZombieLV1.class);
@@ -305,64 +317,64 @@ public class Main extends JavaPlugin {
 		nmsUtil.registerEntity("Zombie LV3", 54, EntityZombie.class, ZombieLV3.class);
 		nmsUtil.registerEntity("Zombie LV4", 54, EntityZombie.class, ZombieLV4.class);
 		nmsUtil.registerEntity("Zombie LV5", 54, EntityZombie.class, ZombieLV5.class);
-		
+
 		nmsUtil.registerEntity("Skeleton LV1", 51, EntitySkeleton.class, SkeletonLV1.class);
 		nmsUtil.registerEntity("Skeleton LV2", 51, EntitySkeleton.class, SkeletonLV2.class);
 		nmsUtil.registerEntity("Skeleton LV3", 51, EntitySkeleton.class, SkeletonLV3.class);
 		nmsUtil.registerEntity("Skeleton LV4", 51, EntitySkeleton.class, SkeletonLV4.class);
 		nmsUtil.registerEntity("Skeleton LV5", 51, EntitySkeleton.class, SkeletonLV5.class);
-		
+
 		nmsUtil.registerEntity("Blaze LV1", 61, EntityBlaze.class, BlazeLV1.class);
 		nmsUtil.registerEntity("Blaze LV2", 61, EntityBlaze.class, BlazeLV2.class);
 		nmsUtil.registerEntity("Blaze LV3", 61, EntityBlaze.class, BlazeLV3.class);
 		nmsUtil.registerEntity("Blaze LV4", 61, EntityBlaze.class, BlazeLV4.class);
 		nmsUtil.registerEntity("Blaze LV5", 61, EntityBlaze.class, BlazeLV5.class);
-		
+
 		nmsUtil.registerEntity("Creeper LV1", 50, EntityCreeper.class, CreeperLV1.class);
 		nmsUtil.registerEntity("Creeper LV2", 50, EntityCreeper.class, CreeperLV2.class);
 		nmsUtil.registerEntity("Creeper LV3", 50, EntityCreeper.class, CreeperLV3.class);
 		nmsUtil.registerEntity("Creeper LV4", 50, EntityCreeper.class, CreeperLV4.class);
 		nmsUtil.registerEntity("Creeper LV5", 50, EntityCreeper.class, CreeperLV5.class);
-		
+
 		nmsUtil.registerEntity("Enderman LV1", 58, EntityEnderman.class, EndermanLV1.class);
 		nmsUtil.registerEntity("Enderman LV2", 58, EntityEnderman.class, EndermanLV2.class);
 		nmsUtil.registerEntity("Enderman LV3", 58, EntityEnderman.class, EndermanLV3.class);
 		nmsUtil.registerEntity("Enderman LV4", 58, EntityEnderman.class, EndermanLV4.class);
 		nmsUtil.registerEntity("Enderman LV5", 58, EntityEnderman.class, EndermanLV5.class);
-		
+
 		nmsUtil.registerEntity("Spider LV1", 52, EntitySpider.class, SpiderLV1.class);
 		nmsUtil.registerEntity("Spider LV2", 52, EntitySpider.class, SpiderLV2.class);
 		nmsUtil.registerEntity("Spider LV3", 52, EntitySpider.class, SpiderLV3.class);
 		nmsUtil.registerEntity("Spider LV4", 52, EntitySpider.class, SpiderLV4.class);
 		nmsUtil.registerEntity("Spider LV5", 52, EntitySpider.class, SpiderLV5.class);
-		
+
 		nmsUtil.registerEntity("Wither LV1", 64, EntityWither.class, WitherLV1.class);
 		nmsUtil.registerEntity("Wither LV2", 64, EntityWither.class, WitherLV2.class);
 		nmsUtil.registerEntity("Wither LV3", 64, EntityWither.class, WitherLV3.class);
 		nmsUtil.registerEntity("Wither LV4", 64, EntityWither.class, WitherLV4.class);
 		nmsUtil.registerEntity("Wither LV5", 64, EntityWither.class, WitherLV5.class);
-		
+
 		nmsUtil.registerEntity("Wither_Skeleton LV1", 64, EntitySkeleton.class, Wither_SkeletonLV1.class);
 		nmsUtil.registerEntity("Wither_Skeleton LV2", 64, EntitySkeleton.class, Wither_SkeletonLV2.class);
 		nmsUtil.registerEntity("Wither_Skeleton LV3", 64, EntitySkeleton.class, Wither_SkeletonLV3.class);
 		nmsUtil.registerEntity("Wither_Skeleton LV4", 64, EntitySkeleton.class, Wither_SkeletonLV4.class);
 		nmsUtil.registerEntity("Wither_Skeleton LV5", 64, EntitySkeleton.class, Wither_SkeletonLV5.class);
-		
+
 		nmsUtil.registerEntity("Zombie_Pigman LV1", 57, EntityPigZombie.class, Zombie_PigmanLV1.class);
 		nmsUtil.registerEntity("Zombie_Pigman LV2", 57, EntityPigZombie.class, Zombie_PigmanLV2.class);
 		nmsUtil.registerEntity("Zombie_Pigman LV3", 57, EntityPigZombie.class, Zombie_PigmanLV3.class);
 		nmsUtil.registerEntity("Zombie_Pigman LV4", 57, EntityPigZombie.class, Zombie_PigmanLV4.class);
 		nmsUtil.registerEntity("Zombie_Pigman LV5", 57, EntityPigZombie.class, Zombie_PigmanLV5.class);
-		
+
 	}
-	
-	
-	public void registerSchedulers(){
+
+	public void registerSchedulers() {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Timer(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Time_On(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Mob_Killing_Time(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Particle_Timer(), 25, 25);
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new me.Haeseke1.Alliances.Town.Commands.Particle_Timer(), 25, 25);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new me.Haeseke1.Alliances.Town.Commands.Particle_Timer(),
+				25, 25);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Counter(), 0, 10);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Updater(), 0, 5);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new CheckCooldowns(), 0, 20);
@@ -388,23 +400,23 @@ public class Main extends JavaPlugin {
 		challengeConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "challenges.yml"), plugin);
 		shopConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "shop.yml"), plugin);
 		arenaConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "arenas.yml"), plugin);
-		settingsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"settings.yml"), plugin);
+		settingsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "settings.yml"), plugin);
 		PVEConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "PVE.yml"), plugin);
 		BuildingConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "buildings.yml"), plugin);
-	    try {
+		try {
 			ArenaManager.loadArena();
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
 			e.printStackTrace();
 		}
 		AllianceManager.registerAlliance();
-	    TownManager.registerTowns();
+		TownManager.registerTowns();
 		BuildingManager.registerBuildings();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();
 		ShopManager.registerShops();
 		MessageManager.registerMessages(plugin);
-	    PVEManager.registerPVE();
-	    BuilderManager.registerBuilders();
+		PVEManager.registerPVE();
+		BuilderManager.registerBuilders();
 	}
 
 	public static void saveAllCustomConfigs() {
@@ -416,12 +428,12 @@ public class Main extends JavaPlugin {
 		BuildingManager.saveBuildings();
 		BuilderManager.saveBuilders();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
-			if(configFile.containsKey(entry.getKey())){
+			if (configFile.containsKey(entry.getKey())) {
 				ConfigManager.saveCustomConfig(configFile.get(entry.getKey()), entry.getValue());
-			}else{
+			} else {
 				ConfigManager.saveCustomConfig(new File(plugin.getDataFolder(), entry.getKey()), entry.getValue());
 			}
-			
+
 		}
 	}
 }
