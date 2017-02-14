@@ -33,7 +33,7 @@ public class TownC implements CommandExecutor{
 		}
 		
 		if(!(sender instanceof Player)){
-			String message = "This command needs to be executed by a player";
+			String message = "&cThis command needs to be executed by a player";
 			MessageManager.sendAlertMessage(message);
 			return false;
 		}
@@ -84,8 +84,7 @@ public class TownC implements CommandExecutor{
 		
 		if(args[0].equalsIgnoreCase("claim") && args.length > 1){
 			if(!TownManager.isTown(args[1])){
-				String message = "&c";
-				message = message.replace("%town_name%", args[1]);
+				String message = "&cThis town does not exist!";
 				MessageManager.sendMessage(player, message);
 				return false;
 			}
@@ -123,7 +122,7 @@ public class TownC implements CommandExecutor{
 				MessageManager.sendMessage(player, message);
 				Particle_Timer.showRegion.remove(player);
 			}else{
-				String message = "&cTurned on town visuals";
+				String message = "&2Turned on town visuals";
 				MessageManager.sendMessage(player, message);
 				Particle_Timer.showRegion.add(player);
 			}
