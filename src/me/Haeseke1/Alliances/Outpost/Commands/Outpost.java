@@ -28,44 +28,43 @@ public class Outpost implements CommandExecutor {
 			return false;
 		}
 		Player player = (Player) sender;
-		MessageManager.sendMessage(player, "&cWrong argument do: /outpost");
-	 if(player.hasPermission("Alliances.outpost.*")){
-		if(args[0].equalsIgnoreCase("addreward") && args.length > 1){
-			try{
-				if(OutpostType.getOutpostType(args[2]) == null){
-					MessageManager.sendMessage(player, "&cThis outposttype doesn't exists");
+		if (player.hasPermission("Alliances.outpost.*")) {
+			if (args[0].equalsIgnoreCase("addreward") && args.length > 1) {
+				try {
+					if (OutpostType.getOutpostType(args[2]) == null) {
+						MessageManager.sendMessage(player, "&cThis outposttype doesn't exists");
+						return false;
+					}
+					OutpostManager.addReward(player.getItemInHand(), Integer.parseInt(args[1]),
+							OutpostType.getOutpostType(args[2]));
+					MessageManager.sendMessage(player, "&2You've added a reward to the outpost");
 					return false;
+				} catch (Exception e) {
+					MessageManager.sendMessage(player, "&cWrong argument do: /outpost");
 				}
-				OutpostManager.addReward(player.getItemInHand(), Integer.parseInt(args[1]), OutpostType.getOutpostType(args[2]));
-				MessageManager.sendMessage(player, "&2You've added a reward to the outpost");
 				return false;
-			}catch(Exception e){
-				MessageManager.sendMessage(player, "&cWrong argument do: /outpost");
 			}
+
+			if (args[0].equalsIgnoreCase("listtype")) {
+				sender.sendMessage(MessageManager.infoColorCode + "===== Outpost =====");
+				sender.sendMessage(MessageManager.infoColorCode + "Types:");
+				sender.sendMessage(MessageManager.infoColorCode + "1. Blacksmith");
+				sender.sendMessage(MessageManager.infoColorCode + "2. Dock");
+				sender.sendMessage(MessageManager.infoColorCode + "3. Farm");
+				sender.sendMessage(MessageManager.infoColorCode + "4. God");
+				sender.sendMessage(MessageManager.infoColorCode + "5. MagicTower");
+				sender.sendMessage(MessageManager.infoColorCode + "6. Mine");
+				sender.sendMessage(MessageManager.infoColorCode + "7. MobFarm");
+				return false;
+			}
+
+			if (args[0].equalsIgnoreCase("create")) {
+				outpostCreate.onCommand(sender, args);
+				return false;
+			}
+			MessageManager.sendMessage(player, "&cWrong argument do: /outpost");
 			return false;
 		}
-		
-		if(args[0].equalsIgnoreCase("listtype")){
-			sender.sendMessage(MessageManager.infoColorCode + "===== Outpost =====");
-			sender.sendMessage(MessageManager.infoColorCode + "Types:");
-			sender.sendMessage(MessageManager.infoColorCode + "1. Blacksmith");
-			sender.sendMessage(MessageManager.infoColorCode + "2. Dock");
-			sender.sendMessage(MessageManager.infoColorCode + "3. Farm");
-			sender.sendMessage(MessageManager.infoColorCode + "4. God");
-			sender.sendMessage(MessageManager.infoColorCode + "5. MagicTower");
-			sender.sendMessage(MessageManager.infoColorCode + "6. Mine");
-			sender.sendMessage(MessageManager.infoColorCode + "7. MobFarm");
-			return false;
-		}
-		
-		
-		if(args[0].equalsIgnoreCase("create")){
-			outpostCreate.onCommand(sender, args);
-			return false;
-		}
-		MessageManager.sendMessage(player, "&cWrong argument do: /outpost");
 		return false;
-	}
-	return false;
   }
 }

@@ -56,6 +56,7 @@ public class OutpostManager {
 			Mob_Farm.rewards.put(reward, luck);
 			break;
 		default:
+			Farm.rewards.put(reward, luck);
 			break;
 		}
 	}

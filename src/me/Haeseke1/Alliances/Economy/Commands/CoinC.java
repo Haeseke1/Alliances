@@ -118,7 +118,7 @@ public class CoinC implements CommandExecutor{
 					return false;
 				}
 				if (!PlayerManager.isPlayerOnline(args[1])) {
-					MessageManager.sendAlertMessage("&6" + args[1] + "&c isn't online");
+					MessageManager.sendMessage(player, "&6" + args[1] + "&c isn't online");
 					return false;
 				}
 				try {
@@ -127,7 +127,7 @@ public class CoinC implements CommandExecutor{
 					MessageManager.sendMessage(player, "&cWrong argument do: /coins");
 					return false;
 				}
-				MessageManager.sendAlertMessage("&2Successfully setted &6" + Bukkit.getPlayer(args[1]).getName()
+				MessageManager.sendMessage(player, "&2Successfully setted &6" + Bukkit.getPlayer(args[1]).getName()
 						+ "&2's bank account to &6" + args[2] + "&2 coins");
 				return false;
 			}

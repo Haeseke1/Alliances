@@ -1,6 +1,7 @@
 package me.Haeseke1.Alliances.Main;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map.Entry;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -106,9 +107,9 @@ public class Config {
 				Farm.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.Farm." + s + ".Percentage"));
 			}
 			God.rewards.clear();
-			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Blacksmith").getKeys(false)){
-				ItemStack i = ConfigManager.getItemStackFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s);
-				God.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.Blacksmith." + s + ".Percentage"));
+			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.God").getKeys(false)){
+				ItemStack i = ConfigManager.getItemStackFromConfig(Main.config, "Outpost.Rewards.God." + s);
+				God.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.God." + s + ".Percentage"));
 			}
 			Magic_Tower.rewards.clear();
 			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Magic_Tower").getKeys(false)){
@@ -120,12 +121,12 @@ public class Config {
 				ItemStack i = ConfigManager.getItemStackFromConfig(Main.config, "Outpost.Rewards.Mine." + s);
 				Mine.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.Mine." + s + ".Percentage"));
 			}
-			Blacksmith.rewards.clear();
+			
+			Mob_Farm.rewards.clear();
 			for(String s : Main.config.getConfigurationSection("Outpost.Rewards.Mob_Farm").getKeys(false)){
 				ItemStack i = ConfigManager.getItemStackFromConfig(Main.config, "Outpost.Rewards.Mob_Farm." + s);
 				Mob_Farm.rewards.put(i, ConfigManager.getIntFromConfig(Main.config, "Outpost.Rewards.Mob_Farm." + s + ".Percentage"));
 			}
-			Mob_Farm.rewards.clear();
 		}catch(EmptyItemStackException e){
 			e.printStackTrace();
 		} catch (EmptyIntException e) {
@@ -147,63 +148,55 @@ public class Config {
 	}
 
 	public static void saveConfigFile(Main main) {
-		FileConfiguration config = Main.config;
-		config.set("Outpost.Rewards.Blacksmith", null);
+		FileConfiguration config = main.getConfig();
+		config.set("Outpost.Rewards", null);
 		int i = 0;
 		for(Entry<ItemStack,Integer> entry : Blacksmith.rewards.entrySet()){
 			ConfigManager.setItemStackInConfig(config, "Outpost.Rewards.Blacksmith." + i, entry.getKey());
 			config.set("Outpost.Rewards.Blacksmith." + i + ".Percentage", entry.getValue());
 			i++;
 		}
-		
-		config.set("Outpost.Rewards.Dock", null);
 		i = 0;
 		for(Entry<ItemStack,Integer> entry : Dock.rewards.entrySet()){
 			ConfigManager.setItemStackInConfig(config, "Outpost.Rewards.Dock." + i, entry.getKey());
 			config.set("Outpost.Rewards.Dock." + i + ".Percentage", entry.getValue());
 			i++;
 		}
-		
-		config.set("Outpost.Rewards.Farm", null);
 		i = 0;
 		for(Entry<ItemStack,Integer> entry : Farm.rewards.entrySet()){
 			ConfigManager.setItemStackInConfig(config, "Outpost.Rewards.Farm." + i, entry.getKey());
 			config.set("Outpost.Rewards.Farm." + i + ".Percentage", entry.getValue());
 			i++;
 		}
-		
-		config.set("Outpost.Rewards.God", null);
 		i = 0;
 		for(Entry<ItemStack,Integer> entry : God.rewards.entrySet()){
 			ConfigManager.setItemStackInConfig(config, "Outpost.Rewards.God." + i, entry.getKey());
 			config.set("Outpost.Rewards.God." + i + ".Percentage", entry.getValue());
 			i++;
 		}
-		
-		config.set("Outpost.Rewards.Magic_Tower", null);
 		i = 0;
 		for(Entry<ItemStack,Integer> entry : Magic_Tower.rewards.entrySet()){
 			ConfigManager.setItemStackInConfig(config, "Outpost.Rewards.Magic_Tower." + i, entry.getKey());
 			config.set("Outpost.Rewards.Magic_Tower." + i + ".Percentage", entry.getValue());
 			i++;
 		}
-		
-		config.set("Outpost.Rewards.Mine", null);
 		i = 0;
 		for(Entry<ItemStack,Integer> entry : Mine.rewards.entrySet()){
 			ConfigManager.setItemStackInConfig(config, "Outpost.Rewards.Mine." + i, entry.getKey());
 			config.set("Outpost.Rewards.Mine." + i + ".Percentage", entry.getValue());
 			i++;
 		}
-		
-		config.set("Outpost.Rewards.Mob_Farm", null);
 		i = 0;
 		for(Entry<ItemStack,Integer> entry : Mine.rewards.entrySet()){
 			ConfigManager.setItemStackInConfig(config, "Outpost.Rewards.Mob_Farm." + i, entry.getKey());
 			config.set("Outpost.Rewards.Mob_Farm." + i + ".Percentage", entry.getValue());
 			i++;
 		}
-		main.saveDefaultConfig();
+		try {
+			config.save(main.getDataFolder() + File.separator + "config.yml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

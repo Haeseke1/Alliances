@@ -100,28 +100,18 @@ import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
 import me.Haeseke1.Alliances.Item.Outpost_Compass;
 import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
-
 import me.Haeseke1.Alliances.Item.Commands.Item;
-
-
-import me.Haeseke1.Alliances.Item.Commands.Item;
-
 import me.Haeseke1.Alliances.Item.Totems.HealingTotem;
 import me.Haeseke1.Alliances.Item.Totems.Events.DamageTotem;
-
 import me.Haeseke1.Alliances.Item.Totems.Scheduler.Checker;
-
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
-
-
-import me.Haeseke1.Alliances.Item.Weapons.Wands.Commands.Wand;
-import me.Haeseke1.Alliances.Item.Weapons.Wands.Events.RightClickWand;
-import me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler.ManaRegen;
-
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Night_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Warrior_Sword;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Wither_Blade;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Commands.Wand;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Events.RightClickWand;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler.ManaRegen;
 import me.Haeseke1.Alliances.Mounts.MountsManager;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
 import me.Haeseke1.Alliances.Mounts.Events.Death;

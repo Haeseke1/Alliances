@@ -53,7 +53,7 @@ public class Owner {
 		
 		if(args[1].equalsIgnoreCase("change") && args.length > 2){
 			if(!PlayerManager.isPlayerOnline(args[2])){
-				MessageManager.sendMessage(player, "&" + args[2] + " isn't online");
+				MessageManager.sendMessage(player, "&c" + args[2] + " isn't online");
 				return;
 			}
 			Player nowner = PlayerManager.getPlayer(args[2]);
