@@ -1,4 +1,4 @@
-package me.Haeseke1.Alliances.APlayer;
+	package me.Haeseke1.Alliances.APlayer;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,12 +12,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.v1_8_R2.entity.CraftPlayer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
@@ -34,7 +32,6 @@ import me.Haeseke1.Alliances.ScoreBoard.aScoreBoardManager;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
-import net.minecraft.server.v1_8_R2.PacketPlayOutNamedEntitySpawn;
 
 public class aPlayer{
 	
