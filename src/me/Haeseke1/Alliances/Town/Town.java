@@ -25,7 +25,6 @@ public class Town {
 	public List<Player> inTown = new ArrayList<Player>();
 	
 	public String name;
-	public String nameWithColorCodes;
 	
 	
 	public Town(String name, Chunk chunk, Alliance alli) {
@@ -35,7 +34,6 @@ public class Town {
 		this.chunks.add(chunk);
 		this.owner = alli;
 		this.name = ChatColor.translateAlternateColorCodes('&', name);
-		this.nameWithColorCodes = name;
 		alli.addTown(this);
 		towns.add(this);
 	}
@@ -44,7 +42,6 @@ public class Town {
 		this.chunks = chunk;
 		this.owner = alli;
 		this.name = ChatColor.translateAlternateColorCodes('&', name);
-		this.nameWithColorCodes = name;
 		alli.addTown(this);
 		towns.add(this);
 	}

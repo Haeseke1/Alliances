@@ -32,7 +32,6 @@ public class Alliance {
 	private int mCoins;
 	private HashMap<UUID, String> mMembers;
 	private String name;
-	private String nameWithColorCodes;
 	private final AllianceType type;
 	private int exp;
 	
@@ -50,7 +49,7 @@ public class Alliance {
 	
 	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type) {
 		mMembers = new HashMap<UUID, String>();
-		this.nameWithColorCodes = name;
+		mMembers.put(owner, "Owner");
 		this.name = ChatColor.translateAlternateColorCodes('&', name);
 		this.mOwner = owner;
 		this.mWins = wins;
@@ -62,7 +61,6 @@ public class Alliance {
 
 	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type, HashMap<UUID,String> mMembers, int exp) {
 		this.mMembers = mMembers;
-		this.nameWithColorCodes = name;
 		this.name = ChatColor.translateAlternateColorCodes('&', name);
 		this.mOwner = owner;
 		this.mWins = wins;
@@ -246,14 +244,6 @@ public class Alliance {
 		} catch (EmptyIntException e1) {
 			e1.printStackTrace();
 		}
-	}
-
-	public String getNameWithColorCodes() {
-		return nameWithColorCodes;
-	}
-
-	public void setNameWithColorCodes(String nameWithColorCodes) {
-		this.nameWithColorCodes = nameWithColorCodes;
 	}
 	
 	public void addPVE_Player(Player player){

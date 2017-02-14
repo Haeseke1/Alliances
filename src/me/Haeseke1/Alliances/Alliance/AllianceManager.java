@@ -67,12 +67,12 @@ public class AllianceManager {
 			f.set(s, null);
 		}
 		for(Alliance alli : Main.alliances){
-			f.set(alli.getNameWithColorCodes() + ".Type", alli.getType().toString());
-			f.set(alli.getNameWithColorCodes() + ".Coins", alli.getCoins());
-			f.set(alli.getNameWithColorCodes() + ".Wins", alli.getWins());
-			f.set(alli.getNameWithColorCodes() + ".Losses", alli.getLoses());
-			f.set(alli.getNameWithColorCodes() + ".Owner", alli.getOwner().toString());
-			f.set(alli.getNameWithColorCodes() + ".Exp", alli.getExp());
+			f.set(alli.getName() + ".Type", alli.getType().toString());
+			f.set(alli.getName() + ".Coins", alli.getCoins());
+			f.set(alli.getName() + ".Wins", alli.getWins());
+			f.set(alli.getName() + ".Losses", alli.getLoses());
+			f.set(alli.getName() + ".Owner", alli.getOwner().toString());
+			f.set(alli.getName() + ".Exp", alli.getExp());
 			List<String> list = new ArrayList<String>();
 			for(Entry<UUID,String> entry : alli.getMembers().entrySet()){
 				list.add(entry.getKey().toString() + "," + entry.getValue());

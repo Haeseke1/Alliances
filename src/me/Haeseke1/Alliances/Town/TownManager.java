@@ -21,7 +21,6 @@ import net.md_5.bungee.api.ChatColor;
 public class TownManager {
 	
 
-	private static FileConfiguration allianceConfig = Main.alliancesConfig;
 
 	public static int Town_Create_Payment;
 	public static int Town_Claim_Payment;
@@ -41,13 +40,13 @@ public class TownManager {
 			return;
 		}
 		if(!alli.getOwner().equals(player.getUniqueId())){
-			String message = "&6%town_name% &cdoes already exists";
+			String message = "&cYou are not the owner of this alliance!";
 			message = message.replace("%town_name%", name);
 			MessageManager.sendMessage(player, message);
 			return;
 		}
 		if(Exp.getLevel(alli.getExp()) < 3 || alli.getTowns().size() > 0){
-			String message = "&6%town_name% &cyou can't create a town";
+			String message = "&cyou can't create a town";
 			message = message.replace("%town_name%", name);
 			MessageManager.sendMessage(player, message);
 			return;
@@ -213,13 +212,14 @@ public class TownManager {
 	}
 
     public static void saveTowns(){
+    	FileConfiguration f = Main.alliancesConfig;
     	for(Alliance al: Main.alliances){
     		for(Town town: al.getTowns()){
     			int chunkCount = 0;
     			for(Chunk chunk: town.chunks){
-    				allianceConfig.set(al.getNameWithColorCodes() + ".towns." + town.nameWithColorCodes + ".chunks." + chunkCount + ".x", chunk.getX());
-    				allianceConfig.set(al.getNameWithColorCodes() + ".towns." + town.nameWithColorCodes + ".chunks." + chunkCount + ".z", chunk.getZ());
-    				allianceConfig.set(al.getNameWithColorCodes() + ".towns." + town.nameWithColorCodes + ".chunks." + chunkCount + ".world", chunk.getWorld().getName());
+    				f.set(al.getName() + ".towns." + town.name + ".chunks." + chunkCount + ".x", chunk.getX());
+    				f.set(al.getName() + ".towns." + town.name + ".chunks." + chunkCount + ".z", chunk.getZ());
+    				f.set(al.getName() + ".towns." + town.name + ".chunks." + chunkCount + ".world", chunk.getWorld().getName());
     				chunkCount ++;
     			}
     		}
@@ -228,20 +228,17 @@ public class TownManager {
     
 	public static void registerTowns() {
 		Town.towns.clear();
-		for (String alliancename : allianceConfig.getConfigurationSection("").getKeys(false)) {
+		FileConfiguration f = Main.alliancesConfig;
+		for (String alliancename : f.getConfigurationSection("").getKeys(false)) {
 			Alliance al = AllianceManager.getAlliance(alliancename);
-			if (allianceConfig.getConfigurationSection(alliancename + ".towns") != null) {
-				for (String townName : allianceConfig.getConfigurationSection(alliancename + ".towns").getKeys(false)) {
+			if (f.getConfigurationSection(alliancename + ".towns") != null) {
+				for (String townName : f.getConfigurationSection(alliancename + ".towns").getKeys(false)) {
 					List<Chunk> chunkList = new ArrayList<Chunk>();
-					for (String chunk : allianceConfig
-							.getConfigurationSection(alliancename + ".towns." + townName + ".chunks").getKeys(false)) {
+					for (String chunk : f.getConfigurationSection(alliancename + ".towns." + townName + ".chunks").getKeys(false)) {
 						int chunkNumber = Integer.parseInt(chunk);
-						int x = allianceConfig
-								.getInt(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".x");
-						int z = allianceConfig
-								.getInt(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".z");
-						String world = allianceConfig
-								.getString(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".world");
+						int x = f.getInt(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".x");
+						int z = f.getInt(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".z");
+						String world = f.getString(alliancename + ".towns." + townName + ".chunks." + chunkNumber + ".world");
 						chunkList.add(Bukkit.getWorld(world).getChunkAt(x, z));
 					}
 					new Town(townName, chunkList, al);

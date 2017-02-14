@@ -52,18 +52,18 @@ public class Owner {
 		}
 		
 		if(args[1].equalsIgnoreCase("change") && args.length > 2){
-			if(!PlayerManager.isPlayerOnline(args[1])){
-				MessageManager.sendMessage(player, "&" + args[1] + " isn't online");
+			if(!PlayerManager.isPlayerOnline(args[2])){
+				MessageManager.sendMessage(player, "&" + args[2] + " isn't online");
 				return;
 			}
 			Player nowner = PlayerManager.getPlayer(args[2]);
 			if(!AllianceManager.getAlliance(player).getMembers().containsKey(nowner.getUniqueId())){
-				MessageManager.sendMessage(player, "&cYou aren't in an alliance");
+				MessageManager.sendMessage(player, "&cThis player is not in an alliance");
 				return;
 			}
 			
 			AllianceManager.getAlliance(player).setOwner(nowner.getUniqueId());
-			AllianceManager.getAlliance(player).sendPlayersMessage("&2The alliance owner gave the membership to &6" + nowner.getName());
+			AllianceManager.getAlliance(player).sendPlayersMessage("&2The alliance owner gave the ownership to &6" + nowner.getName());
 			return;
 		}
 		
@@ -117,7 +117,7 @@ public class Owner {
 			}
 			Player pinvite = PlayerManager.getPlayer(args[2]);
 			if(AllianceManager.getAlliance(player).getMembers().containsKey(pinvite.getUniqueId())){
-				MessageManager.sendMessage(player, "&6" + args[2] + "&c is already a member of an alliance");
+				MessageManager.sendMessage(player, "&6" + args[2] + "&c is already a member of your alliance");
 				return;
 			}
 			if(Alli.invited.containsKey(pinvite)){

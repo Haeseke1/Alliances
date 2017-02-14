@@ -1,15 +1,10 @@
 package me.Haeseke1.Alliances.Item.Totems.Events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
-import org.bukkit.event.entity.ExplosionPrimeEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import me.Haeseke1.Alliances.Item.Totems.HealingTotem;

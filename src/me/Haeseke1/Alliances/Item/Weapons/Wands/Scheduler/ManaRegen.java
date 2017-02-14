@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.APlayer.aPlayer;
-import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class ManaRegen implements Runnable{
 

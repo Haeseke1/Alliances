@@ -3,9 +3,7 @@ package me.Haeseke1.Alliances.Item.Totems.Scheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.Item.Totems.HealingTotem;
-import net.md_5.bungee.api.ChatColor;
 
 public class Checker implements Runnable{
 
