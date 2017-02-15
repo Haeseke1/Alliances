@@ -146,60 +146,59 @@ public class OutpostManager {
 			zmin = loc1.getBlockZ();
 			zmax = loc2.getBlockZ();
 		}
-		
 		for(Farm f : Farm.farms){
 			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
 					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
-					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
-					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
+					(((xmin <= f.xmin && xmax >= f.xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= f.zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(Blacksmith f : Blacksmith.blacksmiths){
 			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
 					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
-					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
-					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
+					(((xmin <= f.xmin && xmax >= f.xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= f.zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(Dock f : Dock.docks){
 			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
 					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax)) ||
-					((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
-					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
+					((xmin <= f.xmin && xmax >= f.xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= f.zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(God f : God.gods){
 			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
 					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
-					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
-					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
+					(((xmin <= f.xmin && xmax >= f.xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= f.zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(Magic_Tower f : Magic_Tower.magic_towers){
 			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
 					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
-					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
-					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
+					(((xmin <= f.xmin && xmax >= f.xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= f.zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(Mine f : Mine.mines){
 			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
 					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
-					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
-					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
+					(((xmin <= f.xmin && xmax >= f.xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= f.zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
 		for(Mob_Farm f : Mob_Farm.mob_farms){
 			if((((f.xmin <= xmin && f.xmax >= xmin) || (f.xmin <= xmax && f.xmax >= xmax)) &&
 					((f.zmin <= zmin && f.zmax >= zmin) || (f.zmin <= zmax && f.zmax >= zmax))) ||
-					(((xmin <= f.xmin && xmax >= xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
-					((zmin <= f.zmin && zmax >= zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
+					(((xmin <= f.xmin && xmax >= f.xmin) || (xmin <= f.xmax && xmax >= f.xmax)) &&
+					((zmin <= f.zmin && zmax >= f.zmin) || (zmin <= f.zmax && zmax >= f.zmax)))){
 				return false;
 			}
 		}
@@ -588,7 +587,7 @@ public class OutpostManager {
 		FileConfiguration file = Main.outpostConfig;
 		for(Blacksmith f : Blacksmith.blacksmiths){
 			if(f.owner != null){
-				file.set("Blacksmith." + f.nameWithColorCodes + ".Owner", f.owner);
+				file.set("Blacksmith." + f.nameWithColorCodes + ".Owner", f.owner.getName());
 			}
 			file.set("Blacksmith." + f.nameWithColorCodes + ".World", f.world.getName());
 			file.set("Blacksmith." + f.nameWithColorCodes + ".Xmin", f.xmin);
@@ -598,7 +597,7 @@ public class OutpostManager {
 		}
 		for(Dock f : Dock.docks){
 			if(f.owner != null){
-				file.set("Dock." + f.nameWithColorCodes + ".Owner", f.owner);
+				file.set("Dock." + f.nameWithColorCodes + ".Owner", f.owner.getName());
 			}
 			file.set("Dock." + f.nameWithColorCodes + ".World", f.world.getName());
 			file.set("Dock." + f.nameWithColorCodes + ".Xmin", f.xmin);
@@ -608,7 +607,7 @@ public class OutpostManager {
 		}
 		for(Farm f : Farm.farms){
 			if(f.owner != null){
-				file.set("Farm." + f.nameWithColorCodes + ".Owner", f.owner);
+				file.set("Farm." + f.nameWithColorCodes + ".Owner", f.owner.getName());
 			}
 			file.set("Farm." + f.nameWithColorCodes + ".World", f.world.getName());
 			file.set("Farm." + f.nameWithColorCodes + ".Xmin", f.xmin);
@@ -618,7 +617,7 @@ public class OutpostManager {
 		}
 		for(God f : God.gods){
 			if(f.owner != null){
-				file.set("God." + f.nameWithColorCodes + ".Owner", f.owner);
+				file.set("God." + f.nameWithColorCodes + ".Owner", f.owner.getName());
 			}
 			file.set("God." + f.nameWithColorCodes + ".World", f.world.getName());
 			file.set("God." + f.nameWithColorCodes + ".Xmin", f.xmin);
@@ -628,7 +627,7 @@ public class OutpostManager {
 		}
 		for(Magic_Tower f : Magic_Tower.magic_towers){
 			if(f.owner != null){
-				file.set("Magic_Tower." + f.nameWithColorCodes + ".Owner", f.owner);
+				file.set("Magic_Tower." + f.nameWithColorCodes + ".Owner", f.owner.getName());
 			}
 			file.set("Magic_Tower." + f.nameWithColorCodes + ".World", f.world.getName());
 			file.set("Magic_Tower." + f.nameWithColorCodes + ".Xmin", f.xmin);
@@ -638,7 +637,7 @@ public class OutpostManager {
 		}
 		for(Mine f : Mine.mines){
 			if(f.owner != null){
-				file.set("Mine." + f.nameWithColorCodes + ".Owner", f.owner);
+				file.set("Mine." + f.nameWithColorCodes + ".Owner", f.owner.getName());
 			}
 			file.set("Mine." + f.nameWithColorCodes + ".World", f.world.getName());
 			file.set("Mine." + f.nameWithColorCodes + ".Xmin", f.xmin);
@@ -648,7 +647,7 @@ public class OutpostManager {
 		}
 		for(Mob_Farm f : Mob_Farm.mob_farms){
 			if(f.owner != null){
-				file.set("Mob_Farm." + f.nameWithColorCodes + ".Owner", f.owner);
+				file.set("Mob_Farm." + f.nameWithColorCodes + ".Owner", f.owner.getName());
 			}
 			file.set("Mob_Farm." + f.nameWithColorCodes + ".World", f.world.getName());
 			file.set("Mob_Farm." + f.nameWithColorCodes + ".Xmin", f.xmin);

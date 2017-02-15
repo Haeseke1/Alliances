@@ -144,7 +144,7 @@ public class Blacksmith {
 				String message = "&6" + name + "&c is under attack by an alliance! (&60%&c)";
 				MessageManager.sendBroadcast(message);
 				if(owner != null){
-					message = "&cYou're losing an outpost!";
+					message = "&cYou're losing name!";
 					owner.sendPlayersMessage(message); 
 				}
 			}
@@ -152,7 +152,7 @@ public class Blacksmith {
 				String message = "&6" + name + "&c is under attack by an alliance! (&625%&c)";
 				MessageManager.sendBroadcast(message);
 				if(owner != null){
-					message = "&cYou're losing an outpost!";
+					message = "&cYou're losing name!";
 					owner.sendPlayersMessage(message);  
 				}
 			}
@@ -160,7 +160,7 @@ public class Blacksmith {
 				String message = "&6" + name + "&c is under attack by an alliance! (&650%&c)";
 				MessageManager.sendBroadcast(message);
 				if(owner != null){
-					message = "&cYou're losing an outpost!";
+					message = "&cYou're losing name!";
 					owner.sendPlayersMessage(message); 
 				}
 			}
@@ -168,18 +168,19 @@ public class Blacksmith {
 				String message = "&6" + name + "&c is under attack by an alliance! (&675%&c)";
 				MessageManager.sendBroadcast(message);
 				if(owner != null){
-					message = "&cYou're losing an outpost!";
+					message = "&cYou're losing name!";
 					owner.sendPlayersMessage(message); 
 				}
 			}
 			if(time_taking_over == n4){
-				String message = "&6" + name + "&c is under attack by an alliance! (&6100%&c)";
+				String message = "&6" + name + "&c has been taken over by an alliance! (&6100%&c)";
 				MessageManager.sendBroadcast(message);
 				if(owner != null){
-					message = "&cYou're losing an outpost!";
+					message = "&cYou have lost " + ChatColor.GOLD + name;
 					owner.sendPlayersMessage(message);  
 				}
 				owner = taking_over;
+				owner.sendPlayersMessage(ChatColor.DARK_GREEN + "Your alliance has taken over " + ChatColor.GOLD + name);
 				taking_over = null;
 			}
 			if(isTakingOver){

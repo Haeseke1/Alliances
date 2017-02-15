@@ -1,7 +1,6 @@
 	package me.Haeseke1.Alliances.APlayer;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -41,7 +39,6 @@ public class aPlayer{
 	public int coins;
 	public Player player;
 	public FileConfiguration file;
-	public File f;
 	
 	public int wins = 0;
 	public int loses = 0;
@@ -61,11 +58,10 @@ public class aPlayer{
 	public double manaregen = 1.0;
 	public String manaString;
 	
-	public aPlayer(Player player, File f, FileConfiguration file) {
+	public aPlayer(Player player, FileConfiguration file) {
 		coins = Coins.getPlayerCoins(player);
 		this.player = player;
 		this.file = file;
-		this.f = f;
 		this.wins = 0;
 		this.loses = 0;
 		registerConfig();
@@ -85,17 +81,11 @@ public class aPlayer{
 	}
 	
 	public void saveConfig(){
-		try {
-			file.save(f);
-			file.set("Wins", this.wins);
-			file.set("Loses", this.loses);
-			file.set("Mana_regen", this.manaregen);
-		} catch (IOException e) {
-			MessageManager.sendAlertMessage("Could not save " + file.getName() + "!");
-		}
-		File file = new File(Main.plugin.getDataFolder(),player.getUniqueId() + ".yml");
- 	    ConfigManager.saveCustomConfig(file,YamlConfiguration.loadConfiguration(file));
- 	    Bukkit.broadcastMessage("saved");
+		file.set("Wins", this.wins);
+		file.set("Loses", this.loses);
+		file.set("Mana_regen", this.manaregen);
+		File file = new File(Main.plugin.getDataFolder() + File.separator + "PlayerData",player.getUniqueId() + ".yml");
+ 	    ConfigManager.saveCustomConfig(file,this.file);
 	}
 	
 	public void addWin(){
