@@ -149,6 +149,10 @@ public class Alliance {
 	public boolean claimReward(Player player){
 		while(player.getInventory().firstEmpty() >= 0){
 			if(!outpostRewards.isEmpty()){
+				if(outpostRewards.get(0) == null){
+					outpostRewards.remove(0);
+					continue;
+				}
 				player.getInventory().addItem(outpostRewards.get(0));
 				outpostRewards.remove(0);
 			}else{

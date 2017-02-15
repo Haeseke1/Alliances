@@ -28,6 +28,7 @@ public class APlayerEvents implements Listener{
 		f = new File(f, player.getUniqueId().toString() + ".yml");
 		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
 		new aPlayer(player, file);
+		player.setMaxHealth(20);
 	}
 	
 	@EventHandler(priority= EventPriority.LOW) 

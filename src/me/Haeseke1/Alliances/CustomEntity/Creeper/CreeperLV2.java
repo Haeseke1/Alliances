@@ -82,7 +82,7 @@ public class CreeperLV2 extends EntityCreeper{
 		if(damagesource.isExplosion()){
 			return false;
 		}
-		return true;
+		return super.damageEntity(damagesource, f);
 	}
     
     private void explode(){
