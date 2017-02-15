@@ -2,10 +2,12 @@ package me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers;
 
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
 
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Sword;
-
-import java.util.UUID;
+import me.Haeseke1.Alliances.Main.Main;
 
 public class CheckCooldowns implements Runnable{
 
@@ -17,7 +19,14 @@ public class CheckCooldowns implements Runnable{
 				continue;
 			}
 			for(Sword sword : entry.getValue()){
-				sword.cooldown(entry.getKey());
+				Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
+					
+					@Override
+					public void run() {
+						sword.cooldown(entry.getKey());
+						
+					}
+				}, 1);
 			}
 		}
 		
