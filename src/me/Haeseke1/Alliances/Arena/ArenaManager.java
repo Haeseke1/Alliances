@@ -268,7 +268,7 @@ public class ArenaManager {
 	}
 
 	public static boolean checkStatus(String arenaname, String status) throws EmptyStringException {
-		if (ConfigManager.getStringFromConfig(arenaConfig, "Arenas." + arenaname + ".status")
+		if (ConfigManager.getStringFromConfig(arenaConfig, "Arenas." + arenaname.toLowerCase() + ".status")
 				.equalsIgnoreCase(status)) {
 			return true;
 		}
@@ -457,7 +457,8 @@ public class ArenaManager {
 		arena.getPlayersInArena().remove(player.getUniqueId());
 		pastLocations.remove(player.getUniqueId());
 		player.setHealth(player.getMaxHealth());
-		if (teamIsEmpty(player, arena)) {
+		player.setFoodLevel(20);
+		if (teamIsEmpty(player, arena)){
 			al.addLose(player);
 			return;
 		}

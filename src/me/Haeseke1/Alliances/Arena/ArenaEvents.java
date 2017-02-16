@@ -2,6 +2,9 @@ package me.Haeseke1.Alliances.Arena;
 
 
 
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -19,11 +22,14 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
+import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
@@ -220,6 +226,7 @@ public class ArenaEvents implements Listener {
 				ArenaManager.pastLocations.clear();
 				Main.arenaConfig.set("Arenas." + arena.getName().toLowerCase() + ".spawns.team1.alliance", "");
 				Main.arenaConfig.set("Arenas." + arena.getName().toLowerCase() + ".spawns.team2.alliance", "");
+				return;
 			}
 			try {
 				ArenaManager.leaveArena(player);
@@ -271,6 +278,26 @@ public class ArenaEvents implements Listener {
 			MessageManager.sendMessage(event.getPlayer(),
 					"&cYou can only use arena commands while you're competing in a fight");
 			event.setCancelled(true);
+		}
+	}
+	
+	@EventHandler
+	public void onDeath(PlayerDeathEvent event) throws EmptyLocationException{
+		Player player = event.getEntity();
+		if(ArenaManager.isInArena(player)){
+			ArenaManager.kickOnDeath(player);
+			Arena arena = ArenaManager.getArenaOfPlayer(player);
+			if(arena.getPlayersInArena().size() == 1){
+				for(UUID playerUUID: arena.getPlayersInArena().keySet()){
+					Player enemy = Bukkit.getPlayer(playerUUID);
+					Alliance alliance = AllianceManager.getAlliance(enemy);
+					alliance.addWin();
+					arena.teleportToPast();
+					arena.getPlayersInArena().clear();
+					ArenaManager.pastLocations.clear();
+					ArenaManager.setStatus(arena.getName(), "playable", enemy);
+				}
+			}
 		}
 	}
 }
