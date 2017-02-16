@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -28,6 +29,10 @@ public class MessageManager {
 		player.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.cmdlogo + message));
 	}
 
+	public static void sendMessage(CommandSender player, String message) {
+		player.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.cmdlogo + message));
+	}
+	
 	public static void sendInfoMessage(String message) {
 		Bukkit.getConsoleSender().sendMessage(Main.cmdlogo + infoColorCode + message);
 	}

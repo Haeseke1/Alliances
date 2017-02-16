@@ -105,8 +105,10 @@ import me.Haeseke1.Alliances.Item.Totems.HealingTotem;
 import me.Haeseke1.Alliances.Item.Totems.Events.DamageTotem;
 import me.Haeseke1.Alliances.Item.Totems.Scheduler.Checker;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Blade_Of_Zeus;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Night_Blade;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Soul_Stealer;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Warrior_Sword;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Wither_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Commands.Wand;
@@ -268,6 +270,10 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new Night_Blade(), this);
 		pm.registerEvents(new Wither_Blade(), this);
 		pm.registerEvents(new Fatal_Blade(), this);
+		pm.registerEvents(new Soul_Stealer(), this);
+		pm.registerEvents(new Blade_Of_Zeus(), this);
+		
+		
 		pm.registerEvents(new PlayerQuit(), this);
 		pm.registerEvents(new BlockBreak_Place(), this);
 		pm.registerEvents(new PlayerMove(), this);
