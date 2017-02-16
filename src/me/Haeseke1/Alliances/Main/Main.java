@@ -112,6 +112,7 @@ import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Wither_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Commands.Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Events.RightClickWand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler.ManaRegen;
+import me.Haeseke1.Alliances.Mounts.Mount;
 import me.Haeseke1.Alliances.Mounts.MountsManager;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
 import me.Haeseke1.Alliances.Mounts.Events.Death;
@@ -208,6 +209,7 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		Mount.deleteAllHorse();
 	    HealingTotem.removeAllTotems();
 		PVEManager.disablePVE();
 		MountsManager.despawnMounts();

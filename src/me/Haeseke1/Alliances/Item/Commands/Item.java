@@ -30,6 +30,37 @@ public class Item implements CommandExecutor{
 		}
 		
 		if (!(sender instanceof Player)) {
+			if(args[0].equalsIgnoreCase("storageupgrade") && args.length > 1){
+				int tier = 0;
+				switch(args[1].toLowerCase()){
+				case "2":
+					tier = 2;
+					break;
+				case "3":
+					tier = 3;
+					break;
+				case "inf":
+					tier = 0;
+					break;
+				default:
+					MessageManager.sendAlertMessage("This tier doesn't exists");
+					return false;
+				}
+				if(args.length > 2){
+					if(!PlayerManager.isPlayerOnline(args[2])){
+						MessageManager.sendAlertMessage("This player isn't online");
+						return false;
+					}
+					Player getter = PlayerManager.getPlayer(args[2]);
+					ItemStack item = Storage_Level.getItem(tier);
+					getter.getInventory().addItem(item);
+					MessageManager.sendRemarkMessage("Successfully gave " + ChatColor.GOLD + getter.getName() + ChatColor.GREEN + " a " + item.getItemMeta().getDisplayName());
+					MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+					return false;
+				}
+				MessageManager.sendAlertMessage("The console can't receive any in-game items");
+				return false;
+			}
 			String message = "This command needs to be executed by a player";
 			MessageManager.sendAlertMessage(message);
 			return false;

@@ -18,7 +18,7 @@ public class ArenaCommand implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (!(sender instanceof Player)) {
-			MessageManager.sendAlertMessage("&cWrong argument: do /arena to see all the commands");
+			MessageManager.sendAlertMessage("This command is only available for in-game players");
 			return false;
 		}
 		Player player = (Player) sender;
@@ -53,6 +53,7 @@ public class ArenaCommand implements CommandExecutor {
 			} catch (EmptyStringException | EmptyLocationException e) {
 				e.printStackTrace();
 			}
+			return true;
 		}
 		
 		if (args.length == 1 && args[0].equalsIgnoreCase("leave")) {
@@ -91,6 +92,7 @@ public class ArenaCommand implements CommandExecutor {
 				if (player.hasPermission("Alliances.arena.create.*")) {
 					String name = args[1];
 					ArenaManager.removeArena(name, player);
+					return true;
 				}
 			}
 
@@ -101,6 +103,7 @@ public class ArenaCommand implements CommandExecutor {
 					} catch (Exception e) {
 						MessageManager.sendMessage(player, ChatColor.RED + "Team number must be an integer");
 					}
+					return true;
 				}
 			}
 
