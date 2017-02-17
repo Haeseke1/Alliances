@@ -31,7 +31,45 @@ public class Item implements CommandExecutor{
 			return false;
 		}
 
+		if (!(sender instanceof Player)) {
+			if(args[0].equalsIgnoreCase("storageupgrade") && args.length > 1){
+				int tier = 0;
+				switch(args[1].toLowerCase()){
+				case "2":
+					tier = 2;
+					break;
+				case "3":
+					tier = 3;
+					break;
+				case "inf":
+					tier = 0;
+					break;
+				default:
+					MessageManager.sendAlertMessage("This tier doesn't exists");
+					return false;
+				}
+				if(args.length > 2){
+					if(!PlayerManager.isPlayerOnline(args[2])){
+						MessageManager.sendAlertMessage("This player isn't online");
+						return false;
+					}
+					Player getter = PlayerManager.getPlayer(args[2]);
+					ItemStack item = Storage_Level.getItem(tier);
+					getter.getInventory().addItem(item);
+					MessageManager.sendRemarkMessage("Successfully gave " + ChatColor.GOLD + getter.getName() + ChatColor.GREEN + " a " + item.getItemMeta().getDisplayName());
+					MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+					return false;
+				}
+				MessageManager.sendAlertMessage("The console can't receive any in-game items");
+				return false;
+			}
+			String message = "This command needs to be executed by a player";
+			MessageManager.sendAlertMessage(message);
+			return false;
+		}
+		Player player = (Player) sender;
 		
+
 		if(!sender.hasPermission("Alliances.items.*")){
 			MessageManager.sendMessage(sender, "&cWrong argument do: /pve");
 			return false;
@@ -54,7 +92,6 @@ public class Item implements CommandExecutor{
 				MessageManager.sendAlertMessage(message);
 				return false;
 			}
-			Player player = (Player) sender;
 			player.getInventory().addItem(Outpost_Compass.getItem(player));
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + "Outpost Compass" + ChatColor.GREEN + "!");
 			return false;
@@ -93,7 +130,6 @@ public class Item implements CommandExecutor{
 				MessageManager.sendAlertMessage(message);
 				return false;
 			}
-			Player player = (Player) sender;
 			ItemStack item = Storage_Level.getItem(tier);
 			player.getInventory().addItem(item);
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
@@ -117,7 +153,6 @@ public class Item implements CommandExecutor{
 				MessageManager.sendAlertMessage(message);
 				return false;
 			}
-			Player player = (Player) sender;
 			player.getInventory().addItem(Warrior_Sword.getItem());
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + "Sword1" + ChatColor.GREEN + "!");
 			return false;
@@ -141,7 +176,6 @@ public class Item implements CommandExecutor{
 				MessageManager.sendAlertMessage(message);
 				return false;
 			}
-			Player player = (Player) sender;
 			ItemStack item  = Night_Blade.getItem();
 			player.getInventory().addItem(item);
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
@@ -174,7 +208,6 @@ public class Item implements CommandExecutor{
 				MessageManager.sendAlertMessage(message);
 				return false;
 			}
-			Player player = (Player) sender;
 			ItemStack item = Wither_Blade.getItem(tier);
 			player.getInventory().addItem(item);
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
@@ -207,7 +240,6 @@ public class Item implements CommandExecutor{
 				MessageManager.sendAlertMessage(message);
 				return false;
 			}
-			Player player = (Player) sender;
 			ItemStack item = Fatal_Blade.getItem(tier);
 			player.getInventory().addItem(item);
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
@@ -240,7 +272,6 @@ public class Item implements CommandExecutor{
 				MessageManager.sendAlertMessage(message);
 				return false;
 			}
-			Player player = (Player) sender;
 			ItemStack item = Soul_Stealer.getItem(tier);
 			player.getInventory().addItem(item);
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
@@ -265,7 +296,6 @@ public class Item implements CommandExecutor{
 				MessageManager.sendAlertMessage(message);
 				return false;
 			}
-			Player player = (Player) sender;
 			ItemStack item = Blade_Of_Zeus.getItem();
 			player.getInventory().addItem(item);
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");

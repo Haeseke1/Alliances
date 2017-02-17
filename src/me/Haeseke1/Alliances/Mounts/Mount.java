@@ -90,4 +90,10 @@ public class Mount {
 		return true;
 	}
 
+    public static void deleteAllHorse(){
+    	for(Mount mount: MountCommand.mounts.values()){
+    		mount.horse.setHealth(0);
+    		MountCommand.mounts.remove(mount);
+    	}
+    }
 }
