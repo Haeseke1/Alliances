@@ -3,6 +3,7 @@ package me.Haeseke1.Alliances.Buildings.Type.Storage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -28,7 +29,7 @@ public class Storage extends Building{
 	public HashMap<ItemStack,Integer> items = new HashMap<ItemStack,Integer>();
 	public int level = 1;
 	
-	public HashMap<Player,Integer> openInventory = new HashMap<Player,Integer>();
+	public HashMap<UUID,Integer> openInventory = new HashMap<UUID,Integer>();
 	
 	public Storage(Location mainBlock, Chunk chunk, int ymin, int ymax) {
 		super(mainBlock, chunk, ymin, ymax, BuildingType.STORAGE, true);
@@ -42,7 +43,6 @@ public class Storage extends Building{
 		setHolo();
 		this.items = items;
 		storages.add(this);
-		
 	}
 	
 	
@@ -108,14 +108,14 @@ public class Storage extends Building{
 	
 	
 	public void up(Player player){
-		if(openInventory.get(player) > 0){
-			openInventory.replace(player, openInventory.get(player) - 1);
+		if(openInventory.get(player.getUniqueId()) > 0){
+			openInventory.replace(player.getUniqueId(), openInventory.get(player.getUniqueId()) - 1);
 		}
 	}
 	
 	public void down(Player player){
-		if(items.keySet().size() > 48 + (openInventory.get(player) * 8)){
-			openInventory.replace(player, openInventory.get(player) + 1);
+		if(items.keySet().size() > 48 + (openInventory.get(player.getUniqueId()) * 8)){
+			openInventory.replace(player.getUniqueId(), openInventory.get(player.getUniqueId()) + 1);
 		}
 	}
 	
@@ -146,17 +146,18 @@ public class Storage extends Building{
 				inv.setItem((x*9) + y, StorageManager.addLore(types.get((x * 8) + y), items.get(types.get((x * 8) + y))));
 			}
 		}
-		openInventory.put(player, 0);
+		openInventory.put(player.getUniqueId(), 0);
 		player.openInventory(inv);
 	}
 	
 	@SuppressWarnings("deprecation")
 	public void updateStorage(){
-		for(Player player : openInventory.keySet()){
+		for(UUID uuid : openInventory.keySet()){
+			Player player = Bukkit.getPlayer(uuid);
 			InventoryView inv = player.getOpenInventory();
 			ItemStack item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
 			ItemMeta im = item.getItemMeta();
-			if(openInventory.get(player) > 0){
+			if(openInventory.get(player.getUniqueId()) > 0){
 				item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 13);
 				im = item.getItemMeta();
 				im.setDisplayName(ChatColor.GREEN + "Up");
@@ -169,7 +170,7 @@ public class Storage extends Building{
 			inv.setItem(8, item);
 			
 			
-			if(items.keySet().size() > 48 + openInventory.get(player) * 8){
+			if(items.keySet().size() > 48 + openInventory.get(player.getUniqueId()) * 8){
 				item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 13);
 				im = item.getItemMeta();
 				im.setDisplayName(ChatColor.GREEN + "Down");
@@ -189,11 +190,11 @@ public class Storage extends Building{
 			List<ItemStack> types = new ArrayList<>(items.keySet());
 			for(int x = 0; x < 6; x++){
 				for(int y = 0; y < 8; y++){
-					if(types.size() - 1 < ((x + openInventory.get(player)) * 8) + y){
+					if(types.size() - 1 < ((x + openInventory.get(player.getUniqueId())) * 8) + y){
 						inv.setItem((x*9) + y, new ItemStack(Material.AIR));
 						continue;
 					}
-					inv.setItem((x*9) + y, StorageManager.addLore(types.get(((x + openInventory.get(player)) * 8) + y), items.get(types.get(((x + openInventory.get(player)) * 8) + y))));
+					inv.setItem((x*9) + y, StorageManager.addLore(types.get(((x + openInventory.get(player.getUniqueId())) * 8) + y), items.get(types.get(((x + openInventory.get(player.getUniqueId())) * 8) + y))));
 				}
 			}
 			player.updateInventory();

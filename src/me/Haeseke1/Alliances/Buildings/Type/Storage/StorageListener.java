@@ -54,9 +54,11 @@ public class StorageListener implements Listener {
 				event.getItem().getItemMeta().getDisplayName().contains(ChatColor.GOLD + "Storage")){
 			return;
 		}
-		
 		if(b instanceof Storage){
 			Storage s = (Storage) b;
+			if(s.openInventory.containsKey(event.getPlayer().getUniqueId())){
+				return;
+			}
 			s.openStorage(event.getPlayer());
 		}else{
 			Storage s = StorageManager.createStorage(b);
@@ -67,8 +69,8 @@ public class StorageListener implements Listener {
 	@EventHandler
 	private void InventroyClose(InventoryCloseEvent event){
 		for(Storage s : Storage.storages){
-			if(s.openInventory.containsKey((Player) event.getPlayer())){
-				s.openInventory.remove((Player) event.getPlayer());
+			if(s.openInventory.containsKey(event.getPlayer().getUniqueId())){
+				s.openInventory.remove(event.getPlayer().getUniqueId());
 			}
 		}
 	}
@@ -79,7 +81,7 @@ public class StorageListener implements Listener {
 		Player player = (Player) event.getWhoClicked();
 		Storage storage = null;
 		for(Storage s : Storage.storages){
-			if(s.openInventory.containsKey(player)){
+			if(s.openInventory.containsKey(player.getUniqueId())){
 				storage = s;
 			}
 		}

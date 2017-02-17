@@ -17,7 +17,7 @@ public class APlayerEvents implements Listener{
 	
 	
 	
-	@EventHandler
+	@EventHandler (priority = EventPriority.MONITOR)
 	private void playerjoin(PlayerJoinEvent event){
 		File f = new File(Main.plugin.getDataFolder(), "PlayerData");
 		if(!f.exists()){
@@ -29,6 +29,7 @@ public class APlayerEvents implements Listener{
 		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
 		new aPlayer(player, file);
 		player.setMaxHealth(20);
+
 	}
 	
 	@EventHandler(priority= EventPriority.LOW) 

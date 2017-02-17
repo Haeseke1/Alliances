@@ -289,7 +289,7 @@ public class aPlayer{
 		
 		aScoreBoardManager.setScore(this, ChatColor.GREEN + "Coins on win: " + group.settings.getCoinReward(), 30, sideBar, ChatColor.BLACK + " ", null);
 		
-		aScoreBoardManager.setScore(this, ChatColor.RED + "Coins on lose: " + group.settings.getCoinReward() * 3, 27, sideBar, ChatColor.BLACK + " ", null);
+		aScoreBoardManager.setScore(this, ChatColor.RED + "Coins on lose: " + (int) (group.settings.getCoinReward() * 1.5), 27, sideBar, ChatColor.BLACK + " ", null);
 		
 		for(Entry<Integer, Integer> zombie : group.settings.zombies.entrySet()){
 			if(zombie.getValue() != 0){
