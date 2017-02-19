@@ -8,8 +8,10 @@ import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.APlayer.aPlayer;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Cloud_Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Fire_Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Healing_Wand;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Wither_Wand;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
 
@@ -39,10 +41,16 @@ public class Wand implements CommandExecutor{
 			String wandtype = args[1].toLowerCase();
 			switch(wandtype){
 			case "healing":
-				Healing_Wand.giveWand(player);
+				Healing_Wand.giveWand("Healing Wand",player,"&2");
 				break;
 			case "fire":
-				Fire_Wand.giveWand(player);
+				Fire_Wand.giveWand("Fire Wand",player,"&c");
+				break;
+			case "wither":
+				Wither_Wand.giveWand("Wither Wand",player, "&8");
+				break;
+			case "cloud":
+				Cloud_Wand.giveWand("Cloud Wand", player, "&b");
 				break;
 			default:
 				MessageManager.sendMessage(player, "&This wand type doesn't exists");
