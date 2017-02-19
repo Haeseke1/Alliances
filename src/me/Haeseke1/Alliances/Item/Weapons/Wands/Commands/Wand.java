@@ -24,15 +24,16 @@ public class Wand implements CommandExecutor{
 		if(args.length == 0){
 			player.sendMessage(MessageManager.infoColorCode + "===== Wands =====");
 			player.sendMessage(MessageManager.infoColorCode + "Commands:");
-			player.sendMessage(MessageManager.infoColorCode	+ "/wands mana #Shows your mana balance");
+			player.sendMessage(MessageManager.infoColorCode	+ "/wand mana #Shows your mana balance");
+			player.sendMessage(MessageManager.infoColorCode	+ "/wand give <type> #Gives you a wand");
 			return true;
 		}
-		
+		else
 		if(args[0].equalsIgnoreCase("mana")){
 		    APlayer.showMana();
 			return true;
 		}
-		
+		else
 		if(args[0].equalsIgnoreCase("give") && args.length == 2){
 			String wandtype = args[1].toLowerCase();
 			switch(wandtype){
@@ -45,7 +46,10 @@ public class Wand implements CommandExecutor{
 			}
 			SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
 			MessageManager.sendMessage(player, "&2You've received a &6" + wandtype);
+			return true;
 		}
+		
+		MessageManager.sendMessage(player, "&cWrong argument do: /wand");
 		return false;
 	}
 
