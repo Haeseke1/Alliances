@@ -1,5 +1,6 @@
 package me.Haeseke1.Alliances.Item.Weapons.Wands.Commands;
 
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -7,7 +8,9 @@ import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.APlayer.aPlayer;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Healing_Wand;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import me.Haeseke1.Alliances.Utils.SoundManager;
 
 public class Wand implements CommandExecutor{
 
@@ -28,6 +31,20 @@ public class Wand implements CommandExecutor{
 		if(args[0].equalsIgnoreCase("mana")){
 		    APlayer.showMana();
 			return true;
+		}
+		
+		if(args[0].equalsIgnoreCase("give") && args.length == 2){
+			String wandtype = args[1].toLowerCase();
+			switch(wandtype){
+			case "healing":
+				Healing_Wand.giveWand(player);
+				break;
+			default:
+				MessageManager.sendMessage(player, "&This wand type doesn't exists");
+				return false;
+			}
+			SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
+			MessageManager.sendMessage(player, "&2You've received a &6" + wandtype);
 		}
 		return false;
 	}

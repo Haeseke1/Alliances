@@ -5,11 +5,13 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.APlayer.aPlayer;
 import me.Haeseke1.Alliances.Item.Totems.HealingTotem;
+import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
 import net.md_5.bungee.api.ChatColor;
 
@@ -56,5 +58,13 @@ public class Healing_Wand{
         SoundManager.playSoundToPlayer(Sound.LEVEL_UP, user);
 		}
 		}
+	}
+	
+	public static void giveWand(Player player){
+		ItemStack wand = new ItemStack(Material.STICK);
+		ItemMeta wandm = wand.getItemMeta();
+		wandm.setDisplayName(ChatColor.GREEN + "Healing Wand");
+		wand.setItemMeta(wandm);
+		player.getInventory().addItem(wand);
 	}
 }
