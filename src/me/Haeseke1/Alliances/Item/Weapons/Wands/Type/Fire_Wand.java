@@ -21,6 +21,7 @@ public class Fire_Wand{
 	public static Material wand_type;
 	public double mana = 1.5;
 	
+	@SuppressWarnings("static-access")
 	public Fire_Wand(Player user, Material wand_type){
 		this.user = user;
 		this.name = this.getClass().getSimpleName();

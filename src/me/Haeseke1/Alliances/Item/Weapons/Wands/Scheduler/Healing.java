@@ -1,5 +1,7 @@
 package me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -9,18 +11,18 @@ import me.Haeseke1.Alliances.Item.Totems.HealingTotem;
 
 public class Healing implements Runnable{
 
+	public Player player;
+	
 	@Override
 	public void run() {
-		for(Player player: Bukkit.getOnlinePlayers()){
-			for(HealingTotem totem: HealingTotem.htotems.values()){
-				if(player.getName().equalsIgnoreCase(totem.owner.getName())){ totem.heal(player); continue;}
-				Alliance alliance = AllianceManager.getAlliance(totem.owner);
-				if(alliance.getName().equalsIgnoreCase(AllianceManager.getAlliance(player).getName())){
-					totem.heal(player);
-				}
-				continue;
-			}
-		}
+     for(HealingTotem totem: HealingTotem.htotems.values()){
+    	 player = totem.owner;
+    	 if(!AllianceManager.playerIsInAlli(player)){ totem.heal(player); continue;}
+    	 Alliance alliance = AllianceManager.getAlliance(player);
+         for(UUID uuid: alliance.getMembers().keySet()){
+         player = Bukkit.getPlayer(uuid);
+         totem.heal(player);
+         }
+     }
 	}
-	
 }
