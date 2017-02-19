@@ -11,7 +11,6 @@ import org.bukkit.util.Vector;
 import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.APlayer.aPlayer;
 import me.Haeseke1.Alliances.Item.Totems.HealingTotem;
-import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
 import net.md_5.bungee.api.ChatColor;
 

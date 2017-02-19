@@ -87,7 +87,12 @@ public class HealingTotem {
 	
 	public void heal(Player player){
 		if(player.getLocation().distance(this.block.getLocation()) < 5){
-		player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "+" + this.heal + "HEALTH");	
+			if(player.getMaxHealth() < player.getHealth() + this.heal){
+				player.setHealth(player.getMaxHealth());
+			}else{
+				player.setHealth(player.getHealth() + this.heal);
+			}
+			player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "+" + this.heal + "HEALTH");	
 		}
 	}
 	
