@@ -92,7 +92,7 @@ public class HealingTotem {
 			}else{
 				player.setHealth(player.getHealth() + this.heal);
 			}
-			player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "+" + this.heal + "HEALTH");	
+			player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "+" + this.heal + " HEALTH");	
 		}
 	}
 	
