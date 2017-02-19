@@ -12,6 +12,7 @@ public class Checker implements Runnable{
 	@Override
 	public void run() {
         for(Player player: Bukkit.getOnlinePlayers()){
+        	player.setDisplayName(player.getName());
         	if(HealingTotem.htotems.containsKey(player.getUniqueId())){
         		ParticleManager.playParticle(EnumParticle.VILLAGER_HAPPY, HealingTotem.htotems.get(player.getUniqueId()).block.getLocation(), 2, 1);
         		if(player.getLocation().distance(HealingTotem.htotems.get(player.getUniqueId()).block.getLocation()) > 20){

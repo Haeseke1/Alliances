@@ -128,8 +128,8 @@ public class Arena {
 			group.sendPlayersMessage(ChatColor.GREEN + "Your group survived! " + ChatColor.GOLD + "(+" + (int) (group.settings.getCoinReward() / group.members.size()) + " coins)");
 		}else{
 			for(Player player : group.members){
-				if(Coins.removePlayerCoins(player, (group.settings.getCoinReward() * 3) / group.members.size())){
-					player.sendMessage(ChatColor.RED + "Your group lost! " + ChatColor.GOLD + "(-" + (int) ((group.settings.getCoinReward() * 3) / group.members.size()) + " coins)");
+				if(Coins.removePlayerCoins(player, (int) (group.settings.getCoinReward() * 1.5) / group.members.size())){
+					player.sendMessage(ChatColor.RED + "Your group lost! " + ChatColor.GOLD + "(-" + (int) ((group.settings.getCoinReward() * 1.5) / group.members.size()) + " coins)");
 				}else{
 					player.sendMessage(ChatColor.RED + "Your group lost! " + ChatColor.GOLD + "(-" + Coins.getPlayerCoins(player) + " coins)");
 					Coins.removePlayerCoins(player, Coins.getPlayerCoins(player));

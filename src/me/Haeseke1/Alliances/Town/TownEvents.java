@@ -12,6 +12,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.world.ChunkUnloadEvent;
 
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -97,9 +98,17 @@ public class TownEvents implements Listener {
 				}
 			}
 		}
-		
-		
 	}
 	
+	
+	@EventHandler
+	private void onUnloadChunk(ChunkUnloadEvent event){
+		for(Town town : Town.towns){
+			if(town.chunks.contains(event.getChunk())){
+				event.setCancelled(true);
+				return;
+			}
+		}
+	}
 	
 }

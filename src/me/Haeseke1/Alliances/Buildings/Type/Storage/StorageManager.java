@@ -27,6 +27,7 @@ public class StorageManager {
 	public static Storage createStorage(Building b){
 		Storage s = new Storage(b.mainBlock, b.chunk, b.ymin, b.ymax);
 		Storage.buildings.remove(b);
+		Storage.Allbuildings.remove(b);
 		return s;
 	}
 	
