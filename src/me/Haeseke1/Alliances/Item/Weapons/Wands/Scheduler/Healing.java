@@ -22,5 +22,4 @@ public class Healing implements Runnable{
 			}
 		}
 	}
-	
 }
