@@ -15,10 +15,10 @@ import net.md_5.bungee.api.ChatColor;
 public class Fire_Wand{
 	
 	public Player user;
-	public String name;
+	public static String name;
 	public Vector dir;
 	public ItemStack item;
-	public Material wand_type;
+	public static Material wand_type;
 	public double mana = 1.5;
 	
 	public Fire_Wand(Player user, Material wand_type){
@@ -58,7 +58,7 @@ public class Fire_Wand{
 		}
 	}
 	
-	public void giveWand(Player player){
+	public static void giveWand(Player player){
 	   ItemStack wand = new ItemStack(wand_type,1);
 	   wand.getItemMeta().setDisplayName("&c" + name);
 	   wand.setItemMeta(wand.getItemMeta());

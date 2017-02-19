@@ -35,6 +35,8 @@ public class HealingTotem {
 	public final int max_health = 50;
 	public int health = max_health;
 	
+	public int heal = 1;
+	
 	public HealingTotem(Player owner){
 		this.owner = owner;
 	}
@@ -81,6 +83,12 @@ public class HealingTotem {
 		}
 		totemBlocks.clear();
 		armorStands.clear();
+	}
+	
+	public void heal(Player player){
+		if(player.getLocation().distance(this.block.getLocation()) < 5){
+		player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "+" + this.heal + "HEALTH");	
+		}
 	}
 	
 	public void removeTotem(){

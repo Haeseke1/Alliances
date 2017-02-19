@@ -113,6 +113,7 @@ import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Warrior_Sword;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Wither_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Commands.Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Events.RightClickWand;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler.Healing;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler.ManaRegen;
 import me.Haeseke1.Alliances.Mounts.Mount;
 import me.Haeseke1.Alliances.Mounts.MountsManager;
@@ -383,6 +384,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Arena_Scheduler(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ManaRegen(), 0L, 100);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Checker(), 0L, 1L);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Healing(), 0L, 50L);
 		java.util.Timer timer = new java.util.Timer(); 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);

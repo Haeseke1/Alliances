@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.APlayer.aPlayer;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Fire_Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Healing_Wand;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
@@ -40,6 +41,9 @@ public class Wand implements CommandExecutor{
 			case "healing":
 				Healing_Wand.giveWand(player);
 				break;
+			case "fire":
+				Fire_Wand.giveWand(player);
+				break;
 			default:
 				MessageManager.sendMessage(player, "&This wand type doesn't exists");
 				return false;
@@ -49,7 +53,7 @@ public class Wand implements CommandExecutor{
 			return true;
 		}
 		
-		MessageManager.sendMessage(player, "&cWrong argument do: /wand");
+		MessageManager.sendMessage(player,"&cWrong argument do: /wand");
 		return false;
 	}
 
