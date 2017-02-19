@@ -46,6 +46,9 @@ import me.Haeseke1.Alliances.Challenge.Type.Time_On;
 import me.Haeseke1.Alliances.Chat.ChatEvent;
 import me.Haeseke1.Alliances.Commands.Alli;
 import me.Haeseke1.Alliances.Commands.Create.InventoryEvents;
+import me.Haeseke1.Alliances.Crates.CrateManager;
+import me.Haeseke1.Alliances.Crates.CratesEvents;
+import me.Haeseke1.Alliances.Crates.Commands.CrateC;
 import me.Haeseke1.Alliances.CustomEntity.CustomEntityVillager;
 import me.Haeseke1.Alliances.CustomEntity.Blaze.BlazeLV1;
 import me.Haeseke1.Alliances.CustomEntity.Blaze.BlazeLV2;
@@ -178,6 +181,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration settingsConfig;
 	public static FileConfiguration PVEConfig;
 	public static FileConfiguration BuildingConfig;
+	public static FileConfiguration CratesConfig;
 
 	public static Main plugin;
 
@@ -292,6 +296,8 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new RightClickWand(), this);
 		
 		pm.registerEvents(new DamageTotem(), this);
+		
+		pm.registerEvents(new CratesEvents(), this);
 	}
 
 	public void registerCommands() {
@@ -308,6 +314,7 @@ public class Main extends JavaPlugin {
 		getCommand("building").setExecutor(new BuildingC());
 		getCommand("items").setExecutor(new Item());
 		getCommand("wand").setExecutor(new Wand());
+		getCommand("crate").setExecutor(new CrateC());
 	}
 
 	public void registerCustomEntitys() {
@@ -404,24 +411,26 @@ public class Main extends JavaPlugin {
 		settingsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "settings.yml"), plugin);
 		PVEConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "PVE.yml"), plugin);
 		BuildingConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "buildings.yml"), plugin);
+		CratesConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "crates.yml"), plugin);
 		try {
 			ArenaManager.loadArena();
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
 			e.printStackTrace();
 		}
+		CrateManager.registerCrate();
 		AllianceManager.registerAlliance();
 		TownManager.registerTowns();
 		BuildingManager.registerBuildings();
 		OutpostManager.registerOutpost();
 		ChallengeManager.registerChallenges();
 		ShopManager.registerShops();
-		MessageManager.registerMessages(plugin);
 		PVEManager.registerPVE();
 		BuilderManager.registerBuilders();
 	}
 
 	public static void saveAllCustomConfigs() {
 		AllianceManager.saveAlliance();
+		CrateManager.saveCrate();
 		OutpostManager.saveOutpost();
 		ShopManager.saveShops();
 		TownManager.saveTowns();

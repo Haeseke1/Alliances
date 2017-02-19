@@ -22,6 +22,7 @@ import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Sword;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.SwordManager;
+import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
 
@@ -87,6 +88,15 @@ public class Night_Blade extends Sword implements Listener{
 				continue;
 			}
 			player.hidePlayer(this.player);
+			final Player hider = this.player;
+			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
+				
+				@Override
+				public void run() {
+					player.showPlayer(hider);
+					
+				}
+			},160);
 		}
 	}
 }

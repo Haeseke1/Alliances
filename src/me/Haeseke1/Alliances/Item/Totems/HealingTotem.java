@@ -101,7 +101,7 @@ public class HealingTotem {
 			return;
 		}
 		owner.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYour totem is under attack"));
-		SoundManager.playSoundToPlayer(Sound.BLAZE_HIT, owner);
+		SoundManager.playSound(Sound.BLAZE_HIT, block.getLocation());
         armorstand.setCustomName(ChatColor.translateAlternateColorCodes('&',"&2" + owner.getName() + "'s healing totem &8[&9" + health + "&8/&9" + this.max_health +"&8]"));
 	}
 	

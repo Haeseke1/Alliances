@@ -29,3 +29,5 @@ commands:
     aliases: [it,i,item]
   Wand:
     aliases: [w,wand]
+  Crate:
+    aliases: [c,cr,crates]
