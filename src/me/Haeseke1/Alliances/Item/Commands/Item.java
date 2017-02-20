@@ -8,6 +8,9 @@ import org.bukkit.inventory.ItemStack;
 
 import me.Haeseke1.Alliances.Item.Outpost_Compass;
 import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Arrow_Tank;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Legend_Of_Zeus;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Tank;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Blade_Of_Zeus;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Double_Strike;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
@@ -433,6 +436,115 @@ public class Item implements CommandExecutor{
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
 			return false;
 		}
+		
+		if(args[0].equalsIgnoreCase("armor1")){
+			if(args.length > 1){
+				if(!PlayerManager.isPlayerOnline(args[1])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[1]);
+				ItemStack item = Arrow_Tank.getHelmet();
+				getter.getInventory().addItem(item);
+				item = Arrow_Tank.getChestplate();
+				getter.getInventory().addItem(item);
+				item = Arrow_Tank.getLeggings();
+				getter.getInventory().addItem(item);
+				item = Arrow_Tank.getBoots();
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Arrow_Tank.getHelmet();
+			player.getInventory().addItem(item);
+			item = Arrow_Tank.getChestplate();
+			player.getInventory().addItem(item);
+			item = Arrow_Tank.getLeggings();
+			player.getInventory().addItem(item);
+			item = Arrow_Tank.getBoots();
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("armor2")){
+			if(args.length > 1){
+				if(!PlayerManager.isPlayerOnline(args[1])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[1]);
+				ItemStack item = Tank.getHelmet();
+				getter.getInventory().addItem(item);
+				item = Tank.getChestplate();
+				getter.getInventory().addItem(item);
+				item = Tank.getLeggings();
+				getter.getInventory().addItem(item);
+				item = Tank.getBoots();
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Tank.getHelmet();
+			player.getInventory().addItem(item);
+			item = Tank.getChestplate();
+			player.getInventory().addItem(item);
+			item = Tank.getLeggings();
+			player.getInventory().addItem(item);
+			item = Tank.getBoots();
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("armor3")){
+			if(args.length > 1){
+				if(!PlayerManager.isPlayerOnline(args[1])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[1]);
+				ItemStack item = Legend_Of_Zeus.getHelmet();
+				getter.getInventory().addItem(item);
+				item = Legend_Of_Zeus.getChestplate();
+				getter.getInventory().addItem(item);
+				item = Legend_Of_Zeus.getLeggings();
+				getter.getInventory().addItem(item);
+				item = Legend_Of_Zeus.getBoots();
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Legend_Of_Zeus.getHelmet();
+			player.getInventory().addItem(item);
+			item = Legend_Of_Zeus.getChestplate();
+			player.getInventory().addItem(item);
+			item = Legend_Of_Zeus.getLeggings();
+			player.getInventory().addItem(item);
+			item = Legend_Of_Zeus.getBoots();
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
 		
 		return false;
 	}

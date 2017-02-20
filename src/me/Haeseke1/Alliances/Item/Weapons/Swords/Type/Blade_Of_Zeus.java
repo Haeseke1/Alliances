@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -71,6 +72,7 @@ public class Blade_Of_Zeus extends Sword implements Listener{
 	
 	public void playEffect(EntityDamageByEntityEvent event){
 		event.setDamage(event.getDamage() + 6);
-		event.getEntity().getWorld().strikeLightningEffect(event.getEntity().getLocation());
+		LightningStrike ls = event.getEntity().getWorld().strikeLightning(event.getEntity().getLocation());
+		ls.setFireTicks(0);
 	}
 }
