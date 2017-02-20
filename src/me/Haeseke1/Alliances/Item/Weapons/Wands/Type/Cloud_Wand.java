@@ -1,9 +1,5 @@
 package me.Haeseke1.Alliances.Item.Weapons.Wands.Type;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
