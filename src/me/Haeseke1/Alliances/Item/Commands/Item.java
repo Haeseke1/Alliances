@@ -9,9 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import me.Haeseke1.Alliances.Item.Outpost_Compass;
 import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Blade_Of_Zeus;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Double_Strike;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Karma_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Night_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Soul_Stealer;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Speed_Blade;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Swift_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Warrior_Sword;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Wither_Blade;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -302,6 +306,133 @@ public class Item implements CommandExecutor{
 			return false;
 		}
 		
+		if(args[0].equalsIgnoreCase("sword7") && args.length > 1){
+			int tier = 0;
+			try{
+				tier = Integer.parseInt(args[1]);
+			}catch(Exception e){
+				MessageManager.sendMessage(sender, ChatColor.RED + "This is not a number!");
+				return false;
+			}
+			
+			if(args.length > 2){
+				if(!PlayerManager.isPlayerOnline(args[2])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[2]);
+				ItemStack item = Swift_Blade.getItem(tier);
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Swift_Blade.getItem(tier);
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("sword8") && args.length > 1){
+			int tier = 0;
+			try{
+				tier = Integer.parseInt(args[1]);
+			}catch(Exception e){
+				MessageManager.sendMessage(sender, ChatColor.RED + "This is not a number!");
+				return false;
+			}
+			
+			if(args.length > 2){
+				if(!PlayerManager.isPlayerOnline(args[2])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[2]);
+				ItemStack item = Karma_Blade.getItem(tier);
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Karma_Blade.getItem(tier);
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("sword9") && args.length > 1){
+			int tier = 0;
+			try{
+				tier = Integer.parseInt(args[1]);
+			}catch(Exception e){
+				MessageManager.sendMessage(sender, ChatColor.RED + "This is not a number!");
+				return false;
+			}
+			
+			if(args.length > 2){
+				if(!PlayerManager.isPlayerOnline(args[2])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[2]);
+				ItemStack item = Double_Strike.getItem(tier);
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Double_Strike.getItem(tier);
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("sword10") && args.length > 1){
+			int tier = 0;
+			try{
+				tier = Integer.parseInt(args[1]);
+			}catch(Exception e){
+				MessageManager.sendMessage(sender, ChatColor.RED + "This is not a number!");
+				return false;
+			}
+			
+			if(args.length > 2){
+				if(!PlayerManager.isPlayerOnline(args[2])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[2]);
+				ItemStack item = Speed_Blade.getItem(tier);
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Speed_Blade.getItem(tier);
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
 		
 		return false;
 	}

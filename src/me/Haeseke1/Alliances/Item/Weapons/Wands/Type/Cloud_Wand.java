@@ -1,6 +1,5 @@
 package me.Haeseke1.Alliances.Item.Weapons.Wands.Type;
 
-import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -10,7 +9,6 @@ import org.bukkit.util.Vector;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Wand;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.MessageManager;
-import me.Haeseke1.Alliances.Utils.ParticleManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
 
 public class Cloud_Wand extends Wand{
@@ -50,7 +48,7 @@ public class Cloud_Wand extends Wand{
 			if(time == 0){
 				this.cancel();
 			}
-			ParticleManager.playParticle(Effect.SNOWBALL_BREAK, player.getLocation(), 1);
+			//ParticleManager.playParticle(, player.getLocation(), 1);
 			time = time - 1;
 		}
 		
