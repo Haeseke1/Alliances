@@ -12,6 +12,7 @@ import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -20,6 +21,7 @@ import org.bukkit.scoreboard.Team;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Economy.Coins;
+import me.Haeseke1.Alliances.Exceptions.EmptyItemStackException;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.PVE.Arena;
 import me.Haeseke1.Alliances.PVE.ArenaManager;
@@ -58,6 +60,8 @@ public class aPlayer{
 	public double manaregen = 1.0;
 	public String manaString;
 	
+	public ArrayList<ItemStack> rewards = new ArrayList<>();
+	
 	public aPlayer(Player player, FileConfiguration file) {
 		coins = Coins.getPlayerCoins(player);
 		this.player = player;
@@ -78,6 +82,11 @@ public class aPlayer{
 	  this.wins = file.getInt("Wins");
 	  this.loses = file.getInt("Loses");
 	  this.manaregen = file.getDouble("Mana_regen");
+	  try {
+		this.registerRewards();
+	} catch (EmptyItemStackException e) {
+		e.printStackTrace();
+	}
 	}
 	
 	public void saveConfig(){
@@ -86,6 +95,31 @@ public class aPlayer{
 		file.set("Mana_regen", this.manaregen);
 		File file = new File(Main.plugin.getDataFolder() + File.separator + "PlayerData",player.getUniqueId() + ".yml");
  	    ConfigManager.saveCustomConfig(file,this.file);
+ 	    saveRewards();
+	}
+	
+	public boolean playerHasRewards(){
+		if(Main.RewardsConfig.get(player.getUniqueId().toString()) != null) return true;
+		return false;
+	}
+	
+	public void registerRewards() throws EmptyItemStackException{
+		if(!this.playerHasRewards()) return;
+		for(String number: Main.RewardsConfig.getConfigurationSection(player.getUniqueId().toString()).getKeys(false)){
+			ItemStack currentitem = ConfigManager.getItemStackFromConfig(Main.RewardsConfig, player.getUniqueId().toString() + "." + number);
+		    this.rewards.add(currentitem);
+		}
+	}
+	
+	public void saveRewards(){
+		if(this.rewards.size() == 0) return;
+		if(playerHasRewards()){
+		Main.RewardsConfig.set(player.getUniqueId().toString(), null);
+		}
+		for(ItemStack item: this.rewards){
+			int size = Main.RewardsConfig.getConfigurationSection(player.getUniqueId().toString()).getKeys(false).size();
+			ConfigManager.setItemStackInConfig(Main.RewardsConfig, player.getUniqueId().toString() + "." + size, item);
+		}
 	}
 	
 	public void addWin(){

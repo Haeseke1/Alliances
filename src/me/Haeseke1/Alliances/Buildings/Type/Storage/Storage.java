@@ -150,7 +150,6 @@ public class Storage extends Building{
 		player.openInventory(inv);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void updateStorage(){
 		for(UUID uuid : openInventory.keySet()){
 			Player player = Bukkit.getPlayer(uuid);

@@ -187,6 +187,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration PVEConfig;
 	public static FileConfiguration BuildingConfig;
 	public static FileConfiguration CratesConfig;
+	public static FileConfiguration RewardsConfig;
 
 	public static Main plugin;
 
@@ -422,6 +423,7 @@ public class Main extends JavaPlugin {
 		PVEConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "PVE.yml"), plugin);
 		BuildingConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "buildings.yml"), plugin);
 		CratesConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "crates.yml"), plugin);
+		RewardsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"rewards.yml"), plugin);
 		try {
 			ArenaManager.loadArena();
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
