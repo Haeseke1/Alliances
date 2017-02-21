@@ -71,6 +71,6 @@ public class Blade_Of_Zeus extends Sword implements Listener{
 	
 	public void playEffect(EntityDamageByEntityEvent event){
 		event.setDamage(event.getDamage() + 6);
-		event.getEntity().getWorld().strikeLightningEffect(event.getEntity().getLocation());
+		event.getEntity().getWorld().strikeLightning(event.getEntity().getLocation());
 	}
 }

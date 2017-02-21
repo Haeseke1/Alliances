@@ -8,6 +8,8 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import me.Haeseke1.Alliances.Buildings.Type.Storage.Alchemy;
+import me.Haeseke1.Alliances.Buildings.Type.Storage.AlchemyManager;
 import me.Haeseke1.Alliances.Buildings.Type.Storage.Storage;
 import me.Haeseke1.Alliances.Buildings.Type.Storage.StorageManager;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
@@ -63,8 +65,10 @@ public class BuildingManager {
 		Building.Allbuildings = new ArrayList<Building>();
 		Building.buildings = new ArrayList<Building>();
 		Storage.storages = new ArrayList<Storage>();
+		Alchemy.alchemies = new ArrayList<Alchemy>();
 		
 		StorageManager.registerStorage();
+		AlchemyManager.registerAlchemy();
 		
 		FileConfiguration file = Main.BuildingConfig;
 		if(file.contains("Buildings")){
@@ -106,6 +110,7 @@ public class BuildingManager {
 	
 	public static void saveBuildings(){
 		StorageManager.saveStorage();
+		AlchemyManager.saveAlchemy();
 		
 		FileConfiguration file = Main.BuildingConfig;
 		int i = 0;

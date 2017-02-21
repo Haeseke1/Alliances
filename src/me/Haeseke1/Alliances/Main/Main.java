@@ -26,6 +26,7 @@ import me.Haeseke1.Alliances.Buildings.BuildingManager;
 import me.Haeseke1.Alliances.Buildings.Builder.BlockPlace;
 import me.Haeseke1.Alliances.Buildings.Builder.BuilderManager;
 import me.Haeseke1.Alliances.Buildings.Commands.BuildingC;
+import me.Haeseke1.Alliances.Buildings.Type.Storage.AlchemyListener;
 import me.Haeseke1.Alliances.Buildings.Type.Storage.StorageListener;
 import me.Haeseke1.Alliances.Challenge.ChallengeManager;
 import me.Haeseke1.Alliances.Challenge.Commands.mainChallenges;
@@ -107,6 +108,10 @@ import me.Haeseke1.Alliances.Item.Commands.Item;
 import me.Haeseke1.Alliances.Item.Totems.HealingTotem;
 import me.Haeseke1.Alliances.Item.Totems.Events.DamageTotem;
 import me.Haeseke1.Alliances.Item.Totems.Scheduler.Checker;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Arrow_Tank;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Flame_Of_Hell;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Legend_Of_Zeus;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Tank;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Blade_Of_Zeus;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Double_Strike;
@@ -287,6 +292,10 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new Double_Strike(), this);
 		pm.registerEvents(new Speed_Blade(), this);
 		
+		pm.registerEvents(new Arrow_Tank(), this);
+		pm.registerEvents(new Tank(), this);
+		pm.registerEvents(new Legend_Of_Zeus(), this);
+		pm.registerEvents(new Flame_Of_Hell(), this);
 		
 		pm.registerEvents(new PlayerQuit(), this);
 		pm.registerEvents(new BlockBreak_Place(), this);
@@ -308,6 +317,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new DamageTotem(), this);
 		
 		pm.registerEvents(new CratesEvents(), this);
+		pm.registerEvents(new AlchemyListener(), this);
 	}
 
 	public void registerCommands() {
