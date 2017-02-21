@@ -53,7 +53,7 @@ public class Alchemy extends Building{
 	}
 	
 	
-	public ItemStack createPanel(short color, String name){
+	public static ItemStack createPanel(short color, String name){
 		ItemStack item = new ItemStack(Material.STAINED_GLASS_PANE, 1 ,color);
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(name);
@@ -71,7 +71,6 @@ public class Alchemy extends Building{
 		player.openInventory(inv);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void updateInventory(Player player){
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
 			

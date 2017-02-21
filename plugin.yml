@@ -31,3 +31,5 @@ commands:
     aliases: [w,wand]
   Crate:
     aliases: [c,cr,crates]
+  Auction:
+    aliases: [auc,auction]

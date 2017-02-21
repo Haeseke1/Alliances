@@ -21,6 +21,9 @@ import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Arena.ArenaEvents;
 import me.Haeseke1.Alliances.Arena.ArenaManager;
 import me.Haeseke1.Alliances.Arena.Commands.ArenaCommand;
+import me.Haeseke1.Alliances.Auctions.Auction;
+import me.Haeseke1.Alliances.Auctions.Commands.AuctionCommand;
+import me.Haeseke1.Alliances.Auctions.Events.InventoryClick;
 import me.Haeseke1.Alliances.Buildings.BuildingListener;
 import me.Haeseke1.Alliances.Buildings.BuildingManager;
 import me.Haeseke1.Alliances.Buildings.Builder.BlockPlace;
@@ -193,6 +196,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration BuildingConfig;
 	public static FileConfiguration CratesConfig;
 	public static FileConfiguration RewardsConfig;
+	public static FileConfiguration AuctionConfig;
 
 	public static Main plugin;
 
@@ -222,10 +226,12 @@ public class Main extends JavaPlugin {
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		APlayerManager.aPlayerStartUp();
+		Auction.loadAuctions();
 	}
 
 	@Override
 	public void onDisable() {
+	    Auction.saveAuctions();
 		Mount.deleteAllHorse();
 	    HealingTotem.removeAllTotems();
 		PVEManager.disablePVE();
@@ -318,6 +324,8 @@ public class Main extends JavaPlugin {
 		
 		pm.registerEvents(new CratesEvents(), this);
 		pm.registerEvents(new AlchemyListener(), this);
+		
+		pm.registerEvents(new InventoryClick(), this);
 	}
 
 	public void registerCommands() {
@@ -335,6 +343,7 @@ public class Main extends JavaPlugin {
 		getCommand("items").setExecutor(new Item());
 		getCommand("wand").setExecutor(new Wand());
 		getCommand("crate").setExecutor(new CrateC());
+		getCommand("auction").setExecutor(new AuctionCommand());
 	}
 
 	public void registerCustomEntitys() {
@@ -434,6 +443,7 @@ public class Main extends JavaPlugin {
 		BuildingConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "buildings.yml"), plugin);
 		CratesConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "crates.yml"), plugin);
 		RewardsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"rewards.yml"), plugin);
+		AuctionConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"auction.yml"), plugin);
 		try {
 			ArenaManager.loadArena();
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
