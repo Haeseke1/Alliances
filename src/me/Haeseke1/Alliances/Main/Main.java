@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -119,6 +120,7 @@ import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Blade_Of_Zeus;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Double_Strike;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Heaven_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Karma_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Night_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Soul_Stealer;
@@ -232,6 +234,9 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onDisable() {
 	    Auction.saveAuctions();
+		for(Player player : Bukkit.getOnlinePlayers()){
+			player.closeInventory();
+		}
 		Mount.deleteAllHorse();
 	    HealingTotem.removeAllTotems();
 		PVEManager.disablePVE();
@@ -297,6 +302,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new Karma_Blade(), this);
 		pm.registerEvents(new Double_Strike(), this);
 		pm.registerEvents(new Speed_Blade(), this);
+		pm.registerEvents(new Heaven_Blade(), this);
 		
 		pm.registerEvents(new Arrow_Tank(), this);
 		pm.registerEvents(new Tank(), this);

@@ -17,7 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class Flame_Of_Hell implements Listener {
 	
 	public static ItemStack getHelmet(){
-		ItemStack item = new ItemStack(Material.IRON_HELMET);
+		ItemStack item = new ItemStack(Material.DIAMOND_HELMET);
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.LIGHT_PURPLE + "Flame Of Hell Helmet");
 		List<String> lore = new ArrayList<String>();
@@ -29,7 +29,7 @@ public class Flame_Of_Hell implements Listener {
 	}
 	
 	public static ItemStack getChestplate(){
-		ItemStack item = new ItemStack(Material.IRON_CHESTPLATE);
+		ItemStack item = new ItemStack(Material.DIAMOND_CHESTPLATE);
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.LIGHT_PURPLE + "Flame Of Hell Chestplate");
 		List<String> lore = new ArrayList<String>();
@@ -41,7 +41,7 @@ public class Flame_Of_Hell implements Listener {
 	}
 	
 	public static ItemStack getLeggings(){
-		ItemStack item = new ItemStack(Material.IRON_LEGGINGS);
+		ItemStack item = new ItemStack(Material.DIAMOND_LEGGINGS);
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.LIGHT_PURPLE + "Flame Of Hell Leggings");
 		List<String> lore = new ArrayList<String>();
@@ -53,7 +53,7 @@ public class Flame_Of_Hell implements Listener {
 	}
 	
 	public static ItemStack getBoots(){
-		ItemStack item = new ItemStack(Material.IRON_BOOTS);
+		ItemStack item = new ItemStack(Material.DIAMOND_BOOTS);
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.LIGHT_PURPLE + "Flame Of Hell Boots");
 		List<String> lore = new ArrayList<String>();

@@ -123,6 +123,7 @@ public class Settings {
 		player.openInventory(inv);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void updateGUI(Player player){
 		InventoryView inv = player.getOpenInventory();
 		if(placing == 0){

@@ -108,13 +108,17 @@ public class AlchemyListener implements Listener{
 		Player player = (Player) event.getPlayer();
 		for(Alchemy a : Alchemy.alchemies){
 			if(a.openInventory.contains(player)){
+				Inventory inv = event.getInventory();
+				for(int i = 0; i < 53; i = i + 9){
+					for(int j = 0; j < 4; j++){
+						ItemStack slot = inv.getItem(i + j);
+						if(slot != null && slot.getType() != Material.AIR){
+							player.getWorld().dropItem(player.getLocation(), slot);
+						}
+					}
+				}
 				a.openInventory.remove(player);
 			}
 		}
 	}
-	
-	
-	
-	
-	
 }
