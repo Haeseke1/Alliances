@@ -2,10 +2,12 @@ package me.Haeseke1.Alliances.Item.Weapons.Swords.Type;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,6 +19,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Sword;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.SwordManager;
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Utils.SoundManager;
 
 public class Heaven_Blade extends Sword implements Listener{
 
@@ -73,8 +76,10 @@ public class Heaven_Blade extends Sword implements Listener{
 				if(strenght > 3){
 					strenght = 3;
 				}
-				Heaven_Blade fatal_blade = new Heaven_Blade(player,1, strenght);
-				fatal_blade.fataldamageEntity(player, le, strenght);
+				if(new Random().nextInt(10) < strenght){
+					Heaven_Blade fatal_blade = new Heaven_Blade(player,1, strenght);
+					fatal_blade.fataldamageEntity(player, le, strenght);
+				}
 			}catch(Exception e){
 				return;
 			}
@@ -84,6 +89,7 @@ public class Heaven_Blade extends Sword implements Listener{
 	List<Integer> schedulers = new ArrayList<Integer>();
 	
 	public void fataldamageEntity(Player player, LivingEntity le, int strength){
+		SoundManager.playSound(Sound.ENDERDRAGON_GROWL, player.getLocation());
 		schedulers.add(Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.plugin, new Runnable() {
 			int i = 0;
 			

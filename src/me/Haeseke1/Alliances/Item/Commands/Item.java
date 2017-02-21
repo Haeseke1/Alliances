@@ -15,6 +15,7 @@ import me.Haeseke1.Alliances.Item.Weapons.Armor.Tank;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Blade_Of_Zeus;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Double_Strike;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Heaven_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Karma_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Night_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Soul_Stealer;
@@ -433,6 +434,38 @@ public class Item implements CommandExecutor{
 				return false;
 			}
 			ItemStack item = Speed_Blade.getItem(tier);
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("sword11") && args.length > 1){
+			int tier = 0;
+			try{
+				tier = Integer.parseInt(args[1]);
+			}catch(Exception e){
+				MessageManager.sendMessage(sender, ChatColor.RED + "This is not a number!");
+				return false;
+			}
+			
+			if(args.length > 2){
+				if(!PlayerManager.isPlayerOnline(args[2])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[2]);
+				ItemStack item = Heaven_Blade.getItem(tier);
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Heaven_Blade.getItem(tier);
 			player.getInventory().addItem(item);
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
 			return false;
