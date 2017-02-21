@@ -116,7 +116,6 @@ public class Alchemy extends Building{
 						}
 						if(value.equals(item)){
 							if(getValue(slot, item.getType()) > 64){
-								Bukkit.broadcastMessage(slot.getAmount() + " " + (getValue(slot, item.getType()) / 64) + " " + (getValue(slot, item.getType()) % 64));
 								slot.setAmount((int) (slot.getAmount() - ((double)slot.getAmount() / (double)((double) getValue(slot, item.getType()) / 64))));
 								inv.setItem(i + j, slot);
 							}else{
@@ -381,13 +380,4 @@ public class Alchemy extends Building{
 		
 		return items;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

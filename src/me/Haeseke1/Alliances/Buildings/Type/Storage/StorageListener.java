@@ -11,6 +11,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import me.Haeseke1.Alliances.Buildings.Building;
@@ -72,6 +73,25 @@ public class StorageListener implements Listener {
 	private void InventroyClose(InventoryCloseEvent event){
 		for(Storage s : Storage.storages){
 			if(s.openInventory.containsKey(event.getPlayer().getUniqueId())){
+				Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
+					
+					@Override
+					public void run() {
+						Inventory inv = event.getInventory();
+						for(int i = 0; i < 54; i++){
+							if(i== 8 || i == 53){
+								continue;
+							}
+							ItemStack slot = inv.getItem(i);
+							if(slot != null && slot.getType() != Material.AIR){
+								if(!StorageManager.hasLore(slot)){
+									event.getPlayer().getWorld().dropItem(event.getPlayer().getLocation(), slot);
+								}
+							}
+						}
+						
+					}
+				}, 15);
 				s.openInventory.remove(event.getPlayer().getUniqueId());
 			}
 		}
@@ -94,6 +114,7 @@ public class StorageListener implements Listener {
 			event.setCancelled(true);
 			return;
 		}
+		Inventory inv = event.getInventory();
 		final Storage s = storage;
 		final int slot = event.getRawSlot();
 		if(slot == 17 || slot == 26 || slot == 35 || slot == 44){
@@ -110,7 +131,18 @@ public class StorageListener implements Listener {
 						if(event.getInventory().getItem(slot) == null || event.getInventory().getItem(slot).getType().equals(Material.AIR)){
 							return;
 						}
-						s.addItem(event.getInventory().getItem(slot));
+						for(int i = 0; i < 54; i++){
+							if(i== 8 || i == 53){
+								continue;
+							}
+							ItemStack item = inv.getItem(i);
+							if(item != null && item.getType() != Material.AIR){
+								if(!StorageManager.hasLore(item)){
+									s.addItem(item);
+									event.getInventory().setItem(slot, new ItemStack(Material.AIR));
+								}
+							}
+						}
 						s.updateStorage();
 					}
 				}, 10);
@@ -129,7 +161,18 @@ public class StorageListener implements Listener {
 						if(event.getInventory().getItem(slot) == null || event.getInventory().getItem(slot).getType().equals(Material.AIR)){
 							return;
 						}
-						s.addItem(event.getInventory().getItem(slot));
+						for(int i = 0; i < 54; i++){
+							if(i== 8 || i == 53){
+								continue;
+							}
+							ItemStack item = inv.getItem(i);
+							if(item != null && item.getType() != Material.AIR){
+								if(!StorageManager.hasLore(item)){
+									s.addItem(item);
+									event.getInventory().setItem(slot, new ItemStack(Material.AIR));
+								}
+							}
+						}
 						s.updateStorage();
 						
 					}
@@ -186,7 +229,18 @@ public class StorageListener implements Listener {
 									if(event.getInventory().getItem(slot) == null || event.getInventory().getItem(slot).getType().equals(Material.AIR)){
 										return;
 									}
-									s.addItem(event.getInventory().getItem(slot));
+									for(int i = 0; i < 54; i++){
+										if(i== 8 || i == 53){
+											continue;
+										}
+										ItemStack item = inv.getItem(i);
+										if(item != null && item.getType() != Material.AIR){
+											if(!StorageManager.hasLore(item)){
+												s.addItem(item);
+												event.getInventory().setItem(slot, new ItemStack(Material.AIR));
+											}
+										}
+									}
 									s.updateStorage();
 								}
 							}, 10);
@@ -205,7 +259,18 @@ public class StorageListener implements Listener {
 									if(event.getInventory().getItem(slot) == null || event.getInventory().getItem(slot).getType().equals(Material.AIR)){
 										return;
 									}
-									s.addItem(event.getInventory().getItem(slot));
+									for(int i = 0; i < 54; i++){
+										if(i== 8 || i == 53){
+											continue;
+										}
+										ItemStack item = inv.getItem(i);
+										if(item != null && item.getType() != Material.AIR){
+											if(!StorageManager.hasLore(item)){
+												s.addItem(item);
+												event.getInventory().setItem(slot, new ItemStack(Material.AIR));
+											}
+										}
+									}
 									s.updateStorage();
 									
 								}
