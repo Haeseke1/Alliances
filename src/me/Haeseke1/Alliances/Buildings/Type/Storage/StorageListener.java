@@ -61,8 +61,10 @@ public class StorageListener implements Listener {
 			}
 			s.openStorage(event.getPlayer());
 		}else{
-			Storage s = StorageManager.createStorage(b);
-			s.openStorage(event.getPlayer());
+			if(Building.buildings.contains(b)){
+				Storage s = StorageManager.createStorage(b);
+				s.openStorage(event.getPlayer());
+			}
 		}
 	}
 	
@@ -253,12 +255,4 @@ public class StorageListener implements Listener {
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }

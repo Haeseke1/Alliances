@@ -26,6 +26,7 @@ import me.Haeseke1.Alliances.Buildings.BuildingManager;
 import me.Haeseke1.Alliances.Buildings.Builder.BlockPlace;
 import me.Haeseke1.Alliances.Buildings.Builder.BuilderManager;
 import me.Haeseke1.Alliances.Buildings.Commands.BuildingC;
+import me.Haeseke1.Alliances.Buildings.Type.Storage.AlchemyListener;
 import me.Haeseke1.Alliances.Buildings.Type.Storage.StorageListener;
 import me.Haeseke1.Alliances.Challenge.ChallengeManager;
 import me.Haeseke1.Alliances.Challenge.Commands.mainChallenges;
@@ -315,6 +316,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new DamageTotem(), this);
 		
 		pm.registerEvents(new CratesEvents(), this);
+		pm.registerEvents(new AlchemyListener(), this);
 	}
 
 	public void registerCommands() {
