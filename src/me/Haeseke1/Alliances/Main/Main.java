@@ -117,6 +117,7 @@ import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Blade_Of_Zeus;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Double_Strike;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Heaven_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Karma_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Night_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Soul_Stealer;
@@ -295,6 +296,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new Karma_Blade(), this);
 		pm.registerEvents(new Double_Strike(), this);
 		pm.registerEvents(new Speed_Blade(), this);
+		pm.registerEvents(new Heaven_Blade(), this);
 		
 		pm.registerEvents(new Arrow_Tank(), this);
 		pm.registerEvents(new Tank(), this);

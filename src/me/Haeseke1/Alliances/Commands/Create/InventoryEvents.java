@@ -147,63 +147,63 @@ public class InventoryEvents implements Listener{
 			Player player = event.getPlayer();
 			switch(chooseName.get(event.getPlayer())){
 			case CAIT_SITH:
-				if(Coins.getPlayerCoins(player) < Caith_Sith.cost){
+				if(Coins.removePlayerCoins(player, Caith_Sith.cost)){
 					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case GNOME:
-				if(Coins.getPlayerCoins(player) < Gnome.cost){
+				if(Coins.removePlayerCoins(player, Gnome.cost)){
 					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case IMP:
-				if(Coins.getPlayerCoins(player) < Imp.cost){
+				if(Coins.removePlayerCoins(player, Imp.cost)){
 					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case LEPRECHAUN:
-				if(Coins.getPlayerCoins(player) < Leprechaun.cost){
+				if(Coins.removePlayerCoins(player, Leprechaun.cost)){
 					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case POOKA:
-				if(Coins.getPlayerCoins(player) < Pooka.cost){
+				if(Coins.removePlayerCoins(player, Pooka.cost)){
 					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case SALAMANDER:
-				if(Coins.getPlayerCoins(player) < Salamander.cost){
+				if(Coins.removePlayerCoins(player, Salamander.cost)){
 					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case SPRIGGAN:
-				if(Coins.getPlayerCoins(player) < Spriggan.cost){
+				if(Coins.removePlayerCoins(player, Spriggan.cost)){
 					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case SYLPH:
-				if(Coins.getPlayerCoins(player) < Sylph.cost){
+				if(Coins.removePlayerCoins(player, Sylph.cost)){
 					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
 				}
 				break;
 			case UNDINE:
-				if(Coins.getPlayerCoins(player) < Undine.cost){
+				if(Coins.removePlayerCoins(player, Undine.cost)){
 					MessageManager.sendMessage(player,"&cYou don't have enough coins to create an alliance");
 					chooseName.remove(event.getPlayer());
 					return;
