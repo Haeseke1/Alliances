@@ -86,8 +86,12 @@ public class Auction {
 		this.m = this.item.getItemMeta();
 		if(item == null){
 		for(Player player: Bukkit.getOnlinePlayers()){
+			if(m.hasDisplayName()){
 			MessageManager.sendMessage(player, "&6" + Bukkit.getPlayer(owner).getName() + "&b has started an auction! (" + this.item.getItemMeta().getDisplayName() + "&b)");
-		    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8Starting price: &6" + price));
+			}else{
+			MessageManager.sendMessage(player, "&6" + Bukkit.getPlayer(owner).getName() + "&b has started an auction!");
+			}
+			player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8Starting price: &6" + price));
 			SoundManager.playSoundToPlayer(Sound.CAT_MEOW, player);
 		}
 		}

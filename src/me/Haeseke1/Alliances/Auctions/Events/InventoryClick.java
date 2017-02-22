@@ -1,5 +1,6 @@
 package me.Haeseke1.Alliances.Auctions.Events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -33,7 +34,13 @@ public class InventoryClick implements Listener{
 		if(event.getCurrentItem() == null) return;
 		ItemStack item = event.getCurrentItem();
 		ItemMeta m = item.getItemMeta();
-		
+		if(!m.hasDisplayName()){
+			Bukkit.broadcastMessage("test");
+			if(item.getType() == Material.AIR) return;
+			Auction auction = Auction.getAuctionFromPlayer(LoreManager.getOwner(item));
+			auction.bid(player);
+			return;
+		}
 		if(item.getItemMeta().hasDisplayName()){
 			String dpname = ChatColor.stripColor(m.getDisplayName());
 			switch(dpname.toLowerCase()){
@@ -79,7 +86,16 @@ public class InventoryClick implements Listener{
 		if(event.getCurrentItem() == null) return;
 		ItemStack item = event.getCurrentItem();
 		ItemMeta m = item.getItemMeta();
-		
+		if(!m.hasDisplayName()){
+			if(item.getType() == Material.AIR) return;
+			AuctionPlayer aucplayer = AuctionPlayer.getAuctionPlayer(player);
+			aucplayer.rewards.remove(event.getCurrentItem());
+            player.closeInventory();
+			player.getInventory().addItem(event.getCurrentItem());
+			MessageManager.sendMessage(player, "&2You've successfully claimed a reward");
+			SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
+			return;
+		}
 		if(item.getItemMeta().hasDisplayName()){
 			String dpname = ChatColor.stripColor(m.getDisplayName());
 			switch(dpname.toLowerCase()){
