@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class LoreManager {
 
+	@SuppressWarnings("deprecation")
 	public static Player getOwner(ItemStack item){
 		ItemMeta m = item.getItemMeta();
 		if(!m.hasLore()) return null;

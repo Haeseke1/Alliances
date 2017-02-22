@@ -1,10 +1,8 @@
 package me.Haeseke1.Alliances.Auctions.Schedulers;
 
-import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.Haeseke1.Alliances.Auctions.Auction;
-import me.Haeseke1.Alliances.Utils.TimeManager;
 
 public class Timer extends BukkitRunnable{
 	
