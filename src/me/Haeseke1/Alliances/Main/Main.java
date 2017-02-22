@@ -252,7 +252,6 @@ public class Main extends JavaPlugin {
 
 	public void registerEvents() {
 		pm.registerEvents(new InventoryEvents(), this);
-		pm.registerEvents(new me.Haeseke1.Alliances.Outpost.Commands.Create.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Join.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Challenge.Commands.Player.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
