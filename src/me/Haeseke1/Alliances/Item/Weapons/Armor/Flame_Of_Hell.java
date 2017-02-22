@@ -67,7 +67,7 @@ public class Flame_Of_Hell implements Listener {
 	
 	@EventHandler
 	private void entityHit(EntityDamageByEntityEvent event){
-		if(!(event.getEntity() instanceof Player) && !(event.getDamager() instanceof LivingEntity)){
+		if(!(event.getEntity() instanceof Player) || !(event.getDamager() instanceof LivingEntity)){
 			return;
 		}
 		Player player = (Player) event.getEntity();

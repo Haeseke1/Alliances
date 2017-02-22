@@ -74,6 +74,7 @@ public class Alchemy extends Building{
 	public void updateInventory(Player player){
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
 			
+			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
 				InventoryView inv = player.getOpenInventory();

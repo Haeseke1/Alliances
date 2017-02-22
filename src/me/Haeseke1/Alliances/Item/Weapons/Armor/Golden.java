@@ -14,10 +14,12 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import me.Haeseke1.Alliances.Main.Main;
 
-public class Tank implements Listener {
+public class Golden implements Listener {
 	
 	
 	public HashMap<Player,Extension> players = new HashMap<Player,Extension>();
@@ -27,10 +29,10 @@ public class Tank implements Listener {
 	public static ItemStack getHelmet(){
 		ItemStack item = new ItemStack(Material.DIAMOND_HELMET);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(ChatColor.RED + "Tank Helmet");
+		im.setDisplayName(ChatColor.GOLD + "Golden Helmet");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.DARK_GREEN + "Get a hearth extra in a fight!");
-		lore.add(ChatColor.DARK_GREEN + "Full armor set give you 1 extra hearth more!");
+		lore.add(ChatColor.DARK_GREEN + "Get 2 golden hearths extra in a fight!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set give you 2 extra golden hearth more!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -39,10 +41,10 @@ public class Tank implements Listener {
 	public static ItemStack getChestplate(){
 		ItemStack item = new ItemStack(Material.DIAMOND_CHESTPLATE);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(ChatColor.RED + "Tank Chestplate");
+		im.setDisplayName(ChatColor.GOLD + "Golden Chestplate");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.DARK_GREEN + "Get a hearth extra in a fight!");
-		lore.add(ChatColor.DARK_GREEN + "Full armor set give you 1 extra hearth more!");
+		lore.add(ChatColor.DARK_GREEN + "Get 2 golden hearths extra in a fight!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set give you 2 extra golden hearth more!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -51,10 +53,10 @@ public class Tank implements Listener {
 	public static ItemStack getLeggings(){
 		ItemStack item = new ItemStack(Material.DIAMOND_LEGGINGS);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(ChatColor.RED + "Tank Leggings");
+		im.setDisplayName(ChatColor.GOLD + "Golden Leggings");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.DARK_GREEN + "Get a hearth extra in a fight!");
-		lore.add(ChatColor.DARK_GREEN + "Full armor set give you 1 extra hearth more!");
+		lore.add(ChatColor.DARK_GREEN + "Get 2 golden hearths extra in a fight!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set give you 2 extra golden hearth more!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -63,10 +65,10 @@ public class Tank implements Listener {
 	public static ItemStack getBoots(){
 		ItemStack item = new ItemStack(Material.DIAMOND_BOOTS);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(ChatColor.RED + "Tank Boots");
+		im.setDisplayName(ChatColor.GOLD + "Golden Boots");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.DARK_GREEN + "Get a hearth extra in a fight!");
-		lore.add(ChatColor.DARK_GREEN + "Full armor set give you 1 extra hearth more!");
+		lore.add(ChatColor.DARK_GREEN + "Get 2 golden hearths extra in a fight!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set give you 2 extra golden hearth more!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -88,7 +90,7 @@ public class Tank implements Listener {
 				continue;
 			}
 			String displayname = item.getItemMeta().getDisplayName();
-			if(!displayname.startsWith(ChatColor.RED + "Tank")){
+			if(!displayname.startsWith(ChatColor.GOLD + "Golden ")){
 				continue;
 			}
 			amount++;
@@ -96,9 +98,7 @@ public class Tank implements Listener {
 		amount = amount == 4 ? 5 : amount;
 		if(amount > 0){
 			if(!players.containsKey(player)){
-				players.put(player, new Extension(player, amount * 2));
-			}else{
-				players.get(player).resetScheduler();
+				players.put(player, new Extension(player, amount - 1));
 			}
 			return;
 		}
@@ -123,8 +123,8 @@ public class Tank implements Listener {
 		public Extension(Player damaged, int extra_health) {
 			this.damaged = damaged;
 			this.extra_Health = extra_health;
-			damaged.setMaxHealth(damaged.getMaxHealth() + extra_Health);
-			damaged.setHealth(damaged.getHealth() + extra_Health);
+			damaged.removePotionEffect(PotionEffectType.ABSORPTION);
+			damaged.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, Integer.MAX_VALUE, extra_health));
 			startScheduler();
 		}
 		
@@ -133,20 +133,15 @@ public class Tank implements Listener {
 				
 				@Override
 				public void run() {
-					damaged.setMaxHealth(damaged.getMaxHealth() - extra_Health);
+					damaged.removePotionEffect(PotionEffectType.ABSORPTION);
 					players.remove(damaged);
 				}
-			},160);
+			},200);
 		}
 		
 		private void forceReset(){
-			damaged.setMaxHealth(damaged.getMaxHealth() - extra_Health);
+			damaged.removePotionEffect(PotionEffectType.ABSORPTION);
 			players.remove(damaged);
-		}
-		
-		private void resetScheduler(){
-			Bukkit.getScheduler().cancelTask(scheduler);
-			startScheduler();
 		}
 		
 	}

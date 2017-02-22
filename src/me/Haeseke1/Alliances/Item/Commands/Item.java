@@ -10,6 +10,7 @@ import me.Haeseke1.Alliances.Item.Outpost_Compass;
 import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Arrow_Tank;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Flame_Of_Hell;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Golden;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Legend_Of_Zeus;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Tank;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Blade_Of_Zeus;
@@ -17,6 +18,7 @@ import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Double_Strike;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Heaven_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Karma_Blade;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Mob_Slayer;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Night_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Soul_Stealer;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Speed_Blade;
@@ -471,6 +473,39 @@ public class Item implements CommandExecutor{
 			return false;
 		}
 		
+		if(args[0].equalsIgnoreCase("sword12") && args.length > 1){
+			int tier = 0;
+			try{
+				tier = Integer.parseInt(args[1]);
+			}catch(Exception e){
+				MessageManager.sendMessage(sender, ChatColor.RED + "This is not a number!");
+				return false;
+			}
+			
+			if(args.length > 2){
+				if(!PlayerManager.isPlayerOnline(args[2])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[2]);
+				ItemStack item = Mob_Slayer.getItem(tier);
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Mob_Slayer.getItem(tier);
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		
 		if(args[0].equalsIgnoreCase("armor1")){
 			if(args.length > 1){
 				if(!PlayerManager.isPlayerOnline(args[1])){
@@ -610,6 +645,42 @@ public class Item implements CommandExecutor{
 			item = Flame_Of_Hell.getLeggings();
 			player.getInventory().addItem(item);
 			item = Flame_Of_Hell.getBoots();
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("armor5")){
+			if(args.length > 1){
+				if(!PlayerManager.isPlayerOnline(args[1])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[1]);
+				ItemStack item = Golden.getHelmet();
+				getter.getInventory().addItem(item);
+				item = Golden.getChestplate();
+				getter.getInventory().addItem(item);
+				item = Golden.getLeggings();
+				getter.getInventory().addItem(item);
+				item = Golden.getBoots();
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Golden.getHelmet();
+			player.getInventory().addItem(item);
+			item = Golden.getChestplate();
+			player.getInventory().addItem(item);
+			item = Golden.getLeggings();
+			player.getInventory().addItem(item);
+			item = Golden.getBoots();
 			player.getInventory().addItem(item);
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
 			return false;
