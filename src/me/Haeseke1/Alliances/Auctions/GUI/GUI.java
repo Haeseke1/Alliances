@@ -56,25 +56,27 @@ public class GUI {
 	}
 	
 	public void openInv(){
+		if(this.size == 54){
 		for(int i = 36; i <= 44; i++){
-			this.setItem(i, Alchemy.createPanel((short) 15,ChatColor.BLACK + ""));
+			this.setItem(i, Alchemy.createPanel((short) 15,ChatColor.BLACK + "_"));
 		}
 		if(!generateAuctions()){
-			this.setItem(50, Alchemy.createPanel((short) 14, ChatColor.RED + ""));
+			this.setItem(50, Alchemy.createPanel((short) 14, ChatColor.RED + "No Page"));
 			if(page == 0){
-		    this.setItem(48, Alchemy.createPanel((short) 14, ChatColor.RED + ""));
+		    this.setItem(48, Alchemy.createPanel((short) 14, ChatColor.RED + "No Page"));
 			}else{
 		    this.setItem(50, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Previous Page"));
 			}
 		}else{
 		this.setItem(50, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Next Page"));
 		if(page == 0){
-		    this.setItem(48, Alchemy.createPanel((short) 14, ChatColor.RED + ""));
+		    this.setItem(48, Alchemy.createPanel((short) 14, ChatColor.RED + "No Page"));
 		}else{
 		    this.setItem(50, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Previous Page"));
 		}
 		}
 		this.setItem(49, Alchemy.createPanel((short) 9, ChatColor.AQUA + "Refresh"));
+		}
 		owner.openInventory(inv);
 		guis.add(this);
 	}
@@ -90,11 +92,11 @@ public class GUI {
 	
 	public void nextPage(){
 		this.page = this.page + 1;
+		this.updateGui(this.owner, this);
 	}
 	
-	public void updateGui(Player player){
-		GUI gui = this.getGuiOfPlayer(player);
-		guis.remove()
+	public void updateGui(Player player, GUI gui){
+		guis.remove(gui);
 		player.closeInventory();
 		this.openInv();
 	}

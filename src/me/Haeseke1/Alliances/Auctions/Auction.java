@@ -43,7 +43,7 @@ public class Auction {
 	
 	public Timer timer;
 	
-	public Auction(int id, int time,UUID owner,int price,int raising, ItemStack item){
+	public Auction(int id, int time,UUID owner, UUID last_person,int price,int raising, ItemStack item){
 		this.owner = owner;
 		if(this.id == 0){
 		if(auctionAlreadyExists(owner)){
@@ -51,6 +51,9 @@ public class Auction {
 			SoundManager.playSoundToPlayer(Sound.NOTE_BASS, Bukkit.getPlayer(owner));
 			return;
 		}
+		}
+		if(this.last_person != null){
+			this.last_person = last_person;
 		}
 		if(item == null){
 		if(this.getOwnerAsPlayer().getItemInHand().getType() == Material.AIR){
@@ -97,7 +100,10 @@ public class Auction {
 		Main.AuctionConfig.set("#" + this.id + ".raising", raising);
 		Main.AuctionConfig.set("#" + this.id + ".time", time);
 		Main.AuctionConfig.set("#" + this.id + ".owner", owner.toString());
-        ConfigManager.setItemStackInConfig(Main.AuctionConfig, "#" + this.id + ".item", item);
+		if(this.last_person != null){
+		Main.AuctionConfig.set("#" + this.id + ".last_person", last_person.toString());
+		}
+		ConfigManager.setItemStackInConfig(Main.AuctionConfig, "#" + this.id + ".item", item);
         ConfigManager.saveCustomConfig(new File(Main.plugin.getDataFolder(),"auction.yml"), Main.AuctionConfig);
 	}
 	
@@ -109,16 +115,21 @@ public class Auction {
 	}
 	
 	public static void loadAuctions(){
-		auctions.clear();
 		for(String id: Main.AuctionConfig.getKeys(false)){
+			UUID last_person;
 		    UUID owner = UUID.fromString(Main.AuctionConfig.getString(id + ".owner"));
 		    int price = Main.AuctionConfig.getInt(id + ".price");
 		    int raising = Main.AuctionConfig.getInt(id + ".raising");
 		    int time = Main.AuctionConfig.getInt(id + ".time");
+		    if(Main.AuctionConfig.get(id + ".last_person") != null){
+		    last_person = UUID.fromString(Main.AuctionConfig.getString("#" + id + ".last_person"));
+		    }else{
+		    last_person = null;
+		    }
 		    try {
 				ItemStack item = ConfigManager.getItemStackFromConfig(Main.AuctionConfig, id + ".item");
 				@SuppressWarnings("unused")
-			    Auction auction = new Auction(Integer.parseInt(id.substring(1)),time,owner,price,raising,item);
+			    Auction auction = new Auction(Integer.parseInt(id.substring(1)),time,owner,last_person,price,raising,item);
 			} catch (EmptyItemStackException e) {
 				e.printStackTrace();
 			}
@@ -134,18 +145,21 @@ public class Auction {
         }
         if(alreadyBade()){
         	Coins.addPlayerCoins(last_person, price);
-        	this.last_person = null;
         	if(!Bukkit.getPlayer(this.last_person).isOnline()) return;
-        	MessageManager.sendMessage(player, "&6" + player.getName() + "&c bade more on auction &6#" + this.id);
+        	if(!last_person.toString().equalsIgnoreCase(player.getUniqueId().toString())){
+        	MessageManager.sendMessage(player, "&6" + player.getName() + "&c bade more on the auction of &6" + Bukkit.getPlayer(this.owner).getName());
+        	}
+        	this.last_person = player.getUniqueId();
         }
         this.last_person = player.getUniqueId();
         Coins.removePlayerCoins(player, price + raising);
-        MessageManager.sendMessage(player, "&2You've raised the price on auction &6#" + this.id);
+        MessageManager.sendMessage(player, "&2You've raised the price on the auction of &6" + Bukkit.getPlayer(this.owner).getName());
         SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
         this.price = price + raising;
         if(!this.ownerIsOnline()) return;
         MessageManager.sendMessage(this.getOwnerAsPlayer(), "&6" + player.getName() + "&2 raised the price on your auction!");
 	    this.getOwnerAsPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8Current price: &6" + price));
+	    GUI.getGuiOfPlayer(player).updateGui(player, GUI.getGuiOfPlayer(player));
         return;
 	}
 
@@ -200,26 +214,51 @@ public class Auction {
 	}
 	
 	public void closeAuction(){
+        restoreItem();
 		if(ownerIsOnline()){
 		Player owner = this.getOwnerAsPlayer();
 		if(this.last_person == null){
         MessageManager.sendMessage(owner, "&cYour auction has been closed with no bids");
         SoundManager.playSoundToPlayer(Sound.NOTE_BASS, owner);
+        this.getOwnerAsPlayer().getInventory().addItem(item);
+        auctions.remove(this);
+		Main.AuctionConfig.set("#" + this.id, null);
+        ConfigManager.saveCustomConfig(new File(Main.plugin.getDataFolder(),"auction.yml"), Main.AuctionConfig);
         return;
 		}
 		MessageManager.sendMessage(owner, "&2You've gained &6" + price + "&2 coins from your auction!");
 		SoundManager.playSoundToPlayer(Sound.LEVEL_UP, owner);
 		}
-		if(Bukkit.getPlayer(this.last_person).isOnline()){
 	    Player last_person = Bukkit.getPlayer(this.last_person);
-	    MessageManager.sendMessage(last_person, "&2You've won an auction! &e#Do /auc rewards to pick get your reward");
+		if(Bukkit.getPlayer(this.last_person).isOnline()){
+	    MessageManager.sendMessage(last_person, "&2You've won an auction! &e#Do /auc rewards to get your rewards");
 	    SoundManager.playSoundToPlayer(Sound.LEVEL_UP, last_person);
 		}
+	    if(AuctionPlayer.getAuctionPlayer(last_person) == null){
+	    	AuctionPlayer player = new AuctionPlayer(last_person.getUniqueId());
+	    	player.addReward(item);
+	    }else{
+	    	AuctionPlayer.getAuctionPlayer(last_person).addReward(item);
+	    }
+		
 		Coins.addPlayerCoins(owner, price);
+		auctions.remove(this);
+		Main.AuctionConfig.set("#" + this.id, null);
+        ConfigManager.saveCustomConfig(new File(Main.plugin.getDataFolder(),"auction.yml"), Main.AuctionConfig);
 	}
 	
-	public void removeAuction(){
-		
+	public static void removeAuction(Player player){
+		if(!playerHasAuction(player)){
+			MessageManager.sendMessage(player, "&cYou haven't an active auction in the auction house");
+			return;
+		}
+		Auction auction = getAuctionFromPlayer(player);
+		auction.restoreItem();
+		player.getInventory().addItem(auction.item);
+		Main.AuctionConfig.set("#" + auction.id, null);
+        ConfigManager.saveCustomConfig(new File(Main.plugin.getDataFolder(),"auction.yml"), Main.AuctionConfig);
+		auctions.remove(auction);
+		MessageManager.sendMessage(auction.getOwnerAsPlayer(), "&2You've successfully removed your auction!");
 	}
 	
 	public static void openInventory(Player player){
@@ -240,13 +279,21 @@ public class Auction {
 		}
 	}
 	
-	public static Auction getAuctionFromItem(ItemStack item){
+	public static Auction getAuctionFromPlayer(Player player){
 		for(Auction auction: auctions){
-			if(auction.item == item){
-				Bukkit.broadcastMessage("success");
+			if(auction.owner.toString().equalsIgnoreCase(player.getUniqueId().toString())){
 				return auction;
 			}
 		}
 		return null;
+	}
+	
+	public static boolean playerHasAuction(Player player){
+		for(Auction auction: auctions){
+			if(auction.owner.toString().equalsIgnoreCase(player.getUniqueId().toString())){
+				return true;
+			}
+		}
+		return false;
 	}
 }
