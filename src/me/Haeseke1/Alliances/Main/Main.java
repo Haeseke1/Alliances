@@ -23,8 +23,10 @@ import me.Haeseke1.Alliances.Arena.ArenaEvents;
 import me.Haeseke1.Alliances.Arena.ArenaManager;
 import me.Haeseke1.Alliances.Arena.Commands.ArenaCommand;
 import me.Haeseke1.Alliances.Auctions.Auction;
+import me.Haeseke1.Alliances.Auctions.AuctionPlayer;
 import me.Haeseke1.Alliances.Auctions.Commands.AuctionCommand;
 import me.Haeseke1.Alliances.Auctions.Events.InventoryClick;
+import me.Haeseke1.Alliances.Auctions.Events.RewardJoin;
 import me.Haeseke1.Alliances.Buildings.BuildingListener;
 import me.Haeseke1.Alliances.Buildings.BuildingManager;
 import me.Haeseke1.Alliances.Buildings.Builder.BlockPlace;
@@ -230,11 +232,13 @@ public class Main extends JavaPlugin {
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		APlayerManager.aPlayerStartUp();
 		Auction.loadAuctions();
+		AuctionPlayer.loadAuctionPlayers();
 	}
 
 	@Override
 	public void onDisable() {
 	    Auction.saveAuctions();
+	    AuctionPlayer.saveAuctionPlayers();
 		for(Player player : Bukkit.getOnlinePlayers()){
 			player.closeInventory();
 		}
@@ -333,6 +337,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new AlchemyListener(), this);
 		
 		pm.registerEvents(new InventoryClick(), this);
+		pm.registerEvents(new RewardJoin(), this);
 	}
 
 	public void registerCommands() {

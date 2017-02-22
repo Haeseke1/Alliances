@@ -32,4 +32,4 @@ commands:
   Crate:
     aliases: [c,cr,crates]
   Auction:
-    aliases: [auc,auction]
+    aliases: [auc,auction,ah]
