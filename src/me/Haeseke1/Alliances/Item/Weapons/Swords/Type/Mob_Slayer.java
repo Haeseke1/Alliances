@@ -2,13 +2,9 @@ package me.Haeseke1.Alliances.Item.Weapons.Swords.Type;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,31 +14,29 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Sword;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.SwordManager;
-import me.Haeseke1.Alliances.Main.Main;
-import me.Haeseke1.Alliances.Utils.SoundManager;
 
-public class Heaven_Blade extends Sword implements Listener{
+public class Mob_Slayer extends Sword implements Listener{
 
 	public int strength;
 	
-	public Heaven_Blade(Player player, int cooldown, int strength) {
-		super("Heaven Blade", player, cooldown);
+	public Mob_Slayer(Player player, int cooldown, int strength) {
+		super("Mob Slayer", player, cooldown);
 		this.strength = strength;
 	}
 	
-	public Heaven_Blade(){
+	public Mob_Slayer(){
 		
 	}
 	
 	public static ItemStack getItem(int strength){
-		if(strength > 3){
-			strength = 3;
+		if(strength > 5){
+			strength = 5;
 		}
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(ChatColor.RED + "Heaven Blade " + strength);
+		im.setDisplayName(ChatColor.YELLOW + "Mob Slayer " + strength);
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.DARK_GREEN + "Strike your enemies multiple times with lightning!");
+		lore.add(ChatColor.DARK_GREEN + "More damage to mobs!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -55,10 +49,9 @@ public class Heaven_Blade extends Sword implements Listener{
 	
 	@EventHandler
 	public static void onRightClick(EntityDamageByEntityEvent event){
-		if(!(event.getDamager() instanceof Player) || !(event.getEntity() instanceof LivingEntity)){
+		if(!(event.getDamager() instanceof Player) || event.getEntity() instanceof Player){
 			return;
 		}
-		LivingEntity le = (LivingEntity) event.getEntity();
 		Player player = (Player) event.getDamager();
 		if(player.getItemInHand() == null || player.getItemInHand().getType() == Material.AIR){
 			return;
@@ -67,42 +60,19 @@ public class Heaven_Blade extends Sword implements Listener{
 			return;
 		}
 		String displayname = player.getItemInHand().getItemMeta().getDisplayName();
-		if(!displayname.startsWith(ChatColor.RED + "Heaven Blade ")){
+		if(!displayname.startsWith(ChatColor.YELLOW + "Mob Slayer ")){
 			return;
 		}
-		if(!SwordManager.hasSword(player.getUniqueId(), "Heaven Blade")){
+		if(!SwordManager.hasSword(player.getUniqueId(), "Mob Slayer")){
 			try{
 				int strenght = getStrength(displayname);
-				if(strenght > 3){
-					strenght = 3;
+				if(strenght > 5){
+					strenght = 5;
 				}
-				if(new Random().nextInt(10) < strenght){
-					Heaven_Blade fatal_blade = new Heaven_Blade(player,1, strenght);
-					fatal_blade.fataldamageEntity(player, le, strenght);
-				}
+				event.setDamage(event.getDamage() + (strenght * 2));
 			}catch(Exception e){
 				return;
 			}
 		}
-	}
-	
-	List<Integer> schedulers = new ArrayList<Integer>();
-	
-	public void fataldamageEntity(Player player, LivingEntity le, int strength){
-		SoundManager.playSound(Sound.ENDERDRAGON_GROWL, player.getLocation());
-		schedulers.add(Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.plugin, new Runnable() {
-			int i = 0;
-			
-			@Override
-			public void run() {
-				if(i == 4){
-					Bukkit.getScheduler().cancelTask(schedulers.get(0));
-					schedulers.remove(0);
-					return;
-				}
-				le.getWorld().strikeLightning(le.getLocation());
-				i++;
-			}
-		}, 20, 20));
 	}
 }

@@ -1,14 +1,14 @@
 package me.Haeseke1.Alliances.Outpost.Commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
-import me.Haeseke1.Alliances.Outpost.OutpostType;
-import me.Haeseke1.Alliances.Outpost.Commands.Create.outpostCreate;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import me.Haeseke1.Alliances.regionSelect.regionSelect;
 
 public class Outpost implements CommandExecutor {
 	
@@ -18,7 +18,6 @@ public class Outpost implements CommandExecutor {
 			sender.sendMessage(MessageManager.infoColorCode + "===== Outpost =====");
 			sender.sendMessage(MessageManager.infoColorCode + "Commands:");
 			sender.sendMessage(MessageManager.infoColorCode + "/outpost create #Create a new outpost");
-			sender.sendMessage(MessageManager.infoColorCode + "/outpost addreward <Luck> <OutpostType> #Add item in hand to outpost reward");
 			sender.sendMessage(MessageManager.infoColorCode + "/outpost listtype #get a list of different types!");
 			return false;
 		}
@@ -29,21 +28,6 @@ public class Outpost implements CommandExecutor {
 		}
 		Player player = (Player) sender;
 		if (player.hasPermission("Alliances.outpost.*")) {
-			if (args[0].equalsIgnoreCase("addreward") && args.length > 1) {
-				try {
-					if (OutpostType.getOutpostType(args[2]) == null) {
-						MessageManager.sendMessage(player, "&cThis outposttype doesn't exists");
-						return false;
-					}
-					OutpostManager.addReward(player.getItemInHand(), Integer.parseInt(args[1]),
-							OutpostType.getOutpostType(args[2]));
-					MessageManager.sendMessage(player, "&2You've added a reward to the outpost");
-					return false;
-				} catch (Exception e) {
-					MessageManager.sendMessage(player, "&cWrong argument do: /outpost");
-				}
-				return false;
-			}
 
 			if (args[0].equalsIgnoreCase("listtype")) {
 				sender.sendMessage(MessageManager.infoColorCode + "===== Outpost =====");
@@ -57,10 +41,14 @@ public class Outpost implements CommandExecutor {
 				sender.sendMessage(MessageManager.infoColorCode + "7. MobFarm");
 				return false;
 			}
-
-			if (args[0].equalsIgnoreCase("create")) {
-				outpostCreate.onCommand(sender, args);
-				return false;
+			if (args[0].equalsIgnoreCase("create") && args.length > 1) {
+				if (regionSelect.hasRegion(player) && OutpostManager.checkLocation(regionSelect.leftClick.get(player), regionSelect.rightClick.get(player))) {
+					new me.Haeseke1.Alliances.Outpost.Outpost(args[1], regionSelect.leftClick.get(player), regionSelect.rightClick.get(player), null);
+					MessageManager.sendMessage(player, ChatColor.DARK_GREEN + "Outpost created succesfully");
+				} else {
+					String message = "&cYou need to select a region first";
+					MessageManager.sendMessage(player, message);
+				}
 			}
 			MessageManager.sendMessage(player, "&cWrong argument do: /outpost");
 			return false;

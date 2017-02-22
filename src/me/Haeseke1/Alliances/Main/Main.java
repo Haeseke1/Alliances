@@ -116,6 +116,7 @@ import me.Haeseke1.Alliances.Item.Totems.Events.DamageTotem;
 import me.Haeseke1.Alliances.Item.Totems.Scheduler.Checker;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Arrow_Tank;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Flame_Of_Hell;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Golden;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Legend_Of_Zeus;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Tank;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
@@ -124,6 +125,7 @@ import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Double_Strike;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Heaven_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Karma_Blade;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Mob_Slayer;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Night_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Soul_Stealer;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Speed_Blade;
@@ -254,7 +256,6 @@ public class Main extends JavaPlugin {
 
 	public void registerEvents() {
 		pm.registerEvents(new InventoryEvents(), this);
-		pm.registerEvents(new me.Haeseke1.Alliances.Outpost.Commands.Create.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Commands.Join.InventoryEvents(), this);
 		pm.registerEvents(new me.Haeseke1.Alliances.Challenge.Commands.Player.InventoryEvents(), this);
 		pm.registerEvents(new OutpostEvents(), this);
@@ -307,6 +308,8 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new Double_Strike(), this);
 		pm.registerEvents(new Speed_Blade(), this);
 		pm.registerEvents(new Heaven_Blade(), this);
+		pm.registerEvents(new Mob_Slayer(), this);
+		pm.registerEvents(new Golden(), this);
 		
 		pm.registerEvents(new Arrow_Tank(), this);
 		pm.registerEvents(new Tank(), this);
