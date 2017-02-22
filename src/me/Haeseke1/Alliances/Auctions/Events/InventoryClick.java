@@ -1,6 +1,5 @@
 package me.Haeseke1.Alliances.Auctions.Events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -35,7 +34,6 @@ public class InventoryClick implements Listener{
 		ItemStack item = event.getCurrentItem();
 		ItemMeta m = item.getItemMeta();
 		if(!m.hasDisplayName()){
-			Bukkit.broadcastMessage("test");
 			if(item.getType() == Material.AIR) return;
 			Auction auction = Auction.getAuctionFromPlayer(LoreManager.getOwner(item));
 			auction.bid(player);

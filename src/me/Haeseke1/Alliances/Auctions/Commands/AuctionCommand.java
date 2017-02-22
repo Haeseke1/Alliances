@@ -25,8 +25,7 @@ public class AuctionCommand implements CommandExecutor {
 			try{
 				int price = Integer.parseInt(args[1]);
 				int raise = Integer.parseInt(args[2]);
-				@SuppressWarnings("unused")
-				Auction auction = new Auction(0,0,player.getUniqueId(),null,price,raise,null);
+				new Auction(0,0,player.getUniqueId(),null,price,raise,null);
 			}catch(Exception e){
 				MessageManager.sendMessage(player, "&cWrong usage: /auc start <price> <raise>");
 				e.printStackTrace();
