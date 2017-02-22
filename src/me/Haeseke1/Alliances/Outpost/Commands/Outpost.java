@@ -1,12 +1,13 @@
 package me.Haeseke1.Alliances.Outpost.Commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.Haeseke1.Alliances.Outpost.Commands.Create.outpostCreate;
 import me.Haeseke1.Alliances.Utils.MessageManager;
+import me.Haeseke1.Alliances.regionSelect.regionSelect;
 
 public class Outpost implements CommandExecutor {
 	
@@ -39,10 +40,14 @@ public class Outpost implements CommandExecutor {
 				sender.sendMessage(MessageManager.infoColorCode + "7. MobFarm");
 				return false;
 			}
-
 			if (args[0].equalsIgnoreCase("create") && args.length > 1) {
-				outpostCreate.onCommand(sender, args);
-				return false;
+				if (regionSelect.hasRegion(player)) {
+					new me.Haeseke1.Alliances.Outpost.Outpost(args[1], regionSelect.leftClick.get(player), regionSelect.rightClick.get(player), null);
+					MessageManager.sendMessage(player, ChatColor.DARK_GREEN + "Outpost created succesfully");
+				} else {
+					String message = "&cYou need to select a region first";
+					MessageManager.sendMessage(player, message);
+				}
 			}
 			MessageManager.sendMessage(player, "&cWrong argument do: /outpost");
 			return false;
