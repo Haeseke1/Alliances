@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
 
@@ -41,7 +42,7 @@ public class Outpost implements CommandExecutor {
 				return false;
 			}
 			if (args[0].equalsIgnoreCase("create") && args.length > 1) {
-				if (regionSelect.hasRegion(player)) {
+				if (regionSelect.hasRegion(player) && OutpostManager.checkLocation(regionSelect.leftClick.get(player), regionSelect.rightClick.get(player))) {
 					new me.Haeseke1.Alliances.Outpost.Outpost(args[1], regionSelect.leftClick.get(player), regionSelect.rightClick.get(player), null);
 					MessageManager.sendMessage(player, ChatColor.DARK_GREEN + "Outpost created succesfully");
 				} else {

@@ -66,6 +66,10 @@ public class Outpost {
 		this.owner = alli;
 		outposts.add(this);
 	}
+	
+	
+	
+	
 	boolean oldContested = false;
 	boolean contested = false;
 	int contestedTime = 0;
