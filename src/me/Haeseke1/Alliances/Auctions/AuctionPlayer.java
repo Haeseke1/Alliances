@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -19,7 +20,7 @@ public class AuctionPlayer {
 	
 	public UUID player;
 	
-	public List<ItemStack> rewards;
+	public List<ItemStack> rewards = new ArrayList<>();
 	
 	public AuctionPlayer(UUID player){
 		this.player = player;
@@ -28,7 +29,6 @@ public class AuctionPlayer {
 			if(getAuctionPlayer()){
 				return;
 			}
-			this.rewards = new ArrayList<>();
 			return;
 		}
 	}
@@ -67,14 +67,8 @@ public class AuctionPlayer {
 	
 	public static void loadAuctionPlayers(){
 		for(String uuid: Main.RewardsConfig.getKeys(false)){
+			@SuppressWarnings("unused")
 			AuctionPlayer aucplayer = new AuctionPlayer(UUID.fromString(uuid));
-			for(String number: Main.RewardsConfig.getConfigurationSection(uuid).getKeys(false)){
-				try {
-					aucplayer.addReward(ConfigManager.getItemStackFromConfig(Main.RewardsConfig, uuid + "." + number));
-				} catch (EmptyItemStackException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 		MessageManager.sendRemarkMessage("Auction player data has been loaded");
 	}

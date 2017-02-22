@@ -9,6 +9,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import me.Haeseke1.Alliances.Auctions.Auction;
+import me.Haeseke1.Alliances.Auctions.AuctionPlayer;
 import me.Haeseke1.Alliances.Buildings.Type.Storage.Alchemy;
 import net.md_5.bungee.api.ChatColor;
 
@@ -28,6 +29,8 @@ public class GUI {
 	
 	public Inventory inv;
 	
+	public AuctionPlayer aucplayer;
+	
 	public GUI(Player owner, String name, int size){
 		this.owner = owner;
 		this.name = name;
@@ -38,6 +41,11 @@ public class GUI {
 	
 	public void setItem(int slot, ItemStack item){
 		inv.setItem(slot, item);
+	}
+	
+	public void setPage(int pageNumber){
+		this.page = 0;
+		this.updateGui(this.owner, this);
 	}
 	
 	public boolean generateAuctions(){
@@ -55,8 +63,25 @@ public class GUI {
 	    return true;
 	}
 	
+	public boolean generateRewards(Player player){
+	    aucplayer = AuctionPlayer.getAuctionPlayer(player);
+		if(aucplayer == null){
+        aucplayer = new AuctionPlayer(this.owner.getUniqueId());
+		}
+		int slot = 0;
+		for(int i = 9 * this.page; i < (9 * this.page + 9); i++){
+		if(aucplayer.rewards.size() <= i) return false;
+		this.setItem(slot, aucplayer.rewards.get(i));
+		slot ++;
+		}
+		if(aucplayer.rewards.size() == 9) return false;
+		return true;
+	}
 	public void openInv(){
 		if(this.size == 54){
+		for(int i = 0; i < 36; i++){
+				inv.setItem(i, null);
+		}
 		for(int i = 36; i <= 44; i++){
 			this.setItem(i, Alchemy.createPanel((short) 15,ChatColor.BLACK + "_"));
 		}
@@ -72,10 +97,31 @@ public class GUI {
 		if(page == 0){
 		    this.setItem(48, Alchemy.createPanel((short) 14, ChatColor.RED + "No Page"));
 		}else{
-		    this.setItem(50, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Previous Page"));
+		    this.setItem(48, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Previous Page"));
 		}
 		}
 		this.setItem(49, Alchemy.createPanel((short) 9, ChatColor.AQUA + "Refresh"));
+		}
+		if(this.size == 18){
+			for(int i = 0; i < 9; i++){
+				inv.setItem(i, null);
+			}
+			if(!generateRewards(this.owner)){
+				this.setItem(14, Alchemy.createPanel((short) 14, ChatColor.RED + "No Page"));
+				if(page == 0){
+			    this.setItem(12, Alchemy.createPanel((short) 14, ChatColor.RED + "No Page"));
+				}else{
+			    this.setItem(12, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Previous Page"));
+				}
+			}else{
+			this.setItem(14, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Next Page"));
+			if(page == 0){
+			    this.setItem(12, Alchemy.createPanel((short) 14, ChatColor.RED + "No Page"));
+			}else{
+			    this.setItem(14, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Previous Page"));
+			}
+			}
+			this.setItem(13, Alchemy.createPanel((short) 9, ChatColor.AQUA + "Refresh"));
 		}
 		owner.openInventory(inv);
 		guis.add(this);
@@ -92,6 +138,11 @@ public class GUI {
 	
 	public void nextPage(){
 		this.page = this.page + 1;
+		this.updateGui(this.owner, this);
+	}
+	
+	public void previousPage(){
+		this.page = this.page - 1;
 		this.updateGui(this.owner, this);
 	}
 	

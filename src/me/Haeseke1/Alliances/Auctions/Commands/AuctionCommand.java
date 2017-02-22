@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Auctions.Auction;
+import me.Haeseke1.Alliances.Auctions.GUI.GUI;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class AuctionCommand implements CommandExecutor {
@@ -42,12 +43,17 @@ public class AuctionCommand implements CommandExecutor {
 			Auction auction = Auction.getAuctionFromPlayer(player);
 			auction.closeAuction();
 			return true;
+		}else if(args.length == 1 && args[0].equalsIgnoreCase("rewards")){
+			GUI gui = new GUI(player,"REWARDS",18);
+			gui.openInv();
+			return true;
 		}
 		sender.sendMessage(MessageManager.infoColorCode + "===== Auctions =====");
 		sender.sendMessage(MessageManager.infoColorCode + "Commands:");
 		sender.sendMessage(MessageManager.infoColorCode + "/auc start <price> <raise> #Sell items in the auction house");
 		sender.sendMessage(MessageManager.infoColorCode + "/auc remove #Remove your offer from the auction house");
 		sender.sendMessage(MessageManager.infoColorCode + "/auc close #Close your offer and obtain the price");
+		sender.sendMessage(MessageManager.infoColorCode + "/auc rewards #Let you earn your rewards");
 		return false;
 	}
 
