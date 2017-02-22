@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.Haeseke1.Alliances.Item.Outpost_Compass;
 import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Arrow_Tank;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Flame_Of_Hell;
@@ -83,28 +82,6 @@ public class Item implements CommandExecutor{
 
 		if(!sender.hasPermission("Alliances.items.*")){
 			MessageManager.sendMessage(sender, "&cWrong argument do: /pve");
-			return false;
-		}
-		
-		if(args[0].equalsIgnoreCase("compass")){
-			if(args.length > 1){
-				if(!PlayerManager.isPlayerOnline(args[1])){
-					MessageManager.sendMessage(sender,"&cThis player is not online!");
-					return false;
-				}
-				Player getter = PlayerManager.getPlayer(args[1]);
-				getter.getInventory().addItem(Outpost_Compass.getItem(getter));
-				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + "Outpost Compass" + ChatColor.GREEN + "!");
-				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + "Outpost Compass" + ChatColor.GREEN + "!");
-				return false;
-			}
-			if (!(sender instanceof Player)) {
-				String message = "This command needs to be executed by a player";
-				MessageManager.sendAlertMessage(message);
-				return false;
-			}
-			player.getInventory().addItem(Outpost_Compass.getItem(player));
-			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + "Outpost Compass" + ChatColor.GREEN + "!");
 			return false;
 		}
 		

@@ -106,7 +106,6 @@ import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyLocationException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Exceptions.InvalidConfigTypeException;
-import me.Haeseke1.Alliances.Item.Outpost_Compass;
 import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
 import me.Haeseke1.Alliances.Item.Commands.Item;
 import me.Haeseke1.Alliances.Item.Totems.HealingTotem;
@@ -324,7 +323,6 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new BuildingListener(), this);
 		pm.registerEvents(new checkTPACommand(), this);
 
-		pm.registerEvents(new Outpost_Compass(), this);
 		pm.registerEvents(new Storage_Level(), this);
 		
 		pm.registerEvents(new RightClickWand(), this);
