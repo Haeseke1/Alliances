@@ -19,6 +19,11 @@ import me.Haeseke1.Alliances.APlayer.APlayerEvents;
 import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
+import me.Haeseke1.Alliances.Alliance.Bonus_Timer;
+import me.Haeseke1.Alliances.Alliance.Type.Caith_Sith;
+import me.Haeseke1.Alliances.Alliance.Type.Pooka;
+import me.Haeseke1.Alliances.Alliance.Type.Salamander;
+import me.Haeseke1.Alliances.Alliance.Type.Spriggan;
 import me.Haeseke1.Alliances.Arena.ArenaEvents;
 import me.Haeseke1.Alliances.Arena.ArenaManager;
 import me.Haeseke1.Alliances.Arena.Commands.ArenaCommand;
@@ -338,6 +343,10 @@ public class Main extends JavaPlugin {
 		
 		pm.registerEvents(new InventoryClick(), this);
 		pm.registerEvents(new RewardJoin(), this);
+		pm.registerEvents(new Caith_Sith(), this);
+		pm.registerEvents(new Pooka(), this);
+		pm.registerEvents(new Salamander(), this);
+		pm.registerEvents(new Spriggan(), this);
 	}
 
 	public void registerCommands() {
@@ -432,6 +441,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ManaRegen(), 0L, 100);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Checker(), 0L, 1L);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Healing(), 0L, 50L);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Bonus_Timer(), 20, 20);
 		java.util.Timer timer = new java.util.Timer(); 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);

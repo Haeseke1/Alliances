@@ -5,13 +5,20 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import me.Haeseke1.Alliances.Alliance.Alliance;
+import me.Haeseke1.Alliances.Alliance.AllianceManager;
+import me.Haeseke1.Alliances.Alliance.AllianceType;
 import me.Haeseke1.Alliances.Economy.Coins;
 
-public class Salamander {
+public class Salamander implements Listener {
 	
 	public static int cost;
 	
@@ -27,11 +34,25 @@ public class Salamander {
 		}
 		list.add(ChatColor.DARK_PURPLE + "Bonus:");
 		list.add(ChatColor.DARK_PURPLE + "- Extra damage");
-		list.add(ChatColor.DARK_PURPLE + "- Fire magic");
 		im.setLore(list);
 		i.setItemMeta(im);
 		return i;
 	}
 	
+	@EventHandler
+	private void entityhitentity(EntityDamageByEntityEvent event){
+		if(!(event.getEntity() instanceof LivingEntity) || !(event.getDamager() instanceof Player)){
+			return;
+		}
+		Player player = (Player) event.getDamager();
+		if(!AllianceManager.playerIsInAlli(player)){
+			return;
+		}
+		Alliance alli = AllianceManager.getAlliance(player);
+		if(!alli.getType().equals(AllianceType.SALAMANDER)){
+			return;
+		}
+		event.setDamage(event.getDamage() + 2);
+	}
 
 }

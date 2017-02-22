@@ -10,6 +10,7 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import net.minecraft.server.v1_8_R2.EntityHuman;
+import net.minecraft.server.v1_8_R2.EntityLiving;
 import net.minecraft.server.v1_8_R2.EntityZombie;
 import net.minecraft.server.v1_8_R2.GenericAttributes;
 import net.minecraft.server.v1_8_R2.Item;
@@ -37,7 +38,7 @@ public class ZombieLV1 extends EntityZombie{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, 1.0D, false));
+        this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityLiving.class, 1.0D, false));
         this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
         this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 	}
