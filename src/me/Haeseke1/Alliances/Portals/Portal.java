@@ -78,7 +78,7 @@ public class Portal {
 		
 		double x1 = corner1.getX();
 		double x2 = corner2.getX();
-		
+	
 		double z1 = corner1.getZ();
 		double z2 = corner1.getZ();
 		

@@ -9,20 +9,20 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-public class Fire_Resistance {
+public class Drunk {
 	public static ItemStack getHelmet(){
 		ItemStack item = new ItemStack(Material.DIAMOND_HELMET);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(ChatColor.RED + "Fire Resistance Helmet");
+		im.setDisplayName(ChatColor.AQUA + "Drunk Helmet");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.RED + "Has a 25% chance to absorb fire damage!");
-		lore.add(ChatColor.RED + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.RED + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.AQUA + "Has a 10% chance to give your enemies beer!");
+		lore.add(ChatColor.AQUA + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.AQUA + "Full armor set has a 40% chance!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -31,11 +31,11 @@ public class Fire_Resistance {
 	public static ItemStack getChestplate(){
 		ItemStack item = new ItemStack(Material.DIAMOND_CHESTPLATE);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(ChatColor.RED + "Fire Resistance Chestplate");
+		im.setDisplayName(ChatColor.AQUA + "Drunk Chestplate");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.RED + "Has a 25% chance to absorb fire damage!");
-		lore.add(ChatColor.RED + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.RED + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.AQUA + "Has a 10% chance to give your enemies beer!");
+		lore.add(ChatColor.AQUA + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.AQUA + "Full armor set has a 40% chance!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -44,11 +44,11 @@ public class Fire_Resistance {
 	public static ItemStack getLeggings(){
 		ItemStack item = new ItemStack(Material.DIAMOND_LEGGINGS);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(ChatColor.RED + "Fire Resistance Leggings");
+		im.setDisplayName(ChatColor.AQUA + "Drunk Leggings");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.RED + "Has a 25% chance to absorb fire damage!");
-		lore.add(ChatColor.RED + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.RED + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.AQUA + "Has a 10% chance to give your enemies beer!");
+		lore.add(ChatColor.AQUA + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.AQUA + "Full armor set has a 40% chance!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -57,18 +57,18 @@ public class Fire_Resistance {
 	public static ItemStack getBoots(){
 		ItemStack item = new ItemStack(Material.DIAMOND_BOOTS);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(ChatColor.RED + "Fire Resistance Boots");
+		im.setDisplayName(ChatColor.AQUA + "Drunk Boots");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.RED + "Has a 25% chance to absorb fire damage!");
-		lore.add(ChatColor.RED + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.RED + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.AQUA + "Has a 10% chance to give your enemies beer!");
+		lore.add(ChatColor.AQUA + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.AQUA + "Full armor set has a 40% chance!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
 	}
 	
 	@EventHandler
-	private void entityHit(EntityDamageEvent event){
+	private void entityHit(EntityDamageByEntityEvent event){
 		if(!(event.getEntity() instanceof Player)){
 			return;
 		}
@@ -82,17 +82,19 @@ public class Fire_Resistance {
 				continue;
 			}
 			String displayname = item.getItemMeta().getDisplayName();
-			if(!displayname.startsWith(ChatColor.RED + "Fire Resistance ")){
+			if(!displayname.startsWith(ChatColor.DARK_RED + "Fire Imp ")){
 				continue;
 			}
 			amount++;
 		}
-		if(event.getCause() != DamageCause.FIRE_TICK) return;
+		if(!(event.getDamager() instanceof Player)) return;
+		Player damager = (Player) event.getDamager();
 		amount = amount == 4 ? 5 : amount;
 		int random = new Random().nextInt(100) + 1;
-		if(amount * 25 > random){
+		if(amount * 10 > random){
 			event.setCancelled(true);
-            player.setFireTicks(0);
+			damager.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 60, 1,true));
+			damager.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 1,true));
 			for(ItemStack item : player.getInventory().getArmorContents()){
 				if(item == null || item.getType() == Material.AIR){
 					continue;
