@@ -258,7 +258,6 @@ public class Main extends JavaPlugin {
 		for(Player player : Bukkit.getOnlinePlayers()){
 			player.closeInventory();
 		}
-		Mount.deleteAllHorse();
 	    HealingTotem.removeAllTotems();
 		PVEManager.disablePVE();
 		MountsManager.despawnMounts();

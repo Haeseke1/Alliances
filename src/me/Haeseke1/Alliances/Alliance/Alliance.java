@@ -272,4 +272,31 @@ public class Alliance {
 		Score += score;
 	}
 	
+	public static void sendInfo(Player player, String name){
+		Alliance alli;
+		if(name == null){
+	    alli = AllianceManager.getAlliance(name);
+		if(alli == null){
+			MessageManager.sendMessage(player, "&cThis alliance doesn't exists");
+			SoundManager.playSoundToPlayer(Sound.NOTE_BASS, player);
+			return;
+		}
+		}else{
+		if(!AllianceManager.playerIsInAlli(player)){
+			MessageManager.sendMessage(player, "&cYou aren't in an alliance");
+			SoundManager.playSoundToPlayer(Sound.NOTE_BASS, player);
+			return;
+		}
+		alli = AllianceManager.getAlliance(player);
+		}
+		MessageManager.sendMessage(player, " ");
+		MessageManager.sendMessage(player, "&c&l === &6" + alli.name + "&c&l ===");
+		MessageManager.sendMessage(player, "&6 Score: &b" + alli.Score);
+		MessageManager.sendMessage(player, "&6 Coins: &b" + alli.mCoins);
+		MessageManager.sendMessage(player, "&6 Members: &b" + alli.mMembers.size());
+		MessageManager.sendMessage(player, "&2 Wins&6: &b" + alli.mWins);
+		MessageManager.sendMessage(player, "&c Loses&6: &b" + alli.mLoses);
+		
+	}
+	
 }
