@@ -47,6 +47,11 @@ public class VoteCommand implements CommandExecutor{
 			@SuppressWarnings("deprecation")
 			OfflinePlayer offplayer = Bukkit.getOfflinePlayer(name);
 			AuctionPlayer aucplayer = new AuctionPlayer(offplayer.getUniqueId());
+			if(VoteCommand.rewards.isEmpty()){
+				MessageManager.sendMessage(player, "&cNo vote rewards registered");
+				SoundManager.playSoundToPlayer(Sound.NOTE_BASS, player);
+				return true;
+			}
 			int randomint = new Random().nextInt(VoteCommand.rewards.size());
 			if(randomint > 0){
 			randomint = randomint - 1;
@@ -58,9 +63,17 @@ public class VoteCommand implements CommandExecutor{
 			}
 			return true;
 		}
+		if(args.length == 1 && args[0].equalsIgnoreCase("clear")){
+			VoteCommand.rewards.clear();
+			MessageManager.sendMessage(player, "&2You've successfully cleared the vote config");
+			SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
+			return true;
+		}
 		player.sendMessage(MessageManager.infoColorCode + "===== Vote =====");
 		player.sendMessage(MessageManager.infoColorCode + "Commands:");
 		player.sendMessage(MessageManager.infoColorCode	+ "/voteset add reward #Add a reward to the config");
+		player.sendMessage(MessageManager.infoColorCode	+ "/voteset clear #Clear the vote config");
+		player.sendMessage(MessageManager.infoColorCode	+ "/voteset test #Test the reward system");
 		}else{
 			MessageManager.sendMessage(player, "&cYou don't have the permission to execute this command");
 			SoundManager.playSoundToPlayer(Sound.NOTE_BASS, player);

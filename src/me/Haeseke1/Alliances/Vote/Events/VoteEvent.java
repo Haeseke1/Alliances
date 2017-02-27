@@ -24,6 +24,13 @@ public class VoteEvent implements Listener{
 		@SuppressWarnings("deprecation")
 		OfflinePlayer offplayer = Bukkit.getOfflinePlayer(name);
 		AuctionPlayer aucplayer = new AuctionPlayer(offplayer.getUniqueId());
+		if(VoteCommand.rewards.isEmpty()){
+			if(offplayer.isOnline()){
+				Player player = Bukkit.getPlayer(offplayer.getUniqueId());
+				MessageManager.sendMessage(player, "&cNo vote rewards registered");
+				SoundManager.playSoundToPlayer(Sound.NOTE_BASS, player);
+				}
+		}
 		int randomint = new Random().nextInt(VoteCommand.rewards.size() - 1);
 		aucplayer.addReward(VoteCommand.rewards.get(randomint));
 		if(offplayer.isOnline()){
