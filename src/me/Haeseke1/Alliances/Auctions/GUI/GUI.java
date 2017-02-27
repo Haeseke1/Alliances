@@ -1,16 +1,20 @@
 package me.Haeseke1.Alliances.Auctions.GUI;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Haeseke1.Alliances.Auctions.Auction;
 import me.Haeseke1.Alliances.Auctions.AuctionPlayer;
 import me.Haeseke1.Alliances.Buildings.Type.Storage.Alchemy;
+import me.Haeseke1.Alliances.Economy.Coins;
 import net.md_5.bungee.api.ChatColor;
 
 public class GUI {
@@ -25,7 +29,7 @@ public class GUI {
 	
 	public Player owner;
 	
-	public List<ItemStack> contents;
+	public HashMap<ItemStack,Integer> contents = new HashMap<>();
 	
 	public Inventory inv;
 	
@@ -77,9 +81,14 @@ public class GUI {
 		if(aucplayer.rewards.size() == 9) return false;
 		return true;
 	}
+	
 	public void openInv(){
 		if(this.size == 54){
-		for(int i = 0; i < 36; i++){
+		for(ItemStack item: this.contents.keySet()){
+			this.inv.setItem(this.contents.get(item), item);
+		}
+		this.contents.clear();
+		for(int i = 0; i < this.inv.getSize(); i++){
 				inv.setItem(i, null);
 		}
 		for(int i = 36; i <= 44; i++){
@@ -101,8 +110,17 @@ public class GUI {
 		}
 		}
 		this.setItem(49, Alchemy.createPanel((short) 9, ChatColor.AQUA + "Refresh"));
+		ItemStack chest = new ItemStack(Material.CHEST);
+		ItemMeta mchest = chest.getItemMeta();
+		mchest.setDisplayName(ChatColor.GREEN + "Current coins: " + ChatColor.GOLD + Coins.getPlayerCoins(owner));
+		chest.setItemMeta(mchest);
+		this.setItem(46, chest);
 		}
 		if(this.size == 18){
+			for(ItemStack item: this.contents.keySet()){
+				this.inv.setItem(this.contents.get(item), item);
+			}
+			this.contents.clear();
 			for(int i = 0; i < 9; i++){
 				inv.setItem(i, null);
 			}
@@ -125,6 +143,7 @@ public class GUI {
 		}
 		owner.openInventory(inv);
 		guis.add(this);
+		owner.updateInventory();
 	}
 
 	public static GUI getGuiOfPlayer(Player player){
@@ -148,7 +167,6 @@ public class GUI {
 	
 	public void updateGui(Player player, GUI gui){
 		guis.remove(gui);
-		player.closeInventory();
 		this.openInv();
 	}
 	

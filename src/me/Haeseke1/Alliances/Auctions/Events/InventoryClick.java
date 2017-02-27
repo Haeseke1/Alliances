@@ -26,21 +26,31 @@ public class InventoryClick implements Listener{
 		if(event.getInventory() == null) return;
 		Inventory inv = event.getInventory();
 		if(!inv.getName().equalsIgnoreCase("AUCTION HOUSE")) return;
+		if(event.getRawSlot() != event.getSlot()) return;
 		Player player = (Player) inv.getHolder();
 		GUI gui = GUI.getGuiOfPlayer(player);
 		
 		event.setCancelled(true);
 		if(event.getCurrentItem() == null) return;
 		ItemStack item = event.getCurrentItem();
+		if(!item.hasItemMeta()){
+			return;
+		}
 		ItemMeta m = item.getItemMeta();
 		if(!m.hasDisplayName()){
 			if(item.getType() == Material.AIR) return;
+            if(LoreManager.getOwner(item) == null){
+            	return;
+            }
 			Auction auction = Auction.getAuctionFromPlayer(LoreManager.getOwner(item));
 			auction.bid(player);
 			return;
 		}
 		if(item.getItemMeta().hasDisplayName()){
 			String dpname = ChatColor.stripColor(m.getDisplayName());
+			if(dpname.toLowerCase().contains("current coins:")){
+				return;
+			}
 			switch(dpname.toLowerCase()){
 			case "refresh":
 				gui.updateGui(player, gui);
@@ -56,6 +66,9 @@ public class InventoryClick implements Listener{
 				gui.previousPage();
 			    break;
 			default:
+                if(LoreManager.getOwner(item) == null){
+                	return;
+                }
 				if(!Auction.playerHasAuction(LoreManager.getOwner(item))){
 					player.closeInventory();
 					MessageManager.sendMessage(player, "&cThis offer is expired or closed by the owner");
@@ -77,12 +90,15 @@ public class InventoryClick implements Listener{
 		if(event.getInventory() == null) return;
 		Inventory inv = event.getInventory();
 		if(!inv.getName().equalsIgnoreCase("REWARDS")) return;
+		if(event.getRawSlot() != event.getSlot()) return;
 		Player player = (Player) inv.getHolder();
 		GUI gui = GUI.getGuiOfPlayer(player);
-		
 		event.setCancelled(true);
 		if(event.getCurrentItem() == null) return;
 		ItemStack item = event.getCurrentItem();
+		if(!item.hasItemMeta()){
+			return;
+		}
 		ItemMeta m = item.getItemMeta();
 		if(!m.hasDisplayName()){
 			if(item.getType() == Material.AIR) return;
@@ -92,6 +108,7 @@ public class InventoryClick implements Listener{
 			player.getInventory().addItem(event.getCurrentItem());
 			MessageManager.sendMessage(player, "&2You've successfully claimed a reward");
 			SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
+			gui.updateGui(player, gui);
 			return;
 		}
 		if(item.getItemMeta().hasDisplayName()){
@@ -115,6 +132,7 @@ public class InventoryClick implements Listener{
                 player.closeInventory();
 				player.getInventory().addItem(event.getCurrentItem());
 				MessageManager.sendMessage(player, "&2You've successfully claimed a reward");
+				gui.updateGui(player, gui);
 				SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
 				break;
 			}

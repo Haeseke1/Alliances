@@ -11,6 +11,7 @@ import me.Haeseke1.Alliances.APlayer.aPlayer;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Cloud_Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Fire_Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Healing_Wand;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Time_Bomb_Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Wither_Wand;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
@@ -31,12 +32,10 @@ public class Wand implements CommandExecutor{
 			player.sendMessage(MessageManager.infoColorCode	+ "/wand give <type> #Gives you a wand");
 			return true;
 		}
-		else
 		if(args[0].equalsIgnoreCase("mana")){
 		    APlayer.showMana();
 			return true;
 		}
-		else
 		if(args[0].equalsIgnoreCase("give") && args.length == 2){
 			String wandtype = args[1].toLowerCase();
 			switch(wandtype){
@@ -52,6 +51,9 @@ public class Wand implements CommandExecutor{
 			case "cloud":
 				Cloud_Wand.giveWand("Cloud Wand", player, "&b");
 				break;
+			case "time_bomb":
+				Time_Bomb_Wand.giveWand("Time Bomb Wand", player, "&6");
+				break;
 			default:
 				MessageManager.sendMessage(player, "&This wand type doesn't exists");
 				return false;
@@ -60,7 +62,6 @@ public class Wand implements CommandExecutor{
 			MessageManager.sendMessage(player, "&2You've received a &6" + wandtype);
 			return true;
 		}
-		
 		MessageManager.sendMessage(player,"&cWrong argument do: /wand");
 		return false;
 	}

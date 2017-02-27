@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -14,6 +15,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Cloud_Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Fire_Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Healing_Wand;
+import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Time_Bomb_Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Type.Wither_Wand;
 import me.Haeseke1.Alliances.Utils.SoundManager;
 import net.md_5.bungee.api.ChatColor;
@@ -34,6 +36,14 @@ public class RightClickWand implements Listener{
 	    Healing_Wand healing_wand = new Healing_Wand("Healing_Wand",player,Material.STICK,10);
 	    healing_wand.spawnTotem(player.getLocation().getBlock());
 	    }
+	    if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
+	    Healing_Wand healing_wand = new Healing_Wand("Healing_Wand",player,Material.STICK,10);
+	    healing_wand.spawnTotem(player.getLocation().getBlock());
+	    }
+	    if(event.getAction().equals(Action.RIGHT_CLICK_AIR)){
+        Time_Bomb_Wand time_bomb_wand = new Time_Bomb_Wand("Time_Bomb_Wand",player,Material.STICK,5);
+        time_bomb_wand.placeTimeBomb();
+	    }
 	}
 	
 	@EventHandler
@@ -44,6 +54,7 @@ public class RightClickWand implements Listener{
 		if(Cloud_Wand.players_in_air.contains(player)){
 		player.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "PROTECTED BY CLOUD WAND");
 		SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
+		Cloud_Wand.players_in_air.remove(player);
 		event.setCancelled(true);	
 		}
 	}
@@ -55,5 +66,13 @@ public class RightClickWand implements Listener{
 			Cloud_Wand.players_in_air.remove(player);
 		}
 	}
+	
+	@EventHandler
+	public void onBlockBreak(BlockBreakEvent event){
+		if(Time_Bomb_Wand.blocks.contains(event.getBlock())){
+			event.setCancelled(true);
+		}
+	}
+
 	
 }

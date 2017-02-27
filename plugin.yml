@@ -33,3 +33,5 @@ commands:
     aliases: [c,cr,crates]
   Auction:
     aliases: [auc,auction,ah]
+  Portal:
+    aliases: [portal,p]

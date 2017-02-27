@@ -252,16 +252,16 @@ public class ArenaEvents implements Listener {
 		int xblock = (int) blockLocation.getX();
 		int zblock = (int) blockLocation.getZ();
 
-		if (x1 < xblock && xblock < x2 && z1 < zblock && zblock < z2) {
+		if ((x1 < xblock && xblock < x2) && (z1 < zblock && zblock < z2)) {
 			return true;
 		}
-		if (x1 > xblock && xblock > x2 && z1 > zblock && zblock > z2) {
+		if ((x1 > xblock && xblock > x2) && (z1 > zblock && zblock > z2)) {
 			return true;
 		}
-		if (x1 > xblock && xblock > x2 && z1 < zblock && zblock < z2) {
+		if ((x1 > xblock && xblock > x2) && (z1 < zblock && zblock < z2)) {
 			return true;
 		}
-		if (x1 < xblock && xblock < x2 && z1 > zblock && zblock > z2) {
+		if ((x1 < xblock && xblock < x2) && (z1 > zblock && zblock > z2)) {
 			return true;
 		}
 		return false;

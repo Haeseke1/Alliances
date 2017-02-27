@@ -161,6 +161,9 @@ import me.Haeseke1.Alliances.PVE.Events.PlayerMove;
 import me.Haeseke1.Alliances.PVE.Events.PlayerQuit;
 import me.Haeseke1.Alliances.PVE.Schedulers.Arena_Scheduler;
 import me.Haeseke1.Alliances.PVE.Schedulers.PVE_Scheduler;
+import me.Haeseke1.Alliances.Portals.Portal;
+import me.Haeseke1.Alliances.Portals.Commands.PortalCommand;
+import me.Haeseke1.Alliances.Portals.Events.PortalMoveEvent;
 import me.Haeseke1.Alliances.ScoreBoard.Update.Counter;
 import me.Haeseke1.Alliances.Shop.ShopEvents;
 import me.Haeseke1.Alliances.Shop.ShopManager;
@@ -207,6 +210,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration CratesConfig;
 	public static FileConfiguration RewardsConfig;
 	public static FileConfiguration AuctionConfig;
+	public static FileConfiguration PortalsConfig;
 
 	public static Main plugin;
 
@@ -238,10 +242,16 @@ public class Main extends JavaPlugin {
 		APlayerManager.aPlayerStartUp();
 		Auction.loadAuctions();
 		AuctionPlayer.loadAuctionPlayers();
+		try {
+			Portal.loadPortals();
+		} catch (EmptyLocationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void onDisable() {
+        Portal.savePortals();
 	    Auction.saveAuctions();
 	    AuctionPlayer.saveAuctionPlayers();
 		for(Player player : Bukkit.getOnlinePlayers()){
@@ -347,6 +357,8 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new Pooka(), this);
 		pm.registerEvents(new Salamander(), this);
 		pm.registerEvents(new Spriggan(), this);
+		
+		pm.registerEvents(new PortalMoveEvent(), this);
 	}
 
 	public void registerCommands() {
@@ -365,6 +377,7 @@ public class Main extends JavaPlugin {
 		getCommand("wand").setExecutor(new Wand());
 		getCommand("crate").setExecutor(new CrateC());
 		getCommand("auction").setExecutor(new AuctionCommand());
+		getCommand("portal").setExecutor(new PortalCommand());
 	}
 
 	public void registerCustomEntitys() {
@@ -466,6 +479,7 @@ public class Main extends JavaPlugin {
 		CratesConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(), "crates.yml"), plugin);
 		RewardsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"rewards.yml"), plugin);
 		AuctionConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"auction.yml"), plugin);
+		PortalsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"portals.yml"), plugin);
 		try {
 			ArenaManager.loadArena();
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
