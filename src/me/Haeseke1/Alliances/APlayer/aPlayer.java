@@ -429,17 +429,14 @@ public class aPlayer{
 	}
 	
 	public void addMana(double mana){
-		if(this.mana == 20) return;
+		if(this.mana >= 20) return;
 		this.mana = this.mana + mana;
-		if(this.mana > this.MAX_MANA){
-		this.mana = 20;
-		}
  	    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9&l+" + mana + " MANA"));
 		SoundManager.playSoundToPlayer(Sound.WOOD_CLICK, player);
 	}
 	
 	public boolean removeMana(double mana){
-		if(this.mana < 0){
+		if(this.mana - mana < 0){
         MessageManager.sendMessage(this.player, "&cYou don't have enough mana");
         return false;
 		}

@@ -51,6 +51,7 @@ public class Cloud_Wand extends Wand{
 		@Override
 		public void run() {
 			if(time == 0){
+				Cloud_Wand.players_in_air.remove(player);
 				this.cancel();
 			}
 			//ParticleManager.playParticle(, player.getLocation(), 1);
