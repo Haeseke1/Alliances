@@ -29,10 +29,10 @@ public class RewardJoin implements Listener{
 			message = "&cYou've no pending rewards";
 			break;
 		case 1:
-			message = "&bYou've &6" + aucplayer.rewards.size() + "&b pending reward! &e#Do /auc rewards to claim it";
+			message = "&bYou've &6" + aucplayer.rewards.size() + "&b pending reward! &e#Do /rewards to claim it";
 			break;
 		default:
-			message = "&bYou've &6" + aucplayer.rewards.size() + "&b pending rewards! &e#Do /auc rewards to claim them";
+			message = "&bYou've &6" + aucplayer.rewards.size() + "&b pending rewards! &e#Do /rewards to claim them";
 			break;
 		}
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {

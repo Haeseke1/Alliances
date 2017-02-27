@@ -42,10 +42,6 @@ public class AuctionCommand implements CommandExecutor {
 			Auction auction = Auction.getAuctionFromPlayer(player);
 			auction.closeAuction();
 			return true;
-		}else if(args.length == 1 && args[0].equalsIgnoreCase("rewards")){
-			GUI gui = new GUI(player,"REWARDS",18);
-			gui.openInv();
-			return true;
 		}
 		sender.sendMessage(MessageManager.infoColorCode + "===== Auctions =====");
 		sender.sendMessage(MessageManager.infoColorCode + "Commands:");

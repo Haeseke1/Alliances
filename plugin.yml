@@ -35,3 +35,7 @@ commands:
     aliases: [auc,auction,ah]
   Portal:
     aliases: [portal,p]
+  Rewards:
+    aliases: [rewards,reward]
+  Voteset:
+    aliases: [voteset]

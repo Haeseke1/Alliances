@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/pieter/Desktop/Server Bryan/spigot-1.8.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pieter/Desktop/Public plugin test/plugins/nuvotifier-universal-2.3.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
