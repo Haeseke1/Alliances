@@ -29,7 +29,6 @@ public class APlayerEvents implements Listener{
 		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
 		new aPlayer(player, file);
 		player.setMaxHealth(20);
-
 	}
 	
 	@EventHandler(priority= EventPriority.LOW) 
