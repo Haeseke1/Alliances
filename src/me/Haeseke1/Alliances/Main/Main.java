@@ -141,6 +141,9 @@ import me.Haeseke1.Alliances.Item.Weapons.Wands.Events.RightClickWand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler.Healing;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler.ManaRegen;
 import me.Haeseke1.Alliances.LeaderBoard.Head_Board;
+import me.Haeseke1.Alliances.LeaderBoard.LeaderBoard;
+import me.Haeseke1.Alliances.LeaderBoard.LeaderBoard_Timer;
+import me.Haeseke1.Alliances.LeaderBoard.Commands.LeaderboardC;
 import me.Haeseke1.Alliances.Mounts.Mount;
 import me.Haeseke1.Alliances.Mounts.MountsManager;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
@@ -212,6 +215,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration RewardsConfig;
 	public static FileConfiguration AuctionConfig;
 	public static FileConfiguration PortalsConfig;
+	public static FileConfiguration LeaderboardConfig;
 
 	public static Main plugin;
 
@@ -381,6 +385,7 @@ public class Main extends JavaPlugin {
 		getCommand("crate").setExecutor(new CrateC());
 		getCommand("auction").setExecutor(new AuctionCommand());
 		getCommand("portal").setExecutor(new PortalCommand());
+		getCommand("leaderboard").setExecutor(new LeaderboardC());
 	}
 
 	public void registerCustomEntitys() {
@@ -458,6 +463,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Checker(), 0L, 1L);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Healing(), 0L, 50L);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Bonus_Timer(), 20, 20);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new LeaderBoard_Timer(), 20, 20);
 		java.util.Timer timer = new java.util.Timer(); 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);
@@ -483,6 +489,7 @@ public class Main extends JavaPlugin {
 		RewardsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"rewards.yml"), plugin);
 		AuctionConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"auction.yml"), plugin);
 		PortalsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"portals.yml"), plugin);
+		LeaderboardConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"leaderboard.yml"), plugin);
 		try {
 			ArenaManager.loadArena();
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
@@ -497,6 +504,7 @@ public class Main extends JavaPlugin {
 		ShopManager.registerShops();
 		PVEManager.registerPVE();
 		BuilderManager.registerBuilders();
+		LeaderBoard.registerLeaderboard();
 	}
 
 	public static void saveAllCustomConfigs() {
@@ -508,6 +516,7 @@ public class Main extends JavaPlugin {
 		PVEManager.savePVE();
 		BuildingManager.saveBuildings();
 		BuilderManager.saveBuilders();
+		LeaderBoard.saveLeaderboard();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
 			if (configFile.containsKey(entry.getKey())) {
 				ConfigManager.saveCustomConfig(configFile.get(entry.getKey()), entry.getValue());

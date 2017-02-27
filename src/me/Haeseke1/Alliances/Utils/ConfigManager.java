@@ -12,6 +12,8 @@ import java.util.Map.Entry;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
@@ -74,7 +76,18 @@ public class ConfigManager {
 			throw new EmptyLocationException(path);
 		}
 		try{
-			Location loc = new Location(Bukkit.getWorld(config.getString(path + ".World")), config.getDouble(path + ".X"), config.getDouble(path + ".Y"), config.getDouble(path + ".Z"), (float) config.getDouble(path + ".Yaw"), (float) config.getDouble(path + ".Pitch"));
+			boolean isLoaded = false;
+			String world = config.getString(path + ".World");
+			for(World w : Bukkit.getWorlds()){
+				if(w.getName().equalsIgnoreCase(world)){
+					isLoaded = true;
+					break;
+				}
+			}
+			if(!isLoaded){
+				Bukkit.createWorld(new WorldCreator(world));
+			}
+			Location loc = new Location(Bukkit.getWorld(world), config.getDouble(path + ".X"), config.getDouble(path + ".Y"), config.getDouble(path + ".Z"), (float) config.getDouble(path + ".Yaw"), (float) config.getDouble(path + ".Pitch"));
 			return loc;
 		}catch(Exception e){
 			MessageManager.sendAlertMessage("Location can't be fetched from " + path);

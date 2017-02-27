@@ -35,6 +35,10 @@ public class Head_Board implements Listener{
 	
 	
 	public void setLineMessage(int line, String message){
+		if(message == null){
+			sign.setLine(line, "");
+			return;
+		}
 		sign.setLine(line, ChatColor.translateAlternateColorCodes('&', message));
 		sign.update();
 	}
@@ -42,6 +46,7 @@ public class Head_Board implements Listener{
 	public void setOwner(String owner){
 		skull.setSkullType(SkullType.PLAYER);
 		skull.setOwner(owner);
+		skull.update();
 	}
 	
 	

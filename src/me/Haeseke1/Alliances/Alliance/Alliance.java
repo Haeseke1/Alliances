@@ -1,6 +1,7 @@
 package me.Haeseke1.Alliances.Alliance;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +25,7 @@ import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
 import net.md_5.bungee.api.ChatColor;
 
-public class Alliance {
+public class Alliance implements Comparator<Alliance>{
 
 	private UUID mOwner;
 	private int mWins;
@@ -47,6 +48,10 @@ public class Alliance {
 	public int PVE_amount = 0;
 	
 	public List<Player> PVE_players = new ArrayList<Player>();
+	
+	public Alliance() {
+		type = null;
+	}
 	
 	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type) {
 		mMembers = new HashMap<UUID, String>();
@@ -270,6 +275,11 @@ public class Alliance {
 	
 	public void addScore(int score){
 		Score += score;
+	}
+
+	@Override
+	public int compare(Alliance alli, Alliance alli2) {
+		return alli.Score - alli2.Score;
 	}
 	
 }

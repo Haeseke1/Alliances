@@ -96,6 +96,7 @@ public class aPlayer{
 		file.set("Mana_regen", this.manaregen);
 		file.set("Score", this.score);
 		file.set("PVE_Score", this.PVE_Score);
+		file.set("Name", player.getName());
 		File file = new File(Main.plugin.getDataFolder() + File.separator + "PlayerData",player.getUniqueId() + ".yml");
  	    ConfigManager.saveCustomConfig(file,this.file);
 	}

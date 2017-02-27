@@ -2,7 +2,7 @@ main: me.Haeseke1.Alliances.Main.Main
 version: 1.0
 name: Alliances
 authors: [KingPieter, Haeseke1]
-
+softdepend: [Multiverse-Core]
 commands:
   alliances:
     aliases: [alli,al]
@@ -35,3 +35,5 @@ commands:
     aliases: [auc,auction,ah]
   Portal:
     aliases: [portal,p]
+  Leaderboard:
+    aliases: [lb,l]

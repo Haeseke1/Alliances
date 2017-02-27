@@ -49,7 +49,7 @@ public class APlayerManager {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public FileConfiguration getConfig(String name){
+	public static FileConfiguration getConfig(String name){
 		OfflinePlayer offline = Bukkit.getOfflinePlayer(name);
 		offline.getUniqueId();
 		File f = new File(Main.plugin.getDataFolder(), "PlayerData");
@@ -60,7 +60,7 @@ public class APlayerManager {
 		return YamlConfiguration.loadConfiguration(f);
 	}
 	
-	public void saveConfig(FileConfiguration file, UUID uuid){
+	public static void saveConfig(FileConfiguration file, UUID uuid){
 		File f = new File(Main.plugin.getDataFolder() + File.separator + "PlayerData",uuid.toString() + ".yml");
  	    ConfigManager.saveCustomConfig(f,file);
 	}

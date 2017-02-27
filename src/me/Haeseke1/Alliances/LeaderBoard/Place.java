@@ -11,6 +11,7 @@ public class Place {
 	public int location;
 	
 	public Place(String leaderboardName, String keeper, String score, Head_Board hb, int location) {
+		this.leaderboardName = leaderboardName;
 		this.keeper = keeper;
 		this.score = score;
 		this.head_board = hb;
@@ -18,7 +19,7 @@ public class Place {
 		if(hb != null){
 			hb.setLineMessage(0, leaderboardName);
 			hb.setLineMessage(1, "&6&l#" + location);
-			hb.setLineMessage(2, ChatColor.YELLOW + keeper);
+			hb.setLineMessage(2, keeper);
 			hb.setLineMessage(3, ChatColor.AQUA + score);
 		}
 	}
@@ -27,7 +28,7 @@ public class Place {
 		this.head_board = hb;
 		hb.setLineMessage(0, leaderboardName);
 		hb.setLineMessage(1, "&6&l#" + location);
-		hb.setLineMessage(2, ChatColor.YELLOW + keeper);
+		hb.setLineMessage(2, keeper);
 		hb.setLineMessage(3, ChatColor.AQUA + score);
 	}
 	
@@ -36,7 +37,7 @@ public class Place {
 		if(this.head_board != null){
 			this.head_board.setLineMessage(0, leaderboardName);
 			this.head_board.setLineMessage(1, "&6&l#" + location);
-			this.head_board.setLineMessage(2, ChatColor.YELLOW + keeper);
+			this.head_board.setLineMessage(2, keeper);
 			this.head_board.setLineMessage(3, ChatColor.AQUA + score);
 		}
 	}
@@ -46,7 +47,7 @@ public class Place {
 		if(this.head_board != null){
 			this.head_board.setLineMessage(0, leaderboardName);
 			this.head_board.setLineMessage(1, "&6&l#" + location);
-			this.head_board.setLineMessage(2, ChatColor.YELLOW + keeper);
+			this.head_board.setLineMessage(2, keeper);
 			this.head_board.setLineMessage(3, ChatColor.AQUA + score);
 		}
 	}
