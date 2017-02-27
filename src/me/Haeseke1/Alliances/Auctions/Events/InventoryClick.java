@@ -1,5 +1,6 @@
 package me.Haeseke1.Alliances.Auctions.Events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -26,6 +27,7 @@ public class InventoryClick implements Listener{
 		if(event.getInventory() == null) return;
 		Inventory inv = event.getInventory();
 		if(!inv.getName().equalsIgnoreCase("AUCTION HOUSE")) return;
+		event.setCancelled(true);
 		if(event.getRawSlot() != event.getSlot()) return;
 		Player player = (Player) inv.getHolder();
 		GUI gui = GUI.getGuiOfPlayer(player);
@@ -90,13 +92,20 @@ public class InventoryClick implements Listener{
 		if(event.getInventory() == null) return;
 		Inventory inv = event.getInventory();
 		if(!inv.getName().equalsIgnoreCase("REWARDS")) return;
-		if(event.getRawSlot() != event.getSlot()) return;
+		event.setCancelled(true);
 		Player player = (Player) inv.getHolder();
 		GUI gui = GUI.getGuiOfPlayer(player);
-		event.setCancelled(true);
 		if(event.getCurrentItem() == null) return;
 		ItemStack item = event.getCurrentItem();
 		if(!item.hasItemMeta()){
+			if(item.getType() == Material.AIR) return;
+			AuctionPlayer aucplayer = AuctionPlayer.getAuctionPlayer(player);
+			aucplayer.rewards.remove(event.getCurrentItem());
+            player.closeInventory();
+			player.getInventory().addItem(event.getCurrentItem());
+			MessageManager.sendMessage(player, "&2You've successfully claimed a reward");
+			SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
+			gui.updateGui(player, gui);
 			return;
 		}
 		ItemMeta m = item.getItemMeta();

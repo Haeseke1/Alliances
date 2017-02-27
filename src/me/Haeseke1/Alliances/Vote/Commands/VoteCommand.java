@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import me.Haeseke1.Alliances.Auctions.AuctionPlayer;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
+import me.Haeseke1.Alliances.Vote.VotePlayer;
 
 public class VoteCommand implements CommandExecutor{
 
@@ -46,7 +47,6 @@ public class VoteCommand implements CommandExecutor{
 			String name = player.getName();
 			@SuppressWarnings("deprecation")
 			OfflinePlayer offplayer = Bukkit.getOfflinePlayer(name);
-			AuctionPlayer aucplayer = new AuctionPlayer(offplayer.getUniqueId());
 			if(VoteCommand.rewards.isEmpty()){
 				MessageManager.sendMessage(player, "&cNo vote rewards registered");
 				SoundManager.playSoundToPlayer(Sound.NOTE_BASS, player);
@@ -56,9 +56,19 @@ public class VoteCommand implements CommandExecutor{
 			if(randomint > 0){
 			randomint = randomint - 1;
 			}
-			aucplayer.addReward(VoteCommand.rewards.get(randomint));
+		    if(AuctionPlayer.getAuctionPlayer(player) == null){
+		    	AuctionPlayer aucplayer = new AuctionPlayer(player.getUniqueId());
+		    	aucplayer.addReward(VoteCommand.rewards.get(randomint));
+		    }else{
+		    	AuctionPlayer.getAuctionPlayer(player).addReward(VoteCommand.rewards.get(randomint));
+		    }
+			VotePlayer vplayer = VotePlayer.getVotePlayer(offplayer.getUniqueId());
+			vplayer.addVote();
 			if(offplayer.isOnline()){
 			MessageManager.sendMessage(player, "&2You've received a reward! &e#Do /rewards to claim it");
+			MessageManager.sendMessage(player, "&8Weekly votes: &6" + vplayer.weekly_votes);
+			MessageManager.sendMessage(player, "&8Monthly votes: &6" + vplayer.monthly_votes);
+			MessageManager.sendMessage(player, "&8Total votes: &6" + vplayer.total_votes);
 			SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
 			}
 			return true;

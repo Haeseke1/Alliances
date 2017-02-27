@@ -126,7 +126,7 @@ public class Auction {
 		    int raising = Main.AuctionConfig.getInt(id + ".raising");
 		    int time = Main.AuctionConfig.getInt(id + ".time");
 		    if(Main.AuctionConfig.get(id + ".last_person") != null){
-		    last_person = UUID.fromString(Main.AuctionConfig.getString("#" + id + ".last_person"));
+		    last_person = UUID.fromString(Main.AuctionConfig.getString(id + ".last_person"));
 		    }else{
 		    last_person = null;
 		    }

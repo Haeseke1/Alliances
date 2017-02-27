@@ -19,6 +19,7 @@ public class VoteManager {
 		int count = 0;
 		for(ItemStack item: VoteCommand.rewards){
 			ConfigManager.setItemStackInConfig(Main.VoteConfig, Integer.toString(count), item);
+			count++;
 		}
 		ConfigManager.saveCustomConfig(new File(Main.plugin.getDataFolder(),"vote.yml"), Main.VoteConfig);
 		MessageManager.sendRemarkMessage("Saved the rewards for the config system");

@@ -82,7 +82,6 @@ public class GUI {
 		return true;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void openInv(){
 		if(this.size == 54){
 		for(ItemStack item: this.contents.keySet()){
@@ -100,7 +99,7 @@ public class GUI {
 			if(page == 0){
 		    this.setItem(48, Alchemy.createPanel((short) 14, ChatColor.RED + "No Page"));
 			}else{
-		    this.setItem(50, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Previous Page"));
+		    this.setItem(48, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Previous Page"));
 			}
 		}else{
 		this.setItem(50, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Next Page"));
@@ -137,10 +136,11 @@ public class GUI {
 			if(page == 0){
 			    this.setItem(12, Alchemy.createPanel((short) 14, ChatColor.RED + "No Page"));
 			}else{
-			    this.setItem(14, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Previous Page"));
+			    this.setItem(12, Alchemy.createPanel((short) 13, ChatColor.GREEN + "Previous Page"));
 			}
 			}
 			this.setItem(13, Alchemy.createPanel((short) 9, ChatColor.AQUA + "Refresh"));
+			owner.updateInventory();
 		}
 		owner.openInventory(inv);
 		guis.add(this);

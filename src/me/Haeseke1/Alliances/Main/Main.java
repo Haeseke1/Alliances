@@ -178,6 +178,7 @@ import me.Haeseke1.Alliances.Town.Commands.TownC;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Vote.VoteManager;
+import me.Haeseke1.Alliances.Vote.VotePlayer;
 import me.Haeseke1.Alliances.Vote.Commands.VoteCommand;
 import me.Haeseke1.Alliances.Vote.Events.VoteEvent;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
@@ -218,6 +219,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration AuctionConfig;
 	public static FileConfiguration PortalsConfig;
 	public static FileConfiguration VoteConfig;
+	public static FileConfiguration StatsConfig;
 
 	public static Main plugin;
 
@@ -245,6 +247,7 @@ public class Main extends JavaPlugin {
 		} catch (EmptyItemStackException e1) {
 			e1.printStackTrace();
 		}
+		VotePlayer.loadVotePlayers();
 		registerEvents();
 		registerSchedulers();
 		registerCustomEntitys();
@@ -263,6 +266,7 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		VotePlayer.saveVotePlayers();
 		VoteManager.saveVoteRewards();
         Portal.savePortals();
 	    Auction.saveAuctions();
@@ -499,6 +503,7 @@ public class Main extends JavaPlugin {
 		AuctionConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"auction.yml"), plugin);
 		PortalsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"portals.yml"), plugin);
 		VoteConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"vote.yml"),plugin);
+		StatsConfig = ConfigManager.getCustomConfig(new File(Main.plugin.getDataFolder(),"stats.yml"), plugin);
 		try {
 			ArenaManager.loadArena();
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
