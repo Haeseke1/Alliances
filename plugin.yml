@@ -37,3 +37,7 @@ commands:
     aliases: [portal,p]
   Leaderboard:
     aliases: [lb,l]
+  Rewards:
+    aliases: [rewards,reward]
+  Voteset:
+    aliases: [voteset]

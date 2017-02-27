@@ -9,6 +9,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -26,11 +27,11 @@ public class RightClickWand implements Listener{
 	public void onRightClick(PlayerInteractEvent event){
 		if(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) return;
 	    Player player = event.getPlayer();
-	    Fire_Wand fire_wand = new Fire_Wand("Fire_Wand",player,Material.STICK,2);
+	    Fire_Wand fire_wand = new Fire_Wand("Fire_Wand",player,Material.STICK,4);
 	    fire_wand.launchProjectile(Sound.GHAST_FIREBALL);
 	    Wither_Wand wither_wand = new Wither_Wand("Wither_Wand",player,Material.STICK,5);
 	    wither_wand.launchProjectile(Sound.WITHER_HURT);
-	    Cloud_Wand cloud_wand = new Cloud_Wand("Cloud Wand",player,Material.STICK,15);
+	    Cloud_Wand cloud_wand = new Cloud_Wand("Cloud Wand",player,Material.STICK,3);
 	    cloud_wand.launchPlayer(Sound.BAT_TAKEOFF);
 	    if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
 	    Healing_Wand healing_wand = new Healing_Wand("Healing_Wand",player,Material.STICK,10);
@@ -40,10 +41,8 @@ public class RightClickWand implements Listener{
 	    Healing_Wand healing_wand = new Healing_Wand("Healing_Wand",player,Material.STICK,10);
 	    healing_wand.spawnTotem(player.getLocation().getBlock());
 	    }
-	    if(event.getAction().equals(Action.RIGHT_CLICK_AIR)){
         Time_Bomb_Wand time_bomb_wand = new Time_Bomb_Wand("Time_Bomb_Wand",player,Material.STICK,5);
         time_bomb_wand.placeTimeBomb();
-	    }
 	}
 	
 	@EventHandler
@@ -73,6 +72,4 @@ public class RightClickWand implements Listener{
 			event.setCancelled(true);
 		}
 	}
-
-	
 }

@@ -60,9 +60,12 @@ public class PVEManager {
 	}
 
 	public static void  disablePVE(){
+		if(PVE.main == null) return;
+		if(PVE.main.arenas == null) return;
 		for(Arena arena : PVE.main.arenas){
 			arena.forceStopArena();
 		}
+		if(Group.groups == null) return;
 		for(Group group : Group.groups){
 			group.disband();
 		}

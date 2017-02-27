@@ -34,6 +34,7 @@ public class Alli implements CommandExecutor {
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances member #Get a list of commands for a member");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances admin #Get a list of commands for a admin");
 			sender.sendMessage(MessageManager.infoColorCode + "/Alliances owner #Get a list of commands for a owner");
+			sender.sendMessage(MessageManager.infoColorCode + "/Alliances info [name] #Shows an alliance info");
 			return false;
 		}
 		
@@ -93,7 +94,24 @@ public class Alli implements CommandExecutor {
 			return false;
 		}
 		
-		MessageManager.sendMessage(player, "&cWrong argument do: /alli");
+		if(args[0].equalsIgnoreCase("info")){
+			if(args.length == 0){
+			Alliance.sendInfo(player, null);
+			}else{
+			String name = args[1];
+			Alliance.sendInfo(player, name);
+			}
+			return false;
+		}
+		
+		sender.sendMessage(MessageManager.infoColorCode + "===== Alliances =====");
+		sender.sendMessage(MessageManager.infoColorCode + "Commands:");
+		sender.sendMessage(MessageManager.infoColorCode + "/Alliances create #Create a new alliance");
+		sender.sendMessage(MessageManager.infoColorCode + "/Alliances join #join a alliance that invited you");
+		sender.sendMessage(MessageManager.infoColorCode + "/Alliances member #Get a list of commands for a member");
+		sender.sendMessage(MessageManager.infoColorCode + "/Alliances admin #Get a list of commands for a admin");
+		sender.sendMessage(MessageManager.infoColorCode + "/Alliances owner #Get a list of commands for a owner");
+		sender.sendMessage(MessageManager.infoColorCode + "/Alliances info [name] #Shows an alliance info");
 		return false;
 	}
 

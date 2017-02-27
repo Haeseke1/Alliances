@@ -81,7 +81,7 @@ public class Crate {
 		ArmorStand as = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
 		as.setGravity(false);
 		as.setCanPickupItems(false);
-		as.setCustomName(name);
+		as.setCustomName(name.replace("_", " "));
 		as.setCustomNameVisible(true);
 		as.setVisible(false);
 		loc.add(0, -0.5, 0);

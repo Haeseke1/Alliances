@@ -89,11 +89,4 @@ public class Mount {
 		if(this.horse == null) return false;
 		return true;
 	}
-
-    public static void deleteAllHorse(){
-    	for(Mount mount: MountCommand.mounts.values()){
-    		mount.horse.setHealth(0);
-    		MountCommand.mounts.remove(mount);
-    	}
-    }
 }

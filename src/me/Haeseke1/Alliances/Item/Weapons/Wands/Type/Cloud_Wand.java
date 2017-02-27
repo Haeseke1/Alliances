@@ -32,8 +32,6 @@ public class Cloud_Wand extends Wand{
 				user.setVelocity(dir.add(new Vector(1,4,0)));
 				if(sound == null){ return;}
 				SoundManager.playSoundToPlayer(sound, user);
-				Countdown countdown = new Countdown(user);
-				countdown.runTaskTimerAsynchronously(Main.plugin, 0L, 20L);
 				this.players_in_air.add(this.user);
 			}
 		}
