@@ -8,6 +8,8 @@ import org.bukkit.inventory.ItemStack;
 
 import me.Haeseke1.Alliances.Item.Buildings.Storage.Storage_Level;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Arrow_Tank;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Creeper_Armor;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Fire_Imp;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Flame_Of_Hell;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Golden;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Legend_Of_Zeus;
@@ -720,6 +722,78 @@ public class Item implements CommandExecutor{
 			item = Void_Armor.getLeggings();
 			player.getInventory().addItem(item);
 			item = Void_Armor.getBoots();
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("armor7")){
+			if(args.length > 1){
+				if(!PlayerManager.isPlayerOnline(args[1])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[1]);
+				ItemStack item = Creeper_Armor.getHelmet();
+				getter.getInventory().addItem(item);
+				item = Creeper_Armor.getChestplate();
+				getter.getInventory().addItem(item);
+				item = Creeper_Armor.getLeggings();
+				getter.getInventory().addItem(item);
+				item = Creeper_Armor.getBoots();
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Creeper_Armor.getHelmet();
+			player.getInventory().addItem(item);
+			item = Creeper_Armor.getChestplate();
+			player.getInventory().addItem(item);
+			item = Creeper_Armor.getLeggings();
+			player.getInventory().addItem(item);
+			item = Creeper_Armor.getBoots();
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
+		if(args[0].equalsIgnoreCase("armor8")){
+			if(args.length > 1){
+				if(!PlayerManager.isPlayerOnline(args[1])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[1]);
+				ItemStack item = Fire_Imp.getHelmet();
+				getter.getInventory().addItem(item);
+				item = Fire_Imp.getChestplate();
+				getter.getInventory().addItem(item);
+				item = Fire_Imp.getLeggings();
+				getter.getInventory().addItem(item);
+				item = Fire_Imp.getBoots();
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Fire_Imp.getHelmet();
+			player.getInventory().addItem(item);
+			item = Fire_Imp.getChestplate();
+			player.getInventory().addItem(item);
+			item = Fire_Imp.getLeggings();
+			player.getInventory().addItem(item);
+			item = Fire_Imp.getBoots();
 			player.getInventory().addItem(item);
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
 			return false;

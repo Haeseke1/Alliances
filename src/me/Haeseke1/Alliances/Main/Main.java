@@ -20,6 +20,7 @@ import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Alliance.Bonus_Timer;
+import me.Haeseke1.Alliances.Alliance.Event.AllianceMemberDamage;
 import me.Haeseke1.Alliances.Alliance.Type.Caith_Sith;
 import me.Haeseke1.Alliances.Alliance.Type.Pooka;
 import me.Haeseke1.Alliances.Alliance.Type.Salamander;
@@ -386,6 +387,8 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new PortalMoveEvent(), this);
 		
 		pm.registerEvents(new VoteEvent(), this);
+		
+		pm.registerEvents(new AllianceMemberDamage(), this);
 	}
 
 	public void registerCommands() {
