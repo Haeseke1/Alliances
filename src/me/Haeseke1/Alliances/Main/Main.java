@@ -125,9 +125,11 @@ import me.Haeseke1.Alliances.Item.Weapons.Armor.Flame_Of_Hell;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Golden;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Legend_Of_Zeus;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Tank;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Void_Armor;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Schedulers.CheckCooldowns;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Blade_Of_Zeus;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Double_Strike;
+import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Excalibur;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Fatal_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Heaven_Blade;
 import me.Haeseke1.Alliances.Item.Weapons.Swords.Type.Karma_Blade;
@@ -343,11 +345,13 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new Heaven_Blade(), this);
 		pm.registerEvents(new Mob_Slayer(), this);
 		pm.registerEvents(new Golden(), this);
+		pm.registerEvents(new Excalibur(), this);
 		
 		pm.registerEvents(new Arrow_Tank(), this);
 		pm.registerEvents(new Tank(), this);
 		pm.registerEvents(new Legend_Of_Zeus(), this);
 		pm.registerEvents(new Flame_Of_Hell(), this);
+		pm.registerEvents(new Void_Armor(), this);
 		
 		pm.registerEvents(new PlayerQuit(), this);
 		pm.registerEvents(new BlockBreak_Place(), this);

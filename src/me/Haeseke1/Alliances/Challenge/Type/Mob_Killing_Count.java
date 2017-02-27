@@ -20,7 +20,7 @@ public class Mob_Killing_Count implements Listener {
 		for(Challenge challenge : Challenge.challenges){
 			if(challenge.type.equals(challengeType.Mob_Killing_Count)){
 				EntityDamageEvent devent = event.getEntity().getLastDamageCause();
-				if(devent.getCause().equals(DamageCause.ENTITY_ATTACK)){
+				if(devent.getCause() != null && devent.getCause().equals(DamageCause.ENTITY_ATTACK)){
 					if(event.getEntity().getKiller() != null){
 						Player player = event.getEntity().getKiller();
 						if(!challenge.done.contains(player.getUniqueId())){

@@ -35,5 +35,9 @@ commands:
     aliases: [auc,auction,ah]
   Portal:
     aliases: [portal,p]
+  rewards:
+    aliases: [rew,rewards]
+  voteset:
+    aliases: [votes,vs]
   Leaderboard:
     aliases: [lb,l]

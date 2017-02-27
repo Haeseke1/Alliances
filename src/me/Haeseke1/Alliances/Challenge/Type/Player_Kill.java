@@ -23,7 +23,7 @@ public class Player_Kill implements Listener{
 		for(Challenge challenge : Challenge.challenges){
 			if(challenge.type.equals(challengeType.Player_Kill)){
 				EntityDamageEvent devent = event.getEntity().getLastDamageCause();
-				if(devent.getCause().equals(DamageCause.ENTITY_ATTACK)){
+				if(devent.getCause() != null && devent.getCause().equals(DamageCause.ENTITY_ATTACK)){
 					if(event.getEntity().getKiller() != null && event.getEntity().getType().equals(EntityType.PLAYER)){
 						Player player = event.getEntity().getKiller();
 						if(!challenge.done.contains(player.getUniqueId())){
