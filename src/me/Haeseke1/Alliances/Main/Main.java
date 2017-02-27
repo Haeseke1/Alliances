@@ -140,6 +140,7 @@ import me.Haeseke1.Alliances.Item.Weapons.Wands.Commands.Wand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Events.RightClickWand;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler.Healing;
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Scheduler.ManaRegen;
+import me.Haeseke1.Alliances.LeaderBoard.Head_Board;
 import me.Haeseke1.Alliances.Mounts.Mount;
 import me.Haeseke1.Alliances.Mounts.MountsManager;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
@@ -340,6 +341,8 @@ public class Main extends JavaPlugin {
 		
 		pm.registerEvents(new CratesEvents(), this);
 		pm.registerEvents(new AlchemyListener(), this);
+		
+		pm.registerEvents(new Head_Board(), this);
 		
 		pm.registerEvents(new InventoryClick(), this);
 		pm.registerEvents(new RewardJoin(), this);

@@ -18,7 +18,6 @@ import me.Haeseke1.Alliances.Chat.ChatEvent;
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
-import me.Haeseke1.Alliances.Exp.Exp;
 import me.Haeseke1.Alliances.Outpost.Outpost;
 import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Town.TownManager;
@@ -66,11 +65,7 @@ public class Config {
 			Outpost.rewardTime = ConfigManager.getIntFromConfig(Main.config, "Outpost.Time_Per_Reward");
 			Outpost.Coin_Reward = ConfigManager.getIntFromConfig(Main.config, "Outpost.Coin_Reward");
 			OutpostManager.Reward_Exp = ConfigManager.getIntFromConfig(Main.config, "Outpost.Exp_Per_Reward");
-			
-			for(int i = 2; i <= 30; i++){
-				Exp.table.put(i, ConfigManager.getIntFromConfig(Main.config, "Level.Amount_Exp." + i));
-			}
-			
+						
 			TownManager.Town_Create_Payment = ConfigManager.getIntFromConfig(Main.config, "Coins.Town_Starter_Cost");
 			TownManager.Town_Claim_Payment = ConfigManager.getIntFromConfig(Main.config, "Coins.Town_Claim_Cost");
 			TownManager.Claim_Limit = ConfigManager.getIntFromConfig(Main.config, "Town.Town_Claim_Limit");

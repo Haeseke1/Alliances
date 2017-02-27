@@ -33,7 +33,8 @@ public class Alliance {
 	private HashMap<UUID, String> mMembers;
 	private String name;
 	private final AllianceType type;
-	private int exp;
+	
+	private int Score;
 	
 	private List<Town> towns = new ArrayList<Town>();
 	
@@ -56,10 +57,10 @@ public class Alliance {
 		this.mLoses = loses;
 		this.mCoins = coins;
 		this.type = type;
-		this.exp = 0;
+		this.Score = 0;
 	}
 
-	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type, HashMap<UUID,String> mMembers, int exp) {
+	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type, HashMap<UUID,String> mMembers, int score) {
 		this.mMembers = mMembers;
 		this.name = ChatColor.translateAlternateColorCodes('&', name);
 		this.mOwner = owner;
@@ -67,7 +68,7 @@ public class Alliance {
 		this.mLoses = loses;
 		this.mCoins = coins;
 		this.type = type;
-		this.exp = exp;
+		this.Score = score;
 	}
 	
 	public UUID getOwner() {
@@ -180,14 +181,6 @@ public class Alliance {
 		this.admins = admins;
 	}
 
-	public int getExp() {
-		return exp;
-	}
-
-	public void setExp(int exp) {
-		this.exp = exp;
-	}
-
 	public List<Town> getTowns() {
 		return towns;
 	}
@@ -208,7 +201,6 @@ public class Alliance {
 			if(ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_lose_alliance_reward_exp") != 0){
 			int lostexp = ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_lose_alliance_reward_exp");
 			this.sendPlayersMessage(ChatColor.RED + "(-" + lostexp + " alliance exp)");
-			this.setExp(this.getExp() - lostexp);
 			}
 			if(ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_lose_alliance_reward_coins") != 0){
 				int lostCoins = ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_lose_alliance_reward_coins");
@@ -237,8 +229,6 @@ public class Alliance {
 			if(ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_win_alliance_reward_exp") != 0){
 			int gainedexp = ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_win_alliance_reward_exp");
 			this.sendPlayersMessage(ChatColor.GREEN + "(+" + gainedexp + " alliance exp)");
-			this.setExp(this.getExp() + gainedexp);
-			
 			}
 			if(ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_win_alliance_reward_coins") != 0){
 				int gainedCoins = ConfigManager.getIntFromConfig(Main.settingsConfig, "Arena_win_alliance_reward_coins");
@@ -268,6 +258,18 @@ public class Alliance {
 			return true;
 		}
 		return false;
+	}
+
+	public int getScore() {
+		return Score;
+	}
+
+	public void setScore(int score) {
+		Score = score;
+	}
+	
+	public void addScore(int score){
+		Score += score;
 	}
 	
 }

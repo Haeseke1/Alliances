@@ -12,6 +12,8 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import me.Haeseke1.Alliances.APlayer.APlayerManager;
 import me.Haeseke1.Alliances.APlayer.aPlayer;
+import me.Haeseke1.Alliances.Alliance.Alliance;
+import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Economy.Coins;
 import net.md_5.bungee.api.ChatColor;
 
@@ -124,6 +126,13 @@ public class Arena {
 		if(playerWon){
 			for(Player player : group.members){
 				Coins.addPlayerCoins(player, group.settings.getCoinReward() / group.members.size());
+				aPlayer aplayer = APlayerManager.getAPlayer(player);
+				aplayer.addPlayerScore(group.settings.getCoinReward() / group.members.size());
+				aplayer.addPVE_Score(group.settings.getCoinReward() / group.members.size());
+			}
+			if(AllianceManager.getAlliance(group.members.get(0)) != null){
+				Alliance alli = AllianceManager.getAlliance(group.members.get(0));
+				alli.addScore(group.settings.getCoinReward());
 			}
 			group.sendPlayersMessage(ChatColor.GREEN + "Your group survived! " + ChatColor.GOLD + "(+" + (int) (group.settings.getCoinReward() / group.members.size()) + " coins)");
 		}else{

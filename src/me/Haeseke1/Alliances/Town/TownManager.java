@@ -13,7 +13,6 @@ import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Buildings.Building;
 import me.Haeseke1.Alliances.Economy.Coins;
-import me.Haeseke1.Alliances.Exp.Exp;
 import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import net.md_5.bungee.api.ChatColor;
@@ -41,12 +40,6 @@ public class TownManager {
 		}
 		if(!alli.getOwner().equals(player.getUniqueId())){
 			String message = "&cYou are not the owner of this alliance!";
-			message = message.replace("%town_name%", name);
-			MessageManager.sendMessage(player, message);
-			return;
-		}
-		if(Exp.getLevel(alli.getExp()) < 3 || alli.getTowns().size() > 0){
-			String message = "&cyou can't create a town";
 			message = message.replace("%town_name%", name);
 			MessageManager.sendMessage(player, message);
 			return;

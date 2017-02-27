@@ -103,6 +103,7 @@ public class Admin {
 				int money = Integer.parseInt(args[2]);
 				if(Coins.removePlayerCoins(player, money)){
 					Coins.addAllianceCoins(alli, money);
+					alli.addScore(money);
 					MessageManager.sendMessage(player, "&2You supported your alliance with &6" + money + "&2 coins!");
 				}else{
 					MessageManager.sendMessage(player, "&cYou don't have enough money");

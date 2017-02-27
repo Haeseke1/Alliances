@@ -9,6 +9,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import me.Haeseke1.Alliances.APlayer.APlayerManager;
+import me.Haeseke1.Alliances.APlayer.aPlayer;
 import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Economy.Coins;
@@ -137,7 +139,12 @@ public class Outpost {
 			if(currentReward == rewardTime){
 				owner.sendPlayersMessage(ChatColor.DARK_GREEN + "Your alliance is rewarded with " + ChatColor.YELLOW + Coin_Reward + " coins!");
 				Coins.addAllianceCoins(owner, Coin_Reward);
+				owner.addScore(Coin_Reward);
 				currentReward = 0;
+				for(Player player : players){
+					aPlayer aplayer = APlayerManager.getAPlayer(player);
+					aplayer.addPlayerScore(Coin_Reward);
+				}
 			}
 			currentReward++;
 			if(oldContested){
