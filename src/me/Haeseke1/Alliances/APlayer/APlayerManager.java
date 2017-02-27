@@ -1,13 +1,16 @@
 package me.Haeseke1.Alliances.APlayer;
 
 import java.io.File;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Utils.ConfigManager;
 
 public class APlayerManager {
 
@@ -45,5 +48,21 @@ public class APlayerManager {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
+	public FileConfiguration getConfig(String name){
+		OfflinePlayer offline = Bukkit.getOfflinePlayer(name);
+		offline.getUniqueId();
+		File f = new File(Main.plugin.getDataFolder(), "PlayerData");
+		if(!f.exists()){
+			f.mkdir();
+		}
+		f = new File(f, offline.getUniqueId().toString() + ".yml");
+		return YamlConfiguration.loadConfiguration(f);
+	}
+	
+	public void saveConfig(FileConfiguration file, UUID uuid){
+		File f = new File(Main.plugin.getDataFolder() + File.separator + "PlayerData",uuid.toString() + ".yml");
+ 	    ConfigManager.saveCustomConfig(f,file);
+	}
 
 }

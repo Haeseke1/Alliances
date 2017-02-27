@@ -14,7 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
-import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class Head_Board implements Listener{
@@ -31,6 +30,7 @@ public class Head_Board implements Listener{
 	public Head_Board(Sign sign, Skull skull) {
 		this.sign = sign;
 		this.skull = skull;
+		headboards.add(this);
 	}
 	
 	
@@ -44,12 +44,31 @@ public class Head_Board implements Listener{
 		skull.setOwner(owner);
 	}
 	
+	
+	
+	
+	
 	@EventHandler
 	private void onBlockBreak(BlockBreakEvent event){
 		if(event.getBlock().getState() instanceof Sign || event.getBlock().getState() instanceof Skull){
-			event.setCancelled(true);
-			String message = "You can't break blocks from the leaderboard";
-			MessageManager.sendAlertMessage(message);
+			for(Head_Board headboard : headboards){
+				if(event.getBlock().getState() instanceof Sign){
+					Sign sign = (Sign) event.getBlock().getState();
+					if(headboard.sign.equals(sign)){
+						event.setCancelled(true);
+						String message = "&cYou can't break blocks from the leaderboard";
+						MessageManager.sendMessage(event.getPlayer(), message);
+					}
+				}
+				if(event.getBlock().getState() instanceof Skull){
+					Skull skull = (Skull) event.getBlock().getState();
+					if(headboard.skull.equals(skull)){
+						event.setCancelled(true);
+						String message = "&cYou can't break blocks from the leaderboard";
+						MessageManager.sendMessage(event.getPlayer(), message);
+					}
+				}
+			}
 		}
 	}
 	
@@ -59,9 +78,20 @@ public class Head_Board implements Listener{
         Iterator<Block> it = destroyed.iterator();
         while (it.hasNext()) {
             Block block = it.next();
-            if(OutpostManager.checkLocation(block.getLocation())){
-            	it.remove();
-            }
+			for(Head_Board headboard : headboards){
+				if(block.getState() instanceof Sign){
+					Sign sign = (Sign) block.getState();
+					if(headboard.sign.equals(sign)){
+						event.setCancelled(true);
+					}
+				}
+				if(block.getState() instanceof Skull){
+					Skull skull = (Skull) block.getState();
+					if(headboard.skull.equals(skull)){
+						event.setCancelled(true);
+					}
+				}
+			}
         }
     }
 	
