@@ -87,7 +87,7 @@ public class aPlayer{
 	  if(file.contains("Score"))
 		  this.score = file.getInt("Score");
 	  if(file.contains("PVE_Score"))
-		  this.score = file.getInt("PVE_Score");
+		  this.PVE_Score = file.getInt("PVE_Score");
 	}
 	
 	public void saveConfig(){
