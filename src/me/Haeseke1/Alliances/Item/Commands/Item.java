@@ -11,7 +11,6 @@ import me.Haeseke1.Alliances.Item.Weapons.Armor.Arrow_Tank;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Creeper_Armor;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Drunk;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Fire_Imp;
-import me.Haeseke1.Alliances.Item.Weapons.Armor.Fire_Resistance;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Flame_Of_Hell;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Golden;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Legend_Of_Zeus;
@@ -801,41 +800,6 @@ public class Item implements CommandExecutor{
 			return false;
 		}
 		
-		if(args[0].equalsIgnoreCase("armor9")){
-			if(args.length > 1){
-				if(!PlayerManager.isPlayerOnline(args[1])){
-					MessageManager.sendMessage(sender, "&cThis player is not online!");
-					return false;
-				}
-				Player getter = PlayerManager.getPlayer(args[1]);
-				ItemStack item = Fire_Resistance.getHelmet();
-				getter.getInventory().addItem(item);
-				item = Fire_Resistance.getChestplate();
-				getter.getInventory().addItem(item);
-				item = Fire_Resistance.getLeggings();
-				getter.getInventory().addItem(item);
-				item = Fire_Resistance.getBoots();
-				getter.getInventory().addItem(item);
-				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
-				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
-				return false;
-			}
-			if (!(sender instanceof Player)) {
-				String message = "This command needs to be executed by a player";
-				MessageManager.sendAlertMessage(message);
-				return false;
-			}
-			ItemStack item = Fire_Resistance.getHelmet();
-			player.getInventory().addItem(item);
-			item = Fire_Resistance.getChestplate();
-			player.getInventory().addItem(item);
-			item = Fire_Resistance.getLeggings();
-			player.getInventory().addItem(item);
-			item = Fire_Resistance.getBoots();
-			player.getInventory().addItem(item);
-			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
-			return false;
-		}
 		
 		if(args[0].equalsIgnoreCase("armor9")){
 			if(args.length > 1){
@@ -872,6 +836,43 @@ public class Item implements CommandExecutor{
 			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
 			return false;
 		}
+		
+		if(args[0].equalsIgnoreCase("armor10")){
+			if(args.length > 1){
+				if(!PlayerManager.isPlayerOnline(args[1])){
+					MessageManager.sendMessage(sender, "&cThis player is not online!");
+					return false;
+				}
+				Player getter = PlayerManager.getPlayer(args[1]);
+				ItemStack item = Flame_Of_Hell.getHelmet();
+				getter.getInventory().addItem(item);
+				item = Flame_Of_Hell.getChestplate();
+				getter.getInventory().addItem(item);
+				item = Flame_Of_Hell.getLeggings();
+				getter.getInventory().addItem(item);
+				item = Flame_Of_Hell.getBoots();
+				getter.getInventory().addItem(item);
+				MessageManager.sendMessage(sender, ChatColor.GREEN + "You gave " + getter.getName() + " a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				MessageManager.sendMessage(getter, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+				return false;
+			}
+			if (!(sender instanceof Player)) {
+				String message = "This command needs to be executed by a player";
+				MessageManager.sendAlertMessage(message);
+				return false;
+			}
+			ItemStack item = Flame_Of_Hell.getHelmet();
+			player.getInventory().addItem(item);
+			item = Flame_Of_Hell.getChestplate();
+			player.getInventory().addItem(item);
+			item = Flame_Of_Hell.getLeggings();
+			player.getInventory().addItem(item);
+			item = Flame_Of_Hell.getBoots();
+			player.getInventory().addItem(item);
+			MessageManager.sendMessage(player, ChatColor.GREEN + "You got a " + ChatColor.GOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + "!");
+			return false;
+		}
+		
 		
 		return false;
 	}

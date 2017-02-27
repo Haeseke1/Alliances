@@ -6,23 +6,26 @@ import java.util.Random;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class Drunk {
+public class Drunk implements Listener{
+	
 	public static ItemStack getHelmet(){
 		ItemStack item = new ItemStack(Material.DIAMOND_HELMET);
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.AQUA + "Drunk Helmet");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.AQUA + "Has a 10% chance to give your enemies beer!");
-		lore.add(ChatColor.AQUA + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.AQUA + "Full armor set has a 40% chance!");
+		lore.add(ChatColor.DARK_GREEN + "Has a 10% chance to give your enemies beer!");
+		lore.add(ChatColor.DARK_GREEN + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set has a 50% chance!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -33,9 +36,9 @@ public class Drunk {
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.AQUA + "Drunk Chestplate");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.AQUA + "Has a 10% chance to give your enemies beer!");
-		lore.add(ChatColor.AQUA + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.AQUA + "Full armor set has a 40% chance!");
+		lore.add(ChatColor.DARK_GREEN + "Has a 10% chance to give your enemies beer!");
+		lore.add(ChatColor.DARK_GREEN + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set has a 50% chance!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -46,9 +49,9 @@ public class Drunk {
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.AQUA + "Drunk Leggings");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.AQUA + "Has a 10% chance to give your enemies beer!");
-		lore.add(ChatColor.AQUA + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.AQUA + "Full armor set has a 40% chance!");
+		lore.add(ChatColor.DARK_GREEN + "Has a 10% chance to give your enemies beer!");
+		lore.add(ChatColor.DARK_GREEN + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set has a 50% chance!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -59,9 +62,9 @@ public class Drunk {
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.AQUA + "Drunk Boots");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.AQUA + "Has a 10% chance to give your enemies beer!");
-		lore.add(ChatColor.AQUA + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.AQUA + "Full armor set has a 40% chance!");
+		lore.add(ChatColor.DARK_GREEN + "Has a 10% chance to give your enemies beer!");
+		lore.add(ChatColor.DARK_GREEN + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set has a 50% chance!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -82,13 +85,13 @@ public class Drunk {
 				continue;
 			}
 			String displayname = item.getItemMeta().getDisplayName();
-			if(!displayname.startsWith(ChatColor.DARK_RED + "Fire Imp ")){
+			if(!displayname.startsWith(ChatColor.AQUA + "Drunk ")){
 				continue;
 			}
 			amount++;
 		}
-		if(!(event.getDamager() instanceof Player)) return;
-		Player damager = (Player) event.getDamager();
+		if(!(event.getDamager() instanceof LivingEntity)) return;
+		LivingEntity damager = (LivingEntity) event.getDamager();
 		amount = amount == 4 ? 5 : amount;
 		int random = new Random().nextInt(100) + 1;
 		if(amount * 10 > random){
