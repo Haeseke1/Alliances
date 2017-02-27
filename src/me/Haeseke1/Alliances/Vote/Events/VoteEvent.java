@@ -19,10 +19,10 @@ import me.Haeseke1.Alliances.Vote.Commands.VoteCommand;
 
 public class VoteEvent implements Listener{
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onVote(VotifierEvent event){
 		String name = event.getVote().getUsername();
-		@SuppressWarnings("deprecation")
 		OfflinePlayer offplayer = Bukkit.getOfflinePlayer(name);
 		if(VoteCommand.rewards.isEmpty()){
 			if(offplayer.isOnline()){

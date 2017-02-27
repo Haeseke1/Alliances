@@ -82,6 +82,7 @@ public class GUI {
 		return true;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void openInv(){
 		if(this.size == 54){
 		for(ItemStack item: this.contents.keySet()){

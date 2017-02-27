@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Auctions.Auction;
-import me.Haeseke1.Alliances.Auctions.GUI.GUI;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
 public class AuctionCommand implements CommandExecutor {

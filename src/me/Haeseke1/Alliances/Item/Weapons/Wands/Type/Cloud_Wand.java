@@ -10,7 +10,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import me.Haeseke1.Alliances.Item.Weapons.Wands.Wand;
-import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
 

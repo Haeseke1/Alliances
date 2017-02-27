@@ -146,7 +146,6 @@ import me.Haeseke1.Alliances.LeaderBoard.Head_Board;
 import me.Haeseke1.Alliances.LeaderBoard.LeaderBoard;
 import me.Haeseke1.Alliances.LeaderBoard.LeaderBoard_Timer;
 import me.Haeseke1.Alliances.LeaderBoard.Commands.LeaderboardC;
-import me.Haeseke1.Alliances.Mounts.Mount;
 import me.Haeseke1.Alliances.Mounts.MountsManager;
 import me.Haeseke1.Alliances.Mounts.Commands.MountCommand;
 import me.Haeseke1.Alliances.Mounts.Events.Death;
@@ -221,12 +220,9 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration RewardsConfig;
 	public static FileConfiguration AuctionConfig;
 	public static FileConfiguration PortalsConfig;
-<<<<<<< HEAD
 	public static FileConfiguration LeaderboardConfig;
-=======
 	public static FileConfiguration VoteConfig;
 	public static FileConfiguration StatsConfig;
->>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 
 	public static Main plugin;
 
@@ -405,12 +401,11 @@ public class Main extends JavaPlugin {
 		getCommand("crate").setExecutor(new CrateC());
 		getCommand("auction").setExecutor(new AuctionCommand());
 		getCommand("portal").setExecutor(new PortalCommand());
-<<<<<<< HEAD
 		getCommand("leaderboard").setExecutor(new LeaderboardC());
-=======
+
+		getCommand("portal").setExecutor(new PortalCommand());
 		getCommand("rewards").setExecutor(new Rewards());
 		getCommand("voteset").setExecutor(new VoteCommand());
->>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 	}
 
 	public void registerCustomEntitys() {
@@ -514,12 +509,9 @@ public class Main extends JavaPlugin {
 		RewardsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"rewards.yml"), plugin);
 		AuctionConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"auction.yml"), plugin);
 		PortalsConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"portals.yml"), plugin);
-<<<<<<< HEAD
 		LeaderboardConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"leaderboard.yml"), plugin);
-=======
 		VoteConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"vote.yml"),plugin);
 		StatsConfig = ConfigManager.getCustomConfig(new File(Main.plugin.getDataFolder(),"stats.yml"), plugin);
->>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 		try {
 			ArenaManager.loadArena();
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
