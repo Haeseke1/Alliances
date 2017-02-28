@@ -300,7 +300,7 @@ public class Alliance implements Comparator<Alliance>{
 		}
 		alli = AllianceManager.getAlliance(player);
 		}
-		MessageManager.sendMessage(player, " ");
+		player.sendMessage(" ");
 		MessageManager.sendMessage(player, "&c&l === &6" + alli.name + "&c&l ===");
 		MessageManager.sendMessage(player, "&6 Score: &b" + alli.Score);
 		MessageManager.sendMessage(player, "&6 Coins: &b" + alli.mCoins);

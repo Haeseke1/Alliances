@@ -95,15 +95,15 @@ public class Alli implements CommandExecutor {
 		}
 		
 		if(args[0].equalsIgnoreCase("info")){
-			if(args.length == 0){
+			if(args.length == 1){
 			Alliance.sendInfo(player, null);
+			return true;
 			}else{
 			String name = args[1];
 			Alliance.sendInfo(player, name);
+			return true;
 			}
-			return false;
 		}
-		
 		sender.sendMessage(MessageManager.infoColorCode + "===== Alliances =====");
 		sender.sendMessage(MessageManager.infoColorCode + "Commands:");
 		sender.sendMessage(MessageManager.infoColorCode + "/Alliances create #Create a new alliance");
