@@ -16,6 +16,8 @@ public class AllianceMemberDamage implements Listener{
 			if(event.getDamager() instanceof Player){
 				Player player = (Player) event.getEntity();
 				Player killer = (Player) event.getDamager();
+				if(!AllianceManager.playerIsInAlli(player)) return;
+				if(!AllianceManager.playerIsInAlli(killer)) return;
 				if(AllianceManager.getAlliance(player).getName().equalsIgnoreCase(AllianceManager.getAlliance(killer).getName())){
 					MessageManager.sendMessage(killer, "&cYou can't hurt your own alliance members");
 					event.setCancelled(true);
