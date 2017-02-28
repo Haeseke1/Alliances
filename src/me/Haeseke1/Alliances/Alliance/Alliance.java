@@ -312,14 +312,14 @@ public class Alliance implements Comparator<Alliance>{
         		members = "&2" + offplayer.getName(); 
         		continue;
         	}
-        	members = members +  ",&2" + offplayer.getName(); 
+        	members = members +  "&6,&2" + offplayer.getName(); 
         	continue;
         	}
         	if(members.isEmpty()){
         		members = "&c" + offplayer.getName(); 
         		continue;
         	}
-        	members = members + ",&c" + offplayer.getName(); 
+        	members = members + "&6,&c" + offplayer.getName(); 
         	continue;
         }
 		MessageManager.sendMessage(player, "&6 Members: " + members);
