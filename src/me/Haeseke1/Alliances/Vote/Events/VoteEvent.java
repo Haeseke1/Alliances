@@ -59,14 +59,8 @@ public class VoteEvent implements Listener{
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event){
 		UUID playerUUID = event.getPlayer().getUniqueId();
-		if(Main.StatsConfig.contains(playerUUID.toString())){
-			int w_votes = Main.StatsConfig.getInt(playerUUID.toString() + ".w_votes");
-			int m_votes = Main.StatsConfig.getInt(playerUUID.toString() + ".m_votes");
-			int t_votes = Main.StatsConfig.getInt(playerUUID.toString() + ".t_votes");
-			int week = Main.StatsConfig.getInt(playerUUID.toString() + ".week");
-			int month = Main.StatsConfig.getInt(playerUUID.toString() + ".month");
-			new VotePlayer(playerUUID,w_votes,m_votes,t_votes,week,month);
+		if(!Main.StatsConfig.contains(playerUUID.toString())){
+			new VotePlayer(playerUUID);
 		}
-		 new VotePlayer(playerUUID);
 	}
 }

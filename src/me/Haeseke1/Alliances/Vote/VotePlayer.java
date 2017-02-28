@@ -40,14 +40,10 @@ public class VotePlayer {
 		monthly_votes = 0;
 		}
 		total_votes = total;
-		voteplayers.remove(this);
 		voteplayers.add(this);
 	}
 	
 	public VotePlayer(UUID playerUUID){
-		if(voteplayers.contains(this)){
-			return;
-		}
 		this.uuid = playerUUID;
 		weekly_votes = 0;
 		monthly_votes = 0;
@@ -67,7 +63,7 @@ public class VotePlayer {
 				return vplayer;
 			}
 		}
-		return loadVotePlayer(playerUUID);
+		return new VotePlayer(playerUUID);
 	}
 	
 	public static VotePlayer loadVotePlayer(UUID playerUUID){

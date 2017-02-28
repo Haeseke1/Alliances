@@ -251,35 +251,16 @@ public class Main extends JavaPlugin {
 		}
 		Config.registerConfigFile(this);
 		registerCommands();
-		try {
-			VoteManager.loadVoteRewards();
-		} catch (EmptyItemStackException e1) {
-			e1.printStackTrace();
-		}
-		VotePlayer.loadVotePlayers();
 		registerEvents();
 		registerSchedulers();
 		registerCustomEntitys();
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
-		APlayerManager.aPlayerStartUp();
-		Auction.loadAuctions();
-		AuctionPlayer.loadAuctionPlayers();
-		try {
-			Portal.loadPortals();
-		} catch (EmptyLocationException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
 	public void onDisable() {
-		VotePlayer.saveVotePlayers();
-		VoteManager.saveVoteRewards();
-        Portal.savePortals();
-	    Auction.saveAuctions();
-	    AuctionPlayer.saveAuctionPlayers();
 		for(Player player : Bukkit.getOnlinePlayers()){
 			player.closeInventory();
 		}
@@ -289,7 +270,6 @@ public class Main extends JavaPlugin {
 		Config.saveConfigFile(this);
 		saveAllCustomConfigs();
 		ShopManager.despawnVendors();
-		APlayerManager.aPlayerSave();
 		MessageManager.sendAlertMessage("The plugin has been shutted down! *-* The cake wasn't a lie thought *-*");
 	}
 
@@ -498,6 +478,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Healing(), 0L, 50L);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Bonus_Timer(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new LeaderBoard_Timer(), 20, 20);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new AutoSave(), 200, 200);
 		java.util.Timer timer = new java.util.Timer(); 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);
@@ -505,6 +486,9 @@ public class Main extends JavaPlugin {
 		today.set(Calendar.SECOND, 0);
 		timer.schedule(new ChallengeManager(), TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
 	}
+	
+	
+	
 
 	/*
 	 * Creates all the needed configs of the code (JSON support not included)
@@ -528,7 +512,9 @@ public class Main extends JavaPlugin {
 		StatsConfig = ConfigManager.getCustomConfig(new File(Main.plugin.getDataFolder(),"stats.yml"), plugin);
 		try {
 			ArenaManager.loadArena();
-		} catch (EmptyIntException | EmptyLocationException | EmptyStringException e) {
+			VoteManager.loadVoteRewards();
+			Portal.loadPortals();
+		} catch (EmptyIntException | EmptyLocationException | EmptyStringException | EmptyItemStackException e) {
 			e.printStackTrace();
 		}
 		CrateManager.registerCrate();
@@ -541,6 +527,10 @@ public class Main extends JavaPlugin {
 		PVEManager.registerPVE();
 		BuilderManager.registerBuilders();
 		LeaderBoard.registerLeaderboard();
+		VotePlayer.loadVotePlayers();
+		APlayerManager.aPlayerStartUp();
+		Auction.loadAuctions();
+		AuctionPlayer.loadAuctionPlayers();
 	}
 
 	public static void saveAllCustomConfigs() {
@@ -553,6 +543,12 @@ public class Main extends JavaPlugin {
 		BuildingManager.saveBuildings();
 		BuilderManager.saveBuilders();
 		LeaderBoard.saveLeaderboard();
+		VotePlayer.saveVotePlayers();
+		VoteManager.saveVoteRewards();
+        Portal.savePortals();
+	    Auction.saveAuctions();
+	    AuctionPlayer.saveAuctionPlayers();
+		APlayerManager.aPlayerSave();
 		for (Entry<String, FileConfiguration> entry : configFiles.entrySet()) {
 			if (configFile.containsKey(entry.getKey())) {
 				ConfigManager.saveCustomConfig(configFile.get(entry.getKey()), entry.getValue());

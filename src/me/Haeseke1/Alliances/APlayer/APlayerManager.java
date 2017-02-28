@@ -33,7 +33,6 @@ public class APlayerManager {
 			if(!f.exists()){
 				f.mkdir();
 			}
-			Bukkit.broadcastMessage(Main.plugin.getDataFolder().getName());
 			f = new File(Main.plugin.getDataFolder() + "PlayerData", player.getUniqueId().toString() + ".yml");
 			FileConfiguration file = YamlConfiguration.loadConfiguration(f);
 			aPlayer APlayer = new aPlayer(player, file);
