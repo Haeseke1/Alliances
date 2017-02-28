@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -284,7 +285,7 @@ public class Alliance implements Comparator<Alliance>{
 	
 	public static void sendInfo(Player player, String name){
 		Alliance alli;
-		if(name == null){
+		if(name != null){
 	    alli = AllianceManager.getAlliance(name);
 		if(alli == null){
 			MessageManager.sendMessage(player, "&cThis alliance doesn't exists");
@@ -303,7 +304,25 @@ public class Alliance implements Comparator<Alliance>{
 		MessageManager.sendMessage(player, "&c&l === &6" + alli.name + "&c&l ===");
 		MessageManager.sendMessage(player, "&6 Score: &b" + alli.Score);
 		MessageManager.sendMessage(player, "&6 Coins: &b" + alli.mCoins);
-		MessageManager.sendMessage(player, "&6 Members: &b" + alli.mMembers.size());
+        String members = "";
+        for(UUID uuid: alli.getMembers().keySet()){
+        	OfflinePlayer offplayer = Bukkit.getOfflinePlayer(uuid);
+        	if(offplayer.isOnline()){
+        	if(members.isEmpty()){
+        		members = "&2" + offplayer.getName(); 
+        		continue;
+        	}
+        	members = ",&2" + offplayer.getName(); 
+        	continue;
+        	}
+        	if(members.isEmpty()){
+        		members = "&c" + offplayer.getName(); 
+        		continue;
+        	}
+        	members = ",&c" + offplayer.getName(); 
+        	continue;
+        }
+		MessageManager.sendMessage(player, "&6 Members: " + members);
 		MessageManager.sendMessage(player, "&2 Wins&6: &b" + alli.mWins);
 		MessageManager.sendMessage(player, "&c Loses&6: &b" + alli.mLoses);
 		
