@@ -91,19 +91,13 @@ public class Flame_Of_Hell implements Listener {
 		}
 		amount = amount == 4 ? 5 : amount;
 		if(amount > 0){
-			if(event.getCause() == DamageCause.FIRE_TICK){
-				for(ItemStack item : player.getInventory().getArmorContents()){
-					if(item == null || item.getType() == Material.AIR){
-						continue;
-					}
-					item.setDurability((short) (item.getDurability() + 1));
-				}
+			if(event.getCause() == DamageCause.FIRE_TICK || event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.LAVA){
 				event.setCancelled(true);
 			}
 		}
 		int random = new Random().nextInt(100) + 1;
 		if(random < amount * 10){
-			if(event.getCause() == DamageCause.FIRE_TICK){
+			if(event.getCause() == DamageCause.FIRE_TICK || event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.LAVA){
 				if(player.getHealth() + 1 < player.getMaxHealth()){
 					player.setHealth(player.getMaxHealth() + 1);
 				}

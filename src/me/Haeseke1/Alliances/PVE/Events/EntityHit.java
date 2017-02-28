@@ -4,6 +4,7 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -14,8 +15,11 @@ import net.md_5.bungee.api.ChatColor;
 
 public class EntityHit implements Listener {
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.MONITOR)
 	private void entityHit(EntityDamageEvent event){
+		if(event.isCancelled()){
+			return;
+		}
 		if(!(event.getEntity() instanceof LivingEntity)){
 			return;
 		}

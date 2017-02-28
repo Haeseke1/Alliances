@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -93,14 +94,8 @@ public class Fire_Imp implements Listener {
 			amount++;
 		}
 		if(amount > 0){
-			if(event.getCause() == DamageCause.FIRE_TICK){
+			if(event.getCause() == DamageCause.FIRE_TICK || event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.LAVA){
 				event.setCancelled(true);
-				for(ItemStack item : player.getInventory().getArmorContents()){
-					if(item == null || item.getType() == Material.AIR){
-						continue;
-					}
-					item.setDurability((short) (item.getDurability() + 1));
-				}
 			}
 		}
 		amount = amount == 4 ? 5 : amount;
@@ -108,6 +103,34 @@ public class Fire_Imp implements Listener {
 		if(amount * 20 > random){
 			event.setCancelled(true);
 			event.getDamager().setFireTicks(60);
+		}
+	}
+	
+	@EventHandler
+	private void entityHit(EntityDamageEvent event){
+		if(!(event.getEntity() instanceof Player)){
+			return;
+		}
+		Player player = (Player) event.getEntity();
+		int amount = 0;
+		for(ItemStack item : player.getInventory().getArmorContents()){
+			if(item == null || item.getType() == Material.AIR){
+				continue;
+			}
+			if(!item.hasItemMeta() || !item.getItemMeta().hasDisplayName() && !item.getItemMeta().hasLore()){
+				continue;
+			}
+			String displayname = item.getItemMeta().getDisplayName();
+			if(!displayname.startsWith(ChatColor.DARK_RED + "Fire Imp ")){
+				continue;
+			}
+			amount++;
+		}
+		amount = amount == 4 ? 5 : amount;
+		if(amount > 0){
+			if(event.getCause() == DamageCause.FIRE_TICK || event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.LAVA){
+				event.setCancelled(true);
+			}
 		}
 	}
 }
