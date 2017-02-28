@@ -1,6 +1,7 @@
 package me.Haeseke1.Alliances.Vote.Events;
 
 import java.util.Random;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -8,10 +9,13 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.vexsoftware.votifier.model.VotifierEvent;
 
 import me.Haeseke1.Alliances.Auctions.AuctionPlayer;
+import me.Haeseke1.Alliances.Main.Main;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
 import me.Haeseke1.Alliances.Vote.VotePlayer;
@@ -53,4 +57,17 @@ public class VoteEvent implements Listener{
 		}
 	}
 	
+	@EventHandler
+	public void onJoin(PlayerJoinEvent event){
+		UUID playerUUID = event.getPlayer().getUniqueId();
+		if(Main.StatsConfig.contains(playerUUID.toString())){
+			int w_votes = Main.StatsConfig.getInt(playerUUID.toString() + ".w_votes");
+			int m_votes = Main.StatsConfig.getInt(playerUUID.toString() + ".m_votes");
+			int t_votes = Main.StatsConfig.getInt(playerUUID.toString() + ".t_votes");
+			int week = Main.StatsConfig.getInt(playerUUID.toString() + ".week");
+			int month = Main.StatsConfig.getInt(playerUUID.toString() + ".month");
+			new VotePlayer(playerUUID,w_votes,m_votes,t_votes,week,month);
+		}
+		 new VotePlayer(playerUUID);
+	}
 }
