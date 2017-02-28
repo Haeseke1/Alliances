@@ -122,6 +122,9 @@ import me.Haeseke1.Alliances.Item.Totems.HealingTotem;
 import me.Haeseke1.Alliances.Item.Totems.Events.DamageTotem;
 import me.Haeseke1.Alliances.Item.Totems.Scheduler.Checker;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Arrow_Tank;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Creeper_Armor;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Drunk;
+import me.Haeseke1.Alliances.Item.Weapons.Armor.Fire_Imp;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Flame_Of_Hell;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Golden;
 import me.Haeseke1.Alliances.Item.Weapons.Armor.Legend_Of_Zeus;
@@ -347,12 +350,16 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new Mob_Slayer(), this);
 		pm.registerEvents(new Golden(), this);
 		pm.registerEvents(new Excalibur(), this);
+		pm.registerEvents(new Creeper_Armor(), this);
 		
 		pm.registerEvents(new Arrow_Tank(), this);
 		pm.registerEvents(new Tank(), this);
 		pm.registerEvents(new Legend_Of_Zeus(), this);
 		pm.registerEvents(new Flame_Of_Hell(), this);
 		pm.registerEvents(new Void_Armor(), this);
+		pm.registerEvents(new Flame_Of_Hell(), this);
+		pm.registerEvents(new Fire_Imp(), this);
+		pm.registerEvents(new Drunk(), this);
 		
 		pm.registerEvents(new PlayerQuit(), this);
 		pm.registerEvents(new BlockBreak_Place(), this);

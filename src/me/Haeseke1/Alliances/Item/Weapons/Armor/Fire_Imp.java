@@ -8,19 +8,23 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class Fire_Imp {
+public class Fire_Imp implements Listener {
+	
 	public static ItemStack getHelmet(){
 		ItemStack item = new ItemStack(Material.DIAMOND_HELMET);
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.DARK_RED + "Fire Imp Helmet");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.DARK_RED + "Has a 25% chance to set your enemy on fire!");
-		lore.add(ChatColor.DARK_RED + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.DARK_RED + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.DARK_GREEN + "Has a 20% chance to set your enemy on fire!");
+		lore.add(ChatColor.DARK_GREEN + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.RED + "Passive: No fire damage for you!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -31,9 +35,10 @@ public class Fire_Imp {
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.DARK_RED + "Fire Imp Chestplate");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.DARK_RED + "Has a 25% chance to set your enemy on fire!");
-		lore.add(ChatColor.DARK_RED + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.DARK_RED + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.DARK_GREEN + "Has a 20% chance to set your enemy on fire!");
+		lore.add(ChatColor.DARK_GREEN + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.RED + "Passive: No fire damage for you!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -44,9 +49,10 @@ public class Fire_Imp {
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.DARK_RED + "Fire Imp Leggings");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.DARK_RED + "Has a 25% chance to set your enemy on fire!");
-		lore.add(ChatColor.DARK_RED + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.DARK_RED + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.DARK_GREEN + "Has a 20% chance to set your enemy on fire!");
+		lore.add(ChatColor.DARK_GREEN + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.RED + "Passive: No fire damage for you!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -57,9 +63,10 @@ public class Fire_Imp {
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(ChatColor.DARK_RED + "Fire Imp Boots");
 		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.DARK_RED + "Has a 25% chance to set your enemy on fire!");
-		lore.add(ChatColor.DARK_RED + "Chance goes higher with more armor pieces!");
-		lore.add(ChatColor.DARK_RED + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.DARK_GREEN + "Has a 20% chance to set your enemy on fire!");
+		lore.add(ChatColor.DARK_GREEN + "Chance goes higher with more armor pieces!");
+		lore.add(ChatColor.DARK_GREEN + "Full armor set has a 100% chance!");
+		lore.add(ChatColor.RED + "Passive: No fire damage for you!");
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
@@ -85,17 +92,22 @@ public class Fire_Imp {
 			}
 			amount++;
 		}
+		if(amount > 0){
+			if(event.getCause() == DamageCause.FIRE_TICK){
+				event.setCancelled(true);
+				for(ItemStack item : player.getInventory().getArmorContents()){
+					if(item == null || item.getType() == Material.AIR){
+						continue;
+					}
+					item.setDurability((short) (item.getDurability() + 1));
+				}
+			}
+		}
 		amount = amount == 4 ? 5 : amount;
 		int random = new Random().nextInt(100) + 1;
-		if(amount * 25 > random){
+		if(amount * 20 > random){
 			event.setCancelled(true);
-			event.getDamager().setFireTicks(20);
-			for(ItemStack item : player.getInventory().getArmorContents()){
-				if(item == null || item.getType() == Material.AIR){
-					continue;
-				}
-				item.setDurability((short) (item.getDurability() + 1));
-			}
+			event.getDamager().setFireTicks(60);
 		}
 	}
 }
