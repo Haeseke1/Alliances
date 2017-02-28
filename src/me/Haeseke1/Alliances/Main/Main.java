@@ -478,7 +478,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Healing(), 0L, 50L);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Bonus_Timer(), 20, 20);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new LeaderBoard_Timer(), 20, 20);
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new AutoSave(), 200, 200);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new AutoSave(), 800, 800);
 		java.util.Timer timer = new java.util.Timer(); 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 1);
