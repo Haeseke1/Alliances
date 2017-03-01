@@ -124,7 +124,7 @@ public class Golden implements Listener {
 			this.damaged = damaged;
 			this.extra_Health = extra_health;
 			damaged.removePotionEffect(PotionEffectType.ABSORPTION);
-			damaged.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, Integer.MAX_VALUE, extra_health));
+			damaged.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 140, extra_health));
 			startScheduler();
 		}
 		
