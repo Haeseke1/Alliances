@@ -55,6 +55,10 @@ public class Auction {
 		if(this.last_person != null){
 			this.last_person = last_person;
 		}
+		if(owner == null){
+			auctions.add(this);
+			return;
+		}
 		if(item == null){
 		if(this.getOwnerAsPlayer().getItemInHand().getType() == Material.AIR){
 			MessageManager.sendMessage(this.getOwnerAsPlayer(), "&cYou can't sell air");
@@ -183,6 +187,7 @@ public class Auction {
 	}
 	
 	public boolean ownerIsOnline(){
+        if(Bukkit.getPlayer(owner) == null) return false;
 	    if(Bukkit.getPlayer(owner).isOnline()) return true;
 		return false;
 	}

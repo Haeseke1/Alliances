@@ -101,7 +101,7 @@ public class Creeper_Armor implements Listener{
 		int random = new Random().nextInt(100) + 1;
 		if(amount * 7 > random && !extension.contains(player)){
 			extension.add(player);
-            player.getWorld().createExplosion(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), 2*amount, false, false);
+            player.getWorld().createExplosion(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), amount, false, false);
 			for(ItemStack item : player.getInventory().getArmorContents()){
 				if(item == null || item.getType() == Material.AIR){
 					continue;

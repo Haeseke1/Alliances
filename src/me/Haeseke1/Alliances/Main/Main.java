@@ -189,6 +189,13 @@ import me.Haeseke1.Alliances.Vote.VoteManager;
 import me.Haeseke1.Alliances.Vote.VotePlayer;
 import me.Haeseke1.Alliances.Vote.Commands.VoteCommand;
 import me.Haeseke1.Alliances.Vote.Events.VoteEvent;
+import me.Haeseke1.Alliances.WorldGuard.Commands.WorldGuardCommand;
+import me.Haeseke1.Alliances.WorldGuard.Events.Blocks;
+import me.Haeseke1.Alliances.WorldGuard.Events.FoodChange;
+import me.Haeseke1.Alliances.WorldGuard.Events.Moving;
+import me.Haeseke1.Alliances.WorldGuard.Events.Slaying;
+import me.Haeseke1.Alliances.WorldGuard.Regions.Region;
+import me.Haeseke1.Alliances.WorldGuard.Regions.Settings;
 import me.Haeseke1.Alliances.regionSelect.regionSelect;
 import me.Haeseke1.Alliances.regionSelect.Commands.Particle_Timer;
 import me.Haeseke1.Alliances.regionSelect.Commands.region;
@@ -229,8 +236,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration LeaderboardConfig;
 	public static FileConfiguration VoteConfig;
 	public static FileConfiguration StatsConfig;
-	
-
+	public static FileConfiguration WorldGuardConfig;
 
 	public static Main plugin;
 
@@ -252,6 +258,8 @@ public class Main extends JavaPlugin {
 					"There was a problem in the code. Ask a dev for more information or download an earlier version of this plugin");
 			return;
 		}
+		Config.registerConfigFile(this);
+		Settings.startUp();
 		registerCommands();
 		registerEvents();
 		registerSchedulers();
@@ -260,9 +268,9 @@ public class Main extends JavaPlugin {
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
+		
 	}
 
-	@Override
 	public void onDisable() {
 		for(Player player : Bukkit.getOnlinePlayers()){
 			player.closeInventory();
@@ -380,6 +388,11 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new VoteEvent(), this);
 		
 		pm.registerEvents(new AllianceMemberDamage(), this);
+		
+		pm.registerEvents(new Slaying(), this);
+		pm.registerEvents(new Moving(), this);
+		pm.registerEvents(new Blocks(), this);
+		pm.registerEvents(new FoodChange(), this);
 	}
 
 	public void registerCommands() {
@@ -404,6 +417,7 @@ public class Main extends JavaPlugin {
 		getCommand("portal").setExecutor(new PortalCommand());
 		getCommand("rewards").setExecutor(new Rewards());
 		getCommand("voteset").setExecutor(new VoteCommand());
+		getCommand("WorldGuard").setExecutor(new WorldGuardCommand());
 	}
 
 	public void registerCustomEntitys() {
@@ -514,6 +528,7 @@ public class Main extends JavaPlugin {
 		LeaderboardConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"leaderboard.yml"), plugin);
 		VoteConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"vote.yml"),plugin);
 		StatsConfig = ConfigManager.getCustomConfig(new File(Main.plugin.getDataFolder(),"stats.yml"), plugin);
+		WorldGuardConfig = ConfigManager.getCustomConfig(new File(plugin.getDataFolder(),"worldguard.yml"),plugin);
 		try {
 			ArenaManager.loadArena();
 			VoteManager.loadVoteRewards();
@@ -521,6 +536,7 @@ public class Main extends JavaPlugin {
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException | EmptyItemStackException e) {
 			e.printStackTrace();
 		}
+		Region.loadRegions();
 		CrateManager.registerCrate();
 		AllianceManager.registerAlliance();
 		TownManager.registerTowns();
@@ -538,6 +554,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public static void saveAllCustomConfigs() {
+		Region.saveRegions();
 		AllianceManager.saveAlliance();
 		CrateManager.saveCrate();
 		OutpostManager.saveOutpost();

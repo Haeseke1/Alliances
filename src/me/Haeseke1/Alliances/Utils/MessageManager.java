@@ -24,11 +24,11 @@ public class MessageManager {
 	}
 	
 	public static void sendInfoMessage(String message) {
-		Bukkit.getConsoleSender().sendMessage(Main.cmdlogo + infoColorCode + message);
+		Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', Main.cmdlogo + infoColorCode + message));
 	}
 
 	public static void sendAlertMessage(String message) {
-		Bukkit.getConsoleSender().sendMessage(Main.cmdlogo + alertColorCode + message);
+		Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', Main.cmdlogo + alertColorCode + message));
 	}
 
 	public static void sendBroadcast(String message) {
@@ -36,7 +36,7 @@ public class MessageManager {
 	}
 
 	public static void sendRemarkMessage(String message) {
-		Bukkit.getConsoleSender().sendMessage(Main.cmdlogo + remarkColorCode + message);
+		Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', Main.cmdlogo + remarkColorCode + message));
 	}
 	
 	public static String translateColorCode(String message) {
