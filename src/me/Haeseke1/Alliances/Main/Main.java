@@ -238,6 +238,7 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration StatsConfig;
 	public static FileConfiguration WorldGuardConfig;
 
+
 	public static Main plugin;
 
 	@SuppressWarnings("static-access")
@@ -258,7 +259,6 @@ public class Main extends JavaPlugin {
 					"There was a problem in the code. Ask a dev for more information or download an earlier version of this plugin");
 			return;
 		}
-		Config.registerConfigFile(this);
 		Settings.startUp();
 		registerCommands();
 		registerEvents();
@@ -268,9 +268,9 @@ public class Main extends JavaPlugin {
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
-		
 	}
 
+	@Override
 	public void onDisable() {
 		for(Player player : Bukkit.getOnlinePlayers()){
 			player.closeInventory();
@@ -536,7 +536,6 @@ public class Main extends JavaPlugin {
 		} catch (EmptyIntException | EmptyLocationException | EmptyStringException | EmptyItemStackException e) {
 			e.printStackTrace();
 		}
-		Region.loadRegions();
 		CrateManager.registerCrate();
 		AllianceManager.registerAlliance();
 		TownManager.registerTowns();
