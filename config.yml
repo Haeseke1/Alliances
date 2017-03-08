@@ -32,7 +32,6 @@ Outpost:
   # the time per reward (in seconds) and the time it takes to take over a outpost (in sec) (best to take a number divisible by 4)
   Time_Per_Reward: 40
   Coin_Reward: 50
-  Exp_Per_Reward: 50
         
 Town:
   Town_Claim_Limit: 100        

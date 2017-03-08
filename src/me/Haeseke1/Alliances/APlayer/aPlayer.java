@@ -78,7 +78,7 @@ public class aPlayer{
 		if(SQL.tableContainsData("aPlayer", "UUID", "\"" + player.getUniqueId().toString() + "\"")){
 			registerSQL();
 		}else{
-			SQL.addDataToTable("aPlayer", "null,\"" + player.getUniqueId().toString() + "\",\"" + player.getName() + "\",0,0," + Coins.getPlayerCoins(player) + ",null,0,0");
+			SQL.addDataToTable("aPlayer", "null,\"" + player.getUniqueId().toString() + "\",\"" + player.getName() + "\",0,0," + Coins.getPlayerCoins(player) + ",null,0,0,null,null,null");
 		}
 		online_Players.add(this);
 		scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
