@@ -27,13 +27,10 @@ public class VotePlayer {
 	public UUID uuid;
 	
 	public VotePlayer(UUID playerUUID,int weekly,int monthly,int total,int week,int month){
-<<<<<<< HEAD
 		if(voteplayers.contains(this)){
 			return;
 		}
-=======
 		MessageManager.sendAlertMessage("month_int: " + month_int + " week_int: " + week_int);
->>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 		this.uuid = playerUUID;
 		if (week_int == week) {
 			weekly_votes = weekly;
@@ -48,10 +45,7 @@ public class VotePlayer {
 		this.month = month_int;
 		this.week = week_int;
 		total_votes = total;
-<<<<<<< HEAD
-=======
 		voteplayers.add(this);
->>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 	}
 	
 	public VotePlayer(UUID playerUUID){
