@@ -26,18 +26,15 @@ public class APlayerManager {
 	}
 	
 	
-	@SuppressWarnings("static-access")
 	public static void aPlayerStartUp(){
 		for(Player player : Bukkit.getOnlinePlayers()){
 			File f = new File(Main.plugin.getDataFolder(), "PlayerData");
 			if(!f.exists()){
 				f.mkdir();
 			}
-			Bukkit.broadcastMessage(Main.plugin.getDataFolder().getName());
 			f = new File(Main.plugin.getDataFolder() + "PlayerData", player.getUniqueId().toString() + ".yml");
 			FileConfiguration file = YamlConfiguration.loadConfiguration(f);
-			aPlayer APlayer = new aPlayer(player, file);
-			APlayer.online_Players.add(APlayer);
+			new aPlayer(player, file);
 		}
 	}
 	

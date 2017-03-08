@@ -18,37 +18,43 @@ public class VotePlayer {
 	public int monthly_votes;
 	public int total_votes;
 	
-	public Calendar cal = Calendar.getInstance();
+	public int month;
+	public int week;
 	
-	@SuppressWarnings("static-access")
-	public int month_int = cal.getInstance().MONTH;
-	@SuppressWarnings("static-access")
-	public int week_int = cal.getInstance().WEEK_OF_YEAR;
+	public static int month_int = Calendar.MONTH;
+	public static int week_int = Calendar.WEEK_OF_YEAR;
 	
 	public UUID uuid;
 	
 	public VotePlayer(UUID playerUUID,int weekly,int monthly,int total,int week,int month){
+<<<<<<< HEAD
 		if(voteplayers.contains(this)){
 			return;
 		}
+=======
+		MessageManager.sendAlertMessage("month_int: " + month_int + " week_int: " + week_int);
+>>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 		this.uuid = playerUUID;
-		if(week_int == week){
-		weekly_votes = weekly;
-		}else{
-		weekly_votes = 0;
+		if (week_int == week) {
+			weekly_votes = weekly;
+		} else {
+			weekly_votes = 0;
 		}
-		if(month_int == month){
-		monthly_votes = monthly;
-		}else{
-		monthly_votes = 0;
+		if (month_int == month) {
+			monthly_votes = monthly;
+		} else {
+			monthly_votes = 0;
 		}
+		this.month = month_int;
+		this.week = week_int;
 		total_votes = total;
+<<<<<<< HEAD
+=======
+		voteplayers.add(this);
+>>>>>>> branch 'master' of https://github.com/Haeseke1/Alliances.git
 	}
 	
 	public VotePlayer(UUID playerUUID){
-		if(voteplayers.contains(this)){
-			return;
-		}
 		this.uuid = playerUUID;
 		weekly_votes = 0;
 		monthly_votes = 0;
@@ -68,7 +74,7 @@ public class VotePlayer {
 				return vplayer;
 			}
 		}
-		return loadVotePlayer(playerUUID);
+		return new VotePlayer(playerUUID);
 	}
 	
 	public static VotePlayer loadVotePlayer(UUID playerUUID){
@@ -87,11 +93,19 @@ public class VotePlayer {
 	
 	public static void saveVotePlayers(){
 		for(VotePlayer vplayer: VotePlayer.voteplayers){
+			if(vplayer.month != VotePlayer.month_int){
+				vplayer.monthly_votes = 0;
+				vplayer.month = VotePlayer.month_int;
+			}
+			if(vplayer.week != VotePlayer.week_int){
+				vplayer.weekly_votes = 0;
+				vplayer.week = VotePlayer.week_int;
+			}
 			Main.StatsConfig.set(vplayer.uuid.toString() + ".w_votes", vplayer.weekly_votes);
 			Main.StatsConfig.set(vplayer.uuid.toString() + ".m_votes", vplayer.monthly_votes);
 			Main.StatsConfig.set(vplayer.uuid.toString() + ".t_votes", vplayer.total_votes);
-			Main.StatsConfig.set(vplayer.uuid.toString() + ".week", vplayer.week_int);
-			Main.StatsConfig.set(vplayer.uuid.toString() + ".month", vplayer.month_int);
+			Main.StatsConfig.set(vplayer.uuid.toString() + ".week", vplayer.week);
+			Main.StatsConfig.set(vplayer.uuid.toString() + ".month", vplayer.month);
 		}
 		ConfigManager.saveCustomConfig(new File(Main.plugin.getDataFolder(),"stats.yml"), Main.StatsConfig);
 		MessageManager.sendRemarkMessage("Registered the voteplayers in the config");

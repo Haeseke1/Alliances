@@ -90,12 +90,6 @@ public class Void_Armor implements Listener {
 		int random = new Random().nextInt(100) + 1;
 		if(amount * 7 > random){
 			event.setCancelled(true);
-			for(ItemStack item : player.getInventory().getArmorContents()){
-				if(item == null || item.getType() == Material.AIR){
-					continue;
-				}
-				item.setDurability((short) (item.getDurability() + 1));
-			}
 		}
 	}
 }
