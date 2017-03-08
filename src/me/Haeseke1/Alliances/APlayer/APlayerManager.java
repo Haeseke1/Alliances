@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Main.SQL;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 
 public class APlayerManager {
@@ -28,6 +29,10 @@ public class APlayerManager {
 	
 	public static void aPlayerStartUp(){
 		for(Player player : Bukkit.getOnlinePlayers()){
+			if(SQL.SQL){
+				new aPlayer(player);
+				continue;
+			}
 			File f = new File(Main.plugin.getDataFolder(), "PlayerData");
 			if(!f.exists()){
 				f.mkdir();
@@ -41,6 +46,10 @@ public class APlayerManager {
 	public static void aPlayerSave(){
 		for(Player player: Bukkit.getOnlinePlayers()){
 			aPlayer aPlayer = APlayerManager.getAPlayer(player);
+			if(SQL.SQL){
+				aPlayer.saveSQL();
+				continue;
+			}
 			aPlayer.saveConfig();
 		}
 	}

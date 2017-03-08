@@ -229,6 +229,8 @@ public class Main extends JavaPlugin {
 	public static FileConfiguration LeaderboardConfig;
 	public static FileConfiguration VoteConfig;
 	public static FileConfiguration StatsConfig;
+	
+
 
 	public static Main plugin;
 
@@ -237,6 +239,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		this.config = getConfig();
 		this.plugin = this;
+		Config.registerConfigFile(this);
 		try {
 			createConfigs();
 		} catch (IOException e) {
@@ -249,11 +252,11 @@ public class Main extends JavaPlugin {
 					"There was a problem in the code. Ask a dev for more information or download an earlier version of this plugin");
 			return;
 		}
-		Config.registerConfigFile(this);
 		registerCommands();
 		registerEvents();
 		registerSchedulers();
 		registerCustomEntitys();
+		
 		MessageManager.sendRemarkMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendAlertMessage("The plugin is doing fine... *-* The cake is a lie *-*");
 		MessageManager.sendInfoMessage("The plugin is doing fine... *-* The cake is a lie *-*");
@@ -270,6 +273,7 @@ public class Main extends JavaPlugin {
 		Config.saveConfigFile(this);
 		saveAllCustomConfigs();
 		ShopManager.despawnVendors();
+		SQL.forceCloseConnection();
 		MessageManager.sendAlertMessage("The plugin has been shutted down! *-* The cake wasn't a lie thought *-*");
 	}
 

@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Main.SQL;
 
 public class APlayerEvents implements Listener{
 	
@@ -24,17 +25,24 @@ public class APlayerEvents implements Listener{
 			f.mkdir();
 		}
 		Player player = event.getPlayer();
-		
-		f = new File(f, player.getUniqueId().toString() + ".yml");
-		FileConfiguration file = YamlConfiguration.loadConfiguration(f);
-		new aPlayer(player, file);
+		if(SQL.SQL){
+			new aPlayer(player);
+		}else{
+			f = new File(f, player.getUniqueId().toString() + ".yml");
+			FileConfiguration file = YamlConfiguration.loadConfiguration(f);
+			new aPlayer(player, file);
+		}
 		player.setMaxHealth(20);
 	}
 	
 	@EventHandler(priority= EventPriority.LOW) 
 	private void playerleave(PlayerQuitEvent event){
 		aPlayer aplayer = APlayerManager.getAPlayer(event.getPlayer());
-		aplayer.saveConfig();
+		if(SQL.SQL){
+			aplayer.saveSQL();
+		}else{
+			aplayer.saveConfig();
+		}
 		aPlayer.online_Players.remove(aplayer);
 	}
 }

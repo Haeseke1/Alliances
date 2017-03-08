@@ -71,7 +71,7 @@ public class Double_Strike extends Sword implements Listener{
 			int strength = getStrength(displayname);
 			if(!SwordManager.hasSword(player.getUniqueId(), "Double Strike") && strength <= number){
 			    Double_Strike swift_blade = new Double_Strike(player,1);
-			    swift_blade.giveDamage((LivingEntity) event.getEntity(), Sound.BLAZE_HIT, (int) event.getDamage());
+			    swift_blade.giveDamage(player,(LivingEntity) event.getEntity(), Sound.BLAZE_HIT, (int) event.getDamage());
 			}
 		} catch (Exception e) {
 			return;
@@ -79,8 +79,14 @@ public class Double_Strike extends Sword implements Listener{
 	}
 	
 	
-	public void giveDamage(LivingEntity damaged, Sound sound, int damage){
+	public void giveDamage(Player damager, LivingEntity damaged, Sound sound, int damage){
 		for(Entity e : damaged.getNearbyEntities(5, 5, 5)){
+			if(e instanceof Player){
+				Player player = (Player) e;
+				if(player.equals(damager)){
+					continue;
+				}
+			}
 			if(e instanceof LivingEntity){
 				((LivingEntity) e).damage(damage);
 				SoundManager.playSound(sound, e.getLocation());

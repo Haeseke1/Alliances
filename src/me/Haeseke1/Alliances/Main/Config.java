@@ -16,10 +16,10 @@ import me.Haeseke1.Alliances.Alliance.Type.Sylph;
 import me.Haeseke1.Alliances.Alliance.Type.Undine;
 import me.Haeseke1.Alliances.Chat.ChatEvent;
 import me.Haeseke1.Alliances.Economy.Coins;
+import me.Haeseke1.Alliances.Exceptions.EmptyBooleanException;
 import me.Haeseke1.Alliances.Exceptions.EmptyIntException;
 import me.Haeseke1.Alliances.Exceptions.EmptyStringException;
 import me.Haeseke1.Alliances.Outpost.Outpost;
-import me.Haeseke1.Alliances.Outpost.OutpostManager;
 import me.Haeseke1.Alliances.Town.TownManager;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
@@ -28,12 +28,10 @@ public class Config {
 	
 	public static void registerConfigFile(Main main) {
 		main.reloadConfig();
-		
 		try {
 			Main.cmdlogo = MessageManager.translateColorCode(ConfigManager.getStringFromConfig(Main.config, "Logo"));
 		} catch (EmptyStringException e) {
 			e.printStackTrace();
-			Main.pm.disablePlugin(main);
 			return;
 		}
 		
@@ -45,9 +43,15 @@ public class Config {
 			MessageManager.remarkColorCode = MessageManager
 					.translateColorCode(ConfigManager.getStringFromConfig(Main.config, "ColorCodes.remarkMessages"));
 			ChatEvent.format = ConfigManager.getStringFromConfig(Main.config, "Chat.Message");
-		} catch (EmptyStringException e) {
+			
+			SQL.SQL = ConfigManager.getBooleanFromConfig(Main.config, "SQL.enable");
+			SQL.ip = ConfigManager.getStringFromConfig(Main.config, "SQL.ip");
+			SQL.username = ConfigManager.getStringFromConfig(Main.config, "SQL.username");
+			SQL.password = ConfigManager.getStringFromConfig(Main.config, "SQL.password");
+			SQL.dbName = ConfigManager.getStringFromConfig(Main.config, "SQL.dbName");
+			
+		} catch (EmptyStringException | EmptyBooleanException e) {
 			e.printStackTrace();
-			Main.pm.disablePlugin(main);
 		}
 		
 		try {
@@ -64,7 +68,6 @@ public class Config {
 			
 			Outpost.rewardTime = ConfigManager.getIntFromConfig(Main.config, "Outpost.Time_Per_Reward");
 			Outpost.Coin_Reward = ConfigManager.getIntFromConfig(Main.config, "Outpost.Coin_Reward");
-			OutpostManager.Reward_Exp = ConfigManager.getIntFromConfig(Main.config, "Outpost.Exp_Per_Reward");
 						
 			TownManager.Town_Create_Payment = ConfigManager.getIntFromConfig(Main.config, "Coins.Town_Starter_Cost");
 			TownManager.Town_Claim_Payment = ConfigManager.getIntFromConfig(Main.config, "Coins.Town_Claim_Cost");
@@ -72,7 +75,6 @@ public class Config {
 			
 		} catch (EmptyIntException e) {
 			e.printStackTrace();
-			Main.pm.disablePlugin(main);
 		}
 		
 		

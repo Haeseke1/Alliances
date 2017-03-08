@@ -1,6 +1,8 @@
 	package me.Haeseke1.Alliances.APlayer;
 
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +23,7 @@ import me.Haeseke1.Alliances.Alliance.Alliance;
 import me.Haeseke1.Alliances.Alliance.AllianceManager;
 import me.Haeseke1.Alliances.Economy.Coins;
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Main.SQL;
 import me.Haeseke1.Alliances.PVE.Arena;
 import me.Haeseke1.Alliances.PVE.ArenaManager;
 import me.Haeseke1.Alliances.PVE.Group;
@@ -36,12 +39,11 @@ public class aPlayer{
 	
 	public static List<aPlayer> online_Players = new ArrayList<aPlayer>();
 
-	public int coins;
 	public Player player;
 	public FileConfiguration file;
 	
-	public int score;
-	public int PVE_Score;
+	public int score = 0;
+	public int PVE_Score = 0;
 	
 	public int wins = 0;
 	public int loses = 0;
@@ -63,17 +65,47 @@ public class aPlayer{
 	
 	
 	public aPlayer(Player player, FileConfiguration file) {
-		coins = Coins.getPlayerCoins(player);
 		this.player = player;
 		this.file = file;
-		this.wins = 0;
-		this.loses = 0;
-		this.score = 0;
-		this.PVE_Score = 0;
 		registerConfig();
 		online_Players.add(this);
 		scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 		player.setScoreboard(scoreboard);
+	}
+	
+	public aPlayer(Player player) {
+		this.player = player;
+		if(SQL.tableContainsData("aPlayer", "UUID", "\"" + player.getUniqueId().toString() + "\"")){
+			registerSQL();
+		}else{
+			SQL.addDataToTable("aPlayer", "null,\"" + player.getUniqueId().toString() + "\",\"" + player.getName() + "\",0,0," + Coins.getPlayerCoins(player) + ",null,0,0");
+		}
+		online_Players.add(this);
+		scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+		player.setScoreboard(scoreboard);
+	}
+	
+	
+	public void registerSQL(){
+		ResultSet rs = SQL.tableGetData("aPlayer", "UUID", "\"" + player.getUniqueId().toString() + "\"");
+		try {
+			rs.next();
+			score = rs.getInt(4);
+			PVE_Score = rs.getInt(5);
+			wins = rs.getInt(8);
+			loses = rs.getInt(9);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void saveSQL(){
+		SQL.setDataToTable("aPlayer", "Score", score + "", "UUID", "\"" + player.getUniqueId().toString() + "\"");
+		SQL.setDataToTable("aPlayer", "PVE_Score", PVE_Score + "", "UUID", "\"" + player.getUniqueId().toString() + "\"");
+		SQL.setDataToTable("aPlayer", "Name", "\"" + player.getName() + "\"","UUID", "\"" + player.getUniqueId().toString() + "\"");
+		SQL.setDataToTable("aPlayer", "Wins", wins + "", "UUID", "\"" + player.getUniqueId().toString() + "\"");
+		SQL.setDataToTable("aPlayer", "Loses", wins + "", "UUID", "\"" + player.getUniqueId().toString() + "\"");
 	}
 	
 	

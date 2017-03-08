@@ -36,6 +36,7 @@ public class Alliance implements Comparator<Alliance>{
 	private String name;
 	private final AllianceType type;
 	
+	
 	private int Score;
 	
 	private List<Town> towns = new ArrayList<Town>();
@@ -66,7 +67,7 @@ public class Alliance implements Comparator<Alliance>{
 		this.Score = 0;
 	}
 
-	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type, HashMap<UUID,String> mMembers, int score) {
+	public Alliance(String name, UUID owner, int wins, int loses, int coins, AllianceType type, HashMap<UUID,String> mMembers, List<UUID> admins, int score) {
 		this.mMembers = mMembers;
 		this.name = ChatColor.translateAlternateColorCodes('&', name);
 		this.mOwner = owner;
@@ -327,5 +328,4 @@ public class Alliance implements Comparator<Alliance>{
 		MessageManager.sendMessage(player, "&c Loses&6: &b" + alli.mLoses);
 		
 	}
-	
 }

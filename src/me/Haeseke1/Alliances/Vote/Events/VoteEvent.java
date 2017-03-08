@@ -15,6 +15,7 @@ import com.vexsoftware.votifier.model.VotifierEvent;
 
 import me.Haeseke1.Alliances.Auctions.AuctionPlayer;
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Main.SQL;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 import me.Haeseke1.Alliances.Utils.SoundManager;
 import me.Haeseke1.Alliances.Vote.VotePlayer;
@@ -24,43 +25,50 @@ public class VoteEvent implements Listener{
 
 	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void onVote(VotifierEvent event){
+	public void onVote(VotifierEvent event) {
 		String name = event.getVote().getUsername();
 		OfflinePlayer offplayer = Bukkit.getOfflinePlayer(name);
-		if(VoteCommand.rewards.isEmpty()){
-			if(offplayer.isOnline()){
+		if (VoteCommand.rewards.isEmpty()) {
+			if (offplayer.isOnline()) {
 				Player player = Bukkit.getPlayer(offplayer.getUniqueId());
 				MessageManager.sendMessage(player, "&cNo vote rewards registered");
 				SoundManager.playSoundToPlayer(Sound.NOTE_BASS, player);
-				}
+			}
 		}
 		int randomint = new Random().nextInt(VoteCommand.rewards.size());
-		if(randomint > 0){
-		randomint = randomint - 1;
+		if (randomint > 0) {
+			randomint = randomint - 1;
 		}
 		Player player = Bukkit.getPlayer(name);
-	    if(AuctionPlayer.getAuctionPlayer(player) == null){
-	    	AuctionPlayer aucplayer = new AuctionPlayer(offplayer.getUniqueId());
-	    	aucplayer.addReward(VoteCommand.rewards.get(randomint));
-	    }else{
-	    	AuctionPlayer.getAuctionPlayer(player).addReward(VoteCommand.rewards.get(randomint));
-	    }
+		if (AuctionPlayer.getAuctionPlayer(player) == null) {
+			AuctionPlayer aucplayer = new AuctionPlayer(offplayer.getUniqueId());
+			aucplayer.addReward(VoteCommand.rewards.get(randomint));
+		} else {
+			AuctionPlayer.getAuctionPlayer(player).addReward(VoteCommand.rewards.get(randomint));
+		}
 		VotePlayer vplayer = VotePlayer.getVotePlayer(offplayer.getUniqueId());
 		vplayer.addVote();
-		if(offplayer.isOnline()){
-		MessageManager.sendMessage(player, "&2You've received a reward! &e#Do /rewards to claim it");
-		MessageManager.sendMessage(player, "&8Weekly votes: &6" + vplayer.weekly_votes);
-		MessageManager.sendMessage(player, "&8Monthly votes: &6" + vplayer.monthly_votes);
-		MessageManager.sendMessage(player, "&8Total votes: &6" + vplayer.total_votes);
-		SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
+		if (offplayer.isOnline()) {
+			MessageManager.sendMessage(player, "&2You've received a reward! &e#Do /rewards to claim it");
+			MessageManager.sendMessage(player, "&8Weekly votes: &6" + vplayer.weekly_votes);
+			MessageManager.sendMessage(player, "&8Monthly votes: &6" + vplayer.monthly_votes);
+			MessageManager.sendMessage(player, "&8Total votes: &6" + vplayer.total_votes);
+			SoundManager.playSoundToPlayer(Sound.LEVEL_UP, player);
 		}
 	}
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event){
 		UUID playerUUID = event.getPlayer().getUniqueId();
-		if(!Main.StatsConfig.contains(playerUUID.toString())){
-			new VotePlayer(playerUUID);
+		if(SQL.SQL){
+			if(!SQL.tableContainsData("voteplayer", "UUID", "\"" + playerUUID.toString() + "\"")){
+				new VotePlayer(playerUUID);
+			}
+		}else{
+			if(!Main.StatsConfig.contains(playerUUID.toString())){
+				new VotePlayer(playerUUID);
+			}
 		}
+
 	}
 }

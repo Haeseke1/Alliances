@@ -1,12 +1,15 @@
 package me.Haeseke1.Alliances.Vote;
 
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Main.SQL;
 import me.Haeseke1.Alliances.Utils.ConfigManager;
 import me.Haeseke1.Alliances.Utils.MessageManager;
 
@@ -27,7 +30,6 @@ public class VotePlayer {
 	public UUID uuid;
 	
 	public VotePlayer(UUID playerUUID,int weekly,int monthly,int total,int week,int month){
-		MessageManager.sendAlertMessage("month_int: " + month_int + " week_int: " + week_int);
 		this.uuid = playerUUID;
 		if (week_int == week) {
 			weekly_votes = weekly;
@@ -45,7 +47,18 @@ public class VotePlayer {
 		voteplayers.add(this);
 	}
 	
+	public VotePlayer(UUID playerUUID,int weekly,int monthly,int total){
+		this.uuid = playerUUID;
+		weekly_votes = weekly;
+		monthly_votes = monthly;
+		total_votes = total;
+		voteplayers.add(this);
+	}
+	
 	public VotePlayer(UUID playerUUID){
+		if(SQL.SQL){
+			SQL.addDataToTable("voteplayer", "\"" + playerUUID.toString() + "\", 0, 0, 0");
+		}
 		this.uuid = playerUUID;
 		weekly_votes = 0;
 		monthly_votes = 0;
@@ -54,9 +67,31 @@ public class VotePlayer {
 	}
 	
 	public void addVote(){
-		this.monthly_votes = this.monthly_votes + 1;
-		this.weekly_votes = this.weekly_votes + 1;
-		this.total_votes = this.total_votes + 1;
+		if(SQL.SQL){
+			ResultSet rs = SQL.tableGetData("voteplayer", "UUID", "\"" + uuid.toString() + "\"");
+			try {
+				rs.next();
+				SQL.setDataToTable("voteplayer", "Weekly", (rs.getInt("Weekly") + 1) + "" , "UUID", "\"" + uuid.toString() + "\"");
+				SQL.setDataToTable("voteplayer", "Monthly", (rs.getInt("Monthly") + 1) + "", "UUID", "\"" + uuid.toString() + "\"");
+				SQL.setDataToTable("voteplayer", "All_Time", (rs.getInt("All_Time") + 1) + "", "UUID", "\"" + uuid.toString() + "\"");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			rs = SQL.tableGetData("voteplayer", "UUID", "\"" + uuid.toString() + "\"");
+			try {
+				rs.next();
+				this.monthly_votes = rs.getInt("Monthly");
+				this.weekly_votes = rs.getInt("Weekly");
+				this.total_votes = rs.getInt("All_Time");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return;
+		}
+		this.monthly_votes++;
+		this.weekly_votes++;
+		this.total_votes++;
+		
 	}
 	
 	public static VotePlayer getVotePlayer(UUID playerUUID){
@@ -69,6 +104,7 @@ public class VotePlayer {
 	}
 	
 	public static VotePlayer loadVotePlayer(UUID playerUUID){
+		
 		if(Main.StatsConfig.contains(playerUUID.toString())){
 			int w_votes = Main.StatsConfig.getInt(playerUUID.toString() + ".w_votes");
 			int m_votes = Main.StatsConfig.getInt(playerUUID.toString() + ".m_votes");
@@ -83,6 +119,9 @@ public class VotePlayer {
 	}
 	
 	public static void saveVotePlayers(){
+		if(SQL.SQL){
+			return;
+		}
 		for(VotePlayer vplayer: VotePlayer.voteplayers){
 			if(vplayer.month != VotePlayer.month_int){
 				vplayer.monthly_votes = 0;
@@ -103,9 +142,20 @@ public class VotePlayer {
 	}
 	
 	public static void loadVotePlayers(){
-		for(String uuid: Main.StatsConfig.getKeys(false)){
-			UUID playerUUID = UUID.fromString(uuid);
-		    loadVotePlayer(playerUUID);
+		if(SQL.SQL){
+			ResultSet rs = SQL.getTable("voteplayer");
+			try {
+				while(rs.next()){
+					new VotePlayer(UUID.fromString(rs.getString("UUID")), rs.getInt("Weekly"), rs.getInt("Monthly"), rs.getInt("All_Time"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}else{
+			for(String uuid: Main.StatsConfig.getKeys(false)){
+				UUID playerUUID = UUID.fromString(uuid);
+			    loadVotePlayer(playerUUID);
+			}
 		}
 		MessageManager.sendRemarkMessage("Loaded the voteplayers in the code");
 	}

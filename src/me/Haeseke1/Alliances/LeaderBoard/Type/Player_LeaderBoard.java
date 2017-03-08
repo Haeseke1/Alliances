@@ -1,6 +1,8 @@
 package me.Haeseke1.Alliances.LeaderBoard.Type;
 
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +15,7 @@ import me.Haeseke1.Alliances.LeaderBoard.Head_Board;
 import me.Haeseke1.Alliances.LeaderBoard.LeaderBoard;
 import me.Haeseke1.Alliances.LeaderBoard.Place;
 import me.Haeseke1.Alliances.Main.Main;
+import me.Haeseke1.Alliances.Main.SQL;
 import net.md_5.bungee.api.ChatColor;
 
 public class Player_LeaderBoard extends LeaderBoard{
@@ -38,10 +41,23 @@ public class Player_LeaderBoard extends LeaderBoard{
 			return;
 		}
 		List<player_score> list = new ArrayList<player_score>();
-		for(File f : new File(Main.plugin.getDataFolder(),"PlayerData").listFiles()){
-			FileConfiguration file = YamlConfiguration.loadConfiguration(f);
-			list.add(new player_score(file.getString("Name"), file.getInt("Score")));
+		
+		if(SQL.SQL){
+			ResultSet rs = SQL.getTable("aPlayer");
+			try {
+				while(rs.next()){
+					list.add(new player_score(rs.getString(3), rs.getInt(4)));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}else{
+			for(File f : new File(Main.plugin.getDataFolder(),"PlayerData").listFiles()){
+				FileConfiguration file = YamlConfiguration.loadConfiguration(f);
+				list.add(new player_score(file.getString("Name"), file.getInt("Score")));
+			}
 		}
+		
 		Collections.sort(list, new player_score());
 		Collections.reverse(list);
 		for(Place place : this.places){

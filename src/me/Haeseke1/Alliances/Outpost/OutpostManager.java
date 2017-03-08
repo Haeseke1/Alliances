@@ -15,7 +15,6 @@ import me.Haeseke1.Alliances.Utils.ConfigManager;
 public class OutpostManager {
 	
 	
-	public static int Reward_Exp;
 	
 	
 	public static boolean checkLocation(Location loc1, Location loc2){
