@@ -1,0 +1,22 @@
+#Default settings and regions
+
+can-break-blocks: false
+can-place-blocks: false
+can-harm-players: true
+can-harm-mobs: true
+can-lose-food: true
+can-drown: false
+
+can-receive-fall-damage: true
+can-receive-fire-damage: true
+
+can-right-click-chest: false
+can-right-click-furnace: false
+can-right-click-enchant: false
+can-right-click-anvil: false
+can-right-click-crafting: false
+can-right-click-doors: true
+can-right-click-blocks: true
+
+show-message-on-enter: true
+show-message-on-leave: true

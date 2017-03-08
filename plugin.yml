@@ -43,3 +43,5 @@ commands:
     aliases: [votes,vs]
   Leaderboard:
     aliases: [lb,l]
+  WorldGuard:
+    aliases: [wg]

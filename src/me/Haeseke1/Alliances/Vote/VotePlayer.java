@@ -28,6 +28,9 @@ public class VotePlayer {
 	public UUID uuid;
 	
 	public VotePlayer(UUID playerUUID,int weekly,int monthly,int total,int week,int month){
+		if(voteplayers.contains(this)){
+			return;
+		}
 		this.uuid = playerUUID;
 		if(week_int == week){
 		weekly_votes = weekly;
@@ -40,8 +43,6 @@ public class VotePlayer {
 		monthly_votes = 0;
 		}
 		total_votes = total;
-		voteplayers.remove(this);
-		voteplayers.add(this);
 	}
 	
 	public VotePlayer(UUID playerUUID){
